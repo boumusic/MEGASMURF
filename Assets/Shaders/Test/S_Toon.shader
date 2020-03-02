@@ -1,8 +1,9 @@
-﻿Shader "Unlit/S_Shader"
+﻿Shader "Unlit/S_Toon"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _Sharpness("Sharpness", float) = 0.5
     }
     SubShader
     {
