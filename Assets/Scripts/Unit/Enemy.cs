@@ -17,4 +17,9 @@ public class Enemy : Unit
     {
         enemy.UnitStats = enemyStats;
     }
+
+    public override Color ColorInEditor()
+    {
+        return Color.red;
+    }
 }
