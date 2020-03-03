@@ -5,7 +5,7 @@ using Pataya.QuikFeedback;
 
 namespace Pataya.QuikFeedback
 {
-    [CreateAssetMenu(fileName = "New QuikFeedback Asset", menuName = "QuikFeedback")]
+    //[CreateAssetMenu(fileName = "New QuikFeedback Asset", menuName = "QuikFeedback")]
     public class QuikFeedbackAsset : ScriptableObject
     {
         public float generalDelay = 0f;
