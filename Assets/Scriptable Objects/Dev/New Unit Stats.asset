@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: New Unit Stats
   m_EditorClassIdentifier: 
   health: 1
+  movement: {fileID: 11400000, guid: d93e56ebfd0dcbf43a6c79c22ab41828, type: 2}
+  attack: {fileID: 11400000, guid: 2cf3f5e9b4d6bcc48a4894ca22e0f31f, type: 2}
