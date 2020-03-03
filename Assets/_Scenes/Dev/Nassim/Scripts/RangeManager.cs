@@ -10,8 +10,7 @@ public class RangeManager : MonoBehaviour
     public int debugRangeX, debugRangeY;
     public bool debugRange;
 
-    private Dictionary<Tile, List<Tile>> path;
-    private List<Tile> displayedRange;
+    private Dictionary<Tile, List<Vector2Int>> rangePaths;
     private Tile unitTile;
 
     // Start is called before the first frame update
@@ -20,8 +19,7 @@ public class RangeManager : MonoBehaviour
         if (RangeManager.Instance == null)
         {
             RangeManager.Instance = this;
-            path = new Dictionary<Tile, List<Tile>>();
-            displayedRange = new List<Tile>();
+            rangePaths = new Dictionary<Tile, List<Vector2Int>>();
         }
     }
 
@@ -37,31 +35,67 @@ public class RangeManager : MonoBehaviour
 
     public void DebugRange()
     {
-        List<Tile> rangeTest = new List<Tile>();
+        List<Vector2Int> rangeTest = new List<Vector2Int>();
         for (int i = 0; i < debugRangeX; i++)
         {
             for (int j = 0; j < debugRangeY; j++)
             {
                 if (Board.Instance.GetTile(i, j) != null)
                 {
-                    rangeTest.Add(Board.Instance.GetTile(i, j));
+                    rangeTest.Add(Board.Instance.GetTile(i, j).Coords);
                 }
             }
         }
-        GetTilesInRange(rangeTest[0], rangeTest);
+        if (rangeTest.Count > 0)
+        {
+            GetTilesInRange(Board.Instance.GetTile(rangeTest[0]), rangeTest);
+        }
     }
 
-    public void GetTilesInRange(Tile startTile, List<Tile> range)
+    public void GetTilesInRange(Tile startTile, List<Vector2Int> range)
     {
         unitTile = startTile;
-        displayedRange.Clear();
-        path.Clear();
+        rangePaths.Clear();
         ProcessMovementRange(startTile, null, range, 20);
     }
 
-    private void ProcessMovementRange(Tile tile, List<Tile> previous, List<Tile> comparedRange, int remain)
+    private void ProcessRange(Tile tile, List<Vector2Int> previous, List<Vector2Int> comparedRange)
     {
-        if (remain <= 0 && (tile.type != TileType.Ally && tile.type != TileType.Free) || (tile.isProcessed && previous != null && previous.Count > path[tile].Count) || !comparedRange.Contains(tile))
+        if (previous != null)
+        {
+            if (rangePaths.ContainsKey(tile))
+            {
+                if (rangePaths[tile].Count > previous.Count)
+                {
+                    rangePaths[tile] = previous;
+                }
+                else
+                {
+                    return;
+                }
+            }
+            if (!comparedRange.Contains(tile.Coords) || (tile.type != TileType.Ally && tile.type != TileType.Free))
+            {
+                return;
+            }
+        }
+        if(previous != null)
+        {
+            if (tile.Equals(unitTile))
+            {
+                return;
+            }
+
+            else
+            {
+                rangePaths.Add(tile, previous);
+            }
+        }
+    }
+
+    private void ProcessMovementRange(Tile tile, List<Vector2Int> previous, List<Vector2Int> comparedRange, int remain)
+    {
+        if (remain <= 0 && (tile.type != TileType.Ally && tile.type != TileType.Free) || (tile.isProcessed && previous != null && rangePaths.ContainsKey(tile) && previous.Count > rangePaths[tile].Count) || !comparedRange.Contains(tile.Coords))
         {
             return;
         }
@@ -69,30 +103,30 @@ public class RangeManager : MonoBehaviour
         {
             if (!tile.Equals(unitTile) && !tile.isProcessed)
             {
-                displayedRange.Add(tile);
+                displayedRange.Add(tile.Coords);
                 tile.isProcessed = true;
             }
             if (previous != null)
             {
-                if (path.ContainsKey(tile))
+                if (rangePaths.ContainsKey(tile))
                 {
-                    if (path[tile].Count > previous.Count)
+                    if (rangePaths[tile].Count > previous.Count)
                     {
-                        path[tile] = previous;
+                        rangePaths[tile] = previous;
                     }
                 }
                 else if (!tile.Equals(unitTile) && (tile.type == TileType.Ally || tile.type == TileType.Free))
                 {
-                    path.Add(tile, previous);
+                    rangePaths.Add(tile, previous);
                 }
             }
-            List<Tile> newPrevious = new List<Tile>();
+            List<Vector2Int> newPrevious = new List<Vector2Int>();
             if (previous != null && !tile.Equals(unitTile))
             {
                 newPrevious.AddRange(previous);
-                newPrevious.Add(tile);
+                newPrevious.Add(tile.Coords);
             }
-            foreach (Tile nextTile in tile.Neighbors)
+            foreach (Tile nextTile in tile.GetNeighbors())
             {
                 ProcessMovementRange(nextTile, newPrevious, comparedRange, remain--);
             }
@@ -101,6 +135,10 @@ public class RangeManager : MonoBehaviour
 
     public void DisplayTiles()
     {
-
+        foreach (Tile tile in rangePaths.Keys)
+        {
+            tile.TriggerAnimation(TileAnim.Movement);
+        }
     }
+
 }
