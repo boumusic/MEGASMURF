@@ -19,4 +19,9 @@ public class Enemy : Unit
         enemy.UnitStats = enemyStats;
         UnitBrain = new Brain(this);
     }
+
+    public override Color ColorInEditor()
+    {
+        return Color.red;
+    }
 }
