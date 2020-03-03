@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
-[CustomEditor(typeof(LevelChunk))]
-public class LevelChunkEditor : Editor
+[CustomEditor(typeof(Room))]
+public class RoomEditor : Editor
 {
-    private LevelChunk c;
+    private Room c;
     private Material gridMat;
     private LevelManager lvM;
     private PoolManager pM;
+    private Board board;
 
     private float offsetSides = 100f;
 
@@ -22,12 +23,12 @@ public class LevelChunkEditor : Editor
     private float minY = 200f;
     private float maxY = 750f;
 
-    private int columns = LevelManager.chunkColumns;
-    private int rows = LevelManager.chunkRows;
+    private int columns = Board.Instance == null? 10 : Board.Instance.maxX;
+    private int rows = Board.Instance == null ? 10 : Board.Instance.maxY;
 
     private void OnEnable()
     {
-        c = target as LevelChunk;
+        c = target as Room;
 
         Shader shader = Shader.Find("Hidden/Internal-Colored");
         gridMat = new Material(shader);
@@ -56,6 +57,7 @@ public class LevelChunkEditor : Editor
     {
         lvM = LevelManager.Instance;
         pM = PoolManager.Instance;
+        board = Board.Instance;
 
         if (!pM)
         {
@@ -76,8 +78,16 @@ public class LevelChunkEditor : Editor
                 }
                 else
                 {
-                    UpdateListElements();
-                    DrawInspector();
+                    if(!board)
+                    {
+                        EditorGUILayout.HelpBox("No Board found. Make sure one is present in the scene.", MessageType.Error);
+                        
+                    }
+                    else
+                    {
+                        UpdateListElements();
+                        DrawInspector();
+                    }
                 }
             }
         }
@@ -86,13 +96,13 @@ public class LevelChunkEditor : Editor
 
     private void UpdateListElements()
     {
-        int count = LevelManager.chunkColumns * LevelManager.chunkRows;
+        int count = Board.Instance.maxX * Board.Instance.maxY;
         if (c.elements.Count != count)
         {
             c.elements.Clear();
             for (int i = 0; i < count; i++)
             {
-                c.elements.Add(new LevelElementChunkSettings());
+                c.elements.Add(new LevelElementRoomSettings());
             }
         }
     }
@@ -109,15 +119,12 @@ public class LevelChunkEditor : Editor
 
     private void DrawTitle()
     {
-        CustomEditorUtility.DrawTitle("Level Chunk");
+        CustomEditorUtility.DrawTitle("Room");
     }
 
     private void DrawGeneralSettings()
     {
         EditorGUILayout.BeginVertical("box");
-
-        CustomEditorUtility.QuickSerializeObject("difficulty", serializedObject);
-
         EditorGUILayout.EndVertical();
     }
 
@@ -176,7 +183,6 @@ public class LevelChunkEditor : Editor
 
     private void DrawClearAllButton()
     {
-
         Rect rect = new Rect(new Vector2(offsetSides / 2, maxY + 50), new Vector2(editorWidth - offsetSides, EditorGUIUtility.singleLineHeight * 2));
         if (GUI.Button(rect, "Clear All"))
         {
@@ -208,7 +214,7 @@ public class LevelChunkEditor : Editor
         Rect newRect = new Rect(pos, size);
         Rect buttonStatsRect = new Rect(pos - Vector2.up * 10, size / new Vector2(2, 3f));
 
-        int indexElement = y + LevelManager.chunkRows * x;
+        int indexElement = y + rows * x;
         Pool pool = PoolManager.Instance.GetLevelElementPoolAtIndex(c.selectedBrush);
 
         if (pool != null)
@@ -324,11 +330,7 @@ public class LevelChunkEditor : Editor
                     float xPos = Utility.Interpolate(minX, maxX, 0, columns - 1, x);
                     Vector3 start = new Vector3(xPos, minY - offsetY, 0f);
                     Vector3 end = new Vector3(xPos, maxY - offsetY, 0f);
-                    Color col = LevelManager.gridCol;
-                    if (x == columns - 1) col = LevelManager.spawnCol;
-                    else if (x == 0) col = LevelManager.killCol;
-
-                    DrawLine(start, end, col);
+                    DrawLine(start, end, LevelManager.gridCol);
                 }
 
                 for (int y = 0; y < rows; y++)
@@ -337,21 +339,25 @@ public class LevelChunkEditor : Editor
                     Vector3 start = new Vector3(minX, yPos, 0f);
                     Vector3 end = new Vector3(maxX, yPos, 0f);
 
-                    DrawLine(start, end, LevelManager.gridCol);
+                    Color col = LevelManager.gridCol;
+                    if (y == rows - 1) col = LevelManager.spawnCol;
+                    else if (y == 0) col = LevelManager.killCol;
+                    DrawLine(start, end, col);
                 }
                 GL.End();
 
                 //ARROWS
                 float tSize = 10;
-                float tOffset = 30;
-                for (int y = 0; y < rows; y++)
+                float tOffset = 15;
+                for (int x = 0; x < columns; x++)
                 {
-                    float yPos = Utility.Interpolate(minY, maxY, 0, rows - 1, y) - offsetY;
-                    Vector3 a = new Vector3(maxX - tOffset, yPos + tSize / 2, 0f);
-                    Vector3 b = new Vector3(maxX - tSize - tOffset, yPos, 0f);
-                    Vector3 c = new Vector3(maxX - tOffset, yPos - tSize / 2, 0f);
+                    float xPos = Utility.Interpolate(minX, maxX, 0, columns - 1, x);
+                    Vector3 a = new Vector3(xPos + tSize / 2, maxY - tOffset - offsetY, 0f);
+                    Vector3 b = new Vector3(xPos, maxY - tSize - tOffset - offsetY, 0f);
+                    Vector3 c = new Vector3(xPos - tSize / 2, maxY - tOffset - offsetY,  0f);
                     DrawTriangle(a, b, c, LevelManager.spawnCol);
                 }
+                
 
                 GL.PopMatrix();
                 GUI.EndClip();
@@ -395,5 +401,4 @@ public class LevelChunkEditor : Editor
 
         GL.End();
     }
-
 }

@@ -15,8 +15,10 @@ public class LevelManagerEditor : Editor
 
     private void OnSceneGUI()
     {
-        DrawHandles();
+        //DrawHandles();
     }
+
+    /*
 
     private void DrawHandles()
     {
@@ -96,4 +98,5 @@ public class LevelManagerEditor : Editor
         Vector3 killBottom = new Vector3(x, -maxPosY, 0f);
         Handles.DrawLine(killTop, killBottom);
     }
+    */
 }
