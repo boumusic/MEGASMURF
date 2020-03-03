@@ -7,7 +7,7 @@ using System;
 [CustomEditor(typeof(Room))]
 public class RoomEditor : Editor
 {
-    private Room c;
+    private Room t;
     private Material gridMat;
     private LevelManager lvM;
     private PoolManager pM;
@@ -23,12 +23,19 @@ public class RoomEditor : Editor
     private float minY = 200f;
     private float maxY = 750f;
 
-    private int columns = Board.Instance == null? 10 : Board.Instance.maxX;
-    private int rows = Board.Instance == null ? 10 : Board.Instance.maxY;
+    private int Columns()
+    {
+        return Board.Instance == null ? 10 : Board.Instance.maxX;
+    }
+
+    private int Rows()
+    {
+        return Board.Instance == null ? 10 : Board.Instance.maxY;
+    }
 
     private void OnEnable()
     {
-        c = target as Room;
+        t = target as Room;
 
         Shader shader = Shader.Find("Hidden/Internal-Colored");
         gridMat = new Material(shader);
@@ -36,7 +43,7 @@ public class RoomEditor : Editor
 
     private void OnDisable()
     {
-        EditorUtility.SetDirty(c);
+        EditorUtility.SetDirty(t);
         DestroyImmediate(gridMat);
     }
 
@@ -97,12 +104,12 @@ public class RoomEditor : Editor
     private void UpdateListElements()
     {
         int count = Board.Instance.maxX * Board.Instance.maxY;
-        if (c.elements.Count != count)
+        if (t.elements.Count != count)
         {
-            c.elements.Clear();
+            t.elements.Clear();
             for (int i = 0; i < count; i++)
             {
-                c.elements.Add(new LevelElementRoomSettings());
+                t.elements.Add(new LevelElementRoomSettings());
             }
         }
     }
@@ -119,7 +126,7 @@ public class RoomEditor : Editor
 
     private void DrawTitle()
     {
-        CustomEditorUtility.DrawTitle("Room");
+        CustomEditorUtility.DrawTitle(t.name);
     }
 
     private void DrawGeneralSettings()
@@ -153,9 +160,9 @@ public class RoomEditor : Editor
         string[] brushesArray = brushes.ToArray();
 
         Color colorBrush = defaultCol;
-        if (colors.Count > c.selectedBrush)
+        if (colors.Count > t.selectedBrush)
         {
-            colorBrush = colors[c.selectedBrush];
+            colorBrush = colors[t.selectedBrush];
         }
 
         GUI.color = colorBrush;
@@ -165,7 +172,7 @@ public class RoomEditor : Editor
         EditorGUILayout.LabelField("Current Brush: ", EditorStyles.boldLabel);
         GUI.color = colorBrush;
         //c.selectedBrush = EditorGUILayout.Popup(c.selectedBrush, brushesArray);
-        c.selectedBrush = GUILayout.Toolbar(c.selectedBrush, brushesArray, GUILayout.MinHeight(30));
+        t.selectedBrush = GUILayout.Toolbar(t.selectedBrush, brushesArray, GUILayout.MinHeight(30));
         GUIStyle centered = new GUIStyle();
         centered.alignment = TextAnchor.MiddleCenter;
         centered.fontSize = 10;
@@ -186,20 +193,24 @@ public class RoomEditor : Editor
         Rect rect = new Rect(new Vector2(offsetSides / 2, maxY + 50), new Vector2(editorWidth - offsetSides, EditorGUIUtility.singleLineHeight * 2));
         if (GUI.Button(rect, "Clear All"))
         {
-            Undo.RecordObject(c, "Clear All");
-            c.elements.Clear();
+            Undo.RecordObject(t, "Clear All");
+            t.elements.Clear();
         }
     }
 
     private void DrawButtons()
     {
-        float size = (editorWidth - offsetSides * 2) / 10;
-        float fixedHeight = 50;
-        for (int x = 0; x < columns; x++)
+        float gridWidth = maxX - minX;
+        float gridHeight = maxY - minY;
+
+        float width = gridWidth / Columns();
+        //float width = (editorWidth - offsetSides * 2) / 10;
+        float height = gridHeight / Rows();
+        for (int x = 0; x < Columns(); x++)
         {
-            for (int y = 0; y < rows; y++)
+            for (int y = 0; y < Rows(); y++)
             {
-                DrawLevelElementButton(size, fixedHeight, y, x);
+                DrawLevelElementButton(width, height, y, x);
             }
         }
     }
@@ -207,23 +218,23 @@ public class RoomEditor : Editor
     private void DrawLevelElementButton(float width, float height, int y, int x)
     {
         Color defaultCol = GUI.color;
-        float xPos = Utility.Interpolate(minX, maxX, 0, columns - 1, x);
-        float yPos = Utility.Interpolate(minY, maxY, 0, rows - 1, y);
+        float xPos = Utility.Interpolate(minX, maxX, 0, Columns() - 1, x);
+        float yPos = Utility.Interpolate(minY, maxY, 0, Rows() - 1, y);
         Vector2 pos = new Vector2(xPos - 10, yPos - height / 2);
         Vector2 size = new Vector2(width, height);
         Rect newRect = new Rect(pos, size);
-        Rect buttonStatsRect = new Rect(pos - Vector2.up * 10, size / new Vector2(2, 3f));
+        Rect buttonStatsRect = new Rect(pos - Vector2.up * 10, size);
 
-        int indexElement = y + rows * x;
-        Pool pool = PoolManager.Instance.GetLevelElementPoolAtIndex(c.selectedBrush);
+        int indexElement = y + Rows() * x;
+        Pool pool = PoolManager.Instance.GetLevelElementPoolAtIndex(t.selectedBrush);
 
         if (pool != null)
         {
-            if (indexElement < c.elements.Count)
+            if (indexElement < t.elements.Count)
             {
-                if (c.elements[indexElement] != null)
+                if (t.elements[indexElement] != null)
                 {
-                    LevelElement current = c.elements[indexElement].levelElement;
+                    LevelElement current = t.elements[indexElement].levelElement;
                     Color colorButton = new Color();
                     if (current)
                         colorButton = current.ColorInEditor();
@@ -252,27 +263,27 @@ public class RoomEditor : Editor
                     {
                         if (currentEvent.button == 1 && currentEvent.isMouse)
                         {
-                            Undo.RecordObject(c, "Clear Level Element");
+                            Undo.RecordObject(t, "Clear Level Element");
 
-                            c.elements[indexElement] = null;
+                            t.elements[indexElement] = null;
                         }
 
                         if (currentEvent.button == 0 && currentEvent.isMouse)
                         {
                             if (currentEvent.shift)
                             {
-                                if (c.elements[indexElement].levelElement != null)
+                                if (t.elements[indexElement].levelElement != null)
                                 {
                                     SerializedProperty elements = serializedObject.FindProperty("elements");
                                     SerializedProperty element = elements.GetArrayElementAtIndex(indexElement);
-                                    LevelElementWindow.Init(element, c);
+                                    LevelElementWindow.Init(element, t);
 
                                 }
                             }
 
                             else
                             {
-                                Undo.RecordObject(c, "Add Level Element");
+                                Undo.RecordObject(t, "Add Level Element");
 
                                 GameObject prefab = pool.prefab;
 
@@ -280,25 +291,25 @@ public class RoomEditor : Editor
 
                                 if (lvl)
                                 {
-                                    c.elements[indexElement].levelElement = lvl;
+                                    t.elements[indexElement].levelElement = lvl;
                                 }
                             }
                         }
 
                         if (currentEvent.button == 2 && currentEvent.isMouse)
                         {
-                            Undo.RecordObject(c, "Change Brush");
-                            if (c.elements[indexElement].levelElement != null)
+                            Undo.RecordObject(t, "Change Brush");
+                            if (t.elements[indexElement].levelElement != null)
                             {
-                                c.selectedBrush = PoolManager.Instance.GetIndexLevelElementPool(c.elements[indexElement].levelElement);
+                                t.selectedBrush = PoolManager.Instance.GetIndexLevelElementPool(t.elements[indexElement].levelElement);
                             }
                         }
                     }
 
-                    if (indexElement < c.elements.Count)
-                        if (c.elements[indexElement] != null)
+                    if (indexElement < t.elements.Count)
+                        if (t.elements[indexElement] != null)
                         {
-                            c.elements[indexElement].pos = new Vector3(x, y, 0);
+                            t.elements[indexElement].pos = new Vector3(x, y, 0);
                         }
                 }
             }
@@ -311,6 +322,7 @@ public class RoomEditor : Editor
     {
         float height = 1000f;
         Rect rect = GUILayoutUtility.GetRect(800f, 1000, height, height);
+        /*
         float offsetY = GridOffsetY();
         //Rect rect = new Rect(0, 0, editorWidth, 900f);
         //Rect rect = new Rect(new Vector2(minX, minY), new Vector2(maxX - minX, maxY - minY));
@@ -325,22 +337,22 @@ public class RoomEditor : Editor
 
 
                 GL.Begin(GL.LINES);
-                for (int x = 0; x < columns; x++)
+                for (int x = 0; x < Columns(); x++)
                 {
-                    float xPos = Utility.Interpolate(minX, maxX, 0, columns - 1, x);
+                    float xPos = Utility.Interpolate(minX, maxX, 0, Columns() - 1, x);
                     Vector3 start = new Vector3(xPos, minY - offsetY, 0f);
                     Vector3 end = new Vector3(xPos, maxY - offsetY, 0f);
                     DrawLine(start, end, LevelManager.gridCol);
                 }
 
-                for (int y = 0; y < rows; y++)
+                for (int y = 0; y < Rows(); y++)
                 {
-                    float yPos = Utility.Interpolate(minY, maxY, 0, rows - 1, y) - offsetY;
+                    float yPos = Utility.Interpolate(minY, maxY, 0, Rows() - 1, y) - offsetY;
                     Vector3 start = new Vector3(minX, yPos, 0f);
                     Vector3 end = new Vector3(maxX, yPos, 0f);
 
                     Color col = LevelManager.gridCol;
-                    if (y == rows - 1) col = LevelManager.spawnCol;
+                    if (y == Rows() - 1) col = LevelManager.spawnCol;
                     else if (y == 0) col = LevelManager.killCol;
                     DrawLine(start, end, col);
                 }
@@ -349,9 +361,9 @@ public class RoomEditor : Editor
                 //ARROWS
                 float tSize = 10;
                 float tOffset = 15;
-                for (int x = 0; x < columns; x++)
+                for (int x = 0; x < Columns(); x++)
                 {
-                    float xPos = Utility.Interpolate(minX, maxX, 0, columns - 1, x);
+                    float xPos = Utility.Interpolate(minX, maxX, 0, Columns() - 1, x);
                     Vector3 a = new Vector3(xPos + tSize / 2, maxY - tOffset - offsetY, 0f);
                     Vector3 b = new Vector3(xPos, maxY - tSize - tOffset - offsetY, 0f);
                     Vector3 c = new Vector3(xPos - tSize / 2, maxY - tOffset - offsetY,  0f);
@@ -363,6 +375,7 @@ public class RoomEditor : Editor
                 GUI.EndClip();
             }
         }
+        */
     }
 
     private void DrawLine(Vector3 start, Vector3 end, Color col)
