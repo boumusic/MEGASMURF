@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
- [CustomEditor(typeof(LevelSettings))]
-public class LevelSettingsEditor : Editor
+ [CustomEditor(typeof(Level))]
+public class LevelEditor : Editor
 {
-    private LevelSettings l;
+    private Level l;
 
     private void OnEnable()
     {
-        l = target as LevelSettings;
+        l = target as Level;
     }
 
     public override void OnInspectorGUI()
@@ -23,39 +23,13 @@ public class LevelSettingsEditor : Editor
     {
         CustomEditorUtility.DrawTitle("Level Settings");
 
-        GridSettings();
-
         EditorGUILayout.Space();
-        SpawnAndDestroySettings();
         EditorGUILayout.Space();
-        ScrollingSettings();
         
-        CustomEditorUtility.QuickSerializeObject("levelChunks", serializedObject);
-    }    
+        CustomEditorUtility.QuickSerializeObject("rooms", serializedObject);
+    } 
 
-    private void ScrollingSettings()
-    {
-        EditorGUILayout.BeginVertical("box");
-        EditorGUILayout.LabelField("Difficulty", EditorStyles.boldLabel);
-        CustomEditorUtility.CustomMinMaxSlider(ref l.minScrollingSpeed, ref l.maxScrollingSpeed, 0, 10, "Min & max scrolling speed", l);
-
-        EditorGUILayout.Space();
-
-        CustomEditorUtility.QuickSerializeObject("scrollingCurve", serializedObject);
-
-        EditorGUILayout.Space();
-
-        CustomEditorUtility.QuickSerializeObject("difficultyIncreaseSpeed", serializedObject);
-
-        GUI.enabled = false;
-        float seconds = 1f / l.difficultyIncreaseSpeed;
-        int mins = (int)(seconds / 60);
-        seconds -= mins * 60f;
-        EditorGUILayout.LabelField("Maximum difficulty will be reached in " + mins.ToString() + " minutes and " + seconds.ToString("F1") + " seconds.");
-        GUI.enabled = true;
-        EditorGUILayout.EndVertical();
-    }
-
+    /*
     private void SpawnAndDestroySettings()
     {
         EditorGUILayout.BeginVertical("box");
@@ -70,6 +44,7 @@ public class LevelSettingsEditor : Editor
 
     private void GridSettings()
     {
+        
         EditorGUILayout.BeginVertical("box");
 
         EditorGUILayout.LabelField("Grid", EditorStyles.boldLabel);
@@ -77,5 +52,7 @@ public class LevelSettingsEditor : Editor
         CustomEditorUtility.QuickSerializeObject("levelWidth", serializedObject);
 
         EditorGUILayout.EndVertical();
+        
     }
+    */
 }

@@ -3,17 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShapeUnit : Ally
+public class ShapeUnit : Unit
 {
     public bool IsUnitComposite => HeadUnit != null;
     public int UnitMergeLevel => unitStack.Count;
 
-    public override Attack UnitAttack => (ArmUnit != null) ? ArmUnit.UnitAttack : LegUnit.UnitAttack;
-    public override Movement UnitMovement => LegUnit.UnitMovement;
+    public override Attack UnitAttack => (ArmUnit != null) ? ArmUnit.UnitStats.attack : LegUnit.UnitStats.attack;
+    public override Movement UnitMovement => LegUnit.UnitStats.movement;
     public override Stats UnitStats => throw new NotImplementedException();                                                         // TODO
 
-    public Attack baseUnitAttack;
-    public Movement baseUnitMovement;
     public Stats baseUnitStats;
 
     public BaseUnit HeadUnit => (unitStack.Count > 2) ? unitStack[2] : null;
@@ -24,21 +22,9 @@ public class ShapeUnit : Ally
 
     private void Awake()
     {
-        LegUnit.UnitAttack = baseUnitAttack;
-        LegUnit.UnitMovement = baseUnitMovement;
         LegUnit.UnitStats = baseUnitStats;
 
         unitStack = new List<BaseUnit>();
-    }
-
-    public override void MoveTo(Tile tile)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Attack(Tile tile)
-    {
-        throw new NotImplementedException();
     }
 
     public void MergeWithAlly(ShapeUnit shape)
