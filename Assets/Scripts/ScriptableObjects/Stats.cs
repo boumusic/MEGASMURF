@@ -1,9 +1,0 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[CreateAssetMenu(fileName = "New Unit Stats", menuName = "Gameplay/UnitStats", order = 150)]
-public class Stats : ScriptableObject
-{
-    public float health = 1f;
-}

@@ -5,7 +5,9 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
 
-    public static Board Instance;
+    public static Board Instance { get { if (!instance) instance = FindObjectOfType<Board>(); return instance; } set { } }
+
+    private static Board instance;
 
     public int maxX;
     public int maxY;
@@ -19,7 +21,7 @@ public class Board : MonoBehaviour
     {
         if (Board.Instance != null)
         {
-            Instance = this;
+            Board.Instance = this;
         }
     }
 
@@ -35,7 +37,7 @@ public class Board : MonoBehaviour
                     (float)i * tilePrefab.transform.localScale.x + tilesOffset * i - (((float)(maxX-1.0f) / 2.0f) + tilesOffset) * tilePrefab.transform.localScale.x,
                     (float)j * tilePrefab.transform.localScale.y + tilesOffset * j - (((float)(maxY-1.0f) / 2.0f) + tilesOffset) * tilePrefab.transform.localScale.y,
                     0f);
-                Instantiate<GameObject>(tilePrefab, instancePosition, Quaternion.identity, transform);
+                Instantiate<GameObject>(tilePrefab, instancePosition, Quaternion.identity, transform).GetComponent<Tile>().Coords = new Vector2(i, j);
             }
         }
     }
@@ -51,7 +53,7 @@ public class Board : MonoBehaviour
 
     }
 
-    public Tile GetTile(int x, int y)
+    public Tile GetTile(float x, float y)
     {
         if ((tiles.GetLength(0) - 1) < x || (tiles.GetLength(1) - 1) < y)
         {
@@ -59,7 +61,7 @@ public class Board : MonoBehaviour
         }
         else
         {
-            return tiles[x, y];
+            return tiles[(int)x, (int)y];
         }
     }
 
