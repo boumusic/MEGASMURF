@@ -12,6 +12,8 @@ public class ShapeUnit : Unit
     public override Movement UnitMovement => LegUnit.UnitStats.movement;
     public override Stats UnitStats => throw new NotImplementedException();                                                         // TODO
 
+    public Equipement equipement { get; set; }
+
     public Stats baseUnitStats;
 
     public BaseUnit HeadUnit => (unitStack.Count > 2) ? unitStack[2] : null;

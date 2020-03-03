@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Enemy : Unit
 {
+    public Brain UnitBrain { get; set; }
     public override Attack UnitAttack => enemy.UnitStats.attack;
     public override Movement UnitMovement => enemy.UnitStats.movement;
     public override Stats UnitStats => enemy.UnitStats;
@@ -16,5 +17,6 @@ public class Enemy : Unit
     private void Awake()
     {
         enemy.UnitStats = enemyStats;
+        UnitBrain = new Brain(this);
     }
 }

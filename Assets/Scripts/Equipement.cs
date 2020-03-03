@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct StatModifier
+public class Equipement : ScriptableObject
 {
-    // Truc
-    // Voila
-    // La bise
+    
 }
