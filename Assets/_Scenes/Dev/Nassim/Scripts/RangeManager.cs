@@ -56,13 +56,22 @@ public class RangeManager : MonoBehaviour
     {
         unitTile = startTile;
         rangePaths.Clear();
-        ProcessMovementRange(startTile, null, range, 20);
+        ProcessRange(startTile, null, range);
     }
 
     private void ProcessRange(Tile tile, List<Vector2Int> previous, List<Vector2Int> comparedRange)
     {
+        List<Vector2Int> newPrevious = new List<Vector2Int>();
         if (previous != null)
         {
+            if (tile.Equals(unitTile))
+            {
+                return;
+            }
+            if (!comparedRange.Contains(tile.Coords) || (tile.type != TileType.Ally && tile.type != TileType.Free))
+            {
+                return;
+            }
             if (rangePaths.ContainsKey(tile))
             {
                 if (rangePaths[tile].Count > previous.Count)
@@ -74,62 +83,16 @@ public class RangeManager : MonoBehaviour
                     return;
                 }
             }
-            if (!comparedRange.Contains(tile.Coords) || (tile.type != TileType.Ally && tile.type != TileType.Free))
-            {
-                return;
-            }
-        }
-        if(previous != null)
-        {
-            if (tile.Equals(unitTile))
-            {
-                return;
-            }
-
             else
             {
                 rangePaths.Add(tile, previous);
             }
+            newPrevious.AddRange(previous);
+            newPrevious.Add(tile.Coords);         
         }
-    }
-
-    private void ProcessMovementRange(Tile tile, List<Vector2Int> previous, List<Vector2Int> comparedRange, int remain)
-    {
-        if (remain <= 0 && (tile.type != TileType.Ally && tile.type != TileType.Free) || (tile.isProcessed && previous != null && rangePaths.ContainsKey(tile) && previous.Count > rangePaths[tile].Count) || !comparedRange.Contains(tile.Coords))
+        foreach (Tile nextTile in tile.GetNeighbors())
         {
-            return;
-        }
-        else
-        {
-            if (!tile.Equals(unitTile) && !tile.isProcessed)
-            {
-                displayedRange.Add(tile.Coords);
-                tile.isProcessed = true;
-            }
-            if (previous != null)
-            {
-                if (rangePaths.ContainsKey(tile))
-                {
-                    if (rangePaths[tile].Count > previous.Count)
-                    {
-                        rangePaths[tile] = previous;
-                    }
-                }
-                else if (!tile.Equals(unitTile) && (tile.type == TileType.Ally || tile.type == TileType.Free))
-                {
-                    rangePaths.Add(tile, previous);
-                }
-            }
-            List<Vector2Int> newPrevious = new List<Vector2Int>();
-            if (previous != null && !tile.Equals(unitTile))
-            {
-                newPrevious.AddRange(previous);
-                newPrevious.Add(tile.Coords);
-            }
-            foreach (Tile nextTile in tile.GetNeighbors())
-            {
-                ProcessMovementRange(nextTile, newPrevious, comparedRange, remain--);
-            }
+            ProcessRange(nextTile, newPrevious, comparedRange);
         }
     }
 
