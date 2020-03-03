@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_CharaTest
+  m_Name: M_ShapeTest
   m_Shader: {fileID: 4800000, guid: bac7a4fadf99ec947a0a7dca95545c5d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
