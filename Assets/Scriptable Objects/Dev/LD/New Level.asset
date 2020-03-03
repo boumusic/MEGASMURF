@@ -13,8 +13,4 @@ MonoBehaviour:
   m_Name: New Level
   m_EditorClassIdentifier: 
   rooms:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 99f8bdb635b961b42bd72ba140ca1566, type: 2}
