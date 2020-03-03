@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Maestro : Unit
 {
-    public override Attack UnitAttack => maestro.UnitStats.attack;
-    public override Movement UnitMovement => maestro.UnitStats.movement;
+    public override Attack UnitAttack => maestro.UnitStats.attacks[0];
+    public override Movement UnitMovement => maestro.UnitStats.movements[0];
     public override Stats UnitStats => maestro.UnitStats;
 
     public Attack maestroAttacks;

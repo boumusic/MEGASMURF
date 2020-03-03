@@ -7,6 +7,6 @@ public class Stats : ScriptableObject
 {
     [Header("Base Stats")]
     public float health = 1f;
-    public Movement movement;
-    public Attack attack;
+    public Movement[] movements;
+    public Attack[] attacks;
 }
