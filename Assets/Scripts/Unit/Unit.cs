@@ -34,7 +34,7 @@ public abstract class Unit : LevelElement
 
     public virtual void TakeDamage(Unit unit)
     {
-        CurrentHitPoint -= unit.UnitStats.damage;
+        CurrentHitPoint -= unit.UnitAttack.damage;
         
         if(CurrentHitPoint <= 0)
         {
