@@ -9,7 +9,15 @@ public class RangeDrawer : PropertyDrawer
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
         //return CustomEditorUtility.PropertyHeight(3 + Length(property));
-        return 800f;
+        if (property.isExpanded)
+        {
+            return 540f;
+        }
+
+        else
+        {
+            return EditorGUIUtility.singleLineHeight;
+        }
     }
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -17,20 +25,25 @@ public class RangeDrawer : PropertyDrawer
         Range range = fieldInfo.GetValue(property.serializedObject.targetObject) as Range;
         float viewWidth = EditorGUIUtility.currentViewWidth;
         float lineHeight = EditorGUIUtility.singleLineHeight;
-        //float buttonOffset = 5;
         int size = property.FindPropertyRelative("size").intValue;
+        property.isExpanded = EditorGUI.Foldout(new Rect(position.position, new Vector2(viewWidth, lineHeight)), property.isExpanded, "Range", EditorStyles.foldoutHeader);
 
-        EditorGUI.LabelField(new Rect(position.position, new Vector2(viewWidth, lineHeight)), "Range", EditorStyles.boldLabel);
-        Rect sRect = new Rect(position.position + CustomEditorUtility.LineOffsetVertical(1), CustomEditorUtility.RectSize());
-        EditorGUI.PropertyField(sRect, property.FindPropertyRelative("size"));
-
-        DrawButtons(position, property, range, viewWidth, lineHeight, size);
-        
-        if(GUI.Button(new Rect(0, 500, 50, 50),"Clear all"))
+        if(property.isExpanded)
         {
-            Undo.RecordObject(property.serializedObject.targetObject, "Clear Range");
-            range.coords.Clear();
-        }
+            Rect sRect = new Rect(position.position + CustomEditorUtility.LineOffsetVertical(1), CustomEditorUtility.RectSize());
+            EditorGUI.PropertyField(sRect, property.FindPropertyRelative("size"));
+
+            DrawButtons(position, property, range, viewWidth, lineHeight, size);
+            Color def = GUI.color;
+            GUI.color = CustomEditorUtility.RemoveButtonColor();
+            Rect clearAllRect = new Rect(new Vector2(position.x, position.y + 500f), new Vector2(EditorGUIUtility.currentViewWidth - 32, EditorGUIUtility.singleLineHeight));
+            if (GUI.Button(clearAllRect, "Clear all"))
+            {
+                Undo.RecordObject(property.serializedObject.targetObject, "Clear Range");
+                range.coords.Clear();
+            }
+            GUI.color = def;
+        }        
     }
 
     private void DrawButtons(Rect position, SerializedProperty property, Range range, float viewWidth, float lineHeight, int size)
@@ -66,7 +79,8 @@ public class RangeDrawer : PropertyDrawer
                     {
                         if (range.coords[i] == new Vector2(x, y))
                         {
-                            buttonColor = new Color(1f, 0.23f, 0.35f, 1f);
+
+                            buttonColor = new Color(1f, 0.5f, 0.6f, 1f);
                             break;
                         }
                     }
@@ -76,7 +90,6 @@ public class RangeDrawer : PropertyDrawer
 
                     Vector2 coord = new Vector2(x, y);
 
-                    EditorGUI.DrawRect(button, buttonColor);
 
                     Event e = Event.current;
 
@@ -96,8 +109,12 @@ public class RangeDrawer : PropertyDrawer
                                 Undo.RecordObject(property.serializedObject.targetObject, "Remove Range");
                                 range.coords.Remove(coord);
                             }
-                        }                        
+                        }
+
+                        float added = 0.2f;
+                        buttonColor += new Color(added, added, added, 0f);
                     }
+                    EditorGUI.DrawRect(button, buttonColor);
 
                     GUI.color = def;
                 }
