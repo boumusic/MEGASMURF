@@ -145,4 +145,18 @@ public class Board : MonoBehaviour
         return GetTile((int)v.x, (int)v.y);
     }
 
+    public List<Tile> GetTiles(List<Vector2> vectors)
+    {
+        List<Tile> tiles = new List<Tile>();
+        foreach(Vector2 v in vectors)
+        {
+            Tile t = GetTile(v);
+            if (t != null)
+            {
+                tiles.Add(t);
+            }
+        }
+        return tiles;
+    }
+
 }
