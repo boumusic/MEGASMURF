@@ -29,7 +29,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Displace: 0.2
-    - _Normal: 0.18
+    - _Normal: 0
     - _Shake: 0.005
     - _Speed: 4
     - __dirty: 0
