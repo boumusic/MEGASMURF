@@ -11,7 +11,6 @@ public abstract class Unit : LevelElement
     public Tile currentTile { get; protected set; }
 
     public float CurrentHitPoint { get; protected set; }
-    public StatModifier UnitStatModifier { get; protected set; }
 
     public virtual void SetUnitPosition(Tile tile)
     {
