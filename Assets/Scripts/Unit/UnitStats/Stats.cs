@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Unit Stats", menuName = "Gameplay/UnitStats", order = 150)]
+[CreateAssetMenu(fileName = "NewUnitStats", menuName = "Gameplay/UnitStats", order = 150)]
 public class Stats : ScriptableObject
 {
     [Header("Base Stats")]
-    public float health = 1f;
+    public int maxHealth = 1;
     public Movement[] movements;
     public Attack[] attacks;
 }

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseUnit
+public enum BaseUnitType
 {
-    public Stats UnitStats;
+    Triangle,
+    Circle,
+    Square
+    // Enemy Type
 }
