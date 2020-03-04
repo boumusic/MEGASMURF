@@ -6,6 +6,7 @@ public enum BaseUnitType
 {
     Triangle,
     Circle,
-    Square
+    Square,
+    ShapeComposite
     // Enemy Type
 }
