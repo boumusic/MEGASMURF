@@ -25,12 +25,12 @@ public class RoomEditor : Editor
 
     private int Columns()
     {
-        return Board.Instance == null ? 10 : Board.Instance.maxX;
+        return Board.Instance == null ? 10 : Board.Instance.columns;
     }
 
     private int Rows()
     {
-        return Board.Instance == null ? 10 : Board.Instance.maxY;
+        return Board.Instance == null ? 10 : Board.Instance.rows;
     }
 
     private void OnEnable()
@@ -103,7 +103,7 @@ public class RoomEditor : Editor
 
     private void UpdateListElements()
     {
-        int count = Board.Instance.maxX * Board.Instance.maxY;
+        int count = Board.Instance.columns * Board.Instance.rows;
         if (t.elements.Count != count)
         {
             t.elements.Clear();

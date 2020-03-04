@@ -1,10 +1,13 @@
-﻿using System;
+﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class ShapeUnit : Unit
 {
+    [Header("Components")]
+    [SerializeField] private UnitMergeAnimator unitMergeAnimator;
+
     public BaseUnitType UnitType => BaseUnitType.ShapeComposite;
     public Equipement equipement { get; set; }
 
@@ -36,16 +39,32 @@ public class ShapeUnit : Unit
     private void Awake()
     {
         mergedUnits = new List<ShapeUnit>();
+
+        Stack<Tile> path = new Stack<Tile>();
+        for (int i = 0; i < 20; i++)
+        { 
+          
+            path.Push(Board.Instance.GetTile((int)UnityEngine.Random.Range(0, 10), (int)UnityEngine.Random.Range(0, 10)));
+        }
+
+        MoveTo(path);
     }
 
+    /// <summary>
+    /// Takes a unit and merges it on top of itself.
+    /// </summary>
+    /// <param name="shape">The shape that will be merged on top of this shape.</param>
     public void MergeWithAlly(ShapeUnit shape)
     {
         if (shape.UnitMergeLevel == 0)
         {
             if (UnitMergeLevel < 2)
+            {
                 mergedUnits.Add(shape);
+                shape.unitMergeAnimator.MergeOnTopOf(this);
                 // Autre check 
                 // Vanish d'equipement + Refund
+            }
             else
                 Debug.LogError("Illicite Merge: bottom unit is already at max level");
         }

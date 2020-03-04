@@ -16,6 +16,9 @@ public class ShapeVisuals : MonoBehaviour
     [SerializeField] private Animator[] armsAnimators;
     [SerializeField] private Animator faceAnimator;
 
+    [SerializeField] private GameObject legs;
+    [SerializeField] private GameObject[] arms;
+
     private List<Animator> allAnimators = new List<Animator>();
 
     public void ToggleMember(bool on, ShapeMember member)
@@ -27,14 +30,13 @@ public class ShapeVisuals : MonoBehaviour
                 break;
 
             case ShapeMember.Leg:
-                rootAnimator.SetBool("on", on);
+                legs.SetActive(on);
                 break;
 
             case ShapeMember.Arm:
-                for (int i = 0; i < armsAnimators.Length; i++)
+                for (int i = 0; i < arms.Length; i++)
                 {
-                    armsAnimators[i].SetBool("on", on);
-
+                    arms[i].SetActive(on);
                 }
                 break;
         }
