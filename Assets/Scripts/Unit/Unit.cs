@@ -24,6 +24,15 @@ public class Unit : LevelElement
         //Animation d'apparition
     }
 
+    public virtual void MovementMode()
+    {
+        //Fait apparaitre les range de déplacement
+        //Active l'enregistrement de path
+        //Attend un input
+        //Declenche le déplacement
+        //Rend la main au turnManager
+    }
+
     public virtual void MoveTo(Stack<Tile> path)
     {
         // Lancer une coroutine qui fait parcourir le chemin

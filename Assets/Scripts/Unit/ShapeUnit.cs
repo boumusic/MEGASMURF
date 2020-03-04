@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class ShapeUnit : Unit
 {
-    public UnitBase unitBase;
-
+    public BaseUnitType UnitType => BaseUnitType.ShapeComposite;
     public Equipement equipement { get; set; }
 
     private List<ShapeUnit> mergedUnits;
@@ -15,7 +14,7 @@ public class ShapeUnit : Unit
 
     public ShapeUnit HeadUnit => (mergedUnits.Count > 1) ? mergedUnits[1] : null;
     public ShapeUnit ArmUnit => (mergedUnits.Count > 0) ? mergedUnits[0] : null;
-    //public UnitBase LegUnit => baseUnit;
+    public UnitBase LegUnit => unitBase;
     
     public override int MaxHealth
     {
