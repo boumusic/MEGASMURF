@@ -11,10 +11,9 @@ public class RangeManager : MonoBehaviour
     public bool debugRange;
 
     private Dictionary<Tile, List<Tile>> rangePaths;
-    private Dictionary<Tile, List<Enemy>> attackRange;
+    private Dictionary<Tile, List<Tile>> attackRange;
     private Stack<Tile> currentPath;
     private Tile unitTile;
-    private Tile attackTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +22,7 @@ public class RangeManager : MonoBehaviour
         {
             RangeManager.Instance = this;
             rangePaths = new Dictionary<Tile, List<Tile>>();
+            attackRange = new Dictionary<Tile, List<Tile>>();
             currentPath = new Stack<Tile>();
         }
     }
@@ -62,7 +62,8 @@ public class RangeManager : MonoBehaviour
     public void GetTilesInAttackRange(Tile startTile, Range range)
     {
         unitTile = startTile;
-       // ProcessAttackRange(range);
+        attackRange.Clear();
+        ProcessAttackRange(range);
     }
 
     public void GetTilesInMovementRange(Tile startTile, Range range)
@@ -72,24 +73,51 @@ public class RangeManager : MonoBehaviour
         currentPath.Clear();
         ProcessMovementRange(startTile, null, range, debugRangeMax);
     }
-    /*
+
     private void ProcessAttackRange(Range range)
     {
+        Range correctedRange = range;
+        foreach(Vector2 v in range.coords)
+        {
+            Tile check = Board.Instance.GetTile(v + unitTile.Coords);
+            if (check == null || check.type == TileType.None || check.type == TileType.Obstacle)
+            {
+                correctedRange.coords.Remove(v + unitTile.Coords);
+            }
+        }
         switch (unitTile.unit.unitBase.unitType)
         {
             case BaseUnitType.Circle:
-                
-        }
-        foreach(Vector2 v in range.coords)
-        {
-            if (Board.Instance.GetTile(v).type)
-            {
+                foreach (Vector2 v in correctedRange.coords)
+                {
+                    Tile circleCheck = Board.Instance.GetTile(v + unitTile.Coords);
+                    if (circleCheck != null && circleCheck.type == TileType.Enemy)
+                    {
+                        foreach (Vector2 v2 in correctedRange.coords)
+                        {
+                            attackRange.Add(Board.Instance.GetTile(v2), Board.Instance.GetTiles(correctedRange.coords));
+                        }
+                        return;
+                    }
+                }
+                attackRange.Clear();
+                break;
+            case BaseUnitType.Square:
+                foreach (Vector2 v in correctedRange.coords)
+                {
+                    Tile squareCheck = Board.Instance.GetTile(v + unitTile.Coords);
+                    if (squareCheck != null && squareCheck.type == TileType.Enemy)
+                    {
+                        attackRange.Add(squareCheck, new List<Tile> { squareCheck });
+                    }
+                }
+                break;
+            case BaseUnitType.Triangle:
 
-            }
+                break;
         }
-       
     }
-    */
+    
     private void ProcessMovementRange(Tile tile, List<Tile> previous, Range comparedRange, int remaining)
     {
         List<Tile> newPrevious = new List<Tile>();
@@ -99,7 +127,7 @@ public class RangeManager : MonoBehaviour
             {
                 return;
             }
-            if (!comparedRange.coords.Contains(tile.Coords) || (tile.type != TileType.Ally && tile.type != TileType.Free))
+            if (!comparedRange.coords.Contains(tile.Coords + unitTile.Coords) || (tile.type != TileType.Ally && tile.type != TileType.Free))
             {
                 return;
             }
