@@ -18,9 +18,10 @@ public class LevelManager : MonoBehaviour
     private float currentDifficulty = 0f;
     private float currentDistanceChunkLastRow = 0f;
  
+    /*
     public void RequestNewChunkSpawn()
     {
-        /*
+        
         if (settings)
         {
             List<Room> potentialChunks = GetAllChunksOfCurrentDifficulty();
@@ -29,23 +30,23 @@ public class LevelManager : MonoBehaviour
             Room newChunk = potentialChunks[index];
             SpawnRoom(newChunk);
         }
-        */
+        
     }
 
     private void SpawnRoom(Room chunk)
     {
-        /*
+        
         currentDistanceChunkLastRow = DistanceLastRowSpawnPos();
         for (int i = 0; i < chunk.elements.Count; i++)
         {
             SpawnElement(i, chunk);
         }
-        */
+        
     }
 
     private void SpawnElement(int i, Room chunk)
     {
-        /*
+        
         LevelElementChunkSettings element = chunk.elements[i];
         if (element.levelElement)
         {
@@ -64,6 +65,7 @@ public class LevelManager : MonoBehaviour
             pooled.transform.position = pos;
             pooled.transform.localEulerAngles = new Vector3(0, 0, 180);
         }
-        */
+        
     }
+    */
 }
