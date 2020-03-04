@@ -5,31 +5,38 @@ using UnityEngine;
 
 public class ShapeUnit : Unit
 {
-    public BaseUnit baseUnit;
-
-    public bool IsUnitComposite => mergedUnits.Count > 0;
-    public int UnitMergeLevel => mergedUnits.Count;
-
-    ///////////////////////////// Part To modify (UnitStats)
-    public override Attack UnitAttack => (ArmUnit != null) ? ArmUnit.UnitStats.attacks[1] : baseUnitStats.attacks[0];
-    public override Movement UnitMovement => baseUnitStats.movements[(mergedUnits.Count > 0) ? 1 : 0];
-    public override Stats UnitStats => (mergedUnits.Count > 0) ?  compositeStats : baseUnitStats;
-    /////////////////////////////
-
-    public Stats baseUnitStats;                                                                                                                 //To Be Modified
-    private Stats compositeStats;                                                                                                               //To Be Modified
-
-    public BaseUnit HeadUnit => (mergedUnits.Count > 1) ? mergedUnits[1] : null;
-    public BaseUnit ArmUnit => (mergedUnits.Count > 0) ? mergedUnits[0] : null;
-    public BaseUnit LegUnit => baseUnit;
+    public UnitBase unitBase;
 
     public Equipement equipement { get; set; }
 
-    private List<BaseUnit> mergedUnits;
+    private List<ShapeUnit> mergedUnits;
+    public bool IsUnitComposite => mergedUnits.Count > 0;
+    public int UnitMergeLevel => mergedUnits.Count;
 
+    public ShapeUnit HeadUnit => (mergedUnits.Count > 1) ? mergedUnits[1] : null;
+    public ShapeUnit ArmUnit => (mergedUnits.Count > 0) ? mergedUnits[0] : null;
+    //public UnitBase LegUnit => baseUnit;
+    
+    public override int MaxHealth
+    {
+        get
+        {
+            int maxHealth = unitBase.unitStats.maxHealth;
+            foreach(ShapeUnit shape in mergedUnits)
+            {
+                maxHealth += shape.MaxHealth;
+            }
+            return maxHealth;
+        }
+    }
+    public int Damage => (ArmUnit != null) ? ArmUnit.Damage : unitBase.unitStats.damage;
+
+    public override AttackPattern UnitAttackPattern => (ArmUnit != null) ? ArmUnit.unitBase.attackPatterns[1] : unitBase.attackPatterns[0];
+    public override MovementPattern UnitMovementPattern => unitBase.movementPatterns[(mergedUnits.Count > 0) ? 1 : 0];
+          
     private void Awake()
     {
-        mergedUnits = new List<BaseUnit>();
+        mergedUnits = new List<ShapeUnit>();
     }
 
     public void MergeWithAlly(ShapeUnit shape)
@@ -37,8 +44,9 @@ public class ShapeUnit : Unit
         if (shape.UnitMergeLevel == 0)
         {
             if (UnitMergeLevel < 2)
-                mergedUnits.Add(shape.baseUnit);
+                mergedUnits.Add(shape);
                 // Autre check 
+                // Vanish d'equipement + Refund
             else
                 Debug.LogError("Illicite Merge: bottom unit is already at max level");
         }

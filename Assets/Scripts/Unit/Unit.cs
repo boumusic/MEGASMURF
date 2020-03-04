@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Unit : LevelElement
+public class Unit : LevelElement
 {
-    public virtual Stats UnitStats { get; protected set; }
-    public virtual Movement UnitMovement { get; protected set; }
-    public virtual Attack UnitAttack { get; protected set; }
+    public UnitBase unitBase;     //Passage en UnitBase
+    public Tile CurrentTile { get; protected set; }
 
-    public Tile currentTile { get; protected set; }
-
+    //A Initialiser
     public float CurrentHitPoint { get; protected set; }
+
+    public virtual int MaxHealth => unitBase.unitStats.maxHealth;
+    public virtual int Damage => unitBase.unitStats.damage;
+    
+    public virtual AttackPattern UnitAttackPattern => unitBase.attackPatterns[0];
+    public virtual MovementPattern UnitMovementPattern => unitBase.movementPatterns[0];
+    public virtual UnitStatistics UnitStats => unitBase.unitStats;
 
     public virtual void SetUnitPosition(Tile tile)
     {
@@ -18,9 +23,8 @@ public abstract class Unit : LevelElement
         //Animation d'apparition
     }
 
-    public virtual void MoveTo(Tile tile)
+    public virtual void MoveTo(Stack<Tile> path)
     {
-        // recup un path (list de tile)
         // Lancer une coroutine qui fait parcourir le chemin
     }
 
@@ -31,9 +35,13 @@ public abstract class Unit : LevelElement
         tile.unit.TakeDamage(this);
     }
 
+    /// <summary>
+    /// Method to inflict damage
+    /// </summary>
+    /// <param name="unit"></param>
     public virtual void TakeDamage(Unit unit)
     {
-        CurrentHitPoint -= unit.UnitAttack.damage;
+        CurrentHitPoint -= unit.UnitStats.damage;
         
         if(CurrentHitPoint <= 0)
         {
@@ -48,11 +56,12 @@ public abstract class Unit : LevelElement
     /// <param name="unit"> Killed unit </param>
     protected virtual void OnKillScored(Unit unit)
     {
-        //Check si c'est un boss
-        MoveTo(unit.currentTile);
-        //Anim particuliere?
+        
     }
 
+    /// <summary>
+    /// Execute all the action needed upon unit death
+    /// </summary>
     protected virtual void Die()
     {
         // Animation Mort
