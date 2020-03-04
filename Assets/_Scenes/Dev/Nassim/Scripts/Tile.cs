@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum TileType
 {
@@ -11,6 +12,15 @@ public enum TileType
     Enemy
 }
 
+public enum TileAnim
+{
+    None,
+    Movement,
+    MovementMouseOver,
+    Attack,
+    AttackMouseOver
+}
+
 public class Tile : MonoBehaviour
 {
 
@@ -18,46 +28,30 @@ public class Tile : MonoBehaviour
     public Unit unit;
     public Animator animator;
 
-    [HideInInspector]
-    public bool isProcessed;
+    private Vector2Int _coords;
 
-    private Vector2 _coords;
+    private List<Tile> _neighbors;
 
-    public List<Tile> Neighbors { get; set; }
-    public Vector2 Coords
+    private TileAnim _currentAnim;
+
+    public Vector2Int Coords
     {
         get => _coords;
         set 
         {
             _coords = value;
-            if(Neighbors == null)
-            {
-                Neighbors = new List<Tile>();
-            }
-            Neighbors.Clear();
-            if(Board.Instance.GetTile(value.x + 1, value.y) != null)
-            {
-                Neighbors.Add(Board.Instance.GetTile(value.x + 1, value.y));
-            }
-            if (Board.Instance.GetTile(value.x, value.y + 1) != null)
-            {
-                Neighbors.Add(Board.Instance.GetTile(value.x, value.y + 1));
-            }
-            if (Board.Instance.GetTile(value.x - 1, value.y) != null)
-            {
-                Neighbors.Add(Board.Instance.GetTile(value.x - 1, value.y));
-            }
-            if (Board.Instance.GetTile(value.x, value.y - 1) != null)
-            {
-                Neighbors.Add(Board.Instance.GetTile(value.x, value.y - 1));
-            }
-        } }
+            CheckNeighbors();
+        } 
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        isProcessed = false;
-        Neighbors = new List<Tile>();
+        if(animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+        _currentAnim = TileAnim.None;
     }
 
     // Update is called once per frame
@@ -66,8 +60,71 @@ public class Tile : MonoBehaviour
         
     }
 
+    public List<Tile> GetNeighbors()
+    {
+        return _neighbors;
+    }
+
+    public void CheckNeighbors()
+    {
+        if (_neighbors == null)
+        {
+            _neighbors = new List<Tile>();
+        }
+        else
+        {
+            _neighbors.Clear();
+        }
+        if (Board.Instance.GetTile(_coords.x + 1, _coords.y) != null)
+        {
+            _neighbors.Add(Board.Instance.GetTile(_coords.x + 1, _coords.y));
+        }
+        if (Board.Instance.GetTile(_coords.x, _coords.y + 1) != null)
+        {
+            _neighbors.Add(Board.Instance.GetTile(_coords.x, _coords.y + 1));
+        }
+        if (Board.Instance.GetTile(_coords.x - 1, _coords.y) != null)
+        {
+            _neighbors.Add(Board.Instance.GetTile(_coords.x - 1, _coords.y));
+        }
+        if (Board.Instance.GetTile(_coords.x, _coords.y - 1) != null)
+        {
+            _neighbors.Add(Board.Instance.GetTile(_coords.x, _coords.y - 1));
+        }
+    }
+
+    public bool IsNeighbor(Tile other)
+    {
+        return Vector2Int.Distance(Coords, other.Coords) == 1;
+    }
+
     public bool Equals(Tile other)
     {
         return Coords.Equals(other.Coords);
     }
+
+    public void TriggerAnimation(TileAnim anim)
+    {
+        if (animator != null && _currentAnim != anim)
+        {
+            switch (anim)
+            {
+                case TileAnim.Movement:
+                    animator.SetTrigger("Movement");
+                    break;
+                case TileAnim.MovementMouseOver:
+                    animator.SetTrigger("MovementMouseOver");
+                    break;
+                default:
+                    animator.SetTrigger("None");
+                    break;
+            }
+            _currentAnim = anim;
+        }
+    }
+
+    private void OnMouseEnter() {
+        RangeManager.Instance.AddToCurrentPath(this);
+    }
+
 }
