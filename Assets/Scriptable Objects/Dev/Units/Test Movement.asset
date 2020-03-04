@@ -9,9 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1b73794d7bb97b42af7251bb265d0d4, type: 3}
-  m_Name: New Unit Stats
+  m_Script: {fileID: 11500000, guid: 53cd9951597f26d44939d730cbdae7d3, type: 3}
+  m_Name: Test Movement
   m_EditorClassIdentifier: 
-  health: 1
-  movement: {fileID: 11400000, guid: d93e56ebfd0dcbf43a6c79c22ab41828, type: 2}
-  attack: {fileID: 11400000, guid: 2cf3f5e9b4d6bcc48a4894ca22e0f31f, type: 2}
+  range:
+    size: 7
+    coords:
+    - {x: -1, y: -1}
+    - {x: -1, y: 0}
+    - {x: -1, y: 1}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: -1}
+    - {x: 0, y: -1}
