@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Maestro : Ally
+public class Maestro : Unit
 {
-    public override Attack UnitAttack => maestro.UnitAttack;
-    public override Movement UnitMovement => maestro.UnitMovement;
+    public override Attack UnitAttack => maestro.UnitStats.attacks[0];
+    public override Movement UnitMovement => maestro.UnitStats.movements[0];
     public override Stats UnitStats => maestro.UnitStats;
 
     public Attack maestroAttacks;
@@ -16,18 +16,16 @@ public class Maestro : Ally
 
     private void Awake()
     {
-        maestro.UnitAttack = maestroAttacks;
-        maestro.UnitMovement = maestroMovement;
         maestro.UnitStats = maestroStats;
     }
 
     public override void Attack(Tile tile)
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public override void MoveTo(Tile tile)
+    protected override void OnKillScored(Unit unit)
     {
-        throw new System.NotImplementedException();
+
     }
 }

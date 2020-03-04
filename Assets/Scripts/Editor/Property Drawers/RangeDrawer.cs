@@ -73,7 +73,7 @@ public class RangeDrawer : PropertyDrawer
                     Color def = GUI.color;
                     float value = 0.55f;
                     
-                    Color buttonColor = new Color(value, value, value, 1f);
+                    Color buttonColor = new Color(0f, 0f, 0f, 0.4f);
 
                     for (int i = 0; i < range.coords.Count; i++)
                     {
