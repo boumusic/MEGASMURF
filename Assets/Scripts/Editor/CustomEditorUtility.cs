@@ -139,7 +139,7 @@ public static class CustomEditorUtility
 
     public static Vector2 RectSize()
     {
-        return RectSize(1, 0);
+        return RectSize(1, 32);
     }
 
     public static Vector2 RectSize(float widthMul, int offset)
@@ -171,6 +171,7 @@ public static class CustomEditorUtility
     {
         return EditorGUIUtility.singleLineHeight * count;
     }
+
 
     #endregion
 
@@ -262,6 +263,7 @@ public static class CustomEditorUtility
         GUI.color = def;
         return null;
     }
+
 
     #region GL   
 
