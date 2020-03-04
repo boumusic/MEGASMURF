@@ -14,7 +14,7 @@ public class ShapeUnit : Unit
 
     public ShapeUnit HeadUnit => (mergedUnits.Count > 1) ? mergedUnits[1] : null;
     public ShapeUnit ArmUnit => (mergedUnits.Count > 0) ? mergedUnits[0] : null;
-    public UnitBase LegUnit => unitBase;
+    public ShapeUnit LegUnit => this;
     
     public override int MaxHealth
     {
@@ -30,9 +30,9 @@ public class ShapeUnit : Unit
     }
     public int Damage => (ArmUnit != null) ? ArmUnit.Damage : unitBase.unitStats.damage;
 
-    public override AttackPattern UnitAttackPattern => (ArmUnit != null) ? ArmUnit.unitBase.attackPatterns[1] : unitBase.attackPatterns[0];
-    public override MovementPattern UnitMovementPattern => unitBase.movementPatterns[(mergedUnits.Count > 0) ? 1 : 0];
-          
+    public override AttackPattern UnitAttackPattern => (ArmUnit != null) ? ArmUnit.unitBase.attackPatterns[1] : unitBase.attackPatterns[0]; // Ajout range level 3 (item)
+    public override MovementPattern UnitMovementPattern => unitBase.movementPatterns[(mergedUnits.Count > 0) ? 1 : 0];  // Ajout range level 3 (item)
+
     private void Awake()
     {
         mergedUnits = new List<ShapeUnit>();

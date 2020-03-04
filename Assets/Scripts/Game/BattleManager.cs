@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using MonsterLove.StateMachine;
 
-public class GameManager : MonoBehaviour
+public class BattleManager : MonoBehaviour
 {
-    private static GameManager instance;
-    public static GameManager Instance { get { if (!instance) instance = FindObjectOfType<GameManager>(); return instance; } }
+    private static BattleManager instance;
+    public static BattleManager Instance { get { if (!instance) instance = FindObjectOfType<BattleManager>(); return instance; } }
 
     public delegate void GameEvent();
     public GameEvent playerTurnStarted;
@@ -39,6 +39,29 @@ public class GameManager : MonoBehaviour
     {
         gameState.ChangeState(GameState.EnemyTurn);
     }
+
+    //public void EnterPlayerTurn()
+    //{
+    //    //Anim de debut de tour
+    //    //Entre dans UnitSelection
+    //}
+
+    //public void EnterUnitSelection()
+    //{
+    //    //Abonnement input 
+    //      => ClickUnit = SelectUnit()
+    //      => cancel = gameplayMenu()
+    //    (//Attend un input
+    //    //Entre en EnemyUnitDisplay
+    //    //Entre en ActionSelection)
+    //}
+
+    //public void SelecUnit()
+    //{
+    //     recup l'unit cliqué
+    //     Check enemy ou ally
+    //     Allez dans le bon state
+    //}
 }
 
 public enum GameState
