@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class ShapeUnit : Unit
 {
+    [Header("Components")]
+    [SerializeField] private UnitMergeAnimator unitMergeAnimator;
+
     public BaseUnitType UnitType => BaseUnitType.ShapeComposite;
     public Equipement equipement { get; set; }
 
@@ -38,14 +41,21 @@ public class ShapeUnit : Unit
         mergedUnits = new List<ShapeUnit>();
     }
 
+    /// <summary>
+    /// Takes a unit and merges it on top of itself.
+    /// </summary>
+    /// <param name="shape">The shape that will be merged on top of this shape.</param>
     public void MergeWithAlly(ShapeUnit shape)
     {
         if (shape.UnitMergeLevel == 0)
         {
             if (UnitMergeLevel < 2)
+            {
                 mergedUnits.Add(shape);
+                shape.unitMergeAnimator.MergeOnTopOf(this);
                 // Autre check 
                 // Vanish d'equipement + Refund
+            }
             else
                 Debug.LogError("Illicite Merge: bottom unit is already at max level");
         }

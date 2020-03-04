@@ -12,7 +12,166 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18697ebbb6539b4498aaaee45825f6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseUnitStats: {fileID: 11400000, guid: 533e9bf72eea5e4468b480f9364f4f10, type: 2}
+  unitBase: {fileID: 0}
+  unitMergeAnimator: {fileID: 7068817320334795538}
+--- !u!114 &7068817320334795538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5613015649589116678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26cb13e3fc83414ca4bebd4c371f49c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curveHoriz:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  curveVerti:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 54.980156
+      outSlope: 54.980156
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.16917776
+    - serializedVersion: 3
+      time: 0.025301307
+      value: 2.058261
+      inSlope: 4.358648
+      outSlope: 4.358648
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.25366676
+      outWeight: 0.082696326
+    - serializedVersion: 3
+      time: 0.76145476
+      value: 2.298286
+      inSlope: -3.245202
+      outSlope: -3.245202
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.056010157
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8017851
+      value: 0.7431105
+      inSlope: -5.33093
+      outSlope: -5.33093
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.81059694
+      value: 0.993238
+      inSlope: 5.096702
+      outSlope: 5.096702
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8920871
+      value: 0.95692
+      inSlope: 0.475368
+      outSlope: 0.475368
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1.0111619
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  curveRot:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4.8308196
+      outSlope: 4.8308196
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.14289626
+    - serializedVersion: 3
+      time: 0.17980689
+      value: 0.5666723
+      inSlope: 1.5700272
+      outSlope: 1.5700272
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7427524
+      value: 0.9986882
+      inSlope: 0.03298413
+      outSlope: 0.03298413
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.78965837
+      value: 1.0430646
+      inSlope: 0.004258575
+      outSlope: 0.004258575
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  offsetY: 1
+  speed: 1.8
 --- !u!1001 &5405772397372956265
 PrefabInstance:
   m_ObjectHideFlags: 0

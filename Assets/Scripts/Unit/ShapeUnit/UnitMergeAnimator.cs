@@ -2,25 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaceholderUnitMerge : MonoBehaviour
+public class UnitMergeAnimator : MonoBehaviour
 {
-    public ShapeUnit toMergeOn;
+    [Header("Animation")]
     [SerializeField] private AnimationCurve curveHoriz;
     [SerializeField] private AnimationCurve curveVerti;
     [SerializeField] private AnimationCurve curveRot;
-    [SerializeField] private float maxY = 2f;
     [SerializeField] private float offsetY = 1f;
     [SerializeField] private float speed = 1f;
+
     private bool isMerging = false;
     private float mergeProgress = 0f;
     private Vector3 initialPos;
     private Vector3 init;
+    private ShapeUnit destination;
 
     void Start()
     {
         init = transform.position;
-
     }
+
+    public void MergeOnTopOf(ShapeUnit _destination)
+    {
+        destination = _destination;
+        Merge();
+    }
+
     private void Update()
     {
         MergeUpdate();
@@ -37,7 +44,7 @@ public class PlaceholderUnitMerge : MonoBehaviour
 
     private void Merge()
     {
-        if (toMergeOn)
+        if (destination)
         {
             initialPos = transform.position;
             isMerging = true;
@@ -52,21 +59,21 @@ public class PlaceholderUnitMerge : MonoBehaviour
             if(mergeProgress < 1f)
             {
                 mergeProgress += Time.deltaTime * speed;
-                Vector3 pos = Vector3.Lerp(initialPos, toMergeOn.transform.position, curveHoriz.Evaluate(mergeProgress));
-                float y = Mathf.LerpUnclamped(initialPos.y, toMergeOn.transform.position.y + offsetY, curveVerti.Evaluate(mergeProgress));
+                Vector3 pos = Vector3.Lerp(initialPos, destination.transform.position, curveHoriz.Evaluate(mergeProgress));
+                float y = Mathf.LerpUnclamped(initialPos.y, destination.transform.position.y + offsetY, curveVerti.Evaluate(mergeProgress));
                 float xRot = curveRot.Evaluate(mergeProgress) * 360f;
                 transform.position = new Vector3(pos.x, y, pos.z);
                 transform.localEulerAngles = new Vector3(xRot, 0f, 0f);
 
                 if(mergeProgress > 0.7f)
                 {
-                    toMergeOn.GetComponentInChildren<Animator>().SetBool("isLandedOn", true);
+                    destination.GetComponentInChildren<Animator>().SetBool("isLandedOn", true);
                 }
             }
 
             else
             {
-                    toMergeOn.GetComponentInChildren<Animator>().SetBool("isLandedOn", false);
+                    destination.GetComponentInChildren<Animator>().SetBool("isLandedOn", false);
                 isMerging = false;
             }
         }
