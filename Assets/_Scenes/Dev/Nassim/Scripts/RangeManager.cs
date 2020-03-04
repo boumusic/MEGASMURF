@@ -11,8 +11,10 @@ public class RangeManager : MonoBehaviour
     public bool debugRange;
 
     private Dictionary<Tile, List<Tile>> rangePaths;
+    private Dictionary<Tile, List<Enemy>> attackRange;
     private Stack<Tile> currentPath;
     private Tile unitTile;
+    private Tile attackTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +39,7 @@ public class RangeManager : MonoBehaviour
 
     public void DebugRange()
     {
-        List<Vector2Int> rangeTest = new List<Vector2Int>();
+        List<Vector2> rangeTest = new List<Vector2>();
         for (int i = 0; i < debugRangeX; i++)
         {
             for (int j = 0; j < debugRangeY; j++)
@@ -48,22 +50,47 @@ public class RangeManager : MonoBehaviour
                 }
             }
         }
+        Range range = new Range();
+        range.coords = rangeTest;
         if (rangeTest.Count > 0)
         {
-            GetTilesInRange(Board.Instance.GetTile(rangeTest[0]), rangeTest);
-            DisplayTiles();
+            GetTilesInMovementRange(Board.Instance.GetTile(rangeTest[0]), range);
+            DisplayMovementTiles();
         }
     }
 
-    public void GetTilesInRange(Tile startTile, List<Vector2Int> range)
+    public void GetTilesInAttackRange(Tile startTile, Range range)
+    {
+        unitTile = startTile;
+       // ProcessAttackRange(range);
+    }
+
+    public void GetTilesInMovementRange(Tile startTile, Range range)
     {
         unitTile = startTile;
         rangePaths.Clear();
         currentPath.Clear();
-        ProcessRange(startTile, null, range, debugRangeMax);
+        ProcessMovementRange(startTile, null, range, debugRangeMax);
     }
+    /*
+    private void ProcessAttackRange(Range range)
+    {
+        switch (unitTile.unit.unitBase.unitType)
+        {
+            case BaseUnitType.Circle:
+                
+        }
+        foreach(Vector2 v in range.coords)
+        {
+            if (Board.Instance.GetTile(v).type)
+            {
 
-    private void ProcessRange(Tile tile, List<Tile> previous, List<Vector2Int> comparedRange, int remaining)
+            }
+        }
+       
+    }
+    */
+    private void ProcessMovementRange(Tile tile, List<Tile> previous, Range comparedRange, int remaining)
     {
         List<Tile> newPrevious = new List<Tile>();
         if (previous != null)
@@ -72,7 +99,7 @@ public class RangeManager : MonoBehaviour
             {
                 return;
             }
-            if (!comparedRange.Contains(tile.Coords) || (tile.type != TileType.Ally && tile.type != TileType.Free))
+            if (!comparedRange.coords.Contains(tile.Coords) || (tile.type != TileType.Ally && tile.type != TileType.Free))
             {
                 return;
             }
@@ -100,7 +127,7 @@ public class RangeManager : MonoBehaviour
         }
         foreach (Tile nextTile in tile.GetNeighbors())
         {
-            ProcessRange(nextTile, newPrevious, comparedRange, remaining--);
+            ProcessMovementRange(nextTile, newPrevious, comparedRange, remaining--);
         }
     }
 
@@ -185,11 +212,19 @@ public class RangeManager : MonoBehaviour
         currentPath.Push(tile);
     }
 
-    public void DisplayTiles()
+    public void DisplayMovementTiles()
     {
         foreach (Tile tile in rangePaths.Keys)
         {
             tile.TriggerAnimation(TileAnim.Movement);
+        }
+    }
+
+    public void DisplayAttackTiles()
+    {
+        foreach (Tile tile in rangePaths.Keys)
+        {
+            tile.TriggerAnimation(TileAnim.Attack);
         }
     }
 
@@ -218,6 +253,17 @@ public class RangeManager : MonoBehaviour
             tile.TriggerAnimation(TileAnim.Movement);
         }
         currentPath.Clear();
+    }
+
+    public Stack<Tile> GetCurrentPath()
+    {
+        Stack<Tile> orderedPath = new Stack<Tile>();
+        do
+        {
+            orderedPath.Push(currentPath.Pop());
+        }
+        while (currentPath.Count > 0);
+        return orderedPath;
     }
 
 }

@@ -123,9 +123,9 @@ public class Board : MonoBehaviour
         }
     }
 
-    public Tile GetTile(Vector2Int v)
+    public Tile GetTile(Vector2 v)
     {
-        return GetTile(v.x, v.y);
+        return GetTile((int)v.x, (int)v.y);
     }
 
 }
