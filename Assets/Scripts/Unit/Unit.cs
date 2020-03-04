@@ -6,6 +6,7 @@ public class Unit : LevelElement
 {
     public UnitBase unitBase;     //Passage en UnitBase
     public Tile CurrentTile { get; protected set; }
+    public BaseUnitType UnitType => unitBase.unitType;
 
     //A Initialiser
     public float CurrentHitPoint { get; protected set; }
