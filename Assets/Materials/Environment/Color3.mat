@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Ground
-  m_Shader: {fileID: 4800000, guid: acae454a3f37f444f84c8777c1dd2e81, type: 3}
+  m_Name: Color3
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,10 +39,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _GradientTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -64,66 +60,18 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EyeCurve: 0
-    - _EyeDistance: 0.5
-    - _EyeHeight: 0
-    - _EyeHeightOffset: 0
-    - _EyeOffsetX: 1
-    - _EyeOffsetY: 0
-    - _EyeSample: 3
-    - _EyeSize: 0.2
-    - _EyebrowCurve: 0
-    - _EyebrowDistance: 0.01
-    - _EyebrowHeight: 0
-    - _EyebrowOffsetX: 0.001
-    - _EyebrowOffsetY: 0
-    - _EyebrowSample: 3
-    - _EyebrowSize: 0.1
-    - _FaceOffsetX: 1.25
-    - _FaceOffsetY: 0.1
-    - _FresnelPower: 0
-    - _FresnelShadow: 0
-    - _FresnelStrength: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GradientY: 0
-    - _LineSharpness: 0
     - _Metallic: 0
     - _Mode: 0
-    - _MouthCurve: 0
-    - _MouthHeight: 0
-    - _MouthOffsetX: 1
-    - _MouthOffsetY: 1
-    - _MouthSample: 2
-    - _MouthSize: 0.01
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RemoveBackFace: 0.5
-    - _RimLightSharpness: 0.5
-    - _RimLightThreshold: 0.5
-    - _SSSSThreshold: 1
-    - _SSSSharpness: 1
-    - _ShadowOutlineSmoothness: 0.522
-    - _ShadowOutlineWidth: 0.5
-    - _SharpnessShadow: 1
-    - _Smoothness: 0
-    - _SmoothnessSharp: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _UseFace: 0
-    - _UseFresnel: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
+    - _Color: {r: 1, g: 0.7475157, b: 0.4009434, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EyeColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EyebrowColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 0, g: 0, b: 0, a: 0}
-    - _MouthColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RimLightColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SSSColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShadowOutlineColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 0}
