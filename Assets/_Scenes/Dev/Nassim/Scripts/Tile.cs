@@ -28,13 +28,13 @@ public class Tile : MonoBehaviour
     public Unit unit;
     public Animator animator;
 
-    private Vector2Int _coords;
+    private Vector2 _coords;
 
     private List<Tile> _neighbors;
 
     private TileAnim _currentAnim;
 
-    public Vector2Int Coords
+    public Vector2 Coords
     {
         get => _coords;
         set 
@@ -75,27 +75,27 @@ public class Tile : MonoBehaviour
         {
             _neighbors.Clear();
         }
-        if (Board.Instance.GetTile(_coords.x + 1, _coords.y) != null)
+        if (Board.Instance.GetTile((int)_coords.x + 1, (int)_coords.y) != null)
         {
-            _neighbors.Add(Board.Instance.GetTile(_coords.x + 1, _coords.y));
+            _neighbors.Add(Board.Instance.GetTile((int)_coords.x + 1, (int)_coords.y));
         }
-        if (Board.Instance.GetTile(_coords.x, _coords.y + 1) != null)
+        if (Board.Instance.GetTile((int)_coords.x, (int)_coords.y + 1) != null)
         {
-            _neighbors.Add(Board.Instance.GetTile(_coords.x, _coords.y + 1));
+            _neighbors.Add(Board.Instance.GetTile((int)_coords.x, (int)_coords.y + 1));
         }
-        if (Board.Instance.GetTile(_coords.x - 1, _coords.y) != null)
+        if (Board.Instance.GetTile((int)_coords.x - 1, (int)_coords.y) != null)
         {
-            _neighbors.Add(Board.Instance.GetTile(_coords.x - 1, _coords.y));
+            _neighbors.Add(Board.Instance.GetTile((int)_coords.x - 1, (int)_coords.y));
         }
-        if (Board.Instance.GetTile(_coords.x, _coords.y - 1) != null)
+        if (Board.Instance.GetTile((int)_coords.x, (int)_coords.y - 1) != null)
         {
-            _neighbors.Add(Board.Instance.GetTile(_coords.x, _coords.y - 1));
+            _neighbors.Add(Board.Instance.GetTile((int)_coords.x, (int)_coords.y - 1));
         }
     }
 
     public bool IsNeighbor(Tile other)
     {
-        return Vector2Int.Distance(Coords, other.Coords) == 1;
+        return Vector2.Distance(Coords, other.Coords) == 1.0f;
     }
 
     public bool Equals(Tile other)
@@ -114,6 +114,9 @@ public class Tile : MonoBehaviour
                     break;
                 case TileAnim.MovementMouseOver:
                     animator.SetTrigger("MovementMouseOver");
+                    break;
+                case TileAnim.Attack:
+                    animator.SetTrigger("Attack");
                     break;
                 default:
                     animator.SetTrigger("None");
