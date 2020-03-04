@@ -13,7 +13,7 @@ public class Unit : LevelElement
 
     public virtual int MaxHealth => unitBase.unitStats.maxHealth;
     public virtual int Damage => unitBase.unitStats.damage;
-    
+
     public virtual AttackPattern UnitAttackPattern => unitBase.attackPatterns[0];
     public virtual MovementPattern UnitMovementPattern => unitBase.movementPatterns[0];
     public virtual UnitStatistics UnitStats => unitBase.unitStats;
@@ -36,6 +36,21 @@ public class Unit : LevelElement
     public virtual void MoveTo(Stack<Tile> path)
     {
         // Lancer une coroutine qui fait parcourir le chemin
+        StartCoroutine(MovingTo(path));
+    }
+
+    private IEnumerator MovingTo(Stack<Tile> path)
+    {
+        while (path.Count > 0)
+        {
+            //Debug.Log(path.ToArray()[i]);
+            Vector3 pos = path.Pop().transform.position;
+            while (transform.position != pos)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, pos, UnitStats.moveSpeed);
+                yield return new WaitForFixedUpdate();
+            }
+        }
     }
 
     public virtual void Attack(Tile tile)
@@ -52,8 +67,8 @@ public class Unit : LevelElement
     public virtual void TakeDamage(Unit unit)
     {
         CurrentHitPoint -= unit.UnitStats.damage;
-        
-        if(CurrentHitPoint <= 0)
+
+        if (CurrentHitPoint <= 0)
         {
             Die();
             unit.OnKillScored(this);
@@ -66,7 +81,7 @@ public class Unit : LevelElement
     /// <param name="unit"> Killed unit </param>
     protected virtual void OnKillScored(Unit unit)
     {
-        
+
     }
 
     /// <summary>

@@ -36,10 +36,11 @@ public class Board : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(GenerateBoard());
+        GenerateBoard();
+        StartCoroutine(TileAppear());
     }
 
-    private IEnumerator GenerateBoard()
+    private void GenerateBoard()
     {
         if (Board.Instance == null)
         {
@@ -66,11 +67,10 @@ public class Board : MonoBehaviour
                         tiles[i, j] = newTile;
                         string name = "Tile (" + i + "," + j + ")";
                         newTile.gameObject.name = name;
-                        newTile.transform.localScale = new Vector3(totalWidth / (columns-1), 1f, totalHeight / (rows-1));
+                        newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), 1f, totalHeight / (rows - 1));
                         //newTile.GetComponentInChildren<TextMeshPro>().text = name;
                     }
 
-                    yield return new WaitForSeconds(tileDelay);
                 }
             }
             for (int i = 0; i < columns; i++)
@@ -79,6 +79,18 @@ public class Board : MonoBehaviour
                 {
                     tiles[i, j].CheckNeighbors();
                 }
+            }
+        }
+    }
+
+    private IEnumerator TileAppear()
+    {
+        for (int x = 0; x < tiles.GetLength(0); x++)
+        {
+            for (int y = 0; y < tiles.GetLength(1); y++)
+            {
+                tiles[x, y].Appear();
+                yield return new WaitForSeconds(tileDelay);
             }
         }
     }
@@ -121,6 +133,11 @@ public class Board : MonoBehaviour
         {
             return tiles[x, y];
         }
+    }
+
+    public Tile[,] GetTiles()
+    {
+        return tiles;
     }
 
     public Tile GetTile(Vector2 v)

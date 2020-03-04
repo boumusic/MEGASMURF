@@ -1,7 +1,7 @@
-﻿using System;
+﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class ShapeUnit : Unit
 {
@@ -39,6 +39,15 @@ public class ShapeUnit : Unit
     private void Awake()
     {
         mergedUnits = new List<ShapeUnit>();
+
+        Stack<Tile> path = new Stack<Tile>();
+        for (int i = 0; i < 20; i++)
+        { 
+          
+            path.Push(Board.Instance.GetTile((int)UnityEngine.Random.Range(0, 10), (int)UnityEngine.Random.Range(0, 10)));
+        }
+
+        MoveTo(path);
     }
 
     /// <summary>

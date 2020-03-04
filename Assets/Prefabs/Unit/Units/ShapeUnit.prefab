@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18697ebbb6539b4498aaaee45825f6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitBase: {fileID: 0}
+  unitBase: {fileID: 11400000, guid: 88b5f366a842dcc45ab41cc24dea485d, type: 2}
   unitMergeAnimator: {fileID: 7068817320334795538}
 --- !u!114 &7068817320334795538
 MonoBehaviour:
@@ -239,7 +239,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShapeUnit
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6230010613138883686, guid: b5de573a3d505c647b81c6561a17a605, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b5de573a3d505c647b81c6561a17a605, type: 3}
 --- !u!1 &5613015649589116678 stripped
 GameObject:
