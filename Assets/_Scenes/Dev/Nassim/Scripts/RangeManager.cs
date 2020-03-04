@@ -7,10 +7,11 @@ public class RangeManager : MonoBehaviour
 
     public static RangeManager Instance;
 
-    public int debugRangeX, debugRangeY;
+    public int debugRangeX, debugRangeY, debugRangeMax;
     public bool debugRange;
 
-    private Dictionary<Tile, List<Vector2Int>> rangePaths;
+    private Dictionary<Tile, List<Tile>> rangePaths;
+    private Stack<Tile> currentPath;
     private Tile unitTile;
 
     // Start is called before the first frame update
@@ -19,7 +20,8 @@ public class RangeManager : MonoBehaviour
         if (RangeManager.Instance == null)
         {
             RangeManager.Instance = this;
-            rangePaths = new Dictionary<Tile, List<Vector2Int>>();
+            rangePaths = new Dictionary<Tile, List<Tile>>();
+            currentPath = new Stack<Tile>();
         }
     }
 
@@ -49,6 +51,7 @@ public class RangeManager : MonoBehaviour
         if (rangeTest.Count > 0)
         {
             GetTilesInRange(Board.Instance.GetTile(rangeTest[0]), rangeTest);
+            DisplayTiles();
         }
     }
 
@@ -56,12 +59,13 @@ public class RangeManager : MonoBehaviour
     {
         unitTile = startTile;
         rangePaths.Clear();
-        ProcessRange(startTile, null, range);
+        currentPath.Clear();
+        ProcessRange(startTile, null, range, debugRangeMax);
     }
 
-    private void ProcessRange(Tile tile, List<Vector2Int> previous, List<Vector2Int> comparedRange)
+    private void ProcessRange(Tile tile, List<Tile> previous, List<Vector2Int> comparedRange, int remaining)
     {
-        List<Vector2Int> newPrevious = new List<Vector2Int>();
+        List<Tile> newPrevious = new List<Tile>();
         if (previous != null)
         {
             if (tile.Equals(unitTile))
@@ -88,12 +92,97 @@ public class RangeManager : MonoBehaviour
                 rangePaths.Add(tile, previous);
             }
             newPrevious.AddRange(previous);
-            newPrevious.Add(tile.Coords);         
+            newPrevious.Add(tile);         
+        }
+        if(remaining <= 0)
+        {
+            return;
         }
         foreach (Tile nextTile in tile.GetNeighbors())
         {
-            ProcessRange(nextTile, newPrevious, comparedRange);
+            ProcessRange(nextTile, newPrevious, comparedRange, remaining--);
         }
+    }
+
+    public bool IsInRange(Tile tile)
+    {
+        if(rangePaths.ContainsKey(tile)) 
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void AddToCurrentPath(Tile tile)
+    {
+        if((tile.type != TileType.Ally && tile.type != TileType.Free) || IsInRange(tile))
+        {
+            if(currentPath.Count == 0)
+            {
+                SetShorterCurrentPath(tile);
+            } 
+            else 
+            {
+                if(tile.Equals(currentPath.Peek())) 
+                {
+                    return;
+                }
+                if(tile.IsNeighbor(currentPath.Peek()))
+                {
+                    if(rangePaths[tile].Count < currentPath.Count) 
+                    {
+                        if(currentPath.Contains(tile)) 
+                        {
+                            bool found;
+                            do 
+                            {
+                                Tile peek = currentPath.Peek();
+                                found = tile.Equals(peek) || currentPath.Count == 0;
+                                if(!found)
+                                {
+                                    currentPath.Pop().TriggerAnimation(TileAnim.Movement);
+                                }
+                            }
+                            while(!found);
+                        } 
+                        else 
+                        {
+                            SetShorterCurrentPath(tile);
+                        }
+                    } 
+                    else
+                    {
+                        currentPath.Push(tile);
+                    }
+                } 
+                else 
+                {
+                    SetShorterCurrentPath(tile);
+                }
+            }
+            DisplayCurrentPath();
+        } 
+        else 
+        {
+            ClearCurrentPath();
+        }
+    }
+
+    public void SetShorterCurrentPath(Tile tile)
+    {
+        foreach(Tile pathTile in currentPath) 
+        {
+            if(!rangePaths[tile].Contains(pathTile)) 
+            {
+                pathTile.TriggerAnimation(TileAnim.Movement);
+            }
+        }
+        currentPath.Clear();
+        foreach(Tile pathTile in rangePaths[tile]) 
+        {
+            currentPath.Push(pathTile);
+        }
+        currentPath.Push(tile);
     }
 
     public void DisplayTiles()
@@ -102,6 +191,33 @@ public class RangeManager : MonoBehaviour
         {
             tile.TriggerAnimation(TileAnim.Movement);
         }
+    }
+
+    public void DisplayCurrentPath()
+    {
+        foreach(Tile tile in currentPath)
+        {
+            tile.TriggerAnimation(TileAnim.MovementMouseOver);
+        }
+    }
+
+    public void ClearTiles()
+    {
+        foreach(Tile tile in rangePaths.Keys)
+        {
+            tile.TriggerAnimation(TileAnim.None);
+        }
+        rangePaths.Clear();
+        currentPath.Clear();
+    }
+
+    public void ClearCurrentPath()
+    {
+        foreach(Tile tile in currentPath) 
+        {
+            tile.TriggerAnimation(TileAnim.Movement);
+        }
+        currentPath.Clear();
     }
 
 }
