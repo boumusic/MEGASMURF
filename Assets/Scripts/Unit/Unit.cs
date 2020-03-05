@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum UnitState
+{
+    Fresh,
+    Moved,
+    Used
+}
+
 public class Unit : LevelElement
 {
     public UnitBase unitBase;     //Passage en UnitBase
     public Tile CurrentTile { get; protected set; }
     public BaseUnitType UnitType => unitBase.unitType;
 
-    public bool HasMoved { get; private set; }                          //Unit State
-    public bool IsExausted { get; private set; }
-    
+    public UnitState CurrentUnitState { get; private set; }     //State Machine
+
+    public virtual int UnitMergeLevel => 0;
 
     //A Initialiser
     public float CurrentHitPoint { get; protected set; }
@@ -26,6 +33,11 @@ public class Unit : LevelElement
     {
         //Set Unit.tile et Tile.unit
         //Animation d'apparition
+    }
+
+    public virtual void BecomeFresh()
+    {
+        //Change StateMachine To Fresh State
     }
 
     public virtual void MovementMode()
