@@ -35,4 +35,5 @@ public class ShapeUnitAnimator : UnitAnimator
             allAnimators[i].SetBool("isMoving", isMoving);
         }
     }
+
 }

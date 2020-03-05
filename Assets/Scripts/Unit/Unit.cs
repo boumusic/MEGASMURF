@@ -14,7 +14,6 @@ public class Unit : LevelElement
     public bool HasMoved { get; private set; }                          //Unit State
     public bool IsExausted { get; private set; }
     
-
     //A Initialiser
     public float CurrentHitPoint { get; protected set; }
 
@@ -24,6 +23,8 @@ public class Unit : LevelElement
     public virtual AttackPattern UnitAttackPattern => unitBase.attackPatterns[0];
     public virtual MovementPattern UnitMovementPattern => unitBase.movementPatterns[0];
     public virtual UnitStatistics UnitStats => unitBase.unitStats;
+
+    public UnitAnimator UnitAnimator { get => unitAnimator; }
 
     public virtual void Start()
     {

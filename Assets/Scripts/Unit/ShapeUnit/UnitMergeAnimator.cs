@@ -85,8 +85,8 @@ public class UnitMergeAnimator : MonoBehaviour
     private void FinishedMerging()
     {
         isMerging = false;
-        finishedMerging?.Invoke();
         pivot.transform.localEulerAngles = Vector3.zero;
+        shapeUnitAnimator.PlayFeedback("MergedOnTop");
         StartCoroutine(ReleasingZoom());
     }
 
@@ -94,5 +94,6 @@ public class UnitMergeAnimator : MonoBehaviour
     {
         yield return new WaitForSeconds(releaseZoomDelay);
         GameCamera.Instance.ReleaseZoom();
+        finishedMerging?.Invoke();
     }
 }
