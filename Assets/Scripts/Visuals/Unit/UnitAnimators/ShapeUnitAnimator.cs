@@ -9,6 +9,7 @@ public class ShapeUnitAnimator : UnitAnimator
     [SerializeField] private Animator[] armsAnimator;
 
     [SerializeField] private GameObject legs;
+    [SerializeField] private GameObject arms;
 
     private List<Animator> allAnimators = new List<Animator>();
 
@@ -24,6 +25,11 @@ public class ShapeUnitAnimator : UnitAnimator
     public void ToggleLegs(bool on)
     {
         legs.SetActive(on);
+    }
+
+    public void ToggleArms(bool on)
+    {
+        arms.SetActive(on);
     }
 
     public override void SetIsMoving(bool isMoving)
