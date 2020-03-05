@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Room01
   m_EditorClassIdentifier: 
   elements:
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 5652221100376227775, guid: 450f5f5f3f9e62e4489f1051e3776bb4,
+      type: 3}
     pos: {x: 0, y: 0, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 0, y: 1, z: 0}
@@ -41,18 +42,9 @@ MonoBehaviour:
     pos: {x: 0, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 0, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 0, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 0, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 0, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 0, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 0, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 0, y: 19, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 1, y: 0, z: 0}
   - levelElement: {fileID: 0}
@@ -81,18 +73,9 @@ MonoBehaviour:
     pos: {x: 1, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 1, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 1, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 1, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 1, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 1, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 1, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 1, y: 19, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 2, y: 0, z: 0}
   - levelElement: {fileID: 0}
@@ -124,16 +107,6 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 2, y: 14, z: 0}
   - levelElement: {fileID: 0}
-    pos: {x: 2, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 2, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 2, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 2, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 2, y: 19, z: 0}
-  - levelElement: {fileID: 0}
     pos: {x: 3, y: 0, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 3, y: 1, z: 0}
@@ -153,26 +126,20 @@ MonoBehaviour:
     pos: {x: 3, y: 8, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 3, y: 9, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
+      type: 3}
     pos: {x: 3, y: 10, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
+      type: 3}
     pos: {x: 3, y: 11, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
+      type: 3}
     pos: {x: 3, y: 12, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
+      type: 3}
     pos: {x: 3, y: 13, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 3, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 3, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 3, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 3, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 3, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 3, y: 19, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 4, y: 0, z: 0}
   - levelElement: {fileID: 0}
@@ -189,9 +156,11 @@ MonoBehaviour:
     pos: {x: 4, y: 6, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 4, y: 7, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 4, y: 8, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 4, y: 9, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 4, y: 10, z: 0}
@@ -201,18 +170,9 @@ MonoBehaviour:
     pos: {x: 4, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 4, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 4, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 4, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 4, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 4, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 4, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 4, y: 19, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 5, y: 0, z: 0}
   - levelElement: {fileID: 0}
@@ -225,15 +185,20 @@ MonoBehaviour:
     pos: {x: 5, y: 4, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 5, y: 5, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 5, y: 6, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 5, y: 7, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 5, y: 8, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 5, y: 9, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 5, y: 10, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 5, y: 11, z: 0}
@@ -243,16 +208,6 @@ MonoBehaviour:
     pos: {x: 5, y: 13, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 5, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 5, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 5, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 5, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 5, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 5, y: 19, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 6, y: 0, z: 0}
   - levelElement: {fileID: 0}
@@ -265,34 +220,30 @@ MonoBehaviour:
     pos: {x: 6, y: 4, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 6, y: 5, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 6, y: 6, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 6, y: 7, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 6, y: 8, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 6, y: 9, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 6, y: 10, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 6, y: 11, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 6, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 6, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 6, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 6, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 6, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 6, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 6, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 6, y: 19, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 7, y: 0, z: 0}
   - levelElement: {fileID: 0}
@@ -305,11 +256,14 @@ MonoBehaviour:
     pos: {x: 7, y: 4, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 7, y: 5, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 7, y: 6, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 7, y: 7, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 7, y: 8, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 7, y: 9, z: 0}
@@ -321,18 +275,9 @@ MonoBehaviour:
     pos: {x: 7, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 7, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 7, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 7, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 7, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 7, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 7, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 7, y: 19, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 8, y: 0, z: 0}
   - levelElement: {fileID: 0}
@@ -351,9 +296,11 @@ MonoBehaviour:
     pos: {x: 8, y: 7, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 8, y: 8, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 8, y: 9, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 8, y: 10, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 8, y: 11, z: 0}
@@ -361,18 +308,9 @@ MonoBehaviour:
     pos: {x: 8, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 8, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 8, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 8, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 8, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 8, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 8, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 8, y: 19, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 9, y: 0, z: 0}
   - levelElement: {fileID: 0}
@@ -401,18 +339,9 @@ MonoBehaviour:
     pos: {x: 9, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 9, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 9, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 9, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 9, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 9, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 9, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 9, y: 19, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 10, y: 0, z: 0}
   - levelElement: {fileID: 0}
@@ -441,18 +370,9 @@ MonoBehaviour:
     pos: {x: 10, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 10, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 10, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 10, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 10, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 10, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 10, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 10, y: 19, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 11, y: 0, z: 0}
   - levelElement: {fileID: 0}
@@ -481,18 +401,9 @@ MonoBehaviour:
     pos: {x: 11, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 11, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 11, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 11, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 11, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 11, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 11, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 11, y: 19, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 12, y: 0, z: 0}
   - levelElement: {fileID: 0}
@@ -521,18 +432,9 @@ MonoBehaviour:
     pos: {x: 12, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 12, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 12, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 12, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 12, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 12, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 12, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 12, y: 19, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 13, y: 0, z: 0}
   - levelElement: {fileID: 0}
@@ -551,28 +453,24 @@ MonoBehaviour:
     pos: {x: 13, y: 7, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 13, y: 8, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 13, y: 9, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 13, y: 10, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 13, y: 11, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 13, y: 12, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 13, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 13, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 13, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 13, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 13, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 13, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 13, y: 19, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 14, y: 0, z: 0}
   - levelElement: {fileID: 0}
@@ -583,13 +481,17 @@ MonoBehaviour:
     pos: {x: 14, y: 3, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 14, y: 4, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 14, y: 5, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 14, y: 6, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 14, y: 7, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 14, y: 8, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 14, y: 9, z: 0}
@@ -601,216 +503,7 @@ MonoBehaviour:
     pos: {x: 14, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 14, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+      type: 3}
     pos: {x: 14, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 14, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 14, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 14, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 14, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 14, y: 19, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 0, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 1, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 2, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 3, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 4, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 5, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 6, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 7, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 8, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 9, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 10, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 11, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 12, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 13, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 15, y: 19, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 0, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 1, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 2, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 3, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 4, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 5, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 6, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 7, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 8, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 9, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 10, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 11, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 12, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 13, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 16, y: 19, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 0, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 1, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 2, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 3, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 4, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 5, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 6, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 7, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 8, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 9, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 10, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 11, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 12, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 13, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 17, y: 19, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 0, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 1, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 2, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 3, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 4, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 5, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 6, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 7, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 8, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 9, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 10, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 11, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 12, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 13, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 18, y: 19, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 0, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 1, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 2, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 3, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 4, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 5, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 6, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 7, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 8, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 9, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 10, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 11, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 12, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 13, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 14, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 15, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 16, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 17, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 18, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 19, y: 19, z: 0}
-  selectedBrush: 0
+  selectedBrush: 2
