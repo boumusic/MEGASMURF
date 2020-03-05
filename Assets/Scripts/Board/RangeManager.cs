@@ -11,8 +11,10 @@ public class RangeManager : MonoBehaviour
     public bool debugRange;
 
     private Dictionary<Tile, List<Tile>> rangePaths;
-    private Dictionary<Tile, List<Tile>> attackRange;
+    private Dictionary<Tile, List<Tile>> attackPaths;
+    private List<Tile> attackRange;
     private Stack<Tile> currentPath;
+    private Tile target;
     private Tile unitTile;
 
     // Start is called before the first frame update
@@ -22,7 +24,8 @@ public class RangeManager : MonoBehaviour
         {
             RangeManager.Instance = this;
             rangePaths = new Dictionary<Tile, List<Tile>>();
-            attackRange = new Dictionary<Tile, List<Tile>>();
+            attackPaths = new Dictionary<Tile, List<Tile>>();
+            attackRange = new List<Tile>();
             currentPath = new Stack<Tile>();
         }
     }
@@ -54,24 +57,52 @@ public class RangeManager : MonoBehaviour
         range.coords = rangeTest;
         if (rangeTest.Count > 0)
         {
-            GetTilesInMovementRange(Board.Instance.GetTile(rangeTest[0]), range);
+            //GetTilesInMovementRange(Board.Instance.GetTile(rangeTest[0]), range);
             DisplayMovementTiles();
         }
     }
 
-    public void GetTilesInAttackRange(Tile startTile, AttackPattern pattern)
+    public List<Tile> GetTilesInAttackRange(Tile startTile)
     {
         unitTile = startTile;
         attackRange.Clear();
-        ProcessAttackRange(pattern);
+        ProcessAttackRange(startTile.unit.UnitAttackPattern);
+        List<Tile> range = new List<Tile>();
+        foreach (Tile tile in attackPaths.Keys)
+        {
+            range.Add(tile);
+        }
+        return range;
+
     }
 
-    public void GetTilesInMovementRange(Tile startTile, Range range)
+    public List<Tile> GetTilesInMovementRange(Tile startTile)
     {
         unitTile = startTile;
         rangePaths.Clear();
         currentPath.Clear();
-        ProcessMovementRange(startTile, null, range, debugRangeMax);
+        switch (startTile.unit.UnitMovementPattern.type)
+        {
+            case MovementPatternType.Teleport:
+                foreach (Vector2 v in startTile.unit.UnitMovementPattern.range.coords)
+                {
+                    Tile check = Board.Instance.GetTile(v);
+                    if (check != null)
+                    {
+                        rangePaths.Add(check, new List<Tile> { check });
+                    }
+                }
+                break;
+            case MovementPatternType.Walk:
+                ProcessMovementRange(startTile, null, startTile.unit.UnitMovementPattern.range, debugRangeMax);
+                break;
+        }
+        List<Tile> range = new List<Tile>();
+        foreach (Tile tile in rangePaths.Keys)
+        {
+            range.Add(tile);
+        }
+        return range;
     }
 
     private void ProcessAttackRange(AttackPattern pattern)
@@ -96,7 +127,7 @@ public class RangeManager : MonoBehaviour
                     {
                         foreach (Vector2 v2 in correctedRange.coords)
                         {
-                            attackRange.Add(Board.Instance.GetTile(v2), Board.Instance.GetTiles(correctedRange.coords));
+                            attackPaths.Add(Board.Instance.GetTile(v2), Board.Instance.GetTiles(correctedRange.coords));
                         }
                         return;
                     }
@@ -110,7 +141,7 @@ public class RangeManager : MonoBehaviour
                     Tile singleCheck = Board.Instance.GetTile(v + unitTile.Coords);
                     if (singleCheck != null && singleCheck.type == TileType.Enemy)
                     {
-                        attackRange.Add(singleCheck, new List<Tile> { singleCheck });
+                        attackPaths.Add(singleCheck, new List<Tile> { singleCheck });
                     }
                 }
                 break;
@@ -129,7 +160,7 @@ public class RangeManager : MonoBehaviour
                             {
                                 between.Add(t);
                             }
-                            else if(t.type == TileType.Ally || t.type == TileType.Obstacle)
+                            else if(t.type != TileType.Free)
                             {
                                 clear = true;
                             }
@@ -140,7 +171,7 @@ public class RangeManager : MonoBehaviour
                         }
                         if (between.Count > 0)
                         {
-                            attackRange.Add(sliceCheck, between);
+                            attackPaths.Add(sliceCheck, between);
                         }
                     }
                 }
@@ -153,11 +184,18 @@ public class RangeManager : MonoBehaviour
         List<Tile> newPrevious = new List<Tile>();
         if (previous != null)
         {
-            if (tile.Equals(unitTile))
+            // Tile is unit tile or tile is occupied by full totem unit
+            if (tile.Equals(unitTile) || tile.unit.UnitMergeLevel > 2)
             {
                 return;
             }
-            if (!comparedRange.coords.Contains(tile.Coords + unitTile.Coords) || (tile.type != TileType.Ally && tile.type != TileType.Free))
+            // Unit is totem and tile is occupied by ally
+            if (unitTile.unit.UnitMergeLevel > 0 && tile.type == TileType.Ally)
+            {
+                return;
+            }
+            // Tile is out of range or tile is not free or occupied by ally
+            if (!comparedRange.coords.Contains(tile.Coords + unitTile.Coords) || (tile.type != TileType.Free && tile.type != TileType.Ally))
             {
                 return;
             }
@@ -179,7 +217,7 @@ public class RangeManager : MonoBehaviour
             newPrevious.AddRange(previous);
             newPrevious.Add(tile);         
         }
-        if(remaining <= 0)
+        if(remaining <= 0 || tile.type == TileType.Ally)
         {
             return;
         }
@@ -253,6 +291,12 @@ public class RangeManager : MonoBehaviour
         }
     }
 
+    public void TargetTile(Tile tile)
+    {
+        target = tile;
+        DisplayTarget();
+    }
+
     public void SetShorterCurrentPath(Tile tile)
     {
         foreach(Tile pathTile in currentPath) 
@@ -280,9 +324,16 @@ public class RangeManager : MonoBehaviour
 
     public void DisplayAttackTiles()
     {
-        foreach (Tile tile in rangePaths.Keys)
+        foreach (Tile tile in attackRange)
         {
-            tile.TriggerAnimation(TileAnim.Attack);
+            if (attackPaths.ContainsKey(tile))
+            {
+                tile.TriggerAnimation(TileAnim.Attack);
+            }
+            else
+            {
+                tile.TriggerAnimation(TileAnim.Disabled);
+            }
         }
     }
 
@@ -291,6 +342,17 @@ public class RangeManager : MonoBehaviour
         foreach(Tile tile in currentPath)
         {
             tile.TriggerAnimation(TileAnim.MovementMouseOver);
+        }
+    }
+
+    public void DisplayTarget()
+    {
+        if (attackPaths.ContainsKey(target))
+        {
+            foreach (Tile tile in attackPaths[target])
+            {
+                tile.TriggerAnimation(TileAnim.AttackMouseOver);
+            }
         }
     }
 
@@ -322,6 +384,15 @@ public class RangeManager : MonoBehaviour
         }
         while (currentPath.Count > 0);
         return orderedPath;
+    }
+
+    public List<Tile> GetTargets()
+    {
+        if (attackPaths.ContainsKey(target))
+        {
+            return attackPaths[target];
+        }
+        return new List<Tile>();
     }
 
 }
