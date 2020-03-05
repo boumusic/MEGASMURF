@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9483ed0f0eaff5c46a0471869f08bc82, type: 3}
   m_Name: NewUnitStatistics
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  damage: 0
+  maxHealth: 5
+  damage: 1
   moveSpeed: 0.4
