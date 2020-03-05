@@ -24,6 +24,10 @@ public class BattleManager : MonoBehaviour
 
     private StateMachine<GameState> gameState;
 
+    public Maestro MaestroUnit { get; private set; }
+    public List<ShapeUnit> ShapeUnits { get; private set; }
+    public List<Enemy> Enemies { get; private set; }
+
     private void Start()
     {
         gameState = StateMachine<GameState>.Initialize(this);
@@ -31,33 +35,28 @@ public class BattleManager : MonoBehaviour
         gameState.ChangeState(GameState.PlayerTurn);
     }
 
-    private void PlayerTurn_Enter()
-    {
-        playerTurnStarted?.Invoke();
-    }
-
-    private void EnemyTurn_Enter()
-    {
-        enemyTurnStarted?.Invoke();
-    }
-
     public void PlayerEndTurn()
     {
         gameState.ChangeState(GameState.EnemyTurn);
     }
 
-    //public void EnterStartPlayerTurn()
-    //{
-    //    //Anim de debut de tour
-    //    //Entre dans UnitSelection
-    //}
-
-    public void ExitStartPlayerTurn()
+    private void PlayerTurn_Enter()
     {
-        //rien
+        //Anim de debut de tour
+        playerTurnStarted?.Invoke();
+        //UnExaustedPlayerUnit()
+        //Entre dans UnitSelection
     }
 
-    public void EnterUnitSelection()
+    private void EnemyTurn_Enter()
+    {
+        //Animation
+        enemyTurnStarted?.Invoke();
+        //UnExaustedEnemyUnit()
+        //EnterStartPlayerTurn()
+    }
+
+    private void UnitSelection_Enter()
     {
         //Check Si allUnitExausted() -> si oui Enter EnemyTurn
         //Abonnement input 
@@ -65,24 +64,16 @@ public class BattleManager : MonoBehaviour
         //=> OnCancel = gameplayMenu()
     }
 
-    public void ExitUnitSelection()
+    private void UnitSelection_Exit()
     {
         //Desabonne tous les events
         //=> OnClick = null
         //=> OnCancel = null
     }
 
-    private void SelectUnit(Unit unit)
-    {
-         //Check si type d'entity = Unit
-         // Si oui : check enemy, Shape ou maestro
-         //          Check si l'unit est !exausted
-         //          Entrer dans le bon state
-         // Si non : rien faire
-         // Allez dans le bon state (check si unit has Moved)
-    }
+    
 
-    public void EnterActionSelection()
+    private void ActionSelection_Enter()
     {
         //DisplayRangeDeplacement
         //Display la bonne UI
@@ -90,13 +81,13 @@ public class BattleManager : MonoBehaviour
         //=> OnCancel = EnterUnitSelection()
     }
 
-    public void ExitActionSelection()
+    private void ActionSelection_Exit()
     {
         //Undisplay UI
         //=> OnCancel = null
     }
 
-    public void EnterAttackSelection()
+    private void AttackSelection_Enter()
     {
         //Display attack Range
         //=> OnClick = OnClickActionSwitch() (check si tile -> check si tileIsInRange -> Unit.Attack)
@@ -106,7 +97,7 @@ public class BattleManager : MonoBehaviour
         //=> OnCancel = EnterActionSelection()
     }
 
-    public void ExitAttackSelection()
+    private void AttackSelection_Exit()
     {
         //unDisplay UI
         //=> OnClick = null
@@ -114,11 +105,16 @@ public class BattleManager : MonoBehaviour
     }
    
 
-    public void EnterStartEnemyTurn()
+    
+
+    private void SelectUnit(Unit unit)
     {
-        //Animation
-        //EnterStartPlayerTurn()
-        //
+        //Check si type d'entity = Unit
+        // Si oui : check enemy, Shape ou maestro
+        //          Check si l'unit est !exausted
+        //          Entrer dans le bon state
+        // Si non : rien faire
+        // Allez dans le bon state (check si unit has Moved)
     }
 }
 

@@ -8,6 +8,10 @@ public class Unit : LevelElement
     public Tile CurrentTile { get; protected set; }
     public BaseUnitType UnitType => unitBase.unitType;
 
+    public bool HasMoved { get; private set; }                          //Unit State
+    public bool IsExausted { get; private set; }
+    
+
     //A Initialiser
     public float CurrentHitPoint { get; protected set; }
 
