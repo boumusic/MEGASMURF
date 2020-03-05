@@ -48,13 +48,14 @@ public class BattleManager : MonoBehaviour
     {
         gameplayState = StateMachine<GameplayState>.Initialize(this);
         gameplayState.ManualUpdate = true;
-        gameplayState.ChangeState(GameplayState.PlayerTurnStart);
+        gameplayState.ChangeState(GameplayState.UnitSelection);
     }
 
     public void StartLevel()
     {
 
     }
+
     public void OpenGameplayMenu()
     {
         //OpenUi
@@ -158,11 +159,11 @@ public class BattleManager : MonoBehaviour
         InputManager.instance.OnCancel += OpenGameplayMenu;
         InputManager.instance.OnUnitSelection += SelectUnit;
 
-        if (MaestroUnit.CurrentUnitState == UnitState.Used && AreAllUnitsUsed(ShapeUnits.Cast<Unit>().ToList()))
-        {
-            gameplayState.ChangeState(GameplayState.EnemyTurnStart);
-            return;
-        }
+        //if (MaestroUnit.CurrentUnitState == UnitState.Used && AreAllUnitsUsed(ShapeUnits.Cast<Unit>().ToList()))
+        //{
+        //    gameplayState.ChangeState(GameplayState.EnemyTurnStart);
+        //    return;
+        //}
     }
 
     private void UnitSelection_Exit()

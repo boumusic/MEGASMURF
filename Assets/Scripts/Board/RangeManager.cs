@@ -86,7 +86,7 @@ public class RangeManager : MonoBehaviour
             case MovementPatternType.Teleport:
                 foreach (Vector2 v in startTile.unit.UnitMovementPattern.range.coords)
                 {
-                    Tile check = Board.Instance.GetTile(v);
+                    Tile check = Board.Instance.GetTile(v + unitTile.Coords);
                     if (check != null)
                     {
                         rangePaths.Add(check, new List<Tile>());
@@ -185,7 +185,7 @@ public class RangeManager : MonoBehaviour
         if (previous != null)
         {
             // Tile is unit tile or tile is occupied by full totem unit
-            if (tile.Equals(unitTile) || tile.unit.UnitMergeLevel > 2)
+            if (tile.Equals(unitTile) || (tile.unit != null && tile.unit.UnitMergeLevel > 2))
             {
                 return;
             }
@@ -195,7 +195,7 @@ public class RangeManager : MonoBehaviour
                 return;
             }
             // Tile is out of range or tile is not free or occupied by ally
-            if (!comparedRange.coords.Contains(tile.Coords + unitTile.Coords) || (tile.type != TileType.Free && tile.type != TileType.Ally))
+            if (!comparedRange.coords.Contains(tile.Coords - unitTile.Coords) || (tile.type != TileType.Free && tile.type != TileType.Ally))
             {
                 return;
             }

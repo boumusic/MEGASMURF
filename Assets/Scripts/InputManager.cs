@@ -51,6 +51,6 @@ public class InputManager : MonoBehaviour
     public void UpdateCurrentTile(Tile tile)
     {
         currentTile = tile;
-        OnTileMouseOver(tile);
+        OnTileMouseOver?.Invoke(tile);
     }
 }

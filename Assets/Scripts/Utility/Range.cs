@@ -6,5 +6,6 @@ using UnityEngine;
 public class Range
 {
     [Range(1, 15)] public int size = 2;
-    public List<Vector2> coords = new List<Vector2>();
+    [SerializeField]
+    public List<Vector2> coords;// = new List<Vector2>();
 }
