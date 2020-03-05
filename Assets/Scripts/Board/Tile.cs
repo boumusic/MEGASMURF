@@ -123,6 +123,12 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
                 case TileAnim.Attack:
                     animator.SetTrigger("Attack");
                     break;
+                case TileAnim.AttackMouseOver:
+                    animator.SetTrigger("AttackMouseOver");
+                    break;
+                case TileAnim.Disabled:
+                    animator.SetTrigger("Disabled");
+                    break;
                 default:
                     animator.SetTrigger("None");
                     break;

@@ -11,6 +11,6 @@ public enum MovementPatternType
 [CreateAssetMenu(fileName = "NewMovementPattern", menuName = "Gameplay/MovementPattern", order = 150)]
 public class MovementPattern : ScriptableObject
 {
-    MovementPatternType type;
+    public MovementPatternType type;
     public Range range;
 }

@@ -57,24 +57,52 @@ public class RangeManager : MonoBehaviour
         range.coords = rangeTest;
         if (rangeTest.Count > 0)
         {
-            GetTilesInMovementRange(Board.Instance.GetTile(rangeTest[0]), range);
+            //GetTilesInMovementRange(Board.Instance.GetTile(rangeTest[0]), range);
             DisplayMovementTiles();
         }
     }
 
-    public void GetTilesInAttackRange(Tile startTile, AttackPattern pattern)
+    public List<Tile> GetTilesInAttackRange(Tile startTile)
     {
         unitTile = startTile;
         attackRange.Clear();
-        ProcessAttackRange(pattern);
+        ProcessAttackRange(startTile.unit.UnitAttackPattern);
+        List<Tile> range = new List<Tile>();
+        foreach (Tile tile in attackPaths.Keys)
+        {
+            range.Add(tile);
+        }
+        return range;
+
     }
 
-    public void GetTilesInMovementRange(Tile startTile, Range range)
+    public List<Tile> GetTilesInMovementRange(Tile startTile)
     {
         unitTile = startTile;
         rangePaths.Clear();
         currentPath.Clear();
-        ProcessMovementRange(startTile, null, range, debugRangeMax);
+        switch (startTile.unit.UnitMovementPattern.type)
+        {
+            case MovementPatternType.Teleport:
+                foreach (Vector2 v in startTile.unit.UnitMovementPattern.range.coords)
+                {
+                    Tile check = Board.Instance.GetTile(v);
+                    if (check != null)
+                    {
+                        rangePaths.Add(check, new List<Tile> { check });
+                    }
+                }
+                break;
+            case MovementPatternType.Walk:
+                ProcessMovementRange(startTile, null, startTile.unit.UnitMovementPattern.range, debugRangeMax);
+                break;
+        }
+        List<Tile> range = new List<Tile>();
+        foreach (Tile tile in rangePaths.Keys)
+        {
+            range.Add(tile);
+        }
+        return range;
     }
 
     private void ProcessAttackRange(AttackPattern pattern)
@@ -156,11 +184,18 @@ public class RangeManager : MonoBehaviour
         List<Tile> newPrevious = new List<Tile>();
         if (previous != null)
         {
-            if (tile.Equals(unitTile))
+            // Tile is unit tile or tile is occupied by full totem unit
+            if (tile.Equals(unitTile) || tile.unit.UnitMergeLevel > 2)
             {
                 return;
             }
-            if (!comparedRange.coords.Contains(tile.Coords + unitTile.Coords) || (tile.type != TileType.Ally && tile.type != TileType.Free))
+            // Unit is totem and tile is occupied by ally
+            if (unitTile.unit.UnitMergeLevel > 0 && tile.type == TileType.Ally)
+            {
+                return;
+            }
+            // Tile is out of range or tile is not free or occupied by ally
+            if (!comparedRange.coords.Contains(tile.Coords + unitTile.Coords) || (tile.type != TileType.Free && tile.type != TileType.Ally))
             {
                 return;
             }
@@ -182,7 +217,7 @@ public class RangeManager : MonoBehaviour
             newPrevious.AddRange(previous);
             newPrevious.Add(tile);         
         }
-        if(remaining <= 0)
+        if(remaining <= 0 || tile.type == TileType.Ally)
         {
             return;
         }
