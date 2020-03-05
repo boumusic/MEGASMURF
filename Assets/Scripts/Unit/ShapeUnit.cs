@@ -14,7 +14,7 @@ public class ShapeUnit : Unit
 
     private List<ShapeUnit> mergedUnits;
     public bool IsUnitComposite => mergedUnits.Count > 0;
-    public int UnitMergeLevel => mergedUnits.Count;
+    public override int UnitMergeLevel => mergedUnits.Count;
 
     public ShapeUnit HeadUnit => (mergedUnits.Count > 1) ? mergedUnits[1] : null;
     public ShapeUnit ArmUnit => (mergedUnits.Count > 0) ? mergedUnits[0] : null;
