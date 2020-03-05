@@ -428,10 +428,10 @@ namespace Pataya.QuikFeedback
 
         private void DebugUpdate()
         {
-            //if (Input.GetKeyDown(debugKey))
-            //{
-            //    Play();
-            //}
+            if (Input.GetKeyDown(debugKey))
+            {
+                Play();
+            }
         }
 
         private void OnDrawGizmosSelected()

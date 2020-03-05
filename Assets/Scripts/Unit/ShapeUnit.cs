@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class ShapeUnit : Unit
 {
     [Header("Components")]
-    [SerializeField] private UnitMergeAnimator unitMergeAnimator;
+    [SerializeField] private UnitMerger unitMergeAnimator;
     [SerializeField] private Transform mergeParent;
 
     public BaseUnitType UnitType => BaseUnitType.ShapeComposite;
@@ -19,6 +19,8 @@ public class ShapeUnit : Unit
     public ShapeUnit HeadUnit => (mergedUnits.Count > 1) ? mergedUnits[1] : null;
     public ShapeUnit ArmUnit => (mergedUnits.Count > 0) ? mergedUnits[0] : null;
     public ShapeUnit LegUnit => this;
+
+    public ShapeUnitAnimator ShapeUnitAnimator => UnitAnimator as ShapeUnitAnimator;
 
     public float Height => UnitMergeLevel * unitBase.unitStats.height;
 
@@ -40,6 +42,8 @@ public class ShapeUnit : Unit
 
     public override AttackPattern UnitAttackPattern => (ArmUnit != null) ? ArmUnit.unitBase.attackPatterns[1] : unitBase.attackPatterns[0]; // Ajout range level 3 (item)
     public override MovementPattern UnitMovementPattern => unitBase.movementPatterns[(mergedUnits.Count > 0) ? 1 : 0];  // Ajout range level 3 (item)
+
+    public Transform MergeParent { get => mergeParent; set => mergeParent = value; }
 
     private void Awake()
     {
@@ -77,11 +81,26 @@ public class ShapeUnit : Unit
             Debug.LogError("Illicite Merge: intiating unit is not level 0");
     }
 
+    public void ToggleMembers(ShapeUnit destination)
+    {
+        destination.ShapeUnitAnimator.ToggleArms(false);
+        destination.ShapeUnitAnimator.ToggleFace(false);
+
+        int count = destination.mergedUnits.Count;
+
+        ShapeUnitAnimator.ToggleLegs(false);
+
+        if (count == 2)
+        {
+            destination.mergedUnits[0].ShapeUnitAnimator.ToggleFace(false);
+            ShapeUnitAnimator.ToggleArms(false);
+        }
+    }
+
     private void FinishedMerging()
     {
         if (shapeBeingMerged)
         {
-            shapeBeingMerged.transform.parent = mergeParent;
             shapeBeingMerged = null;
         }
     }

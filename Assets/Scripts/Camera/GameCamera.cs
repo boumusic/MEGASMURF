@@ -54,7 +54,7 @@ public class GameCamera : MonoBehaviour
         Vector3 targetPos = new Vector3();
 
         if (target)
-            targetPos = new Vector3(target.position.x, transform.position.y, target.position.z);
+            targetPos = new Vector3(target.position.x, target.position.y, target.position.z);
         else
             targetPos = initialPos;
 

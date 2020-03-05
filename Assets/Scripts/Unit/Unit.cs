@@ -18,6 +18,7 @@ public class Unit : LevelElement
     public Tile CurrentTile { get; protected set; }
     public BaseUnitType UnitType => unitBase.unitType;
 
+
     public UnitState CurrentUnitState { get; private set; }     //State Machine
 
     public virtual int UnitMergeLevel => 0;
@@ -31,6 +32,8 @@ public class Unit : LevelElement
     public virtual AttackPattern UnitAttackPattern => unitBase.attackPatterns[0];
     public virtual MovementPattern UnitMovementPattern => unitBase.movementPatterns[0];
     public virtual UnitStatistics UnitStats => unitBase.unitStats;
+
+    public UnitAnimator UnitAnimator { get => unitAnimator; }
 
     public virtual void Start()
     {

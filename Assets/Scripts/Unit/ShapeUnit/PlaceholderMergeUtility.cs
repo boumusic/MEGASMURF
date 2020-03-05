@@ -6,6 +6,7 @@ public class PlaceholderMergeUtility : MonoBehaviour
 {
     public ShapeUnit selected;
     public ShapeUnit target;
+    public ShapeUnit secondUnit;
 
     private void Start()
     {
@@ -26,10 +27,23 @@ public class PlaceholderMergeUtility : MonoBehaviour
     private void MergeComplete()
     {
         Stack<Tile> path = new Stack<Tile>();
-        for (int i = 1; i < 6; i++)
+        for (int i = 10; i > 0; i--)
         {
             path.Push(Board.Instance.GetTile(i, 0));
         }
-        //target.MoveTo(path);
+        target.MoveTo(path, SecondPathComplete);
+        //StartCoroutine(MovingTo(path));
+    }
+
+    private IEnumerator MovingTo(Stack<Tile> path)
+    {
+        yield return new WaitForSeconds(1f);
+
+    }
+
+
+    private void SecondPathComplete()
+    {
+        target.InitiateMergeAlly(secondUnit);
     }
 }
