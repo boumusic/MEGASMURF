@@ -97,6 +97,15 @@ public class ShapeUnit : Unit
         }
     }
 
+    public override void SetAnimatorMoving(bool moving)
+    {
+        base.SetAnimatorMoving(moving);
+        for (int i = 0; i < mergedUnits.Count; i++)
+        {
+            mergedUnits[i].SetAnimatorMoving(moving);
+        }
+    }
+
     private void FinishedMerging()
     {
         if (shapeBeingMerged)
