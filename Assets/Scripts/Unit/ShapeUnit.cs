@@ -18,6 +18,8 @@ public class ShapeUnit : Unit
     public ShapeUnit HeadUnit => (mergedUnits.Count > 1) ? mergedUnits[1] : null;
     public ShapeUnit ArmUnit => (mergedUnits.Count > 0) ? mergedUnits[0] : null;
     public ShapeUnit LegUnit => this;
+
+    private string unitName = "";
     
     public override int MaxHealth
     {
@@ -40,14 +42,14 @@ public class ShapeUnit : Unit
     {
         mergedUnits = new List<ShapeUnit>();
 
+        /*
         Stack<Tile> path = new Stack<Tile>();
         for (int i = 0; i < 20; i++)
         { 
-          
             path.Push(Board.Instance.GetTile((int)UnityEngine.Random.Range(0, 10), (int)UnityEngine.Random.Range(0, 10)));
         }
-
         MoveTo(path);
+        */
     }
 
     /// <summary>
