@@ -7,6 +7,6 @@ public class EndTurnButton : UIButton
     public override void OnClick()
     {
         base.OnClick();
-        GameManager.Instance.PlayerEndTurn();
+        BattleManager.Instance.PlayerEndTurn();
     }
 }
