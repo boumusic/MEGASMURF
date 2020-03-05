@@ -63,9 +63,9 @@ public class UnitMergeAnimator : MonoBehaviour
 
     private void MergeUpdate()
     {
-        if(isMerging)
+        if (isMerging)
         {
-            if(mergeProgress < 1f)
+            if (mergeProgress < 1f)
             {
                 mergeProgress += Time.deltaTime * speed;
                 Vector3 pos = Vector3.Lerp(initialPos, destination.transform.position, curveHoriz.Evaluate(mergeProgress));
@@ -88,6 +88,7 @@ public class UnitMergeAnimator : MonoBehaviour
         pivot.transform.localEulerAngles = Vector3.zero;
         transform.position = destination.transform.position + Vector3.up * destination.Height;
         shapeUnitAnimator.PlayFeedback("MergedOnTop");
+        transform.parent = destination.MergeParent;
         StartCoroutine(ReleasingZoom());
     }
 

@@ -78,7 +78,7 @@ public class Unit : LevelElement
         while (path.Count > 0)
         {
             Vector3 pos = path.Pop().transform.position;
-            //transform.forward = (pos - transform.position).normalized;
+            transform.forward = (pos - transform.position).normalized;
             while (transform.position != pos)
             {
                 transform.position = Vector3.MoveTowards(transform.position, pos, UnitStats.moveSpeed);

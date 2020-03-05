@@ -32,6 +32,13 @@ public class PlaceholderMergeUtility : MonoBehaviour
             path.Push(Board.Instance.GetTile(i, 0));
         }
         target.MoveTo(path, SecondPathComplete);
+        //StartCoroutine(MovingTo(path));
+    }
+
+    private IEnumerator MovingTo(Stack<Tile> path)
+    {
+        yield return new WaitForSeconds(1f);
+
     }
 
 

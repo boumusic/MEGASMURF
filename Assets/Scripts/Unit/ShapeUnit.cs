@@ -41,6 +41,8 @@ public class ShapeUnit : Unit
     public override AttackPattern UnitAttackPattern => (ArmUnit != null) ? ArmUnit.unitBase.attackPatterns[1] : unitBase.attackPatterns[0]; // Ajout range level 3 (item)
     public override MovementPattern UnitMovementPattern => unitBase.movementPatterns[(mergedUnits.Count > 0) ? 1 : 0];  // Ajout range level 3 (item)
 
+    public Transform MergeParent { get => mergeParent; set => mergeParent = value; }
+
     private void Awake()
     {
         mergedUnits = new List<ShapeUnit>();
@@ -81,7 +83,6 @@ public class ShapeUnit : Unit
     {
         if (shapeBeingMerged)
         {
-            shapeBeingMerged.transform.parent = mergeParent;
             shapeBeingMerged = null;
         }
     }
