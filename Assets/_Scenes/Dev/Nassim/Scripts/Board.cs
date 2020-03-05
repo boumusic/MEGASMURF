@@ -6,20 +6,21 @@ using TMPro;
 public class Board : MonoBehaviour
 {
 
-    public static Board Instance;// {
-    /*get 
+    public static Board Instance
     {
-        if (Board.Instance == null)
+        get
         {
-            Board.Instance = FindObjectOfType<Board>();
+            if (Board.Instance == null)
+            {
+                Board.Instance = FindObjectOfType<Board>();
+            }
+            return Board.Instance;
         }
-        return Board.Instance; 
-    }         
-    set 
-    {
-        Instance = value;
+        set
+        {
+            Instance = value;
+        }
     }
-}*/
 
     //private static Board instance;
 
@@ -159,4 +160,92 @@ public class Board : MonoBehaviour
         return tiles;
     }
 
+    public List<Tile> GetTilesBetween(Tile t1, Tile t2)
+    {
+        List<Tile> between = new List<Tile>();
+        if(t1.Equals(t2) || !t1.IsInLine(t2))
+        {
+            return between;
+        }
+        if(t1.Coords.x == t2.Coords.x)
+        {
+            // Search Left
+            if(t1.Coords.y > t2.Coords.y)
+            {
+                for(float i = t1.Coords.y; i>t2.Coords.y && i>=0; i--)
+                {
+                    between.Add(tiles[(int)(t1.Coords.x), (int)i]);
+                }
+            }
+            // Search Right
+            else
+            {
+                for (float i = t1.Coords.y; i < t2.Coords.y && i < rows; i++)
+                {
+                    between.Add(tiles[(int)(t1.Coords.x), (int)i]);
+                }
+            }
+        }
+        else if (t1.Coords.y == t2.Coords.y)
+        {
+            // Search Down
+            if (t1.Coords.x > t2.Coords.x)
+            {
+                for (float i = t1.Coords.x; i > t2.Coords.x && i >= 0; i--)
+                {
+                    between.Add(tiles[(int)i, (int)(t1.Coords.y)]);
+                }
+            }
+            // Search Up
+            else
+            {
+                for (float i = t1.Coords.x; i < t2.Coords.x && i < columns; i++)
+                {
+                    between.Add(tiles[(int)i, (int)(t1.Coords.y)]);
+                }
+            }
+        }
+        else
+        {
+            if (t1.Coords.y > t2.Coords.y)
+            {
+                // Search Down Left
+                if(t1.Coords.x > t2.Coords.x)
+                {
+                    for(float i = 1; t1.Coords.x-i > t2.Coords.x && t1.Coords.x - i >= 0 && t2.Coords.x - i >= 0; i--)
+                    {
+                        between.Add(tiles[(int)(t1.Coords.x - i), (int)(t1.Coords.y - i)]);
+                    }
+                }
+                // Search Down Right
+                if (t1.Coords.x < t2.Coords.x)
+                {
+                    for (float i = 1; t1.Coords.x + i < t2.Coords.x && t1.Coords.x + i < columns && t2.Coords.x + i < rows; i++)
+                    {
+                        between.Add(tiles[(int)(t1.Coords.x + i), (int)(t1.Coords.y + i)]);
+                    }
+                }
+            }
+            else
+            {
+                // Search Up Left
+                if (t1.Coords.x > t2.Coords.x)
+                {
+                    for (float i = t1.Coords.x; i < t2.Coords.x && i < columns; i++)
+                    {
+                        between.Add(tiles[(int)i, (int)i]);
+                    }
+                }
+                // Search Up Right
+                if (t1.Coords.x < t2.Coords.x)
+                {
+                    for (float i = t1.Coords.x; i < t2.Coords.x && i > 0; i--)
+                    {
+                        between.Add(tiles[(int)i, (int)i]);
+                    }
+                }
+            }
+        }
+        return between;
+    }
 }
