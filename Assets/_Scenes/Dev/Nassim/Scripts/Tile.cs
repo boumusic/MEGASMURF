@@ -21,7 +21,7 @@ public enum TileAnim
     AttackMouseOver
 }
 
-public class Tile : MonoBehaviour
+public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
 
     public TileType type;
@@ -134,4 +134,19 @@ public class Tile : MonoBehaviour
         RangeManager.Instance.AddToCurrentPath(this);
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        //Animation Si on est dans le bon State de BattleManager
+        InputManager.instance.UpdateCurrentTile(this);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        InputManager.instance.TileClickCallBack(this);
+    }
 }

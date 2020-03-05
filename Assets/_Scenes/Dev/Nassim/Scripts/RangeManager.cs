@@ -59,11 +59,11 @@ public class RangeManager : MonoBehaviour
         }
     }
 
-    public void GetTilesInAttackRange(Tile startTile, Range range)
+    public void GetTilesInAttackRange(Tile startTile, AttackPattern pattern)
     {
         unitTile = startTile;
         attackRange.Clear();
-        ProcessAttackRange(range);
+        ProcessAttackRange(pattern);
     }
 
     public void GetTilesInMovementRange(Tile startTile, Range range)
@@ -74,10 +74,10 @@ public class RangeManager : MonoBehaviour
         ProcessMovementRange(startTile, null, range, debugRangeMax);
     }
 
-    private void ProcessAttackRange(Range range)
+    private void ProcessAttackRange(AttackPattern pattern)
     {
-        Range correctedRange = range;
-        foreach(Vector2 v in range.coords)
+        Range correctedRange = pattern.range;
+        foreach(Vector2 v in pattern.range.coords)
         {
             Tile check = Board.Instance.GetTile(v + unitTile.Coords);
             if (check == null || check.type == TileType.None || check.type == TileType.Obstacle)
@@ -85,13 +85,14 @@ public class RangeManager : MonoBehaviour
                 correctedRange.coords.Remove(v + unitTile.Coords);
             }
         }
-        switch (unitTile.unit.unitBase.unitType)
+        switch (pattern.type)
         {
-            case BaseUnitType.Circle:
+            case AttackPatternType.All:
+                // Just check if there is at least one target in range
                 foreach (Vector2 v in correctedRange.coords)
                 {
-                    Tile circleCheck = Board.Instance.GetTile(v + unitTile.Coords);
-                    if (circleCheck != null && circleCheck.type == TileType.Enemy)
+                    Tile allCheck = Board.Instance.GetTile(v + unitTile.Coords);
+                    if (allCheck != null && allCheck.type == TileType.Enemy)
                     {
                         foreach (Vector2 v2 in correctedRange.coords)
                         {
@@ -102,18 +103,47 @@ public class RangeManager : MonoBehaviour
                 }
                 attackRange.Clear();
                 break;
-            case BaseUnitType.Square:
+            case AttackPatternType.Single:
+                // Check for tiles with targets on them
                 foreach (Vector2 v in correctedRange.coords)
                 {
-                    Tile squareCheck = Board.Instance.GetTile(v + unitTile.Coords);
-                    if (squareCheck != null && squareCheck.type == TileType.Enemy)
+                    Tile singleCheck = Board.Instance.GetTile(v + unitTile.Coords);
+                    if (singleCheck != null && singleCheck.type == TileType.Enemy)
                     {
-                        attackRange.Add(squareCheck, new List<Tile> { squareCheck });
+                        attackRange.Add(singleCheck, new List<Tile> { singleCheck });
                     }
                 }
                 break;
-            case BaseUnitType.Triangle:
-
+            case AttackPatternType.Slice:
+                // Check for free tiles with targets and no obstacle between them and unit tile 
+                foreach (Vector2 v in correctedRange.coords)
+                {
+                    Tile sliceCheck = Board.Instance.GetTile(v + unitTile.Coords);
+                    if(sliceCheck.type == TileType.Free)
+                    {
+                        bool clear = false;
+                        List<Tile> between = new List<Tile>();
+                        foreach(Tile t in Board.Instance.GetTilesBetween(unitTile, sliceCheck, false))
+                        {
+                            if(t.type == TileType.Enemy)
+                            {
+                                between.Add(t);
+                            }
+                            else if(t.type == TileType.Ally || t.type == TileType.Obstacle)
+                            {
+                                clear = true;
+                            }
+                        }
+                        if (clear)
+                        {
+                            between.Clear();
+                        }
+                        if (between.Count > 0)
+                        {
+                            attackRange.Add(sliceCheck, between);
+                        }
+                    }
+                }
                 break;
         }
     }
