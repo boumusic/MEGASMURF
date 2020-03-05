@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MonsterLove.StateMachine;
+using System.Linq;
 
 public enum GameState
 {
@@ -35,16 +36,28 @@ public class BattleManager : MonoBehaviour
         gameState.ChangeState(GameState.PlayerTurn);
     }
 
+    public void StartLevel()
+    {
+
+    }
+
     public void PlayerEndTurn()
     {
         gameState.ChangeState(GameState.EnemyTurn);
     }
 
+    private void LevelStart_Enter()
+    {
+
+    }
+
     private void PlayerTurn_Enter()
     {
         //Anim de debut de tour
+        //Abonner fin anim
         playerTurnStarted?.Invoke();
-        //UnExaustedPlayerUnit()
+        MaestroUnit.BecomeFresh();
+        FreshupUnits(ShapeUnits.Cast<Unit>().ToList());
         //Entre dans UnitSelection
     }
 
@@ -104,8 +117,15 @@ public class BattleManager : MonoBehaviour
         //=> OnCancel = null
     }
    
+    public void FreshupUnits(List<Unit> units)
+    {
+        foreach(Unit unit in units)
+        {
+            unit.BecomeFresh();
+        }
+    }
 
-    
+
 
     private void SelectUnit(Unit unit)
     {

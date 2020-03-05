@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9bb4f18535450e4b85d2478ee28e107, type: 3}
   m_Name: NewAttackPattern
   m_EditorClassIdentifier: 
+  type: 0
   range:
     size: 2
     coords: []

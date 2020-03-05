@@ -2,15 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum UnitState
+{
+    Fresh,
+    Moved,
+    Used
+}
+
 public class Unit : LevelElement
 {
+    [Header("Components")]
+    [SerializeField] private UnitAnimator unitAnimator;
+
     public UnitBase unitBase;     //Passage en UnitBase
     public Tile CurrentTile { get; protected set; }
     public BaseUnitType UnitType => unitBase.unitType;
 
-    public bool HasMoved { get; private set; }                          //Unit State
-    public bool IsExausted { get; private set; }
-    
+
+    public UnitState CurrentUnitState { get; private set; }     //State Machine
+
+    public virtual int UnitMergeLevel => 0;
 
     //A Initialiser
     public float CurrentHitPoint { get; protected set; }
@@ -22,10 +33,22 @@ public class Unit : LevelElement
     public virtual MovementPattern UnitMovementPattern => unitBase.movementPatterns[0];
     public virtual UnitStatistics UnitStats => unitBase.unitStats;
 
+    public UnitAnimator UnitAnimator { get => unitAnimator; }
+
+    public virtual void Start()
+    {
+        FaceCamera();
+    }
+
     public virtual void SetUnitPosition(Tile tile)
     {
         //Set Unit.tile et Tile.unit
         //Animation d'apparition
+    }
+
+    public virtual void BecomeFresh()
+    {
+        //Change StateMachine To Fresh State
     }
 
     public virtual void MovementMode()
@@ -39,22 +62,39 @@ public class Unit : LevelElement
 
     public virtual void MoveTo(Stack<Tile> path)
     {
-        // Lancer une coroutine qui fait parcourir le chemin
-        StartCoroutine(MovingTo(path));
+        StartCoroutine(MovingTo(path, null));
     }
 
-    private IEnumerator MovingTo(Stack<Tile> path)
+    public virtual void MoveTo(Stack<Tile> path, System.Action action)
     {
+        // Lancer une coroutine qui fait parcourir le chemin
+        StartCoroutine(MovingTo(path, action));
+    }
+
+    private IEnumerator MovingTo(Stack<Tile> path, System.Action action)
+    {
+        unitAnimator.SetIsMoving(true);
+
         while (path.Count > 0)
         {
-            //Debug.Log(path.ToArray()[i]);
             Vector3 pos = path.Pop().transform.position;
+            transform.forward = (pos - transform.position).normalized;
             while (transform.position != pos)
             {
                 transform.position = Vector3.MoveTowards(transform.position, pos, UnitStats.moveSpeed);
                 yield return new WaitForFixedUpdate();
             }
         }
+
+        unitAnimator.SetIsMoving(false);
+        FaceCamera();
+        action?.Invoke();
+    }
+
+    public void FaceCamera()
+    {
+        Vector3 forward = GameCamera.Instance.Forward;
+        transform.forward = new Vector3(-forward.x, 0f, -forward.z);
     }
 
     public virtual void AttackMode()
