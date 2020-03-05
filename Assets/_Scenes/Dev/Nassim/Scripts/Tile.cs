@@ -54,10 +54,9 @@ public class Tile : MonoBehaviour
         _currentAnim = TileAnim.None;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Appear()
     {
-        
+        animator.SetTrigger("In");
     }
 
     public List<Tile> GetNeighbors()
