@@ -43,43 +43,39 @@ public class Board : MonoBehaviour
 
     private void GenerateBoard()
     {
-        if (Board.Instance == null)
+        tiles = new Tile[columns, rows];
+        for (int i = 0; i < columns; i++)
         {
-            Board.Instance = this;
-            tiles = new Tile[columns, rows];
-            for (int i = 0; i < columns; i++)
+            for (int j = 0; j < rows; j++)
             {
-                for (int j = 0; j < rows; j++)
+                //Vector3 instancePosition = new Vector3(
+                //    (float)i * tilePrefab.transform.localScale.x + tilesOffset * i - ((float)(columns - 1) / 2.0f) * tilePrefab.transform.localScale.x - (float)(columns - 1) / 2.0f * tilesOffset,
+                //    0f,
+                //    (float)j * tilePrefab.transform.localScale.y + tilesOffset * j - ((float)(rows - 1) / 2.0f) * tilePrefab.transform.localScale.y - (float)(rows - 1) / 2.0f * tilesOffset);
+
+                float x = Utility.Interpolate(-totalWidth / 2, totalWidth / 2, 0, columns - 1, i);
+                float z = Utility.Interpolate(-totalHeight / 2, totalHeight / 2, 0, rows - 1, j);
+
+                Vector3 position = new Vector3(x, 0f, z);
+
+                Tile newTile = Instantiate<GameObject>(tilePrefab, position, Quaternion.identity, transform).GetComponent<Tile>();
+                if (newTile != null)
                 {
-                    //Vector3 instancePosition = new Vector3(
-                    //    (float)i * tilePrefab.transform.localScale.x + tilesOffset * i - ((float)(columns - 1) / 2.0f) * tilePrefab.transform.localScale.x - (float)(columns - 1) / 2.0f * tilesOffset,
-                    //    0f,
-                    //    (float)j * tilePrefab.transform.localScale.y + tilesOffset * j - ((float)(rows - 1) / 2.0f) * tilePrefab.transform.localScale.y - (float)(rows - 1) / 2.0f * tilesOffset);
-
-                    float x = Utility.Interpolate(-totalWidth / 2, totalWidth / 2, 0, columns - 1, i);
-                    float z = Utility.Interpolate(-totalHeight / 2, totalHeight / 2, 0, rows - 1, j);
-
-                    Vector3 position = new Vector3(x, 0f, z);
-
-                    Tile newTile = Instantiate<GameObject>(tilePrefab, position, Quaternion.identity, transform).GetComponent<Tile>();
-                    if (newTile != null)
-                    {
-                        newTile.Coords = new Vector2Int(i, j);
-                        tiles[i, j] = newTile;
-                        string name = "Tile (" + i + "," + j + ")";
-                        newTile.gameObject.name = name;
-                        newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), 1f, totalHeight / (rows - 1));
-                        //newTile.GetComponentInChildren<TextMeshPro>().text = name;
-                    }
-
+                    newTile.Coords = new Vector2Int(i, j);
+                    tiles[i, j] = newTile;
+                    string name = "Tile (" + i + "," + j + ")";
+                    newTile.gameObject.name = name;
+                    newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), 1f, totalHeight / (rows - 1));
+                    //newTile.GetComponentInChildren<TextMeshPro>().text = name;
                 }
+
             }
-            for (int i = 0; i < columns; i++)
+        }
+        for (int i = 0; i < columns; i++)
+        {
+            for (int j = 0; j < rows; j++)
             {
-                for (int j = 0; j < rows; j++)
-                {
-                    tiles[i, j].CheckNeighbors();
-                }
+                tiles[i, j].CheckNeighbors();
             }
         }
     }
