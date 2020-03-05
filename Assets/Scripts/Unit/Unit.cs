@@ -26,7 +26,7 @@ public class Unit : LevelElement
 
     public virtual void MovementMode()
     {
-        //Fait apparaitre les range de déplacement
+        //Fait apparaitre les ranges de déplacement
         //Active l'enregistrement de path
         //Attend un input
         //Declenche le déplacement
@@ -51,6 +51,14 @@ public class Unit : LevelElement
                 yield return new WaitForFixedUpdate();
             }
         }
+    }
+
+    public virtual void AttackMode()
+    {
+        //Fait apparaitre les ranges de déplacement
+        //Attent un input
+        //Déclenche l'attaque
+        //Rend la main au turnManager
     }
 
     public virtual void Attack(Tile tile)
