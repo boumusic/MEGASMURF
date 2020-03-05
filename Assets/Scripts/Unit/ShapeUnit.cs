@@ -7,6 +7,7 @@ public class ShapeUnit : Unit
 {
     [Header("Components")]
     [SerializeField] private UnitMergeAnimator unitMergeAnimator;
+    [SerializeField] private Transform mergeParent;
 
     public BaseUnitType UnitType => BaseUnitType.ShapeComposite;
     public Equipement equipement { get; set; }
@@ -19,14 +20,16 @@ public class ShapeUnit : Unit
     public ShapeUnit ArmUnit => (mergedUnits.Count > 0) ? mergedUnits[0] : null;
     public ShapeUnit LegUnit => this;
 
+    public float Height => UnitMergeLevel * unitBase.unitStats.height;
+
     private string unitName = "";
-    
+
     public override int MaxHealth
     {
         get
         {
             int maxHealth = unitBase.unitStats.maxHealth;
-            foreach(ShapeUnit shape in mergedUnits)
+            foreach (ShapeUnit shape in mergedUnits)
             {
                 maxHealth += shape.MaxHealth;
             }
@@ -41,29 +44,29 @@ public class ShapeUnit : Unit
     private void Awake()
     {
         mergedUnits = new List<ShapeUnit>();
+    }
 
-        /*
-        Stack<Tile> path = new Stack<Tile>();
-        for (int i = 0; i < 20; i++)
-        { 
-            path.Push(Board.Instance.GetTile((int)UnityEngine.Random.Range(0, 10), (int)UnityEngine.Random.Range(0, 10)));
-        }
-        MoveTo(path);
-        */
+    private ShapeUnit shapeBeingMerged;
+
+    public void InitiateMergeAlly(ShapeUnit shape)
+    {
+        InitiateMergeAlly(shape, null);
     }
 
     /// <summary>
     /// Takes a unit and merges it on top of itself.
     /// </summary>
     /// <param name="shape">The shape that will be merged on top of this shape.</param>
-    public void MergeWithAlly(ShapeUnit shape)
+    public void InitiateMergeAlly(ShapeUnit shape, System.Action onFinished)
     {
         if (shape.UnitMergeLevel == 0)
         {
             if (UnitMergeLevel < 2)
             {
+                onFinished += FinishedMerging;
+                shapeBeingMerged = shape;
                 mergedUnits.Add(shape);
-                shape.unitMergeAnimator.MergeOnTopOf(this);
+                shape.unitMergeAnimator.MergeOnTopOf(this, onFinished);
                 // Autre check 
                 // Vanish d'equipement + Refund
             }
@@ -72,5 +75,14 @@ public class ShapeUnit : Unit
         }
         else
             Debug.LogError("Illicite Merge: intiating unit is not level 0");
+    }
+
+    private void FinishedMerging()
+    {
+        if (shapeBeingMerged)
+        {
+            shapeBeingMerged.transform.parent = mergeParent;
+            shapeBeingMerged = null;
+        }
     }
 }
