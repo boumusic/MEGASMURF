@@ -86,6 +86,7 @@ public class UnitMergeAnimator : MonoBehaviour
     {
         isMerging = false;
         pivot.transform.localEulerAngles = Vector3.zero;
+        transform.position = destination.transform.position + Vector3.up * destination.Height;
         shapeUnitAnimator.PlayFeedback("MergedOnTop");
         StartCoroutine(ReleasingZoom());
     }

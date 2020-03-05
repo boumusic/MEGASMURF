@@ -188,7 +188,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     duration: 0.2
-    intensity: 0.8
+    intensity: 0.7
     interpolation: 0.03
   useZoom: 0
   zoomFeedback:
@@ -792,7 +792,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4428802084059770370}
-  - component: {fileID: 7331516201147055484}
   - component: {fileID: 6085409390055014944}
   - component: {fileID: 8146293463804965955}
   - component: {fileID: 101812427093185595}
@@ -821,25 +820,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &7331516201147055484
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4428802084059770371}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 404c6763f5d1633489f6f4f0260e1509, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &6085409390055014944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -862,7 +842,7 @@ BoxCollider:
   m_GameObject: {fileID: 4428802084059770371}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.7, z: 0.4}
   m_Center: {x: 0, y: 0.51, z: 0}
@@ -1221,7 +1201,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7691784327564934837}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 4955c4a85cd9317448cf0b872f1d03ec, type: 2}
   m_CullingMode: 0
