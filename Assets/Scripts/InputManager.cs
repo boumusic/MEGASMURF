@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     private GameObject objectUnderMouse;
 
     public event Action OnCancel;
+    public event Action<Tile> OnTileMouseOver;
     public event Action<Unit> OnUnitSelection;
     public event Action<Tile> OnTileSelection;
 
@@ -50,5 +51,6 @@ public class InputManager : MonoBehaviour
     public void UpdateCurrentTile(Tile tile)
     {
         currentTile = tile;
+        OnTileMouseOver(tile);
     }
 }

@@ -4,10 +4,18 @@ using UnityEngine;
 using MonsterLove.StateMachine;
 using System.Linq;
 
-public enum GameState
+public enum GameplayState
 {
+    LevelStart,
     PlayerTurn,
     EnemyTurn,
+    UnitSelection,
+    ActionSelection,
+    MovementPseudoState,
+    AttackSelection,
+    AttackTargetSelection,
+    AttackPseudoState,
+    GameplayMenu
 }
 
 public class BattleManager : MonoBehaviour
@@ -23,17 +31,23 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private HumanPlayer humanPlayer;
     [SerializeField] private AIPlayer aiPlayer;
 
-    private StateMachine<GameState> gameState;
+    private StateMachine<GameplayState> gameplayState;
 
     public Maestro MaestroUnit { get; private set; }
     public List<ShapeUnit> ShapeUnits { get; private set; }
     public List<Enemy> Enemies { get; private set; }
 
+    public Unit CurrentSelectedUnit { get; private set; }
+    private List<Tile> tilesInMovementRange;
+    private Stack<Tile> movementPath;
+    private List<Tile> tilesInAttackRange;
+    private List<Tile> targets;
+
     private void Start()
     {
-        gameState = StateMachine<GameState>.Initialize(this);
-        gameState.ManualUpdate = true;
-        gameState.ChangeState(GameState.PlayerTurn);
+        gameplayState = StateMachine<GameplayState>.Initialize(this);
+        gameplayState.ManualUpdate = true;
+        gameplayState.ChangeState(GameplayState.PlayerTurn);
     }
 
     public void StartLevel()
@@ -43,10 +57,30 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerEndTurn()
     {
-        gameState.ChangeState(GameState.EnemyTurn);
+        gameplayState.ChangeState(GameplayState.EnemyTurn);
+    }
+
+    public void OpenGameplayMenu()
+    {
+        gameplayState.ChangeState(GameplayState.GameplayMenu);
+    }
+
+    public void EnterUnitSelectionState()
+    {
+        gameplayState.ChangeState(GameplayState.UnitSelection);
+    }
+
+    public void EnterAttackSelectionState()
+    {
+        gameplayState.ChangeState(GameplayState.AttackSelection);
     }
 
     private void LevelStart_Enter()
+    {
+
+    }
+
+    private void LevelStart_Exit()
     {
 
     }
@@ -56,9 +90,9 @@ public class BattleManager : MonoBehaviour
         //Anim de debut de tour
         //Abonner fin anim
         playerTurnStarted?.Invoke();
-        MaestroUnit.BecomeFresh();
+        MaestroUnit.FreshenUp();
         FreshupUnits(ShapeUnits.Cast<Unit>().ToList());
-        //Entre dans UnitSelection
+        gameplayState.ChangeState(GameplayState.UnitSelection);
     }
 
     private void EnemyTurn_Enter()
@@ -71,70 +105,171 @@ public class BattleManager : MonoBehaviour
 
     private void UnitSelection_Enter()
     {
-        //Check Si allUnitExausted() -> si oui Enter EnemyTurn
-        //Abonnement input 
-        //=> OnClick = OnclickActionSwitch(entity)  (appel la methode SelectUnit si cela correspond à une unit)
-        //=> OnCancel = gameplayMenu()
+        CurrentSelectedUnit = null;
+        InputManager.instance.OnCancel += OpenGameplayMenu;
+        InputManager.instance.OnUnitSelection += SelectUnit;
+
+        if (MaestroUnit.CurrentUnitState == UnitState.Used && AreAllUnitsUsed(ShapeUnits.Cast<Unit>().ToList()))
+        {
+            gameplayState.ChangeState(GameplayState.EnemyTurn);
+            return;
+        }
     }
 
     private void UnitSelection_Exit()
     {
-        //Desabonne tous les events
-        //=> OnClick = null
-        //=> OnCancel = null
+        InputManager.instance.OnCancel -= OpenGameplayMenu;
+        InputManager.instance.OnUnitSelection -= SelectUnit;
     }
 
     
 
     private void ActionSelection_Enter()
     {
-        //DisplayRangeDeplacement
+        GetUnitMovementRange();
+        DisplayUnitMovementRange();
+        InputManager.instance.OnTileMouseOver += RangeManager.Instance.AddToCurrentPath;
         //Display la bonne UI
-        //=> OnClick = OnClickActionSwitch() (active moveTo? EnterAttackSele)
-        //=> OnCancel = EnterUnitSelection()
+
+        InputManager.instance.OnTileSelection += OrderMovement;
+        InputManager.instance.OnCancel += EnterUnitSelectionState;
     }
 
     private void ActionSelection_Exit()
     {
+        InputManager.instance.OnTileMouseOver -= RangeManager.Instance.AddToCurrentPath;
+        RangeManager.Instance.ClearTiles();
+        InputManager.instance.OnTileSelection -= OrderMovement;
+        InputManager.instance.OnCancel -= EnterUnitSelectionState;
+
         //Undisplay UI
-        //=> OnCancel = null
+    }
+
+    private void MovementPseudoState_Enter()
+    {
+        CurrentSelectedUnit.MoveTo(movementPath);
+        //Attendre la fin de l'anim
+        gameplayState.ChangeState(GameplayState.AttackSelection);
+    }
+
+    private void MovementPseudoState_Exit()
+    {
+        InputManager.instance.OnCancel -= EnterUnitSelectionState;
     }
 
     private void AttackSelection_Enter()
     {
-        //Display attack Range
-        //=> OnClick = OnClickActionSwitch() (check si tile -> check si tileIsInRange -> Unit.Attack)
-        //if (Unit.hasMoved)
-        //=> OnCancel = EnterUnitSelection()
-        //else 
-        //=> OnCancel = EnterActionSelection()
+        InputManager.instance.OnCancel += EnterUnitSelectionState;
     }
 
     private void AttackSelection_Exit()
     {
+        InputManager.instance.OnCancel -= EnterUnitSelectionState;
+    }
+
+    private void AttackTargetSelection_Enter()
+    {
+        GetUnitAttackRange();
+        DisplayUnitAttackRange();
+        InputManager.instance.OnTileMouseOver += RangeManager.Instance.Target;
+        InputManager.instance.OnTileSelection += OrderAttack;
+        InputManager.instance.OnCancel += EnterAttackSelectionState;
+
+        //Display UI
+    }
+
+    private void AttackTargetSelection_Exit()
+    {
         //unDisplay UI
-        //=> OnClick = null
-        //=> OnCancel = null
+        InputManager.instance.OnTileMouseOver -= RangeManager.Instance.Target;
+        RangeManager.Instance.ClearTiles();
+        InputManager.instance.OnTileSelection -= OrderAttack;
+        InputManager.instance.OnCancel -= EnterAttackSelectionState;
+    }
+
+    private void AttackPseudoState_Enter()
+    {
+        CurrentSelectedUnit.Attack(targets);
+    }
+
+    private void AttackPseudoState_Exit()
+    {
+
     }
    
-    public void FreshupUnits(List<Unit> units)
+    private void FreshupUnits(List<Unit> units)
     {
         foreach(Unit unit in units)
         {
-            unit.BecomeFresh();
+            unit.FreshenUp();
         }
     }
 
-
+    private bool AreAllUnitsUsed(List<Unit> units)
+    {
+        foreach(Unit unit in units)
+        {
+            if (unit.CurrentUnitState != UnitState.Used)
+                return false;
+        }
+        return true;
+    }
 
     private void SelectUnit(Unit unit)
     {
-        //Check si type d'entity = Unit
-        // Si oui : check enemy, Shape ou maestro
-        //          Check si l'unit est !exausted
-        //          Entrer dans le bon state
-        // Si non : rien faire
-        // Allez dans le bon state (check si unit has Moved)
+        if(unit is ShapeUnit)
+        {
+            if(unit.CurrentUnitState == UnitState.Fresh)
+            {
+                CurrentSelectedUnit = unit;
+                gameplayState.ChangeState(GameplayState.ActionSelection);
+            }
+            else if(unit.CurrentUnitState == UnitState.Moved)
+            {
+                CurrentSelectedUnit = unit;
+                gameplayState.ChangeState(GameplayState.AttackSelection);
+            }  
+        }
+    }
+
+    private void GetUnitMovementRange()
+    {
+        tilesInMovementRange = RangeManager.Instance.GetTilesInMovementRange(CurrentSelectedUnit.CurrentTile, CurrentSelectedUnit.UnitMovementPattern.range);
+    }
+
+    private void DisplayUnitMovementRange()
+    {
+        RangeManager.Instance.DisplayMovementTiles();
+    }
+
+    private void OrderMovement(Tile tile)
+    {
+        if(tilesInMovementRange.Contains(tile))
+        {
+            movementPath = RangeManager.Instance.GetCurrentPath();
+
+            gameplayState.ChangeState(GameplayState.MovementPseudoState);
+        }
+    }
+
+    private void GetUnitAttackRange()
+    {
+        tilesInAttackRange = RangeManager.Instance.GetTilesInAttackRange(CurrentSelectedUnit.CurrentTile, CurrentSelectedUnit.UnitAttackPattern);
+    }
+
+    private void DisplayUnitAttackRange()
+    {
+        RangeManager.Instance.DisplayAttackTiles();
+    }
+
+    private void OrderAttack(Tile tile)
+    {
+        if(tilesInAttackRange.Contains(tile))
+        {
+            targets = RangeManager.Instance.GetTarget();
+
+            gameplayState.ChangeState(GameplayState.AttackPseudoState);
+        }
     }
 }
 

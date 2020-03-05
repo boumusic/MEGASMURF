@@ -43,18 +43,11 @@ public class Unit : LevelElement
         //Animation d'apparition
     }
 
-    public virtual void BecomeFresh()
+    public virtual void FreshenUp()
     {
-        //Change StateMachine To Fresh State
-    }
-
-    public virtual void MovementMode()
-    {
-        //Fait apparaitre les ranges de déplacement
-        //Active l'enregistrement de path
-        //Attend un input
-        //Declenche le déplacement
-        //Rend la main au turnManager
+        //Change StateMachine
+        //if stunned => Used State? ou state <-> Stunned + 1
+        //if Used => Fresh
     }
 
     public virtual void MoveTo(Stack<Tile> path)
@@ -94,19 +87,11 @@ public class Unit : LevelElement
         transform.forward = new Vector3(-forward.x, 0f, -forward.z);
     }
 
-    public virtual void AttackMode()
-    {
-        //Fait apparaitre les ranges de déplacement
-        //Attent un input
-        //Déclenche l'attaque
-        //Rend la main au turnManager
-    }
-
-    public virtual void Attack(Tile tile)
+    public virtual void Attack(List<Tile> tile)
     {
         //Recup le path jusqu'a la cible
         //Anim d'attaque
-        tile.unit.TakeDamage(this);
+        //tile.unit.TakeDamage(this);
     }
 
     /// <summary>
