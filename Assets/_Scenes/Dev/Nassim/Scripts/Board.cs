@@ -6,22 +6,23 @@ using TMPro;
 public class Board : MonoBehaviour
 {
 
-    public static Board Instance;// {
-    /*get 
+    public static Board Instance
     {
-        if (Board.Instance == null)
+        get
         {
-            Board.Instance = FindObjectOfType<Board>();
+            if (Board.instance == null)
+            {
+                Board.instance = FindObjectOfType<Board>();
+            }
+            return Board.instance;
         }
-        return Board.Instance; 
-    }         
-    set 
-    {
-        Instance = value;
+        set
+        {
+            instance = value;
+        }
     }
-}*/
 
-    //private static Board instance;
+    private static Board instance;
 
     [Range(1, 40f)] public float totalWidth = 20;
     [Range(1, 40f)] public float totalHeight = 20;
@@ -42,43 +43,39 @@ public class Board : MonoBehaviour
 
     private void GenerateBoard()
     {
-        if (Board.Instance == null)
+        tiles = new Tile[columns, rows];
+        for (int i = 0; i < columns; i++)
         {
-            Board.Instance = this;
-            tiles = new Tile[columns, rows];
-            for (int i = 0; i < columns; i++)
+            for (int j = 0; j < rows; j++)
             {
-                for (int j = 0; j < rows; j++)
+                //Vector3 instancePosition = new Vector3(
+                //    (float)i * tilePrefab.transform.localScale.x + tilesOffset * i - ((float)(columns - 1) / 2.0f) * tilePrefab.transform.localScale.x - (float)(columns - 1) / 2.0f * tilesOffset,
+                //    0f,
+                //    (float)j * tilePrefab.transform.localScale.y + tilesOffset * j - ((float)(rows - 1) / 2.0f) * tilePrefab.transform.localScale.y - (float)(rows - 1) / 2.0f * tilesOffset);
+
+                float x = Utility.Interpolate(-totalWidth / 2, totalWidth / 2, 0, columns - 1, i);
+                float z = Utility.Interpolate(-totalHeight / 2, totalHeight / 2, 0, rows - 1, j);
+
+                Vector3 position = new Vector3(x, 0f, z);
+
+                Tile newTile = Instantiate<GameObject>(tilePrefab, position, Quaternion.identity, transform).GetComponent<Tile>();
+                if (newTile != null)
                 {
-                    //Vector3 instancePosition = new Vector3(
-                    //    (float)i * tilePrefab.transform.localScale.x + tilesOffset * i - ((float)(columns - 1) / 2.0f) * tilePrefab.transform.localScale.x - (float)(columns - 1) / 2.0f * tilesOffset,
-                    //    0f,
-                    //    (float)j * tilePrefab.transform.localScale.y + tilesOffset * j - ((float)(rows - 1) / 2.0f) * tilePrefab.transform.localScale.y - (float)(rows - 1) / 2.0f * tilesOffset);
-
-                    float x = Utility.Interpolate(-totalWidth / 2, totalWidth / 2, 0, columns - 1, i);
-                    float z = Utility.Interpolate(-totalHeight / 2, totalHeight / 2, 0, rows - 1, j);
-
-                    Vector3 position = new Vector3(x, 0f, z);
-
-                    Tile newTile = Instantiate<GameObject>(tilePrefab, position, Quaternion.identity, transform).GetComponent<Tile>();
-                    if (newTile != null)
-                    {
-                        newTile.Coords = new Vector2Int(i, j);
-                        tiles[i, j] = newTile;
-                        string name = "Tile (" + i + "," + j + ")";
-                        newTile.gameObject.name = name;
-                        newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), 1f, totalHeight / (rows - 1));
-                        //newTile.GetComponentInChildren<TextMeshPro>().text = name;
-                    }
-
+                    newTile.Coords = new Vector2Int(i, j);
+                    tiles[i, j] = newTile;
+                    string name = "Tile (" + i + "," + j + ")";
+                    newTile.gameObject.name = name;
+                    newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), 1f, totalHeight / (rows - 1));
+                    //newTile.GetComponentInChildren<TextMeshPro>().text = name;
                 }
+
             }
-            for (int i = 0; i < columns; i++)
+        }
+        for (int i = 0; i < columns; i++)
+        {
+            for (int j = 0; j < rows; j++)
             {
-                for (int j = 0; j < rows; j++)
-                {
-                    tiles[i, j].CheckNeighbors();
-                }
+                tiles[i, j].CheckNeighbors();
             }
         }
     }
@@ -159,4 +156,92 @@ public class Board : MonoBehaviour
         return tiles;
     }
 
+    public List<Tile> GetTilesBetween(Tile t1, Tile t2)
+    {
+        List<Tile> between = new List<Tile>();
+        if(t1.Equals(t2) || !t1.IsInLine(t2))
+        {
+            return between;
+        }
+        if(t1.Coords.x == t2.Coords.x)
+        {
+            // Search Left
+            if(t1.Coords.y > t2.Coords.y)
+            {
+                for(float i = t1.Coords.y; i>t2.Coords.y && i>=0; i--)
+                {
+                    between.Add(tiles[(int)(t1.Coords.x), (int)i]);
+                }
+            }
+            // Search Right
+            else
+            {
+                for (float i = t1.Coords.y; i < t2.Coords.y && i < rows; i++)
+                {
+                    between.Add(tiles[(int)(t1.Coords.x), (int)i]);
+                }
+            }
+        }
+        else if (t1.Coords.y == t2.Coords.y)
+        {
+            // Search Down
+            if (t1.Coords.x > t2.Coords.x)
+            {
+                for (float i = t1.Coords.x; i > t2.Coords.x && i >= 0; i--)
+                {
+                    between.Add(tiles[(int)i, (int)(t1.Coords.y)]);
+                }
+            }
+            // Search Up
+            else
+            {
+                for (float i = t1.Coords.x; i < t2.Coords.x && i < columns; i++)
+                {
+                    between.Add(tiles[(int)i, (int)(t1.Coords.y)]);
+                }
+            }
+        }
+        else
+        {
+            if (t1.Coords.y > t2.Coords.y)
+            {
+                // Search Down Left
+                if(t1.Coords.x > t2.Coords.x)
+                {
+                    for(float i = 1; t1.Coords.x-i > t2.Coords.x && t1.Coords.x - i >= 0 && t2.Coords.x - i >= 0; i--)
+                    {
+                        between.Add(tiles[(int)(t1.Coords.x - i), (int)(t1.Coords.y - i)]);
+                    }
+                }
+                // Search Down Right
+                if (t1.Coords.x < t2.Coords.x)
+                {
+                    for (float i = 1; t1.Coords.x + i < t2.Coords.x && t1.Coords.x + i < columns && t2.Coords.x + i < rows; i++)
+                    {
+                        between.Add(tiles[(int)(t1.Coords.x + i), (int)(t1.Coords.y + i)]);
+                    }
+                }
+            }
+            else
+            {
+                // Search Up Left
+                if (t1.Coords.x > t2.Coords.x)
+                {
+                    for (float i = t1.Coords.x; i < t2.Coords.x && i < columns; i++)
+                    {
+                        between.Add(tiles[(int)i, (int)i]);
+                    }
+                }
+                // Search Up Right
+                if (t1.Coords.x < t2.Coords.x)
+                {
+                    for (float i = t1.Coords.x; i < t2.Coords.x && i > 0; i--)
+                    {
+                        between.Add(tiles[(int)i, (int)i]);
+                    }
+                }
+            }
+        }
+        return between;
+    }
 }
