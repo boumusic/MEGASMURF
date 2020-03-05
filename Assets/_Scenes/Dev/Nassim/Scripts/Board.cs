@@ -156,7 +156,7 @@ public class Board : MonoBehaviour
         return tiles;
     }
 
-    public List<Tile> GetTilesBetween(Tile t1, Tile t2)
+    public List<Tile> GetTilesBetween(Tile t1, Tile t2, bool diagonales)
     {
         List<Tile> between = new List<Tile>();
         if(t1.Equals(t2) || !t1.IsInLine(t2))
@@ -165,7 +165,7 @@ public class Board : MonoBehaviour
         }
         if(t1.Coords.x == t2.Coords.x)
         {
-            // Search Left
+            // Search Down
             if(t1.Coords.y > t2.Coords.y)
             {
                 for(float i = t1.Coords.y; i>t2.Coords.y && i>=0; i--)
@@ -173,7 +173,7 @@ public class Board : MonoBehaviour
                     between.Add(tiles[(int)(t1.Coords.x), (int)i]);
                 }
             }
-            // Search Right
+            // Search Up
             else
             {
                 for (float i = t1.Coords.y; i < t2.Coords.y && i < rows; i++)
@@ -184,7 +184,7 @@ public class Board : MonoBehaviour
         }
         else if (t1.Coords.y == t2.Coords.y)
         {
-            // Search Down
+            // Search Left
             if (t1.Coords.x > t2.Coords.x)
             {
                 for (float i = t1.Coords.x; i > t2.Coords.x && i >= 0; i--)
@@ -192,7 +192,7 @@ public class Board : MonoBehaviour
                     between.Add(tiles[(int)i, (int)(t1.Coords.y)]);
                 }
             }
-            // Search Up
+            // Search Right
             else
             {
                 for (float i = t1.Coords.x; i < t2.Coords.x && i < columns; i++)
@@ -201,14 +201,14 @@ public class Board : MonoBehaviour
                 }
             }
         }
-        else
+        else if(diagonales)
         {
             if (t1.Coords.y > t2.Coords.y)
             {
                 // Search Down Left
                 if(t1.Coords.x > t2.Coords.x)
                 {
-                    for(float i = 1; t1.Coords.x-i > t2.Coords.x && t1.Coords.x - i >= 0 && t2.Coords.x - i >= 0; i--)
+                    for(float i = 1; t1.Coords.x - i > t2.Coords.x && t1.Coords.y - i > t2.Coords.y && t1.Coords.x - i >= 0 && t1.Coords.y - i >= 0; i++)
                     {
                         between.Add(tiles[(int)(t1.Coords.x - i), (int)(t1.Coords.y - i)]);
                     }
@@ -216,9 +216,9 @@ public class Board : MonoBehaviour
                 // Search Down Right
                 if (t1.Coords.x < t2.Coords.x)
                 {
-                    for (float i = 1; t1.Coords.x + i < t2.Coords.x && t1.Coords.x + i < columns && t2.Coords.x + i < rows; i++)
+                    for (float i = 1; t1.Coords.x + i < t2.Coords.x && t1.Coords.y - i > t2.Coords.y && t1.Coords.x + i < columns && t1.Coords.y - i >= 0; i++)
                     {
-                        between.Add(tiles[(int)(t1.Coords.x + i), (int)(t1.Coords.y + i)]);
+                        between.Add(tiles[(int)(t1.Coords.x + i), (int)(t1.Coords.y - i)]);
                     }
                 }
             }
@@ -227,17 +227,16 @@ public class Board : MonoBehaviour
                 // Search Up Left
                 if (t1.Coords.x > t2.Coords.x)
                 {
-                    for (float i = t1.Coords.x; i < t2.Coords.x && i < columns; i++)
+                    for (float i = 1; t1.Coords.x - i > t2.Coords.x && t1.Coords.y + i < t2.Coords.y && t1.Coords.x - i >= 0 && t1.Coords.y + i < rows; i++)
                     {
-                        between.Add(tiles[(int)i, (int)i]);
+                        between.Add(tiles[(int)(t1.Coords.x - i), (int)(t1.Coords.y + i)]);
                     }
                 }
                 // Search Up Right
-                if (t1.Coords.x < t2.Coords.x)
                 {
-                    for (float i = t1.Coords.x; i < t2.Coords.x && i > 0; i--)
+                    for (float i = 1; t1.Coords.x + i < t2.Coords.x && t1.Coords.y + i < t2.Coords.y && t1.Coords.x + i < columns && t1.Coords.y + i < rows; i++)
                     {
-                        between.Add(tiles[(int)i, (int)i]);
+                        between.Add(tiles[(int)(t1.Coords.x + i), (int)(t1.Coords.y + i)]);
                     }
                 }
             }
