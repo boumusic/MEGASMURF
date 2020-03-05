@@ -208,7 +208,7 @@ public class RoomEditor : Editor
         float height = gridHeight / Rows();
         for (int x = 0; x < Columns(); x++)
         {
-            for (int y = 0; y < Rows(); y++)
+            for (int y = Rows() - 1; y > -1 ; y--)
             {
                 DrawLevelElementButton(width, height, y, x);
             }
@@ -257,7 +257,8 @@ public class RoomEditor : Editor
                     }
 
 
-                    EditorGUI.DrawRect(newRect, colorButton);
+                    //EditorGUI.DrawRect(newRect, colorButton);
+                    EditorGUI.LabelField(newRect, (x + y).ToString());
 
                     if (newRect.Contains(currentEvent.mousePosition))
                     {
