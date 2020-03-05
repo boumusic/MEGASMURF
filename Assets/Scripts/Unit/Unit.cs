@@ -70,7 +70,7 @@ public class Unit : LevelElement
 
     private IEnumerator MovingTo(Stack<Tile> path, System.Action action)
     {
-        unitAnimator.SetIsMoving(true);
+        SetAnimatorMoving(true);
 
         while (path.Count > 0)
         {
@@ -83,9 +83,14 @@ public class Unit : LevelElement
             }
         }
 
-        unitAnimator.SetIsMoving(false);
+        SetAnimatorMoving(false);
         FaceCamera();
         action?.Invoke();
+    }
+
+    public virtual void SetAnimatorMoving(bool moving)
+    {
+        unitAnimator.SetIsMoving(moving);
     }
 
     public void FaceCamera()
