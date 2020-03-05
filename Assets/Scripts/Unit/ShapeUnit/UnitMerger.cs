@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitMergeAnimator : MonoBehaviour
+public class UnitMerger : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private ShapeUnitAnimator shapeUnitAnimator;
+    [SerializeField] private ShapeUnit shapeUnit;
     [SerializeField] private Transform pivot;
 
     [Header("Animation")]
@@ -21,16 +22,10 @@ public class UnitMergeAnimator : MonoBehaviour
     private bool isMerging = false;
     private float mergeProgress = 0f;
     private Vector3 initialPos;
-    private Vector3 init;
     private ShapeUnit destination;
 
     private System.Action finishedMerging;
-
-    void Start()
-    {
-        init = transform.position;
-    }
-
+    
     public void MergeOnTopOf(ShapeUnit _destination, System.Action _finishedMerging)
     {
         GameCamera.Instance.RequestZoomOn(transform, GameCamera.closeZoom);
@@ -42,7 +37,7 @@ public class UnitMergeAnimator : MonoBehaviour
     private IEnumerator InitialDelay()
     {
         yield return new WaitForSeconds(initialDelay);
-        shapeUnitAnimator.ToggleLegs(false);
+        shapeUnit.ToggleMembers(destination);
         Merge();
     }
 

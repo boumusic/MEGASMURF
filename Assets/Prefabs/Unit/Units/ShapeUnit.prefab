@@ -42,6 +42,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shapeUnitAnimator: {fileID: 7487550012469225370}
+  shapeUnit: {fileID: 5175111722463130817}
   pivot: {fileID: 7553973564693230130}
   curveHoriz:
     serializedVersion: 2
