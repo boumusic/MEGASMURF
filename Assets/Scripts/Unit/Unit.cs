@@ -42,8 +42,8 @@ public class Unit : LevelElement
 
     public virtual void SetUnitPosition(Tile tile)
     {
-        //Set Unit.tile et Tile.unit
-        //Animation d'apparition
+        CurrentTile = tile;
+        transform.position = tile.transform.position;
     }
 
     public virtual void FreshenUp()
