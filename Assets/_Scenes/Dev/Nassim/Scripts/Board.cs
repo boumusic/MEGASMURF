@@ -10,11 +10,11 @@ public class Board : MonoBehaviour
     {
         get
         {
-            if (Board.Instance == null)
+            if (Board.instance == null)
             {
-                Board.Instance = FindObjectOfType<Board>();
+                Board.instance = FindObjectOfType<Board>();
             }
-            return Board.Instance;
+            return Board.instance;
         }
         set
         {
@@ -22,7 +22,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    //private static Board instance;
+    private static Board instance;
 
     [Range(1, 40f)] public float totalWidth = 20;
     [Range(1, 40f)] public float totalHeight = 20;
