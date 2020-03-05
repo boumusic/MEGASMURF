@@ -97,6 +97,11 @@ public class Tile : MonoBehaviour
         return Vector2.Distance(Coords, other.Coords) == 1.0f;
     }
 
+    public bool IsInLine(Tile other)
+    {
+        return Coords.x == other.Coords.x || Coords.y == other.Coords.y || Mathf.Abs(Coords.x - other.Coords.x) == Mathf.Abs(Coords.y - other.Coords.y); 
+    }
+
     public bool Equals(Tile other)
     {
         return Coords.Equals(other.Coords);
