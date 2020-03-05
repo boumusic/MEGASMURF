@@ -18,7 +18,8 @@ public enum TileAnim
     Movement,
     MovementMouseOver,
     Attack,
-    AttackMouseOver
+    AttackMouseOver,
+    Disabled
 }
 
 public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
