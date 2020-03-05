@@ -89,7 +89,7 @@ public class RangeManager : MonoBehaviour
                     Tile check = Board.Instance.GetTile(v);
                     if (check != null)
                     {
-                        rangePaths.Add(check, new List<Tile> { check });
+                        rangePaths.Add(check, new List<Tile>());
                     }
                 }
                 break;
