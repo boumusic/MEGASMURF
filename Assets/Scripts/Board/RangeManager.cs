@@ -116,6 +116,7 @@ public class RangeManager : MonoBehaviour
                 correctedRange.coords.Remove(v + unitTile.Coords);
             }
         }
+        attackRange = Board.Instance.GetTiles(correctedRange.coords);
         switch (pattern.type)
         {
             case AttackPatternType.All:
@@ -132,7 +133,6 @@ public class RangeManager : MonoBehaviour
                         return;
                     }
                 }
-                attackRange.Clear();
                 break;
             case AttackPatternType.Single:
                 // Check for tiles with targets on them
@@ -362,6 +362,11 @@ public class RangeManager : MonoBehaviour
         {
             tile.TriggerAnimation(TileAnim.None);
         }
+        foreach (Tile tile in attackRange)
+        {
+            tile.TriggerAnimation(TileAnim.None);
+        }
+        attackRange.Clear();
         rangePaths.Clear();
         currentPath.Clear();
     }
