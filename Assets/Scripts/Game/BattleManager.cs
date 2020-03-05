@@ -7,15 +7,16 @@ using System.Linq;
 public enum GameplayState
 {
     LevelStart,
-    PlayerTurn,
-    EnemyTurn,
+    PlayerTurnStart,
+    PlayerTurnEnd,
+    EnemyTurnStart,
+    EnemyTurnEnd,
     UnitSelection,
     ActionSelection,
     MovementPseudoState,
     AttackSelection,
     AttackTargetSelection,
-    AttackPseudoState,
-    GameplayMenu
+    AttackPseudoState
 }
 
 public class BattleManager : MonoBehaviour
@@ -47,22 +48,29 @@ public class BattleManager : MonoBehaviour
     {
         gameplayState = StateMachine<GameplayState>.Initialize(this);
         gameplayState.ManualUpdate = true;
-        gameplayState.ChangeState(GameplayState.PlayerTurn);
+        gameplayState.ChangeState(GameplayState.PlayerTurnStart);
     }
 
     public void StartLevel()
     {
 
     }
+    public void OpenGameplayMenu()
+    {
+        //OpenUi
+        //Sauvegarder le delegate de cancel
+        //abonner closeGameplayMenu sur cancel
+    }
+
+    public void CloseGameplayMenu()
+    {
+        //Close UI
+        //Remettre l'ancien delegate de cancel dans cancel
+    }
 
     public void PlayerEndTurn()
     {
-        gameplayState.ChangeState(GameplayState.EnemyTurn);
-    }
-
-    public void OpenGameplayMenu()
-    {
-        gameplayState.ChangeState(GameplayState.GameplayMenu);
+        gameplayState.ChangeState(GameplayState.EnemyTurnStart);
     }
 
     public void EnterUnitSelectionState()
@@ -70,11 +78,22 @@ public class BattleManager : MonoBehaviour
         gameplayState.ChangeState(GameplayState.UnitSelection);
     }
 
+    public void EnterActionSelectionState()
+    {
+        gameplayState.ChangeState(GameplayState.ActionSelection);
+    }
+
     public void EnterAttackSelectionState()
     {
         gameplayState.ChangeState(GameplayState.AttackSelection);
     }
 
+    public void EnterAttackTargetSelectionState()
+    {
+        gameplayState.ChangeState(GameplayState.AttackTargetSelection);
+    }
+
+    #region State
     private void LevelStart_Enter()
     {
 
@@ -95,12 +114,42 @@ public class BattleManager : MonoBehaviour
         gameplayState.ChangeState(GameplayState.UnitSelection);
     }
 
-    private void EnemyTurn_Enter()
+    private void PlayerTurnStart_Exit()
+    {
+
+    }
+
+    private void PlayerTurnEnd_Enter()
+    {
+
+    }
+    
+    private void PlayerTurnEnd_Exit()
+    {
+
+    }
+
+    private void EnemyTurnStart_Enter()
     {
         //Animation
         enemyTurnStarted?.Invoke();
         //UnExaustedEnemyUnit()
         //EnterStartPlayerTurn()
+    }
+
+    private void EnemyTurnStart_Exit()
+    {
+
+    }
+
+    private void EnemyTurnEnd_Enter()
+    {
+
+    }
+
+    private void EnemyTurnEnd_Exit()
+    {
+
     }
 
     private void UnitSelection_Enter()
@@ -111,7 +160,7 @@ public class BattleManager : MonoBehaviour
 
         if (MaestroUnit.CurrentUnitState == UnitState.Used && AreAllUnitsUsed(ShapeUnits.Cast<Unit>().ToList()))
         {
-            gameplayState.ChangeState(GameplayState.EnemyTurn);
+            gameplayState.ChangeState(GameplayState.EnemyTurnStart);
             return;
         }
     }
@@ -121,8 +170,6 @@ public class BattleManager : MonoBehaviour
         InputManager.instance.OnCancel -= OpenGameplayMenu;
         InputManager.instance.OnUnitSelection -= SelectUnit;
     }
-
-    
 
     private void ActionSelection_Enter()
     {
@@ -154,7 +201,8 @@ public class BattleManager : MonoBehaviour
 
     private void MovementPseudoState_Exit()
     {
-        InputManager.instance.OnCancel -= EnterUnitSelectionState;
+        tilesInMovementRange = null;
+        movementPath = null;
     }
 
     private void AttackSelection_Enter()
@@ -194,9 +242,11 @@ public class BattleManager : MonoBehaviour
 
     private void AttackPseudoState_Exit()
     {
-
+        tilesInAttackRange = null;
+        targets = null;
     }
-   
+    #endregion
+
     private void FreshupUnits(List<Unit> units)
     {
         foreach(Unit unit in units)

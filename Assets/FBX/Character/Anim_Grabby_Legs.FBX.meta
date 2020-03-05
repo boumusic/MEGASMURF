@@ -1,11 +1,22 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 83b14b697fc24df49b6c0a66f93e7824
+=======
+guid: 673d3ee5412985c40ae5933256237b69
+>>>>>>> master
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
+<<<<<<< HEAD
     second: Grabb
+=======
+    second: GrabbyLegs
+  - first:
+      74: -4354764786151128023
+    second: GrabbyLeg
+>>>>>>> master
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,7 +46,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
+<<<<<<< HEAD
       name: Grabb
+=======
+      name: GrabbyLeg
+>>>>>>> master
       takeName: Take 001
       internalID: 0
       firstFrame: 0
@@ -46,7 +61,11 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
+<<<<<<< HEAD
       loopTime: 1
+=======
+      loopTime: 0
+>>>>>>> master
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
