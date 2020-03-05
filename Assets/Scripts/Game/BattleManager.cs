@@ -171,7 +171,7 @@ public class BattleManager : MonoBehaviour
     {
         GetUnitAttackRange();
         DisplayUnitAttackRange();
-        InputManager.instance.OnTileMouseOver += RangeManager.Instance.Target;
+        InputManager.instance.OnTileMouseOver += RangeManager.Instance.TargetTile;
         InputManager.instance.OnTileSelection += OrderAttack;
         InputManager.instance.OnCancel += EnterAttackSelectionState;
 
@@ -181,7 +181,7 @@ public class BattleManager : MonoBehaviour
     private void AttackTargetSelection_Exit()
     {
         //unDisplay UI
-        InputManager.instance.OnTileMouseOver -= RangeManager.Instance.Target;
+        InputManager.instance.OnTileMouseOver -= RangeManager.Instance.TargetTile;
         RangeManager.Instance.ClearTiles();
         InputManager.instance.OnTileSelection -= OrderAttack;
         InputManager.instance.OnCancel -= EnterAttackSelectionState;
@@ -234,7 +234,7 @@ public class BattleManager : MonoBehaviour
 
     private void GetUnitMovementRange()
     {
-        tilesInMovementRange = RangeManager.Instance.GetTilesInMovementRange(CurrentSelectedUnit.CurrentTile, CurrentSelectedUnit.UnitMovementPattern.range);
+        tilesInMovementRange = RangeManager.Instance.GetTilesInMovementRange(CurrentSelectedUnit.CurrentTile);
     }
 
     private void DisplayUnitMovementRange()
@@ -254,7 +254,7 @@ public class BattleManager : MonoBehaviour
 
     private void GetUnitAttackRange()
     {
-        tilesInAttackRange = RangeManager.Instance.GetTilesInAttackRange(CurrentSelectedUnit.CurrentTile, CurrentSelectedUnit.UnitAttackPattern);
+        tilesInAttackRange = RangeManager.Instance.GetTilesInAttackRange(CurrentSelectedUnit.CurrentTile);
     }
 
     private void DisplayUnitAttackRange()
@@ -266,7 +266,7 @@ public class BattleManager : MonoBehaviour
     {
         if(tilesInAttackRange.Contains(tile))
         {
-            targets = RangeManager.Instance.GetTarget();
+            targets = RangeManager.Instance.GetTargets();
 
             gameplayState.ChangeState(GameplayState.AttackPseudoState);
         }
