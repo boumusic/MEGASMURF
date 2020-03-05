@@ -18,7 +18,7 @@ public class Board : MonoBehaviour
         }
         set
         {
-            Instance = value;
+            instance = value;
         }
     }
 
