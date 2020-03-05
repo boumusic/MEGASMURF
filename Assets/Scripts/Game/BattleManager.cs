@@ -273,7 +273,7 @@ public class BattleManager : MonoBehaviour
             if(unit.CurrentUnitState == UnitState.Fresh)
             {
                 CurrentSelectedUnit = unit;
-                gameplayState.ChangeState(GameplayState.ActionSelection);
+                gameplayState.ChangeState(GameplayState.ActionSelection/*AttackTargetSelection*/);                                                                                       //////LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
             }
             else if(unit.CurrentUnitState == UnitState.Moved)
             {

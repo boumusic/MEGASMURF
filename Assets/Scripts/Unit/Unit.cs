@@ -14,7 +14,7 @@ public class Unit : LevelElement
     [Header("Components")]
     [SerializeField] private UnitAnimator unitAnimator;
 
-    public Tile debugTile;
+    public Vector2 debugTile;
 
     public UnitBase unitBase;     //Passage en UnitBase
     public Tile CurrentTile { get; protected set; }
@@ -40,7 +40,7 @@ public class Unit : LevelElement
     public virtual void Start()
     {
         FaceCamera();
-        //SetUnitPosition(Board.Instance.GetTile(10,3));
+        //SetUnitPosition(Board.Instance.GetTile(debugTile));               //Debug
     }
 
     public virtual void SetUnitPosition(Tile tile)
@@ -48,6 +48,7 @@ public class Unit : LevelElement
         CurrentTile = tile;
         transform.position = tile.transform.position;
         tile.unit = this;
+        tile.type = TileType.Ally;
     }
 
     public virtual void FreshenUp()

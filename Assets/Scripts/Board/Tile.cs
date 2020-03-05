@@ -137,10 +137,6 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
     }
 
-    private void OnMouseEnter() {
-        RangeManager.Instance.AddToCurrentPath(this);
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         //Animation Si on est dans le bon State de BattleManager

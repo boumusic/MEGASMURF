@@ -29,8 +29,7 @@ public class InputManager : MonoBehaviour
     {
         if (tile.unit != null)
             OnUnitSelection?.Invoke(tile.unit);
-        else
-            OnTileSelection?.Invoke(tile);
+        OnTileSelection?.Invoke(tile);
     }
 
     public void SendCancelEvent()

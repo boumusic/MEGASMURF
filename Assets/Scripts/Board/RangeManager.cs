@@ -107,7 +107,13 @@ public class RangeManager : MonoBehaviour
 
     private void ProcessAttackRange(AttackPattern pattern)
     {
-        Range correctedRange = pattern.range;
+        Range correctedRange = new Range();
+        correctedRange.coords = new List<Vector2>();
+        correctedRange.coords.AddRange(pattern.range.coords);
+        for(int i = 0; i<correctedRange.coords.Count; i++)
+        {
+            correctedRange.coords[i] += unitTile.Coords;
+        }
         foreach(Vector2 v in pattern.range.coords)
         {
             Tile check = Board.Instance.GetTile(v + unitTile.Coords);
@@ -123,7 +129,7 @@ public class RangeManager : MonoBehaviour
                 // Just check if there is at least one target in range
                 foreach (Vector2 v in correctedRange.coords)
                 {
-                    Tile allCheck = Board.Instance.GetTile(v + unitTile.Coords);
+                    Tile allCheck = Board.Instance.GetTile(v);
                     if (allCheck != null && allCheck.type == TileType.Enemy)
                     {
                         foreach (Vector2 v2 in correctedRange.coords)
@@ -138,7 +144,7 @@ public class RangeManager : MonoBehaviour
                 // Check for tiles with targets on them
                 foreach (Vector2 v in correctedRange.coords)
                 {
-                    Tile singleCheck = Board.Instance.GetTile(v + unitTile.Coords);
+                    Tile singleCheck = Board.Instance.GetTile(v);
                     if (singleCheck != null && singleCheck.type == TileType.Enemy)
                     {
                         attackPaths.Add(singleCheck, new List<Tile> { singleCheck });
@@ -149,8 +155,8 @@ public class RangeManager : MonoBehaviour
                 // Check for free tiles with targets and no obstacle between them and unit tile 
                 foreach (Vector2 v in correctedRange.coords)
                 {
-                    Tile sliceCheck = Board.Instance.GetTile(v + unitTile.Coords);
-                    if(sliceCheck.type == TileType.Free)
+                    Tile sliceCheck = Board.Instance.GetTile(v);
+                    if(sliceCheck != null && sliceCheck.type == TileType.Free)
                     {
                         bool clear = false;
                         List<Tile> between = new List<Tile>();
@@ -215,11 +221,11 @@ public class RangeManager : MonoBehaviour
                 rangePaths.Add(tile, previous);
             }
             newPrevious.AddRange(previous);
-            newPrevious.Add(tile);         
-        }
-        if(remaining <= 0 || tile.type == TileType.Ally)
-        {
-            return;
+            newPrevious.Add(tile);
+            if (remaining <= 0 || tile.type == TileType.Ally)
+            {
+                return;
+            }
         }
         foreach (Tile nextTile in tile.GetNeighbors())
         {
@@ -250,7 +256,7 @@ public class RangeManager : MonoBehaviour
                 {
                     return;
                 }
-                if(tile.IsNeighbor(currentPath.Peek()))
+                if(currentPath.Peek().type != TileType.Ally && tile.IsNeighbor(currentPath.Peek()))
                 {
                     if(rangePaths[tile].Count < currentPath.Count) 
                     {
@@ -294,6 +300,7 @@ public class RangeManager : MonoBehaviour
     public void TargetTile(Tile tile)
     {
         target = tile;
+        DisplayAttackTiles();
         DisplayTarget();
     }
 
@@ -349,6 +356,7 @@ public class RangeManager : MonoBehaviour
     {
         if (attackPaths.ContainsKey(target))
         {
+            target.TriggerAnimation(TileAnim.AttackMouseOver);
             foreach (Tile tile in attackPaths[target])
             {
                 tile.TriggerAnimation(TileAnim.AttackMouseOver);
