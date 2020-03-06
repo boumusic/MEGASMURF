@@ -105,6 +105,11 @@ public class RangeManager : MonoBehaviour
         return range;
     }
 
+    private bool CanTarget(Tile tile)
+    {
+        return tile != null && (((unitTile.type == TileType.Ally || unitTile.type == TileType.Obstacle) && tile.type == TileType.Enemy) || ((unitTile.type == TileType.Enemy && (tile.type == TileType.Obstacle || tile.type == TileType.Enemy))));
+    }
+
     private void ProcessAttackRange(AttackPattern pattern)
     {
         Range correctedRange = new Range();
@@ -117,7 +122,7 @@ public class RangeManager : MonoBehaviour
         foreach(Vector2 v in pattern.range.coords)
         {
             Tile check = Board.Instance.GetTile(v + unitTile.Coords);
-            if (check == null || check.type == TileType.None || check.type == TileType.Obstacle)
+            if (check == null || check.type == TileType.None)
             {
                 correctedRange.coords.Remove(v + unitTile.Coords);
             }
@@ -130,7 +135,7 @@ public class RangeManager : MonoBehaviour
                 foreach (Vector2 v in correctedRange.coords)
                 {
                     Tile allCheck = Board.Instance.GetTile(v);
-                    if (allCheck != null && allCheck.type == TileType.Enemy)
+                    if (CanTarget(allCheck))
                     {
                         foreach (Vector2 v2 in correctedRange.coords)
                         {
@@ -145,7 +150,7 @@ public class RangeManager : MonoBehaviour
                 foreach (Vector2 v in correctedRange.coords)
                 {
                     Tile singleCheck = Board.Instance.GetTile(v);
-                    if (singleCheck != null && singleCheck.type == TileType.Enemy)
+                    if (CanTarget(singleCheck))
                     {
                         attackPaths.Add(singleCheck, new List<Tile> { singleCheck });
                     }
@@ -162,7 +167,7 @@ public class RangeManager : MonoBehaviour
                         List<Tile> between = new List<Tile>();
                         foreach(Tile t in Board.Instance.GetTilesBetween(unitTile, sliceCheck, false))
                         {
-                            if(t.type == TileType.Enemy)
+                            if(CanTarget(t))
                             {
                                 between.Add(t);
                             }
@@ -195,8 +200,8 @@ public class RangeManager : MonoBehaviour
             {
                 return;
             }
-            // Unit is totem and tile is occupied by ally
-            if (unitTile.unit.UnitMergeLevel > 0 && tile.type == TileType.Ally)
+            // Unit is totem or enemy or maestro and tile is occupied by ally
+            if ((unitTile.unit.UnitMergeLevel > 0 || unitTile.type == TileType.Enemy || unitTile.type == TileType.Obstacle) && tile.type == TileType.Ally)
             {
                 return;
             }
@@ -375,8 +380,11 @@ public class RangeManager : MonoBehaviour
             tile.TriggerAnimation(TileAnim.None);
         }
         attackRange.Clear();
+        attackPaths.Clear();
         rangePaths.Clear();
         currentPath.Clear();
+        target = null;
+        unitTile = null;
     }
 
     public void ClearCurrentPath()
