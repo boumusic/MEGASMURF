@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 783e280a66f481640b7ef79a929c612e
+guid: 84b40374c42afa34a940bc6f0eed66a1
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: 
   - first:
       74: 1827226128182048838
     second: Take 001
