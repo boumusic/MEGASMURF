@@ -32,6 +32,50 @@ public class UnitTemplate
         }
         equipment = shape.equipement.id;
     }
+
+    public ShapeUnit GetUnit()
+    {
+        ShapeUnit unit = new ShapeUnit();
+        switch (combination[0])
+        {
+            case (int)BaseUnitType.NONE:
+                return null;
+            case (int)BaseUnitType.Circle:
+                unit.unitBase = SaveManager.Instance.unitFactory.circle.unitBase;
+                break;
+            case (int)BaseUnitType.Square:
+                unit.unitBase = SaveManager.Instance.unitFactory.square.unitBase;
+                break;
+            case (int)BaseUnitType.Triangle:
+                unit.unitBase = SaveManager.Instance.unitFactory.triangle.unitBase;
+                break;
+        }
+        switch (combination[1])
+        {
+            case (int)BaseUnitType.Circle:
+                unit.ArmUnit.unitBase = SaveManager.Instance.unitFactory.circle.unitBase;
+                break;
+            case (int)BaseUnitType.Square:
+                unit.ArmUnit.unitBase = SaveManager.Instance.unitFactory.square.unitBase;
+                break;
+            case (int)BaseUnitType.Triangle:
+                unit.ArmUnit.unitBase = SaveManager.Instance.unitFactory.triangle.unitBase;
+                break;
+        }
+        switch (combination[2])
+        {
+            case (int)BaseUnitType.Circle:
+                unit.HeadUnit.unitBase = SaveManager.Instance.unitFactory.circle.unitBase;
+                break;
+            case (int)BaseUnitType.Square:
+                unit.HeadUnit.unitBase = SaveManager.Instance.unitFactory.square.unitBase;
+                break;
+            case (int)BaseUnitType.Triangle:
+                unit.HeadUnit.unitBase = SaveManager.Instance.unitFactory.triangle.unitBase;
+                break;
+        }
+        return unit;
+    }
 }
 
 [System.Serializable]
@@ -46,6 +90,16 @@ public class Team
         {
             units.Add(new UnitTemplate(shape));
         }
+    }
+
+    public List<ShapeUnit> GetUnits()
+    {
+        List<ShapeUnit> shapes = new List<ShapeUnit>();
+        foreach(UnitTemplate unit in units)
+        {
+            shapes.Add(unit.GetUnit());
+        }
+        return shapes;
     }
 }
 
