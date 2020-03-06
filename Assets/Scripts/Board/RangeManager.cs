@@ -177,7 +177,14 @@ public class RangeManager : MonoBehaviour
                         }
                         if (between.Count > 0)
                         {
-                            attackPaths.Add(sliceCheck, between);
+                            if (attackPaths.ContainsKey(sliceCheck))
+                            {
+                                attackPaths[sliceCheck] = between;
+                            }
+                            else
+                            {
+                                attackPaths.Add(sliceCheck, between);
+                            }
                         }
                     }
                 }
