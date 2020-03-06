@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/FBX/Character/Materials/Anim_Grabby_Arms-No Name.mat.meta~HEAD.meta
 guid: 3a115cf16413fcf4a87096b9475761cc
+=======
+guid: b88fc1afd4e3676469439435ec92faae
+>>>>>>> 2fd4476c33436e427193cbbb388b761c97d1c384:Assets/AmplifyShaderEditor/Plugins/EditorResources/Templates/CustomRTTemplates.unitypackage.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
