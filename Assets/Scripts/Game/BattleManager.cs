@@ -348,7 +348,8 @@ public class BattleManager : MonoBehaviour
     private void DisplayUnitMovementRange()
     {
         //StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayMovementTiles));
-        StartCoroutine(DelayMovementRangeDisplay());
+        //StartCoroutine(DelayMovementRangeDisplay());
+        RangeManager.Instance.DisplayMovementTiles();
     }
 
     private void OrderMovement(Tile tile)
@@ -372,7 +373,8 @@ public class BattleManager : MonoBehaviour
     private void DisplayUnitAttackRange()
     {
         //StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayAttackTiles));
-        StartCoroutine(DelayAttackRangeDisplay());
+        //StartCoroutine(DelayAttackRangeDisplay());
+        RangeManager.Instance.DisplayAttackTiles();
     }
 
     private void OrderAttack(Tile tile)
