@@ -22,4 +22,11 @@ MonoBehaviour:
   - 'uwu :3 :^) '
   - genji
   - djuloh
+  - cafouuuu
+  prefixes:
+  - MEGA
+  - SUPER
+  - ULTRA
   search: 
+  nameForPrefix: 0
+  nameComingFirst: 0
