@@ -210,7 +210,7 @@ public class BattleManager : MonoBehaviour
     private void UnitSelection_Exit()
     {
         Debug.Log("Exit UnitSelection State!");
-        InputManager.instance.OnCancel -= OpenGameplayMenu;
+        InputManager.instance.OnCancel -= PlayerEndTurn;                    //OpenGameplayMenu;
         InputManager.instance.OnUnitSelection -= SelectUnit;
     }
 
@@ -415,9 +415,15 @@ public class BattleManager : MonoBehaviour
     public void RemoveUnitFromPlay(Unit unit)
     {
         if (unit is ShapeUnit && ShapeUnits.Contains((ShapeUnit)unit))
+        {
             ShapeUnits.Remove((ShapeUnit)unit);
+            unit.RemoveFromBoard();
+        } 
         else if (unit is Enemy && ShapeUnits.Contains((ShapeUnit)unit))
+        {
             Enemies.Remove((Enemy)unit);
+            unit.RemoveFromBoard();
+        } 
     }
 
     private IEnumerator DelayDisplay(Action display)

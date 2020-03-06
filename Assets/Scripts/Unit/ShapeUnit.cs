@@ -95,6 +95,7 @@ public class ShapeUnit : Unit
                 shapeBeingMerged = shape;
                 mergedUnits.Add(shape);
                 shape.unitMergeAnimator.MergeOnTopOf(this, onFinished);
+                BattleManager.Instance.RemoveUnitFromPlay(mergedUnits[mergedUnits.Count - 1]);
             }
             else
                 Debug.LogError("Illicite Merge: bottom unit is already at max level");
@@ -136,8 +137,6 @@ public class ShapeUnit : Unit
             shapeBeingMerged = null;
         }
 
-        mergedUnits[mergedUnits.Count - 1].CurrentTile = null;
-        BattleManager.Instance.RemoveUnitFromPlay(mergedUnits[mergedUnits.Count - 1]);
         // Autre check 
         // Vanish d'equipement + Refund
     }

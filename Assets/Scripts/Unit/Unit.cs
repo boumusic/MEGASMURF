@@ -57,6 +57,11 @@ public class Unit : LevelElement
         transform.position = tile.transform.position;
     }
 
+    public void RemoveFromBoard()
+    {
+        CurrentTile = null;
+    }
+
     public void DebugSetUnitPosition()
     {
         SetUnitPosition(Board.Instance.GetTile(debugTile));
