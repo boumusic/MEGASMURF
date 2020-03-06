@@ -9,21 +9,18 @@ public class Maestro : Unit
         get => currentTile;
         protected set
         {
-            if(currentTile != null)
+            if (currentTile != null)
             {
                 currentTile.unit = null;
                 currentTile.type = TileType.Free;
+                CurrentTile = null;
             }
 
-            currentTile = value;
-            if(currentTile == null)
+            if (value != null)
             {
-                currentTile.type = TileType.Free;                               //LUL
-            }
-            else
-            {
+                currentTile = value;
                 currentTile.unit = this;
-                currentTile.type = TileType.Obstacle;
+                currentTile.type = TileType.Obstacle;               //LUL
             }
         }
     }
