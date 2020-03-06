@@ -47,6 +47,7 @@ public class BattleManager : MonoBehaviour
     private Stack<Tile> movementPath;
     private List<Tile> tilesInAttackRange;
     private List<Tile> targets;
+    private bool isMerging;
 
     private void Awake()
     {
@@ -194,6 +195,7 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log("Enter UnitSelection State!");
         CurrentSelectedUnit = null;
+        isMerging = false;
         InputManager.instance.OnCancel += OpenGameplayMenu;
         InputManager.instance.OnUnitSelection += SelectUnit;
 
@@ -241,7 +243,12 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Enter MovementPseudoState State!");
         CurrentSelectedUnit.MoveTo(movementPath);
         //Attendre la fin de l'anim
-        gameplayState.ChangeState(GameplayState.AttackSelection);
+
+        if (isMerging)
+            gameplayState.ChangeState(GameplayState.UnitSelection);
+        else
+            gameplayState.ChangeState(GameplayState.AttackSelection);
+
     }
 
     private void MovementPseudoState_Exit()
@@ -346,6 +353,8 @@ public class BattleManager : MonoBehaviour
     {
         if(tilesInMovementRange.Contains(tile))
         {
+            if (tile.unit != null)
+                isMerging = true;
             movementPath = RangeManager.Instance.GetCurrentPath();
 
             gameplayState.ChangeState(GameplayState.MovementPseudoState);
