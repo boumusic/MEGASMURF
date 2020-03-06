@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47a5d308be88dce459d4943a6850774a, type: 3}
-  m_Name: New Unit Base
+  m_Name: Rond
   m_EditorClassIdentifier: 
-  unitType: 0
+  unitType: 2
   attackPatterns:
-  - {fileID: 11400000, guid: 83efb6f89725eaf4c840a4da89749903, type: 2}
-  - {fileID: 11400000, guid: 83efb6f89725eaf4c840a4da89749903, type: 2}
+  - {fileID: 11400000, guid: 34c5d417ea80fb941a4c7b61ed785596, type: 2}
+  - {fileID: 11400000, guid: 9695c9bc90897964791764aa4158e77d, type: 2}
   movementPatterns:
-  - {fileID: 11400000, guid: 3b5e4348860478147a96420976ddf106, type: 2}
-  - {fileID: 11400000, guid: 3b5e4348860478147a96420976ddf106, type: 2}
-  unitStats: {fileID: 11400000, guid: 6a18a30c18d381c488eea8f7582ec1a8, type: 2}
+  - {fileID: 11400000, guid: 5e6552c48141f894ab3c0d6dacfd8285, type: 2}
+  - {fileID: 11400000, guid: 283987aad12267e4fa6e06e7bf83e5c8, type: 2}
+  unitStats: {fileID: 11400000, guid: 77a4ad08ad6430d4694deb456cd321dd, type: 2}

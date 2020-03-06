@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47a5d308be88dce459d4943a6850774a, type: 3}
-  m_Name: New Unit Base
+  m_Name: Triangle
   m_EditorClassIdentifier: 
-  unitType: 0
+  unitType: 1
   attackPatterns:
-  - {fileID: 11400000, guid: 83efb6f89725eaf4c840a4da89749903, type: 2}
-  - {fileID: 11400000, guid: 83efb6f89725eaf4c840a4da89749903, type: 2}
+  - {fileID: 11400000, guid: dac9466cfd3083d419d964dc2be78ba5, type: 2}
+  - {fileID: 11400000, guid: ff373f1c83cfe4743aea0fb005f57f1d, type: 2}
   movementPatterns:
-  - {fileID: 11400000, guid: 3b5e4348860478147a96420976ddf106, type: 2}
-  - {fileID: 11400000, guid: 3b5e4348860478147a96420976ddf106, type: 2}
-  unitStats: {fileID: 11400000, guid: 6a18a30c18d381c488eea8f7582ec1a8, type: 2}
+  - {fileID: 11400000, guid: 54701afd74b55374e826a7dec829f3c7, type: 2}
+  - {fileID: 11400000, guid: e78c2631d5812724cb4014b31e3b618c, type: 2}
+  unitStats: {fileID: 11400000, guid: 4acf8a31d1b4f2e4498a6f904ee8efc3, type: 2}

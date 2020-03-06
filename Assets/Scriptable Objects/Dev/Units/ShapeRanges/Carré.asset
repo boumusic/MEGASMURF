@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47a5d308be88dce459d4943a6850774a, type: 3}
-  m_Name: New Unit Base
+  m_Name: "Carr\xE9"
   m_EditorClassIdentifier: 
-  unitType: 0
+  unitType: 3
   attackPatterns:
-  - {fileID: 11400000, guid: 83efb6f89725eaf4c840a4da89749903, type: 2}
-  - {fileID: 11400000, guid: 83efb6f89725eaf4c840a4da89749903, type: 2}
+  - {fileID: 11400000, guid: f2a84d2bdcb3e2042a121c785d37ebf5, type: 2}
+  - {fileID: 11400000, guid: b62a8382519124046b567ab2753c6dfb, type: 2}
   movementPatterns:
-  - {fileID: 11400000, guid: 3b5e4348860478147a96420976ddf106, type: 2}
-  - {fileID: 11400000, guid: 3b5e4348860478147a96420976ddf106, type: 2}
-  unitStats: {fileID: 11400000, guid: 6a18a30c18d381c488eea8f7582ec1a8, type: 2}
+  - {fileID: 11400000, guid: 55d700594d894554fa2675f7c4034941, type: 2}
+  - {fileID: 11400000, guid: bfca54244a136884981b34128421f0df, type: 2}
+  unitStats: {fileID: 11400000, guid: ffc132e57cb4ead4ba11372ce5ac3eac, type: 2}
