@@ -5,7 +5,7 @@ using UnityEngine;
 public class SnapToTransform : MonoBehaviour
 {
     public Transform toSnapTo;
-    public Vector3 rotOffset;
+    public float rotationOffset = 0f;
 
     private void OnDrawGizmos()
     {
@@ -22,7 +22,7 @@ public class SnapToTransform : MonoBehaviour
         if (toSnapTo)
         {
             transform.position = toSnapTo.position;
-            transform.eulerAngles = toSnapTo.eulerAngles + rotOffset;
+            transform.rotation = toSnapTo.rotation * Quaternion.AngleAxis(rotationOffset, Vector3.right);
         }
     }
 }
