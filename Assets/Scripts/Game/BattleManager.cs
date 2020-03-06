@@ -92,7 +92,7 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerEndTurn()
     {
-        gameplayState.ChangeState(GameplayState.EnemyTurnStart);
+        gameplayState.ChangeState(GameplayState.PlayerTurnEnd);
     }
 
     public void EnterUnitSelectionState()
@@ -219,9 +219,9 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Enter ActionSelection State!");
         GetUnitMovementRange();
         DisplayUnitMovementRange();
-        InputManager.instance.OnTileMouseOver += RangeManager.Instance.AddToCurrentPath;
         //Display la bonne UI
 
+        InputManager.instance.OnTileMouseOver += RangeManager.Instance.AddToCurrentPath;
         InputManager.instance.OnTileSelection += OrderMovement;
         InputManager.instance.OnAttackButtonPress += EnterAttackTargetSelectionState;
         InputManager.instance.OnCancel += EnterUnitSelectionState;
@@ -231,11 +231,11 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log("Exit ActionSelection State!");
         InputManager.instance.OnTileMouseOver -= RangeManager.Instance.AddToCurrentPath;
-        RangeManager.Instance.ClearTiles();
         InputManager.instance.OnTileSelection -= OrderMovement;
         InputManager.instance.OnAttackButtonPress -= EnterAttackTargetSelectionState;
         InputManager.instance.OnCancel -= EnterUnitSelectionState;
 
+        RangeManager.Instance.ClearTiles();
         //Undisplay UI
     }
 
@@ -347,7 +347,8 @@ public class BattleManager : MonoBehaviour
 
     private void DisplayUnitMovementRange()
     {
-        StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayMovementTiles));
+        //StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayMovementTiles));
+        StartCoroutine(DelayMovementRangeDisplay());
     }
 
     private void OrderMovement(Tile tile)
@@ -356,6 +357,7 @@ public class BattleManager : MonoBehaviour
         {
             if (tile.unit != null)
                 isMerging = true;
+
             movementPath = RangeManager.Instance.GetCurrentPath();
 
             gameplayState.ChangeState(GameplayState.MovementPseudoState);
@@ -369,7 +371,8 @@ public class BattleManager : MonoBehaviour
 
     private void DisplayUnitAttackRange()
     {
-        StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayAttackTiles));
+        //StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayAttackTiles));
+        StartCoroutine(DelayAttackRangeDisplay());
     }
 
     private void OrderAttack(Tile tile)
@@ -426,11 +429,11 @@ public class BattleManager : MonoBehaviour
         } 
     }
 
-    private IEnumerator DelayDisplay(Action display)
-    {
-        yield return new WaitForFixedUpdate();
-        display?.Invoke();
-    }
+    //private IEnumerator DelayDisplay(Action display)
+    //{
+    //    yield return new WaitForFixedUpdate();
+    //    display?.Invoke();
+    //}
 
     private IEnumerator DelayMovementRangeDisplay()
     {
