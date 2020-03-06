@@ -48,7 +48,7 @@ public class BattleManager : MonoBehaviour
     {
         gameplayState = StateMachine<GameplayState>.Initialize(this);
         gameplayState.ManualUpdate = true;
-        gameplayState.ChangeState(GameplayState.UnitSelection);
+        gameplayState.ChangeState(GameplayState.PlayerTurnStart);
     }
 
     public void StartLevel()
@@ -79,6 +79,18 @@ public class BattleManager : MonoBehaviour
         gameplayState.ChangeState(GameplayState.UnitSelection);
     }
 
+    public void EnterAppropriateActionState()
+    {
+        if (CurrentSelectedUnit.CurrentUnitState == UnitState.Fresh)
+        {
+            gameplayState.ChangeState(GameplayState.ActionSelection/*AttackTargetSelection*/);                                                                                       //////LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        }
+        else if (CurrentSelectedUnit.CurrentUnitState == UnitState.Moved)
+        {
+            gameplayState.ChangeState(GameplayState.AttackSelection);
+        }
+    }
+
     public void EnterActionSelectionState()
     {
         gameplayState.ChangeState(GameplayState.ActionSelection);
@@ -105,8 +117,9 @@ public class BattleManager : MonoBehaviour
 
     }
 
-    private void PlayerTurn_Enter()
+    private void PlayerTurnStart_Enter()
     {
+        Debug.Log("Enter PlayerTurnStart State!");
         //Anim de debut de tour
         //Abonner fin anim
         playerTurnStarted?.Invoke();
@@ -117,77 +130,88 @@ public class BattleManager : MonoBehaviour
 
     private void PlayerTurnStart_Exit()
     {
-
+        Debug.Log("Exit PlayerTurnStart State!");
     }
 
     private void PlayerTurnEnd_Enter()
     {
-
+        Debug.Log("Enter PlayerTurnEnd State!");
+        gameplayState.ChangeState(GameplayState.EnemyTurnStart);
     }
-    
+
     private void PlayerTurnEnd_Exit()
     {
+        Debug.Log("Exit PlayerTurnEnd State!");
 
     }
 
     private void EnemyTurnStart_Enter()
     {
+        Debug.Log("Enter EnemyTurnStart State!");
         //Animation
         enemyTurnStarted?.Invoke();
-        //UnExaustedEnemyUnit()
-        //EnterStartPlayerTurn()
+        FreshupUnits(Enemies.Cast<Unit>().ToList());
+        gameplayState.ChangeState(GameplayState.EnemyTurnEnd);
     }
 
     private void EnemyTurnStart_Exit()
     {
+        Debug.Log("Exit EnemyTurnStart State!");
 
     }
 
     private void EnemyTurnEnd_Enter()
     {
-
+        Debug.Log("Enter EnemyTurnEnd State!");
+        gameplayState.ChangeState(GameplayState.PlayerTurnStart);
     }
 
     private void EnemyTurnEnd_Exit()
     {
-
+        Debug.Log("Exit EnemyTurnEnd State!");
     }
 
     private void UnitSelection_Enter()
     {
+        Debug.Log("Enter UnitSelection State!");
         CurrentSelectedUnit = null;
         InputManager.instance.OnCancel += OpenGameplayMenu;
         InputManager.instance.OnUnitSelection += SelectUnit;
 
         //if (MaestroUnit.CurrentUnitState == UnitState.Used && AreAllUnitsUsed(ShapeUnits.Cast<Unit>().ToList()))
         //{
-        //    gameplayState.ChangeState(GameplayState.EnemyTurnStart);
+        //    gameplayState.ChangeState(GameplayState.PlayerTurnEnd);
         //    return;
         //}
     }
 
     private void UnitSelection_Exit()
     {
+        Debug.Log("Exit UnitSelection State!");
         InputManager.instance.OnCancel -= OpenGameplayMenu;
         InputManager.instance.OnUnitSelection -= SelectUnit;
     }
 
     private void ActionSelection_Enter()
     {
+        Debug.Log("Enter ActionSelection State!");
         GetUnitMovementRange();
         DisplayUnitMovementRange();
         InputManager.instance.OnTileMouseOver += RangeManager.Instance.AddToCurrentPath;
         //Display la bonne UI
 
         InputManager.instance.OnTileSelection += OrderMovement;
+        InputManager.instance.OnAttackButtonPress += EnterAttackTargetSelectionState;
         InputManager.instance.OnCancel += EnterUnitSelectionState;
     }
 
     private void ActionSelection_Exit()
     {
+        Debug.Log("Exit ActionSelection State!");
         InputManager.instance.OnTileMouseOver -= RangeManager.Instance.AddToCurrentPath;
         RangeManager.Instance.ClearTiles();
         InputManager.instance.OnTileSelection -= OrderMovement;
+        InputManager.instance.OnAttackButtonPress -= EnterAttackTargetSelectionState;
         InputManager.instance.OnCancel -= EnterUnitSelectionState;
 
         //Undisplay UI
@@ -195,6 +219,7 @@ public class BattleManager : MonoBehaviour
 
     private void MovementPseudoState_Enter()
     {
+        Debug.Log("Enter MovementPseudoState State!");
         CurrentSelectedUnit.MoveTo(movementPath);
         //Attendre la fin de l'anim
         gameplayState.ChangeState(GameplayState.AttackSelection);
@@ -202,47 +227,56 @@ public class BattleManager : MonoBehaviour
 
     private void MovementPseudoState_Exit()
     {
+        Debug.Log("Exit MovementPseudoState State!");
         tilesInMovementRange = null;
         movementPath = null;
     }
 
     private void AttackSelection_Enter()
     {
+        Debug.Log("Enter AttackSelection State!");
+        InputManager.instance.OnAttackButtonPress += EnterAttackTargetSelectionState;
         InputManager.instance.OnCancel += EnterUnitSelectionState;
     }
 
     private void AttackSelection_Exit()
     {
+        Debug.Log("Exit AttackSelection State!");
+        InputManager.instance.OnAttackButtonPress -= EnterAttackTargetSelectionState;
         InputManager.instance.OnCancel -= EnterUnitSelectionState;
     }
 
     private void AttackTargetSelection_Enter()
     {
+        Debug.Log("Enter AttackTargetSelection State!");
         GetUnitAttackRange();
         DisplayUnitAttackRange();
         InputManager.instance.OnTileMouseOver += RangeManager.Instance.TargetTile;
         InputManager.instance.OnTileSelection += OrderAttack;
-        InputManager.instance.OnCancel += EnterAttackSelectionState;
+        InputManager.instance.OnCancel += EnterAppropriateActionState;
 
         //Display UI
     }
 
     private void AttackTargetSelection_Exit()
     {
+        Debug.Log("Exit AttackTargetSelection State!");
         //unDisplay UI
         InputManager.instance.OnTileMouseOver -= RangeManager.Instance.TargetTile;
         RangeManager.Instance.ClearTiles();
         InputManager.instance.OnTileSelection -= OrderAttack;
-        InputManager.instance.OnCancel -= EnterAttackSelectionState;
+        InputManager.instance.OnCancel -= EnterAppropriateActionState;
     }
 
     private void AttackPseudoState_Enter()
     {
+        Debug.Log("Enter AttackPseudoState State!");
         CurrentSelectedUnit.Attack(targets);
     }
 
     private void AttackPseudoState_Exit()
     {
+        Debug.Log("Exit AttackPseudoState State!");
         tilesInAttackRange = null;
         targets = null;
     }
@@ -270,16 +304,11 @@ public class BattleManager : MonoBehaviour
     {
         if(unit is ShapeUnit)
         {
-            if(unit.CurrentUnitState == UnitState.Fresh)
+            if (unit.CurrentUnitState == UnitState.Fresh || unit.CurrentUnitState == UnitState.Moved)
             {
                 CurrentSelectedUnit = unit;
-                gameplayState.ChangeState(GameplayState.ActionSelection/*AttackTargetSelection*/);                                                                                       //////LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                EnterAppropriateActionState();
             }
-            else if(unit.CurrentUnitState == UnitState.Moved)
-            {
-                CurrentSelectedUnit = unit;
-                gameplayState.ChangeState(GameplayState.AttackSelection);
-            }  
         }
     }
 

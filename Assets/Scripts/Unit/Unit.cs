@@ -18,10 +18,10 @@ public class Unit : LevelElement
 
     public UnitBase unitBase;     //Passage en UnitBase
     public Tile CurrentTile { get; protected set; }
-    public BaseUnitType UnitType => unitBase.unitType;
+    public virtual BaseUnitType UnitType => unitBase.unitType;
 
 
-    public UnitState CurrentUnitState { get; private set; }     //State Machine
+    public UnitState CurrentUnitState { get; private set; }
 
     public virtual int UnitMergeLevel => 0;
 
@@ -45,6 +45,12 @@ public class Unit : LevelElement
 
     public virtual void SetUnitPosition(Tile tile)
     {
+        if(CurrentTile != null)
+        {
+            CurrentTile.unit = null;
+            CurrentTile.type = TileType.Free;
+        }
+            
         CurrentTile = tile;
         transform.position = tile.transform.position;
         tile.unit = this;
@@ -53,7 +59,7 @@ public class Unit : LevelElement
 
     public virtual void FreshenUp()
     {
-        //Change StateMachine
+        CurrentUnitState = UnitState.Fresh;
         //if stunned => Used State? ou state <-> Stunned + 1
         //if Used => Fresh
     }

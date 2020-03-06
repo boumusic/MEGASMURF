@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     private GameObject objectUnderMouse;
 
     public event Action OnCancel;
+    public event Action OnAttackButtonPress;
     public event Action<Tile> OnTileMouseOver;
     public event Action<Unit> OnUnitSelection;
     public event Action<Tile> OnTileSelection;
@@ -35,6 +36,11 @@ public class InputManager : MonoBehaviour
     public void SendCancelEvent()
     {
         OnCancel?.Invoke();
+    }
+
+    public void SendAttackButtonEvent()
+    {
+        OnAttackButtonPress?.Invoke();
     }
 
     public void SendUnitSelection(Unit unit)
