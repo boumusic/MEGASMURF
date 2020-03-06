@@ -5,13 +5,21 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
+<<<<<<< HEAD
+    second: Take 001
+=======
     second: GrabbyArms
+>>>>>>> master
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: No Name
+<<<<<<< HEAD
+    second: {fileID: 2100000, guid: e2bf70cada51bd34aa9b63a53b4fc799, type: 2}
+=======
     second: {fileID: 2100000, guid: 63035564380c64043bd3cb0fdb4e81a5, type: 2}
+>>>>>>> master
   materials:
     materialImportMode: 1
     materialName: 3
@@ -38,6 +46,9 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
+<<<<<<< HEAD
+    clipAnimations: []
+=======
     clipAnimations:
     - serializedVersion: 16
       name: GrabbyArms
@@ -68,6 +79,7 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+>>>>>>> master
     isReadable: 1
   meshes:
     lODScreenPercentages: []
