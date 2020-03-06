@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class Equipement : ScriptableObject
 {
-    
+
+    public int id;
+
 }
