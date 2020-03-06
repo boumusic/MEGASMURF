@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/FBX/Character/Shapes/Arms_Character.FBX.meta
 guid: ecad6f761f67295428693b2579ab5e60
+=======
+<<<<<<< HEAD
+guid: 0505db2ebd3f4284fb236567d02afc43
+=======
+guid: d4997e6398c2c754bae791723ed4914c
+>>>>>>> Nassim
+>>>>>>> 6c810eab105a0c37e6e98debcbefb06706bd2394:Assets/FBX/Character/Anim_Spawn_Arms.FBX.meta
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:

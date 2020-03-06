@@ -2,17 +2,67 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Save : MonoBehaviour
+[System.Serializable]
+public class UnitTemplate
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    public int[] combination;
+    [SerializeField]
+    public int equipment;
 
-    // Update is called once per frame
-    void Update()
+    public UnitTemplate(ShapeUnit shape)
     {
-        
+        combination = new int[3];
+        combination[0] = (int)(shape.unitBase.unitType);
+        if(shape.ArmUnit != null)
+        {
+            combination[1] = (int)(shape.ArmUnit.unitBase.unitType);
+        }
+        else
+        {
+            combination[1] = (int)(BaseUnitType.NONE);
+        }
+        if (shape.ArmUnit != null)
+        {
+            combination[2] = (int)(shape.HeadUnit.unitBase.unitType);
+        }
+        else
+        {
+            combination[2] = (int)(BaseUnitType.NONE);
+        }
+        equipment = shape.equipement.id;
+    }
+}
+
+[System.Serializable]
+public class Team
+{
+    [SerializeField]
+    public List<UnitTemplate> units;
+
+    public Team(List<ShapeUnit> shapes)
+    {
+        foreach(ShapeUnit shape in shapes)
+        {
+            units.Add(new UnitTemplate(shape));
+        }
+    }
+}
+
+[System.Serializable]
+public class Save
+{
+    [SerializeField]
+    public int shapemud;
+    [SerializeField]
+    public Dictionary<int, bool> skilltree;
+    [SerializeField]
+    public Team team;
+
+    public Save()
+    {
+        shapemud = GameManager.ShapeMud;
+        skilltree = GameManager.SkillTree.tree;
+        team = new Team(GameManager.units);
     }
 }
