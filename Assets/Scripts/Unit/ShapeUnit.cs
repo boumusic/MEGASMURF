@@ -7,7 +7,7 @@ public class ShapeUnit : Unit
 {
     [Header("Components")]
     [SerializeField] private UnitMerger unitMergeAnimator;
-    [SerializeField] private Transform mergeParent;
+    [SerializeField] public Transform mergeParent;
 
     public override Tile CurrentTile
     {
@@ -60,7 +60,8 @@ public class ShapeUnit : Unit
     public override AttackPattern UnitAttackPattern => (ArmUnit != null) ? ArmUnit.unitBase.attackPatterns[1] : unitBase.attackPatterns[0]; // Ajout range level 3 (item)
     public override MovementPattern UnitMovementPattern => unitBase.movementPatterns[(mergedUnits.Count > 0) ? 1 : 0];  // Ajout range level 3 (item)
 
-    public Transform MergeParent { get => mergeParent; set => mergeParent = value; }
+    //public Transform MergeParent { get => mergeParent; set => mergeParent = value; }
+    public Transform MergeParent => mergedUnits.Count > 1 ? mergedUnits[mergedUnits.Count - 2].mergeParent : mergeParent;
 
     protected override void Awake()
     {

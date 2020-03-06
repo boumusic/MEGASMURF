@@ -1151,7 +1151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   feedbacks:
   - {fileID: 1873518677254039961}
-  bodyAnimator: {fileID: 2997241953737948029}
+  legAnimator: {fileID: 2997241953737948029}
   armsAnimator:
   - {fileID: 726876962514267926}
   - {fileID: 1632880456471001285}
