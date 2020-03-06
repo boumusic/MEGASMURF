@@ -33,14 +33,6 @@ public class Enemy : Unit
         //UnitBrain = new Brain(this);
     }
 
-    public override void SetUnitPosition(Tile tile)
-    {
-        CurrentTile = tile;
-        transform.position = tile.transform.position;
-        tile.unit = this;
-        tile.type = TileType.Enemy;
-    }
-
     public override Color ColorInEditor()
     {
         return Color.red;

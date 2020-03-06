@@ -256,7 +256,7 @@ public class RangeManager : MonoBehaviour
 
     public void AddToCurrentPath(Tile tile)
     {
-        if((tile.type != TileType.Ally && tile.type != TileType.Free) || IsInRange(tile))
+        if(IsInRange(tile))
         {
             if(currentPath.Count == 0)
             {
@@ -326,7 +326,7 @@ public class RangeManager : MonoBehaviour
             }
         }
         currentPath.Clear();
-        foreach(Tile pathTile in rangePaths[tile]) 
+        foreach (Tile pathTile in rangePaths[tile])
         {
             currentPath.Push(pathTile);
         }
