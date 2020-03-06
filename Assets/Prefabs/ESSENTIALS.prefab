@@ -995,7 +995,7 @@ GameObject:
   - component: {fileID: 7041749327518183290}
   - component: {fileID: 7041749327518183293}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: BattleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1029,6 +1029,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a348a0cabd758145b86e7ae82aac178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode: 0
+  debugStartingUnits: []
   humanPlayer: {fileID: 2205424296357309411}
   aiPlayer: {fileID: 511223976435076533}
 --- !u!1 &7041749327786829483
