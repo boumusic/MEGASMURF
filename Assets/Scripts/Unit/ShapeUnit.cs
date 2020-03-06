@@ -137,6 +137,7 @@ public class ShapeUnit : Unit
         }
 
         mergedUnits[mergedUnits.Count - 1].CurrentTile = null;
+        BattleManager.Instance.ShapeUnits.Remove(mergedUnits[mergedUnits.Count - 1]);
         // Autre check 
         // Vanish d'equipement + Refund
     }

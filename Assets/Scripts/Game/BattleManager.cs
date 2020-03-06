@@ -199,7 +199,7 @@ public class BattleManager : MonoBehaviour
         InputManager.instance.OnCancel += OpenGameplayMenu;
         InputManager.instance.OnUnitSelection += SelectUnit;
 
-        if (/*MaestroUnit.CurrentUnitState == UnitState.Used &&*/ AreAllUnitsUsed(ShapeUnits.Cast<Unit>().ToList()))
+        if (/*MaestroUnit.CurrentUnitState == UnitState.Used &&*/ debugMode && AreAllUnitsUsed(ShapeUnits.Cast<Unit>().ToList()))                                       //A enlever
         {
             gameplayState.ChangeState(GameplayState.PlayerTurnEnd);
             return;
