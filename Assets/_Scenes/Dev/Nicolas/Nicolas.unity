@@ -24405,6 +24405,11 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 8188583145701761903, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.09
+      objectReference: {fileID: 0}
     - target: {fileID: 8540786452581005749, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
