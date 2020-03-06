@@ -21,11 +21,18 @@ public class ShapeUnit : Unit
             }
 
             currentTile = value;
-
-            currentTile.unit = this;
-            currentTile.type = TileType.Ally;
+            if (currentTile == null)
+            {
+                currentTile.type = TileType.Free;                               //LUL
+            }
+            else
+            {
+                currentTile.unit = this;
+                currentTile.type = TileType.Ally;
+            }
         }
     }
+
     public override BaseUnitType UnitType => BaseUnitType.ShapeComposite;
     public Equipement equipement { get; set; }
 
@@ -87,6 +94,7 @@ public class ShapeUnit : Unit
             if (UnitMergeLevel < 2)
             {
                 onFinished += FinishedMerging;
+                onFinished += DebugResetHealth;
                 shapeBeingMerged = shape;
                 mergedUnits.Add(shape);
                 shape.unitMergeAnimator.MergeOnTopOf(this, onFinished);

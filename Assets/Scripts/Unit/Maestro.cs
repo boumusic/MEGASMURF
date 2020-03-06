@@ -16,9 +16,15 @@ public class Maestro : Unit
             }
 
             currentTile = value;
-
-            currentTile.unit = this;
-            currentTile.type = TileType.Obstacle;                                           //LUL
+            if(currentTile == null)
+            {
+                currentTile.type = TileType.Free;                               //LUL
+            }
+            else
+            {
+                currentTile.unit = this;
+                currentTile.type = TileType.Obstacle;
+            }
         }
     }
 }

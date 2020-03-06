@@ -19,9 +19,15 @@ public class Enemy : Unit
             }
 
             currentTile = value;
-
-            currentTile.unit = this;
-            currentTile.type = TileType.Enemy;
+            if (currentTile == null)
+            {
+                currentTile.type = TileType.Free;                               //LUL
+            }
+            else
+            {
+                currentTile.unit = this;
+                currentTile.type = TileType.Enemy;
+            }
         }
     }
 
