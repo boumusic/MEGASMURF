@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: New Unit Base
   m_EditorClassIdentifier: 
   unitType: 0
-  attackPatterns: []
-  movementPatterns: []
+  attackPatterns:
+  - {fileID: 11400000, guid: 83efb6f89725eaf4c840a4da89749903, type: 2}
+  movementPatterns:
+  - {fileID: 11400000, guid: 3b5e4348860478147a96420976ddf106, type: 2}
   unitStats: {fileID: 11400000, guid: 6a18a30c18d381c488eea8f7582ec1a8, type: 2}

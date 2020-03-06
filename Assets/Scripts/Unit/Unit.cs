@@ -14,12 +14,16 @@ public class Unit : LevelElement
     [Header("Components")]
     [SerializeField] private UnitAnimator unitAnimator;
 
+    public Vector2 debugTile;
+
     public UnitBase unitBase;     //Passage en UnitBase
-    public Tile CurrentTile { get; protected set; }
-    public BaseUnitType UnitType => unitBase.unitType;
 
+    protected Tile currentTile;
+    public virtual Tile CurrentTile { get; protected set; }
+    
+    public virtual BaseUnitType UnitType => unitBase.unitType;
 
-    public UnitState CurrentUnitState { get; private set; }     //State Machine
+    public UnitState CurrentUnitState { get; private set; }
 
     public virtual int UnitMergeLevel => 0;
 
@@ -35,6 +39,11 @@ public class Unit : LevelElement
 
     public UnitAnimator UnitAnimator { get => unitAnimator; }
 
+    protected virtual void Awake()
+    {
+        currentTile = null;
+    }
+
     public virtual void Start()
     {
         FaceCamera();
@@ -42,22 +51,28 @@ public class Unit : LevelElement
 
     public virtual void SetUnitPosition(Tile tile)
     {
-        //Set Unit.tile et Tile.unit
-        //Animation d'apparition
+        if(CurrentTile != null)
+        {
+            CurrentTile.unit = null;
+            CurrentTile.type = TileType.Free;
+        }
+            
+        CurrentTile = tile;
+        transform.position = tile.transform.position;
+        tile.unit = this;
+        tile.type = TileType.Ally;
     }
 
-    public virtual void BecomeFresh()
+    public void DebugSetUnitPosition()
     {
-        //Change StateMachine To Fresh State
+        SetUnitPosition(Board.Instance.GetTile(debugTile));
     }
 
-    public virtual void MovementMode()
+    public virtual void FreshenUp()
     {
-        //Fait apparaitre les ranges de déplacement
-        //Active l'enregistrement de path
-        //Attend un input
-        //Declenche le déplacement
-        //Rend la main au turnManager
+        CurrentUnitState = UnitState.Fresh;
+        //if stunned => Used State? ou state <-> Stunned + 1
+        //if Used => Fresh
     }
 
     public virtual void MoveTo(Stack<Tile> path)
@@ -73,10 +88,19 @@ public class Unit : LevelElement
 
     private IEnumerator MovingTo(Stack<Tile> path, System.Action action)
     {
-        unitAnimator.SetIsMoving(true);
+        SetAnimatorMoving(true);
 
         while (path.Count > 0)
         {
+            if(path.Count == 1)
+            {
+                if(path.Peek().type == TileType.Ally)
+                {
+                    (path.Pop().unit as ShapeUnit).InitiateMergeAlly(this as ShapeUnit);
+                    break;
+                }
+            }
+
             Vector3 pos = path.Pop().transform.position;
             transform.forward = (pos - transform.position).normalized;
             while (transform.position != pos)
@@ -86,9 +110,13 @@ public class Unit : LevelElement
             }
         }
 
-        unitAnimator.SetIsMoving(false);
+        SetAnimatorMoving(false);
         FaceCamera();
         action?.Invoke();
+    }
+    public virtual void SetAnimatorMoving(bool moving)
+    {
+        unitAnimator.SetIsMoving(moving);
     }
 
     public void FaceCamera()
@@ -97,19 +125,11 @@ public class Unit : LevelElement
         transform.forward = new Vector3(-forward.x, 0f, -forward.z);
     }
 
-    public virtual void AttackMode()
-    {
-        //Fait apparaitre les ranges de déplacement
-        //Attent un input
-        //Déclenche l'attaque
-        //Rend la main au turnManager
-    }
-
-    public virtual void Attack(Tile tile)
+    public virtual void Attack(List<Tile> tile)
     {
         //Recup le path jusqu'a la cible
         //Anim d'attaque
-        tile.unit.TakeDamage(this);
+        //tile.unit.TakeDamage(this);
     }
 
     /// <summary>
