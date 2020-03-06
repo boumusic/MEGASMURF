@@ -19,13 +19,18 @@ public class SaveManager: MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        SaveGame();
+    }
+
     public void SaveGame()
     {
 
         Save save = new Save();
 
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
+        FileStream file = File.Create(Application.dataPath + "/GameSave.save");
         bf.Serialize(file, save);
         file.Close();
 
@@ -36,11 +41,11 @@ public class SaveManager: MonoBehaviour
     public void LoadGame()
     {
 
-        if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
+        if (File.Exists(Application.dataPath + "/Gamesave.save"))
         {
 
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
+            FileStream file = File.Open(Application.dataPath + "/GameSave.save", FileMode.Open);
             Save save = (Save)bf.Deserialize(file);
             file.Close();
 
