@@ -78,6 +78,7 @@ public class Unit : LevelElement
     public virtual void MoveTo(Stack<Tile> path)
     {
         StartCoroutine(MovingTo(path, null));
+        BecomeMoved();
     }
 
     public virtual void MoveTo(Stack<Tile> path, System.Action action)
@@ -199,9 +200,9 @@ public class Unit : LevelElement
     /// </summary>
     protected virtual void Die()
     {
-        // Animation Mort
-        // Drop loot?
-        // Desactivation/Destroy
+        BattleManager.Instance.RemoveUnitFromPlay(this);
+        //animation
+        gameObject.SetActive(false);
     }
 
     public virtual void BecomeMoved()
