@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MonsterLove.StateMachine;
@@ -196,7 +197,7 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Enter UnitSelection State!");
         CurrentSelectedUnit = null;
         isMerging = false;
-        InputManager.instance.OnCancel += OpenGameplayMenu;
+        InputManager.instance.OnCancel += PlayerEndTurn;                    //OpenGameplayMenu;
         InputManager.instance.OnUnitSelection += SelectUnit;
 
         if (/*MaestroUnit.CurrentUnitState == UnitState.Used &&*/ debugMode && AreAllUnitsUsed(ShapeUnits.Cast<Unit>().ToList()))                                       //A enlever
@@ -346,7 +347,7 @@ public class BattleManager : MonoBehaviour
 
     private void DisplayUnitMovementRange()
     {
-        RangeManager.Instance.DisplayMovementTiles();
+        StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayMovementTiles));
     }
 
     private void OrderMovement(Tile tile)
@@ -368,7 +369,7 @@ public class BattleManager : MonoBehaviour
 
     private void DisplayUnitAttackRange()
     {
-        RangeManager.Instance.DisplayAttackTiles();
+        StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayAttackTiles));
     }
 
     private void OrderAttack(Tile tile)
@@ -409,6 +410,32 @@ public class BattleManager : MonoBehaviour
         {
             enemy.DebugSetUnitPosition();
         }
+    }
+
+    public void RemoveUnitFromPlay(Unit unit)
+    {
+        if (unit is ShapeUnit && ShapeUnits.Contains((ShapeUnit)unit))
+            ShapeUnits.Remove((ShapeUnit)unit);
+        else if (unit is Enemy && ShapeUnits.Contains((ShapeUnit)unit))
+            Enemies.Remove((Enemy)unit);
+    }
+
+    private IEnumerator DelayDisplay(Action display)
+    {
+        yield return new WaitForFixedUpdate();
+        display?.Invoke();
+    }
+
+    private IEnumerator DelayMovementRangeDisplay()
+    {
+        yield return new WaitForFixedUpdate();
+        RangeManager.Instance.DisplayMovementTiles();
+    }
+
+    private IEnumerator DelayAttackRangeDisplay()
+    {
+        yield return new WaitForFixedUpdate();
+        RangeManager.Instance.DisplayAttackTiles();
     }
 }
 
