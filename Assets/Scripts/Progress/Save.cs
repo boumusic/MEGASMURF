@@ -20,8 +20,17 @@ public class UnitTemplate
         }
         else
         {
-            //combination[1] = (int)();
+            combination[1] = (int)(BaseUnitType.NONE);
         }
+        if (shape.ArmUnit != null)
+        {
+            combination[2] = (int)(shape.HeadUnit.unitBase.unitType);
+        }
+        else
+        {
+            combination[2] = (int)(BaseUnitType.NONE);
+        }
+        equipment = shape.equipement.id;
     }
 }
 
