@@ -92,6 +92,15 @@ public class Unit : LevelElement
 
         while (path.Count > 0)
         {
+            if(path.Count == 1)
+            {
+                if(path.Peek().type == TileType.Ally)
+                {
+                    (path.Pop().unit as ShapeUnit).InitiateMergeAlly(this as ShapeUnit);
+                    break;
+                }
+            }
+
             Vector3 pos = path.Pop().transform.position;
             transform.forward = (pos - transform.position).normalized;
             while (transform.position != pos)
@@ -105,7 +114,6 @@ public class Unit : LevelElement
         FaceCamera();
         action?.Invoke();
     }
-
     public virtual void SetAnimatorMoving(bool moving)
     {
         unitAnimator.SetIsMoving(moving);
