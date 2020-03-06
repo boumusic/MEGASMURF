@@ -290,6 +290,7 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log("Enter AttackPseudoState State!");
         CurrentSelectedUnit.Attack(targets);
+        gameplayState.ChangeState(GameplayState.UnitSelection);
     }
 
     private void AttackPseudoState_Exit()

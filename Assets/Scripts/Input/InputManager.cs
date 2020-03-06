@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -17,13 +17,23 @@ public class InputManager : MonoBehaviour
     public event Action<Unit> OnUnitSelection;
     public event Action<Tile> OnTileSelection;
 
-    private PointerEventData pointerEventData;
+    private PlayerInput playerInput;
+
+    private InputAction AttackAction;
+    private InputAction CancelAction;
 
     public Tile currentTile { get; private set; }
     
     private void Awake()
     {
         instance = this;
+
+        playerInput = GetComponent<PlayerInput>();
+        AttackAction = playerInput.actions.FindAction("Attack");
+        CancelAction = playerInput.actions.FindAction("Cancel");
+
+        AttackAction.performed += SendAttackButtonEvent;
+        CancelAction.performed += SendCancelEvent;
     }
 
     public void TileClickCallBack(Tile tile)
@@ -33,13 +43,22 @@ public class InputManager : MonoBehaviour
         OnTileSelection?.Invoke(tile);
     }
 
-    public void SendCancelEvent()
+    public void SendCancelEvent(InputAction.CallbackContext context)
     {
+        if (context.phase != InputActionPhase.Performed)
+            return;
+
+        Debug.Log("Cancel button!");
         OnCancel?.Invoke();
     }
 
-    public void SendAttackButtonEvent()
+    public void SendAttackButtonEvent(InputAction.CallbackContext context)
     {
+
+        if (context.phase != InputActionPhase.Performed)
+            return;
+
+        Debug.Log("Attack button!");
         OnAttackButtonPress?.Invoke();
     }
 
@@ -57,5 +76,10 @@ public class InputManager : MonoBehaviour
     {
         currentTile = tile;
         OnTileMouseOver?.Invoke(tile);
+    }
+
+    private void CreateGameplayActions()
+    {
+        var AttackAction = new InputAction("AttackAction");
     }
 }
