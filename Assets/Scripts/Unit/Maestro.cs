@@ -21,4 +21,18 @@ public class Maestro : Unit
             currentTile.type = TileType.Obstacle;                                           //LUL
         }
     }
+
+    public int maxShapes;
+    public float mudLootMultiplier;
+
+    public int maxMoveRange;
+
+    public int maxHealth;
+
+    public float shopReductions;
+
+    public int safeZoneSize;
+
+    public List<Skill> unlockedSkills;
+
 }
