@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 0505db2ebd3f4284fb236567d02afc43
+=======
+guid: d4997e6398c2c754bae791723ed4914c
+>>>>>>> Nassim
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
