@@ -49,23 +49,28 @@ public class Unit : LevelElement
         FaceCamera();
     }
 
+    
+
     public virtual void SetUnitPosition(Tile tile)
     {
-        if(CurrentTile != null)
-        {
-            CurrentTile.unit = null;
-            CurrentTile.type = TileType.Free;
-        }
-            
         CurrentTile = tile;
         transform.position = tile.transform.position;
-        tile.unit = this;
-        tile.type = TileType.Ally;
+    }
+
+    public void RemoveFromBoard()
+    {
+        CurrentTile = null;
     }
 
     public void DebugSetUnitPosition()
     {
         SetUnitPosition(Board.Instance.GetTile(debugTile));
+        DebugResetHealth();
+    }
+
+    public virtual void DebugResetHealth()
+    {
+        CurrentHitPoint = MaxHealth;
     }
 
     public virtual void FreshenUp()
@@ -78,12 +83,14 @@ public class Unit : LevelElement
     public virtual void MoveTo(Stack<Tile> path)
     {
         StartCoroutine(MovingTo(path, null));
+        BecomeMoved();
     }
 
     public virtual void MoveTo(Stack<Tile> path, System.Action action)
     {
         // Lancer une coroutine qui fait parcourir le chemin
         StartCoroutine(MovingTo(path, action));
+        BecomeMoved();
     }
 
     private IEnumerator MovingTo(Stack<Tile> path, System.Action action)
@@ -97,23 +104,27 @@ public class Unit : LevelElement
                 if(path.Peek().type == TileType.Ally)
                 {
                     (path.Pop().unit as ShapeUnit).InitiateMergeAlly(this as ShapeUnit);
+                    currentTile = null;
                     break;
                 }
             }
 
-            Vector3 pos = path.Pop().transform.position;
+            Tile destinationTile = path.Pop();
+            Vector3 pos = destinationTile.transform.position;
             transform.forward = (pos - transform.position).normalized;
             while (transform.position != pos)
             {
                 transform.position = Vector3.MoveTowards(transform.position, pos, UnitStats.moveSpeed);
                 yield return new WaitForFixedUpdate();
             }
+            CurrentTile = destinationTile; 
         }
 
         SetAnimatorMoving(false);
         FaceCamera();
         action?.Invoke();
     }
+
     public virtual void SetAnimatorMoving(bool moving)
     {
         unitAnimator.SetIsMoving(moving);
@@ -125,20 +136,53 @@ public class Unit : LevelElement
         transform.forward = new Vector3(-forward.x, 0f, -forward.z);
     }
 
-    public virtual void Attack(List<Tile> tile)
+    public virtual void Attack(List<Tile> tiles)
     {
-        //Recup le path jusqu'a la cible
-        //Anim d'attaque
-        //tile.unit.TakeDamage(this);
+        switch (UnitAttackPattern.type)
+        {
+            case AttackPatternType.All:
+                foreach (Tile tile in tiles)
+                {
+                    if ((tile.unit?.GetComponent<Unit>()) != null)
+                        tile.unit.TakeDamage(this);
+                }
+                break;
+
+            case AttackPatternType.Single:
+                if ((tiles[0].unit?.GetComponent<Unit>()) != null)
+                    tiles[0].unit.TakeDamage(this);
+                break;
+
+            case AttackPatternType.Slice:
+                Stack<Tile> attackDestination = new Stack<Tile>();
+                attackDestination.Push(tiles[tiles.Count - 1]);
+
+                List<Tile> unitTiles = new List<Tile>();
+                foreach (Tile tile in tiles)
+                {
+                    if ((tile.unit?.GetComponent<Unit>()) != null)
+                        unitTiles.Add(tile);
+                }
+
+                StartCoroutine(MovingTo(attackDestination, null));
+                
+                foreach(Tile tile in unitTiles)
+                {
+                    tile.unit.TakeDamage(this);
+                }
+                break;
+        }
+
+        BecomeExhausted();
     }
 
     /// <summary>
-    /// Method to inflict damage
+    /// Method to receive damage
     /// </summary>
-    /// <param name="unit"></param>
+    /// <param name="unit">Unit who inflict the damage</param>
     public virtual void TakeDamage(Unit unit)
     {
-        CurrentHitPoint -= unit.UnitStats.damage;
+        CurrentHitPoint -= unit.Damage;
 
         if (CurrentHitPoint <= 0)
         {
@@ -161,8 +205,18 @@ public class Unit : LevelElement
     /// </summary>
     protected virtual void Die()
     {
-        // Animation Mort
-        // Drop loot?
-        // Desactivation/Destroy
+        BattleManager.Instance.RemoveUnitFromPlay(this);
+        //animation
+        gameObject.SetActive(false);
+    }
+
+    public virtual void BecomeMoved()
+    {
+        CurrentUnitState = UnitState.Moved;
+    }
+
+    public virtual void BecomeExhausted()
+    {
+        CurrentUnitState = UnitState.Used;
     }
 }

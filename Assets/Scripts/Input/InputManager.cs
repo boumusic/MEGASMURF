@@ -48,7 +48,6 @@ public class InputManager : MonoBehaviour
         if (context.phase != InputActionPhase.Performed)
             return;
 
-        Debug.Log("Cancel button!");
         OnCancel?.Invoke();
     }
 
@@ -58,7 +57,6 @@ public class InputManager : MonoBehaviour
         if (context.phase != InputActionPhase.Performed)
             return;
 
-        Debug.Log("Attack button!");
         OnAttackButtonPress?.Invoke();
     }
 

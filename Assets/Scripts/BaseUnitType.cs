@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum BaseUnitType
 {
+    NONE,
     Triangle,
     Circle,
     Square,

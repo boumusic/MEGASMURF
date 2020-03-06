@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MonsterLove.StateMachine;
@@ -47,6 +48,7 @@ public class BattleManager : MonoBehaviour
     private Stack<Tile> movementPath;
     private List<Tile> tilesInAttackRange;
     private List<Tile> targets;
+    private bool isMerging;
 
     private void Awake()
     {
@@ -60,13 +62,14 @@ public class BattleManager : MonoBehaviour
     {
         gameplayState = StateMachine<GameplayState>.Initialize(this);
         gameplayState.ManualUpdate = true;
-        gameplayState.ChangeState(GameplayState.PlayerTurnStart);
 
-        if(debugMode)
+        if (debugMode)
         {
             FillUnitLists(debugStartingUnits);
             DebugSetupAllUnits();
         }
+
+        gameplayState.ChangeState(GameplayState.PlayerTurnStart);
     }
 
     public void StartLevel()
@@ -193,20 +196,21 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log("Enter UnitSelection State!");
         CurrentSelectedUnit = null;
-        InputManager.instance.OnCancel += OpenGameplayMenu;
+        isMerging = false;
+        InputManager.instance.OnCancel += PlayerEndTurn;                    //OpenGameplayMenu;
         InputManager.instance.OnUnitSelection += SelectUnit;
 
-        //if (MaestroUnit.CurrentUnitState == UnitState.Used && AreAllUnitsUsed(ShapeUnits.Cast<Unit>().ToList()))
-        //{
-        //    gameplayState.ChangeState(GameplayState.PlayerTurnEnd);
-        //    return;
-        //}
+        if (/*MaestroUnit.CurrentUnitState == UnitState.Used &&*/ debugMode && AreAllUnitsUsed(ShapeUnits.Cast<Unit>().ToList()))                                       //A enlever
+        {
+            gameplayState.ChangeState(GameplayState.PlayerTurnEnd);
+            return;
+        }
     }
 
     private void UnitSelection_Exit()
     {
         Debug.Log("Exit UnitSelection State!");
-        InputManager.instance.OnCancel -= OpenGameplayMenu;
+        InputManager.instance.OnCancel -= PlayerEndTurn;                    //OpenGameplayMenu;
         InputManager.instance.OnUnitSelection -= SelectUnit;
     }
 
@@ -240,7 +244,12 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Enter MovementPseudoState State!");
         CurrentSelectedUnit.MoveTo(movementPath);
         //Attendre la fin de l'anim
-        gameplayState.ChangeState(GameplayState.AttackSelection);
+
+        if (isMerging)
+            gameplayState.ChangeState(GameplayState.UnitSelection);
+        else
+            gameplayState.ChangeState(GameplayState.AttackSelection);
+
     }
 
     private void MovementPseudoState_Exit()
@@ -338,13 +347,15 @@ public class BattleManager : MonoBehaviour
 
     private void DisplayUnitMovementRange()
     {
-        RangeManager.Instance.DisplayMovementTiles();
+        StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayMovementTiles));
     }
 
     private void OrderMovement(Tile tile)
     {
         if(tilesInMovementRange.Contains(tile))
         {
+            if (tile.unit != null)
+                isMerging = true;
             movementPath = RangeManager.Instance.GetCurrentPath();
 
             gameplayState.ChangeState(GameplayState.MovementPseudoState);
@@ -358,7 +369,7 @@ public class BattleManager : MonoBehaviour
 
     private void DisplayUnitAttackRange()
     {
-        RangeManager.Instance.DisplayAttackTiles();
+        StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayAttackTiles));
     }
 
     private void OrderAttack(Tile tile)
@@ -366,7 +377,8 @@ public class BattleManager : MonoBehaviour
         if(tilesInAttackRange.Contains(tile))
         {
             targets = RangeManager.Instance.GetTargets();
-
+            if (CurrentSelectedUnit.UnitAttackPattern.type == AttackPatternType.Slice)
+                targets.Add(tile);
             gameplayState.ChangeState(GameplayState.AttackPseudoState);
         }
     }
@@ -398,6 +410,38 @@ public class BattleManager : MonoBehaviour
         {
             enemy.DebugSetUnitPosition();
         }
+    }
+
+    public void RemoveUnitFromPlay(Unit unit)
+    {
+        if (unit is ShapeUnit && ShapeUnits.Contains((ShapeUnit)unit))
+        {
+            ShapeUnits.Remove((ShapeUnit)unit);
+            unit.RemoveFromBoard();
+        } 
+        else if (unit is Enemy && ShapeUnits.Contains((ShapeUnit)unit))
+        {
+            Enemies.Remove((Enemy)unit);
+            unit.RemoveFromBoard();
+        } 
+    }
+
+    private IEnumerator DelayDisplay(Action display)
+    {
+        yield return new WaitForFixedUpdate();
+        display?.Invoke();
+    }
+
+    private IEnumerator DelayMovementRangeDisplay()
+    {
+        yield return new WaitForFixedUpdate();
+        RangeManager.Instance.DisplayMovementTiles();
+    }
+
+    private IEnumerator DelayAttackRangeDisplay()
+    {
+        yield return new WaitForFixedUpdate();
+        RangeManager.Instance.DisplayAttackTiles();
     }
 }
 

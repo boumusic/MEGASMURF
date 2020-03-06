@@ -9,16 +9,33 @@ public class Maestro : Unit
         get => currentTile;
         protected set
         {
-            if(currentTile != null)
+            if (currentTile != null)
             {
                 currentTile.unit = null;
                 currentTile.type = TileType.Free;
+                CurrentTile = null;
             }
 
-            currentTile = value;
-
-            currentTile.unit = this;
-            currentTile.type = TileType.Obstacle;                                           //LUL
+            if (value != null)
+            {
+                currentTile = value;
+                currentTile.unit = this;
+                currentTile.type = TileType.Obstacle;               //LUL
+            }
         }
     }
+
+    public int maxShapes;
+    public float mudLootMultiplier;
+
+    public int maxMoveRange;
+
+    public int maxHealth;
+
+    public float shopReductions;
+
+    public int safeZoneSize;
+
+    public List<Skill> unlockedSkills;
+
 }

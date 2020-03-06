@@ -18,14 +18,18 @@ public class ShapeUnit : Unit
             {
                 currentTile.unit = null;
                 currentTile.type = TileType.Free;
+                currentTile = null;
             }
 
-            currentTile = value;
-
-            currentTile.unit = this;
-            currentTile.type = TileType.Ally;
+            if (value != null)
+            {
+                currentTile = value;
+                currentTile.unit = this;
+                currentTile.type = TileType.Ally;
+            }
         }
     }
+
     public override BaseUnitType UnitType => BaseUnitType.ShapeComposite;
     public Equipement equipement { get; set; }
 
@@ -87,17 +91,18 @@ public class ShapeUnit : Unit
             if (UnitMergeLevel < 2)
             {
                 onFinished += FinishedMerging;
+                onFinished += DebugResetHealth;
                 shapeBeingMerged = shape;
                 mergedUnits.Add(shape);
                 shape.unitMergeAnimator.MergeOnTopOf(this, onFinished);
-                // Autre check 
-                // Vanish d'equipement + Refund
+                BattleManager.Instance.RemoveUnitFromPlay(mergedUnits[mergedUnits.Count - 1]);
             }
             else
                 Debug.LogError("Illicite Merge: bottom unit is already at max level");
         }
         else
             Debug.LogError("Illicite Merge: intiating unit is not level 0");
+        
     }
 
     public void ToggleMembers(ShapeUnit destination)
@@ -131,5 +136,8 @@ public class ShapeUnit : Unit
         {
             shapeBeingMerged = null;
         }
+
+        // Autre check 
+        // Vanish d'equipement + Refund
     }
 }
