@@ -5,7 +5,17 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
+<<<<<<< HEAD:Assets/FBX/Character/Anim_Idle_Legs.FBX.meta
+    second: 
+  - first:
+      74: 1827226128182048838
+    second: 
+  - first:
+      74: 1827226128182048838
+    second: Take 001
+=======
     second: MEGA HIT LEGS
+>>>>>>> 2fd4476c33436e427193cbbb388b761c97d1c384:Assets/FBX/Character/Shapes/Anim_MegaHit_Legs.FBX.meta
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -33,6 +43,9 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
+<<<<<<< HEAD:Assets/FBX/Character/Anim_Idle_Legs.FBX.meta
+    clipAnimations: []
+=======
     clipAnimations:
     - serializedVersion: 16
       name: MEGA HIT LEGS
@@ -63,6 +76,7 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+>>>>>>> 2fd4476c33436e427193cbbb388b761c97d1c384:Assets/FBX/Character/Shapes/Anim_MegaHit_Legs.FBX.meta
     isReadable: 0
   meshes:
     lODScreenPercentages: []

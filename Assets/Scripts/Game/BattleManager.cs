@@ -60,13 +60,14 @@ public class BattleManager : MonoBehaviour
     {
         gameplayState = StateMachine<GameplayState>.Initialize(this);
         gameplayState.ManualUpdate = true;
-        gameplayState.ChangeState(GameplayState.PlayerTurnStart);
 
-        if(debugMode)
+        if (debugMode)
         {
             FillUnitLists(debugStartingUnits);
             DebugSetupAllUnits();
         }
+
+        gameplayState.ChangeState(GameplayState.PlayerTurnStart);
     }
 
     public void StartLevel()
@@ -196,11 +197,11 @@ public class BattleManager : MonoBehaviour
         InputManager.instance.OnCancel += OpenGameplayMenu;
         InputManager.instance.OnUnitSelection += SelectUnit;
 
-        //if (MaestroUnit.CurrentUnitState == UnitState.Used && AreAllUnitsUsed(ShapeUnits.Cast<Unit>().ToList()))
-        //{
-        //    gameplayState.ChangeState(GameplayState.PlayerTurnEnd);
-        //    return;
-        //}
+        if (/*MaestroUnit.CurrentUnitState == UnitState.Used &&*/ AreAllUnitsUsed(ShapeUnits.Cast<Unit>().ToList()))
+        {
+            gameplayState.ChangeState(GameplayState.PlayerTurnEnd);
+            return;
+        }
     }
 
     private void UnitSelection_Exit()
@@ -366,7 +367,8 @@ public class BattleManager : MonoBehaviour
         if(tilesInAttackRange.Contains(tile))
         {
             targets = RangeManager.Instance.GetTargets();
-
+            if (CurrentSelectedUnit.UnitAttackPattern.type == AttackPatternType.Slice)
+                targets.Add(tile);
             gameplayState.ChangeState(GameplayState.AttackPseudoState);
         }
     }

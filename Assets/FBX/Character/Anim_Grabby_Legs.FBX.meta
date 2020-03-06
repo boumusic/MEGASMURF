@@ -1,12 +1,11 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/FBX/Character/Anim_MegaHit_Legs.FBX.meta
-guid: 89522b5466c17004590ec45dda1f12d1
-=======
-guid: 1ad4fb3b9ebbb7e4a83caf26723f5698
->>>>>>> 2fd4476c33436e427193cbbb388b761c97d1c384:Assets/FBX/Character/Shapes/Anim_SimpleHit_Arms.FBX.meta
+guid: 83b14b697fc24df49b6c0a66f93e7824
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
+  - first:
+      74: 1827226128182048838
+    second: 
   - first:
       74: 1827226128182048838
     second: Take 001
