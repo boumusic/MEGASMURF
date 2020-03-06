@@ -24,6 +24,9 @@ public class BattleManager : MonoBehaviour
     private static BattleManager instance;
     public static BattleManager Instance { get { if (!instance) instance = FindObjectOfType<BattleManager>(); return instance; } }
 
+    public bool debugMode;
+    public GameObject[] debugStartingUnits;
+
     public delegate void GameEvent();
     public GameEvent playerTurnStarted;
     public GameEvent enemyTurnStarted;
@@ -33,6 +36,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private AIPlayer aiPlayer;
 
     private StateMachine<GameplayState> gameplayState;
+
 
     public Maestro MaestroUnit { get; private set; }
     public List<ShapeUnit> ShapeUnits { get; private set; }
@@ -44,11 +48,25 @@ public class BattleManager : MonoBehaviour
     private List<Tile> tilesInAttackRange;
     private List<Tile> targets;
 
+    private void Awake()
+    {
+        ShapeUnits = new List<ShapeUnit>();
+        Enemies = new List<Enemy>();
+
+        Board.Instance.InitializeBoard();
+    }
+
     private void Start()
     {
         gameplayState = StateMachine<GameplayState>.Initialize(this);
         gameplayState.ManualUpdate = true;
         gameplayState.ChangeState(GameplayState.PlayerTurnStart);
+
+        if(debugMode)
+        {
+            FillUnitLists(debugStartingUnits);
+            DebugSetupAllUnits();
+        }
     }
 
     public void StartLevel()
@@ -83,7 +101,7 @@ public class BattleManager : MonoBehaviour
     {
         if (CurrentSelectedUnit.CurrentUnitState == UnitState.Fresh)
         {
-            gameplayState.ChangeState(GameplayState.ActionSelection/*AttackTargetSelection*/);                                                                                       //////LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+            gameplayState.ChangeState(GameplayState.ActionSelection);                                                                                       
         }
         else if (CurrentSelectedUnit.CurrentUnitState == UnitState.Moved)
         {
@@ -123,7 +141,7 @@ public class BattleManager : MonoBehaviour
         //Anim de debut de tour
         //Abonner fin anim
         playerTurnStarted?.Invoke();
-        MaestroUnit.FreshenUp();
+        MaestroUnit?.FreshenUp();
         FreshupUnits(ShapeUnits.Cast<Unit>().ToList());
         gameplayState.ChangeState(GameplayState.UnitSelection);
     }
@@ -349,6 +367,35 @@ public class BattleManager : MonoBehaviour
             targets = RangeManager.Instance.GetTargets();
 
             gameplayState.ChangeState(GameplayState.AttackPseudoState);
+        }
+    }
+
+    private void FillUnitLists(GameObject[] startingUnits)
+    {
+        foreach(GameObject unitGameObject in startingUnits)
+        {
+            Unit unit;
+            if ((unit = unitGameObject.GetComponent<Maestro>()) != null)
+                MaestroUnit = (Maestro)unit;
+            else if ((unit = unitGameObject.GetComponent<ShapeUnit>()) != null)
+                ShapeUnits.Add((ShapeUnit)unit);
+            else if ((unit = unitGameObject.GetComponent<Enemy>()) != null)
+                Enemies.Add((Enemy)unit);
+        }
+    }
+
+    private void DebugSetupAllUnits()
+    {
+        MaestroUnit?.DebugSetUnitPosition();
+
+        foreach(ShapeUnit shape in ShapeUnits)
+        {
+            shape.DebugSetUnitPosition();
+        }
+
+        foreach(Enemy enemy in Enemies)
+        {
+            enemy.DebugSetUnitPosition();
         }
     }
 }

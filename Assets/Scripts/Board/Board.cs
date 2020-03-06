@@ -37,6 +37,11 @@ public class Board : MonoBehaviour
 
     private void Awake()
     {
+        
+    }
+
+    public void InitializeBoard()
+    {
         GenerateBoard();
         StartCoroutine(TileAppear());
     }

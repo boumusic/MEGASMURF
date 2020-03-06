@@ -17,9 +17,11 @@ public class Unit : LevelElement
     public Vector2 debugTile;
 
     public UnitBase unitBase;     //Passage en UnitBase
-    public Tile CurrentTile { get; protected set; }
-    public virtual BaseUnitType UnitType => unitBase.unitType;
 
+    protected Tile currentTile;
+    public virtual Tile CurrentTile { get; protected set; }
+    
+    public virtual BaseUnitType UnitType => unitBase.unitType;
 
     public UnitState CurrentUnitState { get; private set; }
 
@@ -37,10 +39,14 @@ public class Unit : LevelElement
 
     public UnitAnimator UnitAnimator { get => unitAnimator; }
 
+    protected virtual void Awake()
+    {
+        currentTile = null;
+    }
+
     public virtual void Start()
     {
         FaceCamera();
-        //SetUnitPosition(Board.Instance.GetTile(debugTile));               //Debug
     }
 
     public virtual void SetUnitPosition(Tile tile)
@@ -55,6 +61,11 @@ public class Unit : LevelElement
         transform.position = tile.transform.position;
         tile.unit = this;
         tile.type = TileType.Ally;
+    }
+
+    public void DebugSetUnitPosition()
+    {
+        SetUnitPosition(Board.Instance.GetTile(debugTile));
     }
 
     public virtual void FreshenUp()
