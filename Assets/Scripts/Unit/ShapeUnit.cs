@@ -9,6 +9,23 @@ public class ShapeUnit : Unit
     [SerializeField] private UnitMerger unitMergeAnimator;
     [SerializeField] private Transform mergeParent;
 
+    public override Tile CurrentTile
+    {
+        get => currentTile;
+        protected set
+        {
+            if(currentTile != null)
+            {
+                currentTile.unit = null;
+                currentTile.type = TileType.Free;
+            }
+
+            currentTile = value;
+
+            currentTile.unit = this;
+            currentTile.type = TileType.Ally;
+        }
+    }
     public override BaseUnitType UnitType => BaseUnitType.ShapeComposite;
     public Equipement equipement { get; set; }
 
@@ -45,8 +62,9 @@ public class ShapeUnit : Unit
 
     public Transform MergeParent { get => mergeParent; set => mergeParent = value; }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         mergedUnits = new List<ShapeUnit>();
     }
 
