@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShapeUnitAnimator : UnitAnimator
 {
     [Header("Components")]
-    [SerializeField] private Animator bodyAnimator;
+    [SerializeField] private Animator legAnimator;
     [SerializeField] private Animator[] armsAnimator;
 
     [SerializeField] private GameObject face;
@@ -16,11 +16,21 @@ public class ShapeUnitAnimator : UnitAnimator
 
     private void Start()
     {
-        allAnimators.Add(bodyAnimator);
+        allAnimators.Add(legAnimator);
         for (int i = 0; i < armsAnimator.Length; i++)
         {
             allAnimators.Add(armsAnimator[i]);
         }
+    }
+
+    public void ToggleLegAnimator(bool on)
+    {
+        legAnimator.enabled = on;
+    }
+
+    public void ResetLegAnimator()
+    {
+        legAnimator.Play("Idle", -1, 0f);
     }
 
     public void ToggleLegs(bool on)

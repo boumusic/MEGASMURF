@@ -5,6 +5,15 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
+<<<<<<< HEAD
+    second: Take 001
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: ec1cf066ebb720549b9d041f0d357c60, type: 2}
+=======
     second: GrabbyLegs
   - first:
       74: -8303818919292000586
@@ -15,6 +24,7 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: No Name
     second: {fileID: 2100000, guid: 1ecb1b30aa90efd4c94c1127c7e7ec2a, type: 2}
+>>>>>>> master
   materials:
     materialImportMode: 1
     materialName: 3
@@ -41,6 +51,9 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
+<<<<<<< HEAD
+    clipAnimations: []
+=======
     clipAnimations:
     - serializedVersion: 16
       name: GrabbyLgs
@@ -71,6 +84,7 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+>>>>>>> master
     isReadable: 1
   meshes:
     lODScreenPercentages: []
