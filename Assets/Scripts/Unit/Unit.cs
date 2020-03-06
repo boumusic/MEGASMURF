@@ -97,6 +97,10 @@ public class Unit : LevelElement
     {
         SetAnimatorMoving(true);
 
+        currentTile.unit = null;
+        TileType tempType = currentTile.type;
+        currentTile.type = TileType.Free;
+
         while (path.Count > 0)
         {
             if(path.Count == 1)
@@ -117,7 +121,12 @@ public class Unit : LevelElement
                 transform.position = Vector3.MoveTowards(transform.position, pos, UnitStats.moveSpeed);
                 yield return new WaitForFixedUpdate();
             }
-            CurrentTile = destinationTile; 
+            CurrentTile = destinationTile;
+        }
+
+        if(currentTile != null) {
+            currentTile.unit = this;
+            currentTile.type = tempType;
         }
 
         SetAnimatorMoving(false);
