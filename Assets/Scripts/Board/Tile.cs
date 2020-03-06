@@ -137,10 +137,6 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
     }
 
-    private void OnMouseEnter() {
-        RangeManager.Instance.AddToCurrentPath(this);
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         //Animation Si on est dans le bon State de BattleManager
@@ -149,11 +145,12 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log("Je sais pas!");
         InputManager.instance.TileClickCallBack(this);
     }
 }

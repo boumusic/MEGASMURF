@@ -14,12 +14,16 @@ public class Unit : LevelElement
     [Header("Components")]
     [SerializeField] private UnitAnimator unitAnimator;
 
+    public Vector2 debugTile;
+
     public UnitBase unitBase;     //Passage en UnitBase
-    public Tile CurrentTile { get; protected set; }
-    public BaseUnitType UnitType => unitBase.unitType;
 
+    protected Tile currentTile;
+    public virtual Tile CurrentTile { get; protected set; }
+    
+    public virtual BaseUnitType UnitType => unitBase.unitType;
 
-    public UnitState CurrentUnitState { get; private set; }     //State Machine
+    public UnitState CurrentUnitState { get; private set; }
 
     public virtual int UnitMergeLevel => 0;
 
@@ -35,6 +39,11 @@ public class Unit : LevelElement
 
     public UnitAnimator UnitAnimator { get => unitAnimator; }
 
+    protected virtual void Awake()
+    {
+        currentTile = null;
+    }
+
     public virtual void Start()
     {
         FaceCamera();
@@ -42,13 +51,26 @@ public class Unit : LevelElement
 
     public virtual void SetUnitPosition(Tile tile)
     {
+        if(CurrentTile != null)
+        {
+            CurrentTile.unit = null;
+            CurrentTile.type = TileType.Free;
+        }
+            
         CurrentTile = tile;
         transform.position = tile.transform.position;
+        tile.unit = this;
+        tile.type = TileType.Ally;
+    }
+
+    public void DebugSetUnitPosition()
+    {
+        SetUnitPosition(Board.Instance.GetTile(debugTile));
     }
 
     public virtual void FreshenUp()
     {
-        //Change StateMachine
+        CurrentUnitState = UnitState.Fresh;
         //if stunned => Used State? ou state <-> Stunned + 1
         //if Used => Fresh
     }
@@ -70,6 +92,15 @@ public class Unit : LevelElement
 
         while (path.Count > 0)
         {
+            if(path.Count == 1)
+            {
+                if(path.Peek().type == TileType.Ally)
+                {
+                    (path.Pop().unit as ShapeUnit).InitiateMergeAlly(this as ShapeUnit);
+                    break;
+                }
+            }
+
             Vector3 pos = path.Pop().transform.position;
             transform.forward = (pos - transform.position).normalized;
             while (transform.position != pos)
@@ -83,7 +114,6 @@ public class Unit : LevelElement
         FaceCamera();
         action?.Invoke();
     }
-
     public virtual void SetAnimatorMoving(bool moving)
     {
         unitAnimator.SetIsMoving(moving);

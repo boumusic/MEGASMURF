@@ -1153,8 +1153,8 @@ MonoBehaviour:
   - {fileID: 1873518677254039961}
   bodyAnimator: {fileID: 2997241953737948029}
   armsAnimator:
-  - {fileID: 5370900144918811218}
-  - {fileID: 6212169885930784129}
+  - {fileID: 726876962514267926}
+  - {fileID: 1632880456471001285}
   face: {fileID: 5868172866252322970}
   legs: {fileID: 2436985587959510428}
   arms: {fileID: 7876081941267230963}
@@ -2336,9 +2336,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3040732754742689173}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &6212169885930784129 stripped
+--- !u!95 &726876962514267926 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 8936502638935914516, guid: 7a2f3c37dad0b574b863c61a6141e67e,
+  m_CorrespondingSourceObject: {fileID: 2316179429933896323, guid: 7a2f3c37dad0b574b863c61a6141e67e,
     type: 3}
   m_PrefabInstance: {fileID: 3040732754742689173}
   m_PrefabAsset: {fileID: 0}
@@ -2622,9 +2622,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3930957430865226310}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &5370900144918811218 stripped
+--- !u!95 &1632880456471001285 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 8936502638935914516, guid: 7a2f3c37dad0b574b863c61a6141e67e,
+  m_CorrespondingSourceObject: {fileID: 2316179429933896323, guid: 7a2f3c37dad0b574b863c61a6141e67e,
     type: 3}
   m_PrefabInstance: {fileID: 3930957430865226310}
   m_PrefabAsset: {fileID: 0}

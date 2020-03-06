@@ -9,7 +9,24 @@ public class ShapeUnit : Unit
     [SerializeField] private UnitMerger unitMergeAnimator;
     [SerializeField] private Transform mergeParent;
 
-    public BaseUnitType UnitType => BaseUnitType.ShapeComposite;
+    public override Tile CurrentTile
+    {
+        get => currentTile;
+        protected set
+        {
+            if(currentTile != null)
+            {
+                currentTile.unit = null;
+                currentTile.type = TileType.Free;
+            }
+
+            currentTile = value;
+
+            currentTile.unit = this;
+            currentTile.type = TileType.Ally;
+        }
+    }
+    public override BaseUnitType UnitType => BaseUnitType.ShapeComposite;
     public Equipement equipement { get; set; }
 
     private List<ShapeUnit> mergedUnits;
@@ -38,15 +55,16 @@ public class ShapeUnit : Unit
             return maxHealth;
         }
     }
-    public int Damage => (ArmUnit != null) ? ArmUnit.Damage : unitBase.unitStats.damage;
+    public override int Damage => (ArmUnit != null) ? ArmUnit.Damage : unitBase.unitStats.damage;
 
     public override AttackPattern UnitAttackPattern => (ArmUnit != null) ? ArmUnit.unitBase.attackPatterns[1] : unitBase.attackPatterns[0]; // Ajout range level 3 (item)
     public override MovementPattern UnitMovementPattern => unitBase.movementPatterns[(mergedUnits.Count > 0) ? 1 : 0];  // Ajout range level 3 (item)
 
     public Transform MergeParent { get => mergeParent; set => mergeParent = value; }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         mergedUnits = new List<ShapeUnit>();
     }
 

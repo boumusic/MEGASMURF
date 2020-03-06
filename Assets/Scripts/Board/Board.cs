@@ -37,6 +37,11 @@ public class Board : MonoBehaviour
 
     private void Awake()
     {
+        
+    }
+
+    public void InitializeBoard()
+    {
         GenerateBoard();
         StartCoroutine(TileAppear());
     }
@@ -168,7 +173,7 @@ public class Board : MonoBehaviour
             // Search Down
             if(t1.Coords.y > t2.Coords.y)
             {
-                for(float i = t1.Coords.y; i>t2.Coords.y && i>=0; i--)
+                for(float i = t1.Coords.y - 1; i>t2.Coords.y && i>=0; i--)
                 {
                     between.Add(tiles[(int)(t1.Coords.x), (int)i]);
                 }
@@ -176,7 +181,7 @@ public class Board : MonoBehaviour
             // Search Up
             else
             {
-                for (float i = t1.Coords.y; i < t2.Coords.y && i < rows; i++)
+                for (float i = t1.Coords.y + 1; i < t2.Coords.y && i < rows; i++)
                 {
                     between.Add(tiles[(int)(t1.Coords.x), (int)i]);
                 }
@@ -187,7 +192,7 @@ public class Board : MonoBehaviour
             // Search Left
             if (t1.Coords.x > t2.Coords.x)
             {
-                for (float i = t1.Coords.x; i > t2.Coords.x && i >= 0; i--)
+                for (float i = t1.Coords.x - 1; i > t2.Coords.x && i >= 0; i--)
                 {
                     between.Add(tiles[(int)i, (int)(t1.Coords.y)]);
                 }
@@ -195,7 +200,7 @@ public class Board : MonoBehaviour
             // Search Right
             else
             {
-                for (float i = t1.Coords.x; i < t2.Coords.x && i < columns; i++)
+                for (float i = t1.Coords.x + 1; i < t2.Coords.x && i < columns; i++)
                 {
                     between.Add(tiles[(int)i, (int)(t1.Coords.y)]);
                 }

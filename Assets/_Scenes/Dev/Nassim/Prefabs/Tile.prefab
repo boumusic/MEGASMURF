@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2601426295979543868}
   - component: {fileID: 397222539413310784}
   - component: {fileID: 6539359060699037352}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TileVisuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5673389505852013315}
   - component: {fileID: 5452416852511892809}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DebugSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 7447862868421375172}
   - component: {fileID: 3771807709214903550}
   - component: {fileID: 6979567908413440826}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6212784851330426394}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 7453743403894055285}
   - component: {fileID: 5259580881454774714}
   - component: {fileID: 1563702200860014231}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Debug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
