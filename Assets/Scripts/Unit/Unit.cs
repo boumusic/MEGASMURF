@@ -13,6 +13,7 @@ public class Unit : LevelElement
 {
     [Header("Components")]
     [SerializeField] private UnitAnimator unitAnimator;
+    [SerializeField] private Jauge hp;
 
     public Vector2 debugTile;
 
@@ -42,14 +43,15 @@ public class Unit : LevelElement
     protected virtual void Awake()
     {
         currentTile = null;
+        ResetHealth();
+        Debug.Log(CurrentHitPoint + " " + gameObject.name);
     }
 
     public virtual void Start()
     {
         FaceCamera();
+        hp.UpdateJauge(CurrentHitPoint, MaxHealth);
     }
-
-    
 
     public virtual void SetUnitPosition(Tile tile)
     {
@@ -65,10 +67,10 @@ public class Unit : LevelElement
     public void DebugSetUnitPosition()
     {
         SetUnitPosition(Board.Instance.GetTile(debugTile));
-        DebugResetHealth();
+        ResetHealth();
     }
 
-    public virtual void DebugResetHealth()
+    public virtual void ResetHealth()
     {
         CurrentHitPoint = MaxHealth;
     }
@@ -198,7 +200,10 @@ public class Unit : LevelElement
     /// <param name="unit">Unit who inflict the damage</param>
     public virtual void TakeDamage(Unit unit)
     {
+        Debug.Log(gameObject.name + " took " + unit.Damage + " damage from " + unit.gameObject.name);
         CurrentHitPoint -= unit.Damage;
+        Debug.Log("He now has " + CurrentHitPoint);
+        hp.UpdateJauge(CurrentHitPoint, MaxHealth);
 
         if (CurrentHitPoint <= 0)
         {
