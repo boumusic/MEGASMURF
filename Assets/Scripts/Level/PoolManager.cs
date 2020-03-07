@@ -147,20 +147,31 @@ public class PoolManager : MonoBehaviour
         return false;
     }
 
-    public Pool GetLevelElementPoolAtIndex(int index)
+    public Pool GetLevelElementPoolAtIndex(int index, int tab)
     {
-        List<Pool> onlyLevelElems = new List<Pool>();
+        List<Pool> onlyTiles = new List<Pool>();
+        List<Pool> onlyEntities = new List<Pool>();
+
         for (int i = 0; i < pools.Count; i++)
         {
-            if(pools[i].isLevelElement)
+            if(pools[i].prefab.GetComponent<Tile>())
             {
-                onlyLevelElems.Add(pools[i]);
+                onlyTiles.Add(pools[i]);
+            }
+            else
+            {
+                if(pools[i].isLevelElement)
+                    onlyEntities.Add(pools[i]);
             }
         }
 
-        if (index < onlyLevelElems.Count)
+        List<Pool> finalPools = new List<Pool>();
+        if (tab == 0) finalPools = onlyTiles;
+        else finalPools = onlyEntities;
+
+        if (index < finalPools.Count)
         {
-            return onlyLevelElems[index];
+            return finalPools[index];
         }
 
         else return null;

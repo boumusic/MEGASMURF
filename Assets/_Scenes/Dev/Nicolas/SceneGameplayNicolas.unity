@@ -20814,28 +20814,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
-      propertyPath: columns
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: rows
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: tileDelay
-      value: 0.0005
-      objectReference: {fileID: 0}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: totalWidth
-      value: 23.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: totalHeight
-      value: 23.5
-      objectReference: {fileID: 0}
+      propertyPath: debugRoom
+      value: 
+      objectReference: {fileID: 11400000, guid: 99f8bdb635b961b42bd72ba140ca1566,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f, type: 3}
