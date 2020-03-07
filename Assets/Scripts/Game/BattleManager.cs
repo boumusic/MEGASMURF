@@ -102,13 +102,16 @@ public class BattleManager : MonoBehaviour
 
     public void EnterAppropriateActionState()
     {
-        if (CurrentSelectedUnit.CurrentUnitState == UnitState.Fresh)
+        if(CurrentSelectedUnit != null) 
         {
-            gameplayState.ChangeState(GameplayState.ActionSelection);                                                                                       
-        }
-        else if (CurrentSelectedUnit.CurrentUnitState == UnitState.Moved)
-        {
-            gameplayState.ChangeState(GameplayState.AttackSelection);
+            if(CurrentSelectedUnit.CurrentUnitState == UnitState.Fresh) 
+            {
+                gameplayState.ChangeState(GameplayState.ActionSelection);
+            }
+            else if(CurrentSelectedUnit.CurrentUnitState == UnitState.Moved) 
+            {
+                gameplayState.ChangeState(GameplayState.AttackSelection);
+            }
         }
     }
 
@@ -354,7 +357,7 @@ public class BattleManager : MonoBehaviour
 
     private void OrderMovement(Tile tile)
     {
-        if(tilesInMovementRange.Contains(tile))
+        if(tile != null && tilesInMovementRange.Contains(tile))
         {
             if (tile.unit != null)
                 isMerging = true;
@@ -379,7 +382,7 @@ public class BattleManager : MonoBehaviour
 
     private void OrderAttack(Tile tile)
     {
-        if(tilesInAttackRange.Contains(tile))
+        if(tile != null && tilesInAttackRange.Contains(tile))
         {
             targets = RangeManager.Instance.GetTargets();
             if (CurrentSelectedUnit.UnitAttackPattern.type == AttackPatternType.Slice)
@@ -424,7 +427,7 @@ public class BattleManager : MonoBehaviour
             ShapeUnits.Remove((ShapeUnit)unit);
             unit.RemoveFromBoard();
         } 
-        else if (unit is Enemy && ShapeUnits.Contains((ShapeUnit)unit))
+        else if (unit is Enemy && Enemies.Contains((Enemy)unit))
         {
             Enemies.Remove((Enemy)unit);
             unit.RemoveFromBoard();

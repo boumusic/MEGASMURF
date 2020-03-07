@@ -22,58 +22,80 @@ public class Board : MonoBehaviour
         }
     }
 
+    public int Columns { get => columns; }
+    public int Rows { get => rows; }
+
     private static Board instance;
 
     [Range(1, 40f)] public float totalWidth = 20;
     [Range(1, 40f)] public float totalHeight = 20;
-    [Range(2, 50)] public int columns;
-    [Range(2, 50)] public int rows;
+    [Range(2, 50)] private int columns = 15;
+    [Range(2, 50)] private int rows = 15;
     public float tileDelay = 0.005f;
+
+    [SerializeField] private Room debugRoom;
     //public float tilesOffset;
 
     public GameObject tilePrefab;
 
     private Tile[,] tiles;
 
-    private void Awake()
-    {
-        
-    }
+    private Room currentRoom;
 
     public void InitializeBoard()
     {
-        GenerateBoard();
-        StartCoroutine(TileAppear());
+        InitializeBoard(debugRoom);
     }
 
-    private void GenerateBoard()
+    public void InitializeBoard(Room room)
+    {
+        currentRoom = room;
+        currentRoom.OrderElements();
+        GenerateTiles();
+        StartCoroutine(TileAppear());
+        GenerateUnits();
+    }
+
+    private void GenerateTiles()
     {
         tiles = new Tile[columns, rows];
         for (int i = 0; i < columns; i++)
         {
             for (int j = 0; j < rows; j++)
             {
-                //Vector3 instancePosition = new Vector3(
-                //    (float)i * tilePrefab.transform.localScale.x + tilesOffset * i - ((float)(columns - 1) / 2.0f) * tilePrefab.transform.localScale.x - (float)(columns - 1) / 2.0f * tilesOffset,
-                //    0f,
-                //    (float)j * tilePrefab.transform.localScale.y + tilesOffset * j - ((float)(rows - 1) / 2.0f) * tilePrefab.transform.localScale.y - (float)(rows - 1) / 2.0f * tilesOffset);
-
                 float x = Utility.Interpolate(-totalWidth / 2, totalWidth / 2, 0, columns - 1, i);
                 float z = Utility.Interpolate(-totalHeight / 2, totalHeight / 2, 0, rows - 1, j);
 
                 Vector3 position = new Vector3(x, 0f, z);
 
-                Tile newTile = Instantiate<GameObject>(tilePrefab, position, Quaternion.identity, transform).GetComponent<Tile>();
-                if (newTile != null)
+                LevelElement tile = currentRoom.GetTile(i, j);
+                if(tile)
                 {
-                    newTile.Coords = new Vector2Int(i, j);
-                    tiles[i, j] = newTile;
-                    string name = "Tile (" + i + "," + j + ")";
-                    newTile.gameObject.name = name;
-                    newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), 1f, totalHeight / (rows - 1));
-                    //newTile.GetComponentInChildren<TextMeshPro>().text = name;
+                    Tile newTile = PoolManager.Instance.GetEntityOfType(tile.GetType()) as Tile;
+                    if (newTile != null)
+                    {
+                        newTile.gameObject.SetActive(true);
+                        newTile.Coords = new Vector2Int(i, j);
+                        newTile.transform.position = position;
+                        tiles[i, j] = newTile;
+                        string name = "Tile (" + i + "," + j + ")";
+                        newTile.gameObject.name = name;
+                        newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), 1f, totalHeight / (rows - 1));
+                    }
                 }
 
+                
+                LevelElement entity = currentRoom.GetEntity(i, j);
+                if(entity)
+                {
+                    LevelElement newEntity = PoolManager.Instance.GetEntityOfType(entity.GetType()) as LevelElement;
+
+                    if (newEntity != null)
+                    {
+                        newEntity.gameObject.SetActive(true);
+                        newEntity.transform.position = position;
+                    }
+                }
             }
         }
         for (int i = 0; i < columns; i++)
@@ -102,7 +124,7 @@ public class Board : MonoBehaviour
         for (int j = 0; j < rows; j++)
         {
             float z = Utility.Interpolate(-totalHeight / 2, totalHeight / 2, 0, rows - 1, j);
-            float x = totalWidth / 2f; 
+            float x = totalWidth / 2f;
 
             Vector3 from = new Vector3(-x, 0f, z);
             Vector3 to = new Vector3(x, 0f, z);
@@ -120,7 +142,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    public void GenerateMap()
+    public void GenerateUnits()
     {
 
     }
@@ -150,7 +172,7 @@ public class Board : MonoBehaviour
     public List<Tile> GetTiles(List<Vector2> vectors)
     {
         List<Tile> tiles = new List<Tile>();
-        foreach(Vector2 v in vectors)
+        foreach (Vector2 v in vectors)
         {
             Tile t = GetTile(v);
             if (t != null)
@@ -164,16 +186,16 @@ public class Board : MonoBehaviour
     public List<Tile> GetTilesBetween(Tile t1, Tile t2, bool diagonales)
     {
         List<Tile> between = new List<Tile>();
-        if(t1.Equals(t2) || !t1.IsInLine(t2))
+        if (t1.Equals(t2) || !t1.IsInLine(t2))
         {
             return between;
         }
-        if(t1.Coords.x == t2.Coords.x)
+        if (t1.Coords.x == t2.Coords.x)
         {
             // Search Down
-            if(t1.Coords.y > t2.Coords.y)
+            if (t1.Coords.y > t2.Coords.y)
             {
-                for(float i = t1.Coords.y - 1; i>t2.Coords.y && i>=0; i--)
+                for (float i = t1.Coords.y - 1; i > t2.Coords.y && i >= 0; i--)
                 {
                     between.Add(tiles[(int)(t1.Coords.x), (int)i]);
                 }
@@ -206,14 +228,14 @@ public class Board : MonoBehaviour
                 }
             }
         }
-        else if(diagonales)
+        else if (diagonales)
         {
             if (t1.Coords.y > t2.Coords.y)
             {
                 // Search Down Left
-                if(t1.Coords.x > t2.Coords.x)
+                if (t1.Coords.x > t2.Coords.x)
                 {
-                    for(float i = 1; t1.Coords.x - i > t2.Coords.x && t1.Coords.y - i > t2.Coords.y && t1.Coords.x - i >= 0 && t1.Coords.y - i >= 0; i++)
+                    for (float i = 1; t1.Coords.x - i > t2.Coords.x && t1.Coords.y - i > t2.Coords.y && t1.Coords.x - i >= 0 && t1.Coords.y - i >= 0; i++)
                     {
                         between.Add(tiles[(int)(t1.Coords.x - i), (int)(t1.Coords.y - i)]);
                     }

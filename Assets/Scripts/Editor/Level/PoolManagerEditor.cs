@@ -31,7 +31,6 @@ public class PoolManagerEditor : Editor
         for (int i = 0; i < pools.arraySize; i++)
         {
             DrawSinglePool(i, pools);
-            EditorGUILayout.Space();
         }
     }
 
@@ -69,7 +68,7 @@ public class PoolManagerEditor : Editor
                 if (!hasEntity)
                     GUI.color = Color.red;
 
-                if (elem) name += ": Level element";
+                //if (elem) name += ": Level element";
             }
 
             else
