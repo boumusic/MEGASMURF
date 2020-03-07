@@ -204,7 +204,7 @@ public class Unit : LevelElement
         Debug.Log(gameObject.name + " took " + unit.Damage + " damage from " + unit.gameObject.name);
         CurrentHitPoint -= unit.Damage;
         Debug.Log("He now has " + CurrentHitPoint);
-        hp.UpdateJauge(CurrentHitPoint, MaxHealth);
+        if(hp)hp.UpdateJauge(CurrentHitPoint, MaxHealth);
 
         if (CurrentHitPoint <= 0)
         {
