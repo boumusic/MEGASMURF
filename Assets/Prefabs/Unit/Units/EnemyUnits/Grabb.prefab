@@ -162,6 +162,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7584402360456984924, guid: 2bbe777a5f518c043b1efbfe08967beb,
+        type: 3}
+      propertyPath: color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7584402360456984924, guid: 2bbe777a5f518c043b1efbfe08967beb,
+        type: 3}
+      propertyPath: color.g
+      value: 0.2216981
+      objectReference: {fileID: 0}
+    - target: {fileID: 7584402360456984924, guid: 2bbe777a5f518c043b1efbfe08967beb,
+        type: 3}
+      propertyPath: color.b
+      value: 0.7773435
+      objectReference: {fileID: 0}
     - target: {fileID: 7835249440626457357, guid: 2bbe777a5f518c043b1efbfe08967beb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
