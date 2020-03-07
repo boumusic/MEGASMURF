@@ -16,7 +16,7 @@ public class Enemy : Unit
             {
                 currentTile.unit = null;
                 currentTile.type = TileType.Free;
-                CurrentTile = null;
+                currentTile = null;
             }
 
             if (value != null)

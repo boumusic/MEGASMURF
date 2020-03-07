@@ -97,10 +97,14 @@ public class Unit : LevelElement
     {
         SetAnimatorMoving(true);
 
-        currentTile.unit = null;
-        TileType tempType = currentTile.type;
-        currentTile.type = TileType.Free;
+        TileType tempType = TileType.Free;
 
+        if(currentTile != null) 
+        {
+            currentTile.unit = null;
+            tempType = currentTile.type;
+            currentTile.type = TileType.Free;
+        }
         while (path.Count > 0)
         {
             if(path.Count == 1)
@@ -152,24 +156,27 @@ public class Unit : LevelElement
             case AttackPatternType.All:
                 foreach (Tile tile in tiles)
                 {
-                    if ((tile.unit?.GetComponent<Unit>()) != null)
+                    if (tile.unit != null)
                         tile.unit.TakeDamage(this);
                 }
                 break;
 
             case AttackPatternType.Single:
-                if ((tiles[0].unit?.GetComponent<Unit>()) != null)
+                if (tiles.Count > 0 && tiles[0].unit != null)
                     tiles[0].unit.TakeDamage(this);
                 break;
 
             case AttackPatternType.Slice:
                 Stack<Tile> attackDestination = new Stack<Tile>();
-                attackDestination.Push(tiles[tiles.Count - 1]);
+                if(tiles.Count > 1) 
+                {
+                    attackDestination.Push(tiles[tiles.Count - 1]);
+                }
 
                 List<Tile> unitTiles = new List<Tile>();
                 foreach (Tile tile in tiles)
                 {
-                    if ((tile.unit?.GetComponent<Unit>()) != null)
+                    if (tile.unit != null)
                         unitTiles.Add(tile);
                 }
 
