@@ -35,6 +35,6 @@ public class Enemy : Unit
 
     public override Color ColorInEditor()
     {
-        return Color.red;
+        return base.ColorInEditor();
     }
 }

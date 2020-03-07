@@ -50,7 +50,8 @@ public class Unit : LevelElement
     public virtual void Start()
     {
         FaceCamera();
-        hp.UpdateJauge(CurrentHitPoint, MaxHealth);
+        if(hp)
+            hp.UpdateJauge(CurrentHitPoint, MaxHealth);
     }
 
     public virtual void SetUnitPosition(Tile tile)

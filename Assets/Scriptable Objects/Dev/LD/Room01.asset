@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Room01
   m_EditorClassIdentifier: 
   elements:
-  - levelElement: {fileID: 5652221100376227775, guid: 450f5f5f3f9e62e4489f1051e3776bb4,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 0, y: 0, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 0, y: 1, z: 0}
@@ -42,7 +41,7 @@ MonoBehaviour:
     pos: {x: 0, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 0, y: 13, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
       type: 3}
     pos: {x: 0, y: 14, z: 0}
   - levelElement: {fileID: 0}
@@ -55,11 +54,9 @@ MonoBehaviour:
     pos: {x: 1, y: 3, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 1, y: 4, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 1, y: 5, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 1, y: 6, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 1, y: 7, z: 0}
@@ -75,7 +72,7 @@ MonoBehaviour:
     pos: {x: 1, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 1, y: 13, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
       type: 3}
     pos: {x: 1, y: 14, z: 0}
   - levelElement: {fileID: 0}
@@ -92,8 +89,7 @@ MonoBehaviour:
     pos: {x: 2, y: 5, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 2, y: 6, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 2, y: 7, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 2, y: 8, z: 0}
@@ -107,7 +103,8 @@ MonoBehaviour:
     pos: {x: 2, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 2, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
+      type: 3}
     pos: {x: 2, y: 14, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 3, y: 0, z: 0}
@@ -117,8 +114,7 @@ MonoBehaviour:
     pos: {x: 3, y: 2, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 3, y: 3, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 3, y: 4, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 3, y: 5, z: 0}
@@ -128,21 +124,22 @@ MonoBehaviour:
     pos: {x: 3, y: 7, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 3, y: 8, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
+      type: 3}
     pos: {x: 3, y: 9, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
       type: 3}
     pos: {x: 3, y: 10, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
       type: 3}
     pos: {x: 3, y: 11, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
       type: 3}
     pos: {x: 3, y: 12, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
-      type: 3}
-    pos: {x: 3, y: 13, z: 0}
   - levelElement: {fileID: 0}
+    pos: {x: 3, y: 13, z: 0}
+  - levelElement: {fileID: 6860531921341968604, guid: d0fbc22970f082349b827ec9a54b74d5,
+      type: 3}
     pos: {x: 3, y: 14, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 4, y: 0, z: 0}
@@ -150,11 +147,9 @@ MonoBehaviour:
     pos: {x: 4, y: 1, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 4, y: 2, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 4, y: 3, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 4, y: 4, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 4, y: 5, z: 0}
@@ -162,22 +157,19 @@ MonoBehaviour:
     pos: {x: 4, y: 6, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 4, y: 7, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 4, y: 8, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 4, y: 9, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 4, y: 10, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 4, y: 11, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 4, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 4, y: 13, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+  - levelElement: {fileID: 6860531921341968604, guid: d0fbc22970f082349b827ec9a54b74d5,
       type: 3}
     pos: {x: 4, y: 14, z: 0}
   - levelElement: {fileID: 0}
@@ -186,35 +178,31 @@ MonoBehaviour:
     pos: {x: 5, y: 1, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 5, y: 2, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 5, y: 3, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 5, y: 4, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 5, y: 5, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 5, y: 6, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
-    pos: {x: 5, y: 7, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
-    pos: {x: 5, y: 8, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
-    pos: {x: 5, y: 9, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
-    pos: {x: 5, y: 10, z: 0}
   - levelElement: {fileID: 0}
+    pos: {x: 5, y: 7, z: 0}
+  - levelElement: {fileID: 0}
+    pos: {x: 5, y: 8, z: 0}
+  - levelElement: {fileID: 0}
+    pos: {x: 5, y: 9, z: 0}
+  - levelElement: {fileID: 0}
+    pos: {x: 5, y: 10, z: 0}
+  - levelElement: {fileID: 3038723831078818022, guid: dde4f90e04ce27f458e7f9aeab3ba62a,
+      type: 3}
     pos: {x: 5, y: 11, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 5, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 5, y: 13, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 5751519241712307919, guid: 510179844b663904fa152155c8921223,
+      type: 3}
     pos: {x: 5, y: 14, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 6, y: 0, z: 0}
@@ -222,8 +210,7 @@ MonoBehaviour:
     pos: {x: 6, y: 1, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 6, y: 2, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 6, y: 3, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 6, y: 4, z: 0}
@@ -231,26 +218,21 @@ MonoBehaviour:
     pos: {x: 6, y: 5, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 6, y: 6, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 6, y: 7, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 6, y: 8, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 6, y: 9, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 6, y: 10, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 6, y: 11, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 6, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 6, y: 13, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+  - levelElement: {fileID: 5751519241712307919, guid: 510179844b663904fa152155c8921223,
       type: 3}
     pos: {x: 6, y: 14, z: 0}
   - levelElement: {fileID: 0}
@@ -259,124 +241,109 @@ MonoBehaviour:
     pos: {x: 7, y: 1, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 7, y: 2, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 7, y: 3, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 7, y: 4, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 7, y: 5, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 7, y: 6, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
       type: 3}
     pos: {x: 7, y: 7, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+  - levelElement: {fileID: 5751519241712307919, guid: 510179844b663904fa152155c8921223,
       type: 3}
     pos: {x: 7, y: 8, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 7, y: 9, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 7, y: 10, z: 0}
-  - levelElement: {fileID: 0}
-    pos: {x: 7, y: 11, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
+  - levelElement: {fileID: 5751519241712307919, guid: 510179844b663904fa152155c8921223,
       type: 3}
+    pos: {x: 7, y: 9, z: 0}
+  - levelElement: {fileID: 5751519241712307919, guid: 510179844b663904fa152155c8921223,
+      type: 3}
+    pos: {x: 7, y: 10, z: 0}
+  - levelElement: {fileID: 5751519241712307919, guid: 510179844b663904fa152155c8921223,
+      type: 3}
+    pos: {x: 7, y: 11, z: 0}
+  - levelElement: {fileID: 0}
     pos: {x: 7, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 7, y: 13, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+  - levelElement: {fileID: 5751519241712307919, guid: 510179844b663904fa152155c8921223,
       type: 3}
     pos: {x: 7, y: 14, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 8, y: 0, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 8, y: 1, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
-    pos: {x: 8, y: 2, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
-    pos: {x: 8, y: 3, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
-    pos: {x: 8, y: 4, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
-    pos: {x: 8, y: 5, z: 0}
   - levelElement: {fileID: 0}
+    pos: {x: 8, y: 2, z: 0}
+  - levelElement: {fileID: 0}
+    pos: {x: 8, y: 3, z: 0}
+  - levelElement: {fileID: 0}
+    pos: {x: 8, y: 4, z: 0}
+  - levelElement: {fileID: 0}
+    pos: {x: 8, y: 5, z: 0}
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
+      type: 3}
     pos: {x: 8, y: 6, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
       type: 3}
     pos: {x: 8, y: 7, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
       type: 3}
     pos: {x: 8, y: 8, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 8, y: 9, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 8, y: 10, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 8, y: 11, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 8, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 8, y: 13, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+  - levelElement: {fileID: 111116948502217079, guid: 49d8bdf5b74dcb54ab49e6b98dce9ae5,
       type: 3}
     pos: {x: 8, y: 14, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 9, y: 0, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 9, y: 1, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 9, y: 2, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 9, y: 3, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 9, y: 4, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 9, y: 5, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 9, y: 6, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 9, y: 7, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 9, y: 8, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 9, y: 9, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 9, y: 10, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 9, y: 11, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
       type: 3}
     pos: {x: 9, y: 12, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 9, y: 13, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+  - levelElement: {fileID: 111116948502217079, guid: 49d8bdf5b74dcb54ab49e6b98dce9ae5,
       type: 3}
     pos: {x: 9, y: 14, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 10, y: 0, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 10, y: 1, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 10, y: 2, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 10, y: 3, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 10, y: 4, z: 0}
@@ -384,23 +351,23 @@ MonoBehaviour:
     pos: {x: 10, y: 5, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 10, y: 6, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 10, y: 7, z: 0}
-  - levelElement: {fileID: 8868392717410728373, guid: 6357365faa08498459dc6215b18677bf,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 10, y: 8, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 10, y: 9, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 10, y: 10, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
+      type: 3}
     pos: {x: 10, y: 11, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
+      type: 3}
     pos: {x: 10, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 10, y: 13, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+  - levelElement: {fileID: 111116948502217079, guid: 49d8bdf5b74dcb54ab49e6b98dce9ae5,
       type: 3}
     pos: {x: 10, y: 14, z: 0}
   - levelElement: {fileID: 0}
@@ -425,13 +392,14 @@ MonoBehaviour:
     pos: {x: 11, y: 9, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 11, y: 10, z: 0}
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
+      type: 3}
     pos: {x: 11, y: 11, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 11, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 11, y: 13, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+  - levelElement: {fileID: 3038723831078818022, guid: dde4f90e04ce27f458e7f9aeab3ba62a,
       type: 3}
     pos: {x: 11, y: 14, z: 0}
   - levelElement: {fileID: 0}
@@ -462,7 +430,7 @@ MonoBehaviour:
     pos: {x: 12, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 12, y: 13, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+  - levelElement: {fileID: 3038723831078818022, guid: dde4f90e04ce27f458e7f9aeab3ba62a,
       type: 3}
     pos: {x: 12, y: 14, z: 0}
   - levelElement: {fileID: 0}
@@ -483,22 +451,17 @@ MonoBehaviour:
     pos: {x: 13, y: 7, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 13, y: 8, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 13, y: 9, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 13, y: 10, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 13, y: 11, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 13, y: 12, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 13, y: 13, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
+  - levelElement: {fileID: 3038723831078818022, guid: dde4f90e04ce27f458e7f9aeab3ba62a,
       type: 3}
     pos: {x: 13, y: 14, z: 0}
   - levelElement: {fileID: 0}
@@ -511,17 +474,13 @@ MonoBehaviour:
     pos: {x: 14, y: 3, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 14, y: 4, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 14, y: 5, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 14, y: 6, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 14, y: 7, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 14, y: 8, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 14, y: 9, z: 0}
@@ -533,7 +492,6 @@ MonoBehaviour:
     pos: {x: 14, y: 12, z: 0}
   - levelElement: {fileID: 0}
     pos: {x: 14, y: 13, z: 0}
-  - levelElement: {fileID: 7509377226736011756, guid: 6e07ad327babe5b48b0e9fafe3d1c627,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 14, y: 14, z: 0}
-  selectedBrush: 2
+  selectedBrush: 1
