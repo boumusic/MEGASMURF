@@ -50,7 +50,7 @@ public class Board : MonoBehaviour
     public void InitializeBoard(Room room)
     {
         currentRoom = room;
-        currentRoom.OrderTiles();
+        currentRoom.OrderElements();
         GenerateTiles();
         StartCoroutine(TileAppear());
         GenerateUnits();
@@ -69,20 +69,33 @@ public class Board : MonoBehaviour
                 Vector3 position = new Vector3(x, 0f, z);
 
                 LevelElement tile = currentRoom.GetTile(i, j);
-
-                Tile newTile = PoolManager.Instance.GetEntityOfType(tile.GetType()) as Tile;
-                //Tile newTile = Instantiate<GameObject>(tilePrefab, position, Quaternion.identity, transform).GetComponent<Tile>();
-                if (newTile != null)
+                if(tile)
                 {
-                    newTile.gameObject.SetActive(true);
-                    newTile.Coords = new Vector2Int(i, j);
-                    newTile.transform.position = position;
-                    tiles[i, j] = newTile;
-                    string name = "Tile (" + i + "," + j + ")";
-                    newTile.gameObject.name = name;
-                    newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), 1f, totalHeight / (rows - 1));
+                    Tile newTile = PoolManager.Instance.GetEntityOfType(tile.GetType()) as Tile;
+                    if (newTile != null)
+                    {
+                        newTile.gameObject.SetActive(true);
+                        newTile.Coords = new Vector2Int(i, j);
+                        newTile.transform.position = position;
+                        tiles[i, j] = newTile;
+                        string name = "Tile (" + i + "," + j + ")";
+                        newTile.gameObject.name = name;
+                        newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), 1f, totalHeight / (rows - 1));
+                    }
                 }
 
+                
+                LevelElement entity = currentRoom.GetEntity(i, j);
+                if(entity)
+                {
+                    LevelElement newEntity = PoolManager.Instance.GetEntityOfType(entity.GetType()) as LevelElement;
+
+                    if (newEntity != null)
+                    {
+                        newEntity.gameObject.SetActive(true);
+                        newEntity.transform.position = position;
+                    }
+                }
             }
         }
         for (int i = 0; i < columns; i++)

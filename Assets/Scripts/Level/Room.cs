@@ -26,23 +26,32 @@ public class Room : ScriptableObject
     private int selectedTab = 0;
 
     private LevelElement[,] orderedTiles;
+    private LevelElement[,] orderedEntities;
 
-    public void OrderTiles()
+    public void OrderElements()
     {
         int columns = Board.Instance.Columns;
         int rows = Board.Instance.Rows;
 
         orderedTiles = new Tile[columns, rows];
+        orderedEntities = new LevelElement[columns, rows];
+
         for (int i = 0; i < tileElements.Count; i++)
         {
             int x = (int)tileElements[i].pos.x;
             int y = (int)tileElements[i].pos.y;
             orderedTiles[x, y] = tileElements[i].levelElement;
+            orderedEntities[x, y] = entityElements[i].levelElement;
         }
     }
 
     public LevelElement GetTile(int x, int y)
     {
         return orderedTiles[x, y];
+    }
+
+    public LevelElement GetEntity(int x, int y)
+    {
+        return orderedEntities[x, y];
     }
 }

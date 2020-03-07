@@ -58,9 +58,16 @@ public class RoomEditor : Editor
     public override void OnInspectorGUI()
     {
         //base.OnInspectorGUI();
+
+        EditorGUI.BeginChangeCheck();
+
         CheckRequiredStuff();
         serializedObject.ApplyModifiedProperties();
-        AssetDatabase.SaveAssets();
+
+        if(EditorGUI.EndChangeCheck())
+        {
+            EditorUtility.SetDirty(t);
+        }
     }
 
     private void CheckRequiredStuff()
@@ -279,7 +286,6 @@ public class RoomEditor : Editor
             }
         }
     }
-
 
     private void DrawLevelElementButton(float width, float height, int y, int x, List<LevelElementRoomSettings> listElement)
     {

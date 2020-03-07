@@ -58,8 +58,6 @@ public class PoolManager : MonoBehaviour
             Pool pool = pools[p];
             if (pool.entities.Count > 0)
             {
-                //Debug.Log("Input type = " + type.ToString());
-                //Debug.Log("Analyzed Type = " + pool.entities[0].GetType());
                 if (pool.entities[0].GetType() == type)
                 {
                     for (int i = 0; i < pool.entities.Count; i++)
