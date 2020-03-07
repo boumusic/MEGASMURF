@@ -27,17 +27,7 @@ public static class CustomEditorUtility
 
     public static void DrawTitle(string name)
     {
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-
-
-        /*
-        EditorGUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
-        GUILayout.FlexibleSpace();
-        */
-
+        EditorGUILayout.Space();        
         GUIStyle titleStyle = new GUIStyle();
         titleStyle.fontStyle = FontStyle.Bold;
         titleStyle.fontSize = 20;
@@ -46,13 +36,6 @@ public static class CustomEditorUtility
         titleStyle.normal.textColor = Color.white;
 #endif
         EditorGUILayout.LabelField(name, titleStyle);
-        /*
-        GUILayout.FlexibleSpace();
-        EditorGUILayout.EndHorizontal();
-        */
-
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
         EditorGUILayout.Space();
     }
 
