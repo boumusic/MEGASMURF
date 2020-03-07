@@ -44,7 +44,6 @@ public class Unit : LevelElement
     {
         currentTile = null;
         ResetHealth();
-        Debug.Log(CurrentHitPoint + " " + gameObject.name);
     }
 
     public virtual void Start()
