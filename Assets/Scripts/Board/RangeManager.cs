@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangeManager: MonoBehaviour
+public class RangeManager : MonoBehaviour
 {
 
     public static RangeManager Instance;
+
+    public int debugRangeX, debugRangeY, debugRangeMax;
+    public bool debugRange;
 
     private Dictionary<Tile, List<Tile>> rangePaths;
     private Dictionary<Tile, List<Tile>> attackPaths;
@@ -15,8 +18,10 @@ public class RangeManager: MonoBehaviour
     private Tile unitTile;
 
     // Start is called before the first frame update
-    void Start() {
-        if(RangeManager.Instance == null) {
+    void Start()
+    {
+        if (RangeManager.Instance == null)
+        {
             RangeManager.Instance = this;
             rangePaths = new Dictionary<Tile, List<Tile>>();
             attackPaths = new Dictionary<Tile, List<Tile>>();
@@ -26,82 +31,115 @@ public class RangeManager: MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
-
+    void Update()
+    {
+        if (debugRange)
+        {
+            debugRange = false;
+            DebugRange();
+        }
     }
 
-    public List<Tile> GetTilesInAttackRange(Tile startTile) {
-        List<Tile> range = new List<Tile>();
-        if(startTile == null) {
-            return range;
+    public void DebugRange()
+    {
+        List<Vector2> rangeTest = new List<Vector2>();
+        for (int i = 0; i < debugRangeX; i++)
+        {
+            for (int j = 0; j < debugRangeY; j++)
+            {
+                if (Board.Instance.GetTile(i, j) != null)
+                {
+                    rangeTest.Add(Board.Instance.GetTile(i, j).Coords);
+                }
+            }
         }
+        Range range = new Range();
+        range.coords = rangeTest;
+        if (rangeTest.Count > 0)
+        {
+            //GetTilesInMovementRange(Board.Instance.GetTile(rangeTest[0]), range);
+            DisplayMovementTiles();
+        }
+    }
+
+    public List<Tile> GetTilesInAttackRange(Tile startTile)
+    {
         unitTile = startTile;
         attackRange.Clear();
         ProcessAttackRange(startTile.unit.UnitAttackPattern);
-        foreach(Tile tile in attackPaths.Keys) {
+        List<Tile> range = new List<Tile>();
+        foreach (Tile tile in attackPaths.Keys)
+        {
             range.Add(tile);
         }
         return range;
 
     }
 
-    public List<Tile> GetTilesInMovementRange(Tile startTile) {
+    public List<Tile> GetTilesInMovementRange(Tile startTile)
+    {
         unitTile = startTile;
         rangePaths.Clear();
         currentPath.Clear();
-        switch(startTile.unit.UnitMovementPattern.type) {
+        switch (startTile.unit.UnitMovementPattern.type)
+        {
             case MovementPatternType.Teleport:
-                foreach(Vector2 v in startTile.unit.UnitMovementPattern.range.coords) {
+                foreach (Vector2 v in startTile.unit.UnitMovementPattern.range.coords)
+                {
                     Tile check = Board.Instance.GetTile(v + unitTile.Coords);
-                    if(check != null && !AbortTileCondition(check, startTile.unit.UnitMovementPattern.range)) {
+                    if (check != null)
+                    {
                         rangePaths.Add(check, new List<Tile>());
                     }
                 }
                 break;
             case MovementPatternType.Walk:
-                ProcessMovementRange(startTile, null, startTile.unit.UnitMovementPattern.range);
+                ProcessMovementRange(startTile, null, startTile.unit.UnitMovementPattern.range, debugRangeMax);
                 break;
         }
         List<Tile> range = new List<Tile>();
-        foreach(Tile tile in rangePaths.Keys) {
+        foreach (Tile tile in rangePaths.Keys)
+        {
             range.Add(tile);
         }
         return range;
     }
 
-    private bool CanTarget(Tile tile) {
+    private bool CanTarget(Tile tile)
+    {
         return tile != null && (((unitTile.type == TileType.Ally || unitTile.type == TileType.Obstacle) && tile.type == TileType.Enemy) || ((unitTile.type == TileType.Enemy && (tile.type == TileType.Obstacle || tile.type == TileType.Enemy))));
     }
 
-    private void ProcessAttackRange(AttackPattern pattern) {
+    private void ProcessAttackRange(AttackPattern pattern)
+    {
         Range correctedRange = new Range();
         correctedRange.coords = new List<Vector2>();
         correctedRange.coords.AddRange(pattern.range.coords);
-        for(int i = 0; i < correctedRange.coords.Count; i++) {
+        for(int i = 0; i<correctedRange.coords.Count; i++)
+        {
             correctedRange.coords[i] += unitTile.Coords;
         }
-        foreach(Vector2 v in pattern.range.coords) {
+        foreach(Vector2 v in pattern.range.coords)
+        {
             Tile check = Board.Instance.GetTile(v + unitTile.Coords);
-            if(check == null || check.type == TileType.None) {
+            if (check == null || check.type == TileType.None)
+            {
                 correctedRange.coords.Remove(v + unitTile.Coords);
             }
         }
         attackRange = Board.Instance.GetTiles(correctedRange.coords);
-        switch(pattern.type) {
+        switch (pattern.type)
+        {
             case AttackPatternType.All:
                 // Just check if there is at least one target in range
-                foreach(Vector2 v in correctedRange.coords) {
+                foreach (Vector2 v in correctedRange.coords)
+                {
                     Tile allCheck = Board.Instance.GetTile(v);
-                    if(CanTarget(allCheck)) {
-                        foreach(Vector2 v2 in correctedRange.coords) {
-                            allCheck = Board.Instance.GetTile(v2);
-                            if(allCheck != null) {
-                                if(attackPaths.ContainsKey(allCheck)) {
-                                    attackPaths[allCheck] = Board.Instance.GetTiles(correctedRange.coords);
-                                } else {
-                                    attackPaths.Add(allCheck, Board.Instance.GetTiles(correctedRange.coords));
-                                }
-                            }
+                    if (CanTarget(allCheck))
+                    {
+                        foreach (Vector2 v2 in correctedRange.coords)
+                        {
+                            attackPaths.Add(Board.Instance.GetTile(v2), Board.Instance.GetTiles(correctedRange.coords));
                         }
                         return;
                     }
@@ -109,34 +147,47 @@ public class RangeManager: MonoBehaviour
                 break;
             case AttackPatternType.Single:
                 // Check for tiles with targets on them
-                foreach(Vector2 v in correctedRange.coords) {
+                foreach (Vector2 v in correctedRange.coords)
+                {
                     Tile singleCheck = Board.Instance.GetTile(v);
-                    if(CanTarget(singleCheck)) {
+                    if (CanTarget(singleCheck))
+                    {
                         attackPaths.Add(singleCheck, new List<Tile> { singleCheck });
                     }
                 }
                 break;
             case AttackPatternType.Slice:
                 // Check for free tiles with targets and no obstacle between them and unit tile 
-                foreach(Vector2 v in correctedRange.coords) {
+                foreach (Vector2 v in correctedRange.coords)
+                {
                     Tile sliceCheck = Board.Instance.GetTile(v);
-                    if(sliceCheck != null && sliceCheck.type == TileType.Free) {
+                    if(sliceCheck != null && sliceCheck.type == TileType.Free)
+                    {
                         bool clear = false;
                         List<Tile> between = new List<Tile>();
-                        foreach(Tile t in Board.Instance.GetTilesBetween(unitTile, sliceCheck, false)) {
-                            if(CanTarget(t)) {
+                        foreach(Tile t in Board.Instance.GetTilesBetween(unitTile, sliceCheck, false))
+                        {
+                            if(CanTarget(t))
+                            {
                                 between.Add(t);
-                            } else if(t.type != TileType.Free) {
+                            }
+                            else if(t.type != TileType.Free)
+                            {
                                 clear = true;
                             }
                         }
-                        if(clear) {
+                        if (clear)
+                        {
                             between.Clear();
                         }
-                        if(between.Count > 0) {
-                            if(attackPaths.ContainsKey(sliceCheck)) {
+                        if (between.Count > 0)
+                        {
+                            if (attackPaths.ContainsKey(sliceCheck))
+                            {
                                 attackPaths[sliceCheck] = between;
-                            } else {
+                            }
+                            else
+                            {
                                 attackPaths.Add(sliceCheck, between);
                             }
                         }
@@ -145,129 +196,150 @@ public class RangeManager: MonoBehaviour
                 break;
         }
     }
-
-    private bool AbortTileCondition(Tile tile, Range comparedRange) {
-        if(tile == null) {
-            return true;
-        }
-        // Tile is unit tile or tile is occupied by full totem unit
-        if(tile.Equals(unitTile) || (tile.unit != null && tile.unit.UnitMergeLevel > 2)) {
-            return true;
-        }
-        // Unit is totem or enemy or maestro and tile is occupied by ally
-        if((unitTile.unit.UnitMergeLevel > 0 || unitTile.type == TileType.Enemy || unitTile.type == TileType.Obstacle) && tile.type == TileType.Ally) {
-            return true;
-        }
-        // Tile is out of range or tile is not free or occupied by ally
-        if(!comparedRange.coords.Contains(tile.Coords - unitTile.Coords) || (tile.type != TileType.Free && tile.type != TileType.Ally)) {
-            return true;
-        }
-        return false;
-    }
-
-    private void ProcessMovementRange(Tile tile, List<Tile> previous, Range comparedRange) {
+    
+    private void ProcessMovementRange(Tile tile, List<Tile> previous, Range comparedRange, int remaining)
+    {
         List<Tile> newPrevious = new List<Tile>();
-        if(tile == null) {
-            return;
-        }
-        if(previous != null) {
-            if(AbortTileCondition(tile, comparedRange)) {
+        if (previous != null)
+        {
+            // Tile is unit tile or tile is occupied by full totem unit
+            if (tile.Equals(unitTile) || (tile.unit != null && tile.unit.UnitMergeLevel > 2))
+            {
                 return;
             }
-            if(rangePaths.ContainsKey(tile)) {
-                if(rangePaths[tile].Count > previous.Count) {
+            // Unit is totem or enemy or maestro and tile is occupied by ally
+            if ((unitTile.unit.UnitMergeLevel > 0 || unitTile.type == TileType.Enemy || unitTile.type == TileType.Obstacle) && tile.type == TileType.Ally)
+            {
+                return;
+            }
+            // Tile is out of range or tile is not free or occupied by ally
+            if (!comparedRange.coords.Contains(tile.Coords - unitTile.Coords) || (tile.type != TileType.Free && tile.type != TileType.Ally))
+            {
+                return;
+            }
+            if (rangePaths.ContainsKey(tile))
+            {
+                if (rangePaths[tile].Count > previous.Count)
+                {
                     rangePaths[tile] = previous;
-                } else {
+                }
+                else
+                {
                     return;
                 }
-            } else {
+            }
+            else
+            {
                 rangePaths.Add(tile, previous);
             }
             newPrevious.AddRange(previous);
             newPrevious.Add(tile);
-            if(tile.type == TileType.Ally) {
+            if (remaining <= 0 || tile.type == TileType.Ally)
+            {
                 return;
             }
         }
-        foreach(Tile nextTile in tile.GetNeighbors()) {
-            ProcessMovementRange(nextTile, newPrevious, comparedRange);
+        foreach (Tile nextTile in tile.GetNeighbors())
+        {
+            ProcessMovementRange(nextTile, newPrevious, comparedRange, remaining--);
         }
     }
 
-    public bool IsInRange(Tile tile) {
-        if(tile != null && rangePaths.ContainsKey(tile)) {
+    public bool IsInRange(Tile tile)
+    {
+        if(rangePaths.ContainsKey(tile)) 
+        {
             return true;
         }
         return false;
     }
 
-    public void AddToCurrentPath(Tile tile) {
-        if(IsInRange(tile)) {
-            if(currentPath.Count == 0) {
+    public void AddToCurrentPath(Tile tile)
+    {
+        if(IsInRange(tile))
+        {
+            if(currentPath.Count == 0)
+            {
                 SetShorterCurrentPath(tile);
-            } else {
-                if(tile.Equals(currentPath.Peek())) {
+            } 
+            else 
+            {
+                if(tile.Equals(currentPath.Peek())) 
+                {
                     return;
                 }
-                if(currentPath.Peek().type != TileType.Ally && tile.IsNeighbor(currentPath.Peek())) {
-                    if(rangePaths[tile].Count < currentPath.Count) {
-                        if(currentPath.Contains(tile)) {
+                if(currentPath.Peek().type != TileType.Ally && tile.IsNeighbor(currentPath.Peek()))
+                {
+                    if(rangePaths[tile].Count < currentPath.Count) 
+                    {
+                        if(currentPath.Contains(tile)) 
+                        {
                             bool found;
-                            do {
+                            do 
+                            {
                                 Tile peek = currentPath.Peek();
                                 found = tile.Equals(peek) || currentPath.Count == 0;
-                                if(!found) {
+                                if(!found)
+                                {
                                     currentPath.Pop().TriggerAnimation(TileAnim.Movement);
                                 }
                             }
                             while(!found);
-                        } else {
+                        } 
+                        else 
+                        {
                             SetShorterCurrentPath(tile);
                         }
-                    } else {
+                    } 
+                    else
+                    {
                         currentPath.Push(tile);
                     }
-                } else {
+                } 
+                else 
+                {
                     SetShorterCurrentPath(tile);
                 }
             }
             DisplayCurrentPath();
-        } else {
+        } 
+        else 
+        {
             ClearCurrentPath();
         }
     }
 
-    public void TargetTile(Tile tile) {
-        if(tile != null && attackPaths.ContainsKey(tile)) 
-        {
-            target = tile;
-        } 
-        else 
-        {
-            target = null;
-        }
+    public void TargetTile(Tile tile)
+    {
+        target = tile;
         DisplayAttackTiles();
         DisplayTarget();
     }
 
-    public void SetShorterCurrentPath(Tile tile) {
-        foreach(Tile pathTile in currentPath) {
-            if(!rangePaths[tile].Contains(pathTile)) {
+    public void SetShorterCurrentPath(Tile tile)
+    {
+        foreach(Tile pathTile in currentPath) 
+        {
+            if(!rangePaths[tile].Contains(pathTile)) 
+            {
                 pathTile.TriggerAnimation(TileAnim.Movement);
             }
         }
         currentPath.Clear();
-        foreach(Tile pathTile in rangePaths[tile]) {
+        foreach (Tile pathTile in rangePaths[tile])
+        {
             currentPath.Push(pathTile);
         }
         currentPath.Push(tile);
     }
 
-    public void DisplayMovementTiles() {
-        foreach(Tile tile in rangePaths.Keys) {
+    public void DisplayMovementTiles()
+    {
+        foreach (Tile tile in rangePaths.Keys)
+        {
             tile.TriggerAnimation(TileAnim.Movement);
         }
-    }                
+    }
 
     public void DisplayAttackTiles()
     {
@@ -275,35 +347,11 @@ public class RangeManager: MonoBehaviour
         {
             if (attackPaths.ContainsKey(tile))
             {
-                if(target != null)
-                { 
-                    if(attackPaths.ContainsKey(target) && attackPaths[target].Contains(tile))
-                    {
-                        tile.TriggerAnimation(TileAnim.AttackMouseOver);
-                    } 
-                    else 
-                    {
-                        tile.TriggerAnimation(TileAnim.Attack);
-
-                    }
-                } 
-                else
-                {
-                    tile.TriggerAnimation(TileAnim.Attack);
-                }
+                tile.TriggerAnimation(TileAnim.Attack);
             }
             else
             {
-                if(target != null) {
-                    if(attackPaths.ContainsKey(target) && attackPaths[target].Contains(tile)) {
-                        tile.TriggerAnimation(TileAnim.AttackMouseOver);
-                    } else {
-                        tile.TriggerAnimation(TileAnim.Disabled);
-
-                    }
-                } else {
-                    tile.TriggerAnimation(TileAnim.Disabled);
-                }
+                tile.TriggerAnimation(TileAnim.Disabled);
             }
         }
     }
@@ -318,8 +366,13 @@ public class RangeManager: MonoBehaviour
 
     public void DisplayTarget()
     {
-        if(target != null) {
+        if (attackPaths.ContainsKey(target))
+        {
             target.TriggerAnimation(TileAnim.AttackMouseOver);
+            foreach (Tile tile in attackPaths[target])
+            {
+                tile.TriggerAnimation(TileAnim.AttackMouseOver);
+            }
         }
     }
 
@@ -353,20 +406,17 @@ public class RangeManager: MonoBehaviour
     public Stack<Tile> GetCurrentPath()
     {
         Stack<Tile> orderedPath = new Stack<Tile>();
-        if(currentPath != null && currentPath.Count > 0) 
+        do
         {
-            do 
-            {
-                orderedPath.Push(currentPath.Pop());
-            }
-            while(currentPath.Count > 0);
+            orderedPath.Push(currentPath.Pop());
         }
+        while (currentPath.Count > 0);
         return orderedPath;
     }
 
     public List<Tile> GetTargets()
     {
-        if (target != null && attackPaths.ContainsKey(target))
+        if (attackPaths.ContainsKey(target))
         {
             return attackPaths[target];
         }

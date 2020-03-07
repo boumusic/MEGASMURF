@@ -88,7 +88,6 @@ Material:
     - _SrcBlend: 1
     - _Sub: 0.26
     - _TessValue: 23.1
-    - _ThresholdUV: -0.02
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0

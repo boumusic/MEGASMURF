@@ -22,8 +22,9 @@ public enum TileAnim
     Disabled
 }
 
-public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+
     public TileType type;
     public Unit unit;
     public Animator animator;

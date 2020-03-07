@@ -20,20 +20,17 @@ public class RoomEditor : Editor
     private float minX { get { return offsetSides - 32; } }
     private float maxX { get { return editorWidth - offsetSides; } }
 
-    private float minY = 220f;
-    private float maxY = 770f;
-
-    private Pool CurrentPool => PoolManager.Instance.GetLevelElementPoolAtIndex(t.SelectedBrush, t.SelectedTab);
-    private LevelElement CurrentPoolElement => CurrentPool.prefab.GetComponent<LevelElement>();
+    private float minY = 200f;
+    private float maxY = 750f;
 
     private int Columns()
     {
-        return Board.Instance == null ? 15 : Board.Instance.Columns;
+        return Board.Instance == null ? 10 : Board.Instance.columns;
     }
 
     private int Rows()
     {
-        return Board.Instance == null ? 15 : Board.Instance.Rows;
+        return Board.Instance == null ? 10 : Board.Instance.rows;
     }
 
     private void OnEnable()
@@ -88,10 +85,10 @@ public class RoomEditor : Editor
                 }
                 else
                 {
-                    if (!board)
+                    if(!board)
                     {
                         EditorGUILayout.HelpBox("No Board found. Make sure one is present in the scene.", MessageType.Error);
-
+                        
                     }
                     else
                     {
@@ -106,19 +103,13 @@ public class RoomEditor : Editor
 
     private void UpdateListElements()
     {
-        int count = Board.Instance.Columns * Board.Instance.Rows;
-        UpdateList(t.tileElements, count);
-        UpdateList(t.entityElements, count);
-    }
-
-    private void UpdateList(List<LevelElementRoomSettings> list, int count)
-    {
-        if (list.Count != count)
+        int count = Board.Instance.columns * Board.Instance.rows;
+        if (t.elements.Count != count)
         {
-            list.Clear();
+            t.elements.Clear();
             for (int i = 0; i < count; i++)
             {
-                list.Add(new LevelElementRoomSettings());
+                t.elements.Add(new LevelElementRoomSettings());
             }
         }
     }
@@ -127,12 +118,9 @@ public class RoomEditor : Editor
     {
         DrawTitle();
         DrawGeneralSettings();
-        DrawTabSettings();
         DrawBrushSettings();
         DrawClearAllButton();
-        FillAllButton();
-        float height = 700f;
-        Rect rect = GUILayoutUtility.GetRect(800f, 1000, height, height);
+        DrawGrid();
         DrawButtons();
     }
 
@@ -147,20 +135,6 @@ public class RoomEditor : Editor
         EditorGUILayout.EndVertical();
     }
 
-    private void DrawTabSettings()
-    {
-        EditorGUILayout.BeginVertical("box");
-        EditorGUILayout.LabelField("Current Element type:", EditorStyles.boldLabel);
-
-        List<string> possibleTabs = new List<string>();
-        possibleTabs.Add("Tiles");
-        possibleTabs.Add("Entities");
-
-        t.SelectedTab = GUILayout.Toolbar(t.SelectedTab, possibleTabs.ToArray());
-
-        EditorGUILayout.EndVertical();
-    }
-
     private void DrawBrushSettings()
     {
         Color defaultCol = GUI.color;
@@ -172,28 +146,13 @@ public class RoomEditor : Editor
         {
             if (pM.pools[i].isLevelElement)
             {
-                GameObject prefab = pM.pools[i].prefab;
-                if (prefab)
+                brushes.Add(pM.pools[i].prefab.name);
+                if (pM.pools[i].prefab)
                 {
-                    if (prefab.GetComponentInChildren<LevelElement>())
+                    if (pM.pools[i].prefab.GetComponentInChildren<LevelElement>())
                     {
-                        if (t.SelectedTab == 0)
-                        {
-                            if (prefab.GetComponentInChildren<Tile>())
-                            {
-                                brushes.Add(pM.pools[i].prefab.name);
-                                colors.Add(pM.pools[i].prefab.GetComponentInChildren<LevelElement>().ColorInEditor());
-                            }
-                        }
+                        colors.Add(pM.pools[i].prefab.GetComponentInChildren<LevelElement>().ColorInEditor());
 
-                        else
-                        {
-                            if (!prefab.GetComponentInChildren<Tile>())
-                            {
-                                brushes.Add(pM.pools[i].prefab.name);
-                                colors.Add(pM.pools[i].prefab.GetComponentInChildren<LevelElement>().ColorInEditor());
-                            }
-                        }
                     }
                 }
             }
@@ -201,9 +160,9 @@ public class RoomEditor : Editor
         string[] brushesArray = brushes.ToArray();
 
         Color colorBrush = defaultCol;
-        if (colors.Count > t.SelectedBrush)
+        if (colors.Count > t.selectedBrush)
         {
-            colorBrush = colors[t.SelectedBrush];
+            colorBrush = colors[t.selectedBrush];
         }
 
         GUI.color = colorBrush;
@@ -213,7 +172,7 @@ public class RoomEditor : Editor
         EditorGUILayout.LabelField("Current Brush: ", EditorStyles.boldLabel);
         GUI.color = colorBrush;
         //c.selectedBrush = EditorGUILayout.Popup(c.selectedBrush, brushesArray);
-        t.SelectedBrush = GUILayout.Toolbar(t.SelectedBrush, brushesArray, GUILayout.MinHeight(30));
+        t.selectedBrush = GUILayout.Toolbar(t.selectedBrush, brushesArray, GUILayout.MinHeight(30));
         GUIStyle centered = new GUIStyle();
         centered.alignment = TextAnchor.MiddleCenter;
         centered.fontSize = 10;
@@ -231,33 +190,11 @@ public class RoomEditor : Editor
 
     private void DrawClearAllButton()
     {
-        Rect rect = new Rect(new Vector2(offsetSides / 2, maxY + 40), new Vector2(editorWidth - offsetSides, EditorGUIUtility.singleLineHeight));
+        Rect rect = new Rect(new Vector2(offsetSides / 2, maxY + 50), new Vector2(editorWidth - offsetSides, EditorGUIUtility.singleLineHeight * 2));
         if (GUI.Button(rect, "Clear All"))
         {
             Undo.RecordObject(t, "Clear All");
-
-            if (t.SelectedTab == 0)
-                t.tileElements.Clear();
-            else
-                t.entityElements.Clear();
-        }
-    }
-
-    private void FillAllButton()
-    {
-        Rect rect = new Rect(new Vector2(offsetSides / 2, maxY + 60), new Vector2(editorWidth - offsetSides, EditorGUIUtility.singleLineHeight));
-        if (GUI.Button(rect, "Fill All"))
-        {
-            Undo.RecordObject(t, "Fill All");
-            FillList(t.CurrentList);
-        }
-    }
-
-    private void FillList(List<LevelElementRoomSettings> list)
-    {
-        for (int i = 0; i < list.Count; i++)
-        {
-            list[i].levelElement = CurrentPoolElement;
+            t.elements.Clear();
         }
     }
 
@@ -267,21 +204,19 @@ public class RoomEditor : Editor
         float gridHeight = maxY - minY;
 
         float width = gridWidth / Columns();
+        //float width = (editorWidth - offsetSides * 2) / 10;
         float height = gridHeight / Rows();
         for (int x = 0; x < Columns(); x++)
         {
             for (int y = 0; y < Rows(); y++)
+                //for (int y = Rows() - 1; y > -1 ; y--)
             {
-                if (t.SelectedTab == 0)
-                    DrawLevelElementButton(width, height, y, x, t.tileElements);
-                else
-                    DrawLevelElementButton(width, height, y, x, t.entityElements);
+                DrawLevelElementButton(width, height, y, x);
             }
         }
     }
 
-
-    private void DrawLevelElementButton(float width, float height, int y, int x, List<LevelElementRoomSettings> listElement)
+    private void DrawLevelElementButton(float width, float height, int y, int x)
     {
         Color defaultCol = GUI.color;
         float xPos = Utility.Interpolate(minX, maxX, 0, Columns() - 1, x);
@@ -292,15 +227,15 @@ public class RoomEditor : Editor
         Rect buttonStatsRect = new Rect(pos - Vector2.up * 10, size);
 
         int indexElement = y + Rows() * x;
-        Pool pool = CurrentPool;
+        Pool pool = PoolManager.Instance.GetLevelElementPoolAtIndex(t.selectedBrush);
 
         if (pool != null)
         {
-            if (indexElement < listElement.Count)
+            if (indexElement < t.elements.Count)
             {
-                if (listElement[indexElement] != null)
+                if (t.elements[indexElement] != null)
                 {
-                    LevelElement current = listElement[indexElement].levelElement;
+                    LevelElement current = t.elements[indexElement].levelElement;
                     Color colorButton = new Color();
                     if (current)
                         colorButton = current.ColorInEditor();
@@ -318,6 +253,8 @@ public class RoomEditor : Editor
                     if (newRect.Contains(currentEvent.mousePosition))
                     {
                         colorButton *= 0.8f;
+
+                        //if (GUI.Button(buttonStatsRect, "Stats")) { }
                     }
 
 
@@ -330,15 +267,14 @@ public class RoomEditor : Editor
                         {
                             Undo.RecordObject(t, "Clear Level Element");
 
-                            listElement[indexElement] = null;
+                            t.elements[indexElement] = null;
                         }
 
                         if (currentEvent.button == 0 && currentEvent.isMouse)
                         {
-                            /*
                             if (currentEvent.shift)
                             {
-                                if (listElement[indexElement].levelElement != null)
+                                if (t.elements[indexElement].levelElement != null)
                                 {
                                     SerializedProperty elements = serializedObject.FindProperty("elements");
                                     SerializedProperty element = elements.GetArrayElementAtIndex(indexElement);
@@ -346,43 +282,138 @@ public class RoomEditor : Editor
 
                                 }
                             }
-                            
 
                             else
                             {
-                            */
-                            Undo.RecordObject(t, "Add Level Element");
+                                Undo.RecordObject(t, "Add Level Element");
 
-                            GameObject prefab = pool.prefab;
+                                GameObject prefab = pool.prefab;
 
-                            LevelElement lvl = prefab.GetComponentInChildren<LevelElement>();
+                                LevelElement lvl = prefab.GetComponentInChildren<LevelElement>();
 
-                            if (lvl)
-                            {
-                                listElement[indexElement].levelElement = lvl;
+                                if (lvl)
+                                {
+                                    t.elements[indexElement].levelElement = lvl;
+                                }
                             }
-                            //}
                         }
 
                         if (currentEvent.button == 2 && currentEvent.isMouse)
                         {
                             Undo.RecordObject(t, "Change Brush");
-                            if (listElement[indexElement].levelElement != null)
+                            if (t.elements[indexElement].levelElement != null)
                             {
-                                t.SelectedBrush = PoolManager.Instance.GetIndexLevelElementPool(listElement[indexElement].levelElement);
+                                t.selectedBrush = PoolManager.Instance.GetIndexLevelElementPool(t.elements[indexElement].levelElement);
                             }
                         }
                     }
 
-                    if (indexElement < listElement.Count)
-                        if (listElement[indexElement] != null)
+                    if (indexElement < t.elements.Count)
+                        if (t.elements[indexElement] != null)
                         {
-                            listElement[indexElement].pos = new Vector3(x, y, 0);
+                            t.elements[indexElement].pos = new Vector3(x, y, 0);
                         }
                 }
             }
         }
 
         GUI.color = defaultCol;
+    }
+
+    private void DrawGrid()
+    {
+        float height = 1000f;
+        Rect rect = GUILayoutUtility.GetRect(800f, 1000, height, height);
+        /*
+        float offsetY = GridOffsetY();
+        //Rect rect = new Rect(0, 0, editorWidth, 900f);
+        //Rect rect = new Rect(new Vector2(minX, minY), new Vector2(maxX - minX, maxY - minY));
+        if (Event.current.type == EventType.Repaint)
+        {
+            if (gridMat)
+            {
+                GUI.BeginClip(rect);
+                GL.PushMatrix();
+                GL.Clear(true, false, Color.red);
+                gridMat.SetPass(0);
+
+
+                GL.Begin(GL.LINES);
+                for (int x = 0; x < Columns(); x++)
+                {
+                    float xPos = Utility.Interpolate(minX, maxX, 0, Columns() - 1, x);
+                    Vector3 start = new Vector3(xPos, minY - offsetY, 0f);
+                    Vector3 end = new Vector3(xPos, maxY - offsetY, 0f);
+                    DrawLine(start, end, LevelManager.gridCol);
+                }
+
+                for (int y = 0; y < Rows(); y++)
+                {
+                    float yPos = Utility.Interpolate(minY, maxY, 0, Rows() - 1, y) - offsetY;
+                    Vector3 start = new Vector3(minX, yPos, 0f);
+                    Vector3 end = new Vector3(maxX, yPos, 0f);
+
+                    Color col = LevelManager.gridCol;
+                    if (y == Rows() - 1) col = LevelManager.spawnCol;
+                    else if (y == 0) col = LevelManager.killCol;
+                    DrawLine(start, end, col);
+                }
+                GL.End();
+
+                //ARROWS
+                float tSize = 10;
+                float tOffset = 15;
+                for (int x = 0; x < Columns(); x++)
+                {
+                    float xPos = Utility.Interpolate(minX, maxX, 0, Columns() - 1, x);
+                    Vector3 a = new Vector3(xPos + tSize / 2, maxY - tOffset - offsetY, 0f);
+                    Vector3 b = new Vector3(xPos, maxY - tSize - tOffset - offsetY, 0f);
+                    Vector3 c = new Vector3(xPos - tSize / 2, maxY - tOffset - offsetY,  0f);
+                    DrawTriangle(a, b, c, LevelManager.spawnCol);
+                }
+                
+
+                GL.PopMatrix();
+                GUI.EndClip();
+            }
+        }
+        */
+    }
+
+    private void DrawLine(Vector3 start, Vector3 end, Color col)
+    {
+        GL.Color(col);
+        GL.Vertex(start);
+        GL.Vertex(end);
+    }
+
+    private void DrawTriangle(Vector3 a, Vector3 b, Vector3 c, Color color)
+    {
+        GL.Begin(GL.TRIANGLES);
+        GL.Color(color);
+
+        GL.Vertex(a);
+        GL.Vertex(b);
+        GL.Vertex(c);
+
+        GL.End();
+    }
+
+    private void DrawSquare(Vector3 pos, float size, Color color)
+    {
+        GL.Begin(GL.QUADS);
+        GL.Color(color);
+
+        Vector3 bottomLeft = new Vector3(pos.x - size, pos.y - size, 0f);
+        Vector3 bottomRight = new Vector3(pos.x + size, pos.y - size, 0f);
+        Vector3 topLeft = new Vector3(pos.x - size, pos.y + size, 0f);
+        Vector3 topRight = new Vector3(pos.x + size, pos.y + size, 0f);
+
+        GL.Vertex(bottomLeft);
+        GL.Vertex(bottomRight);
+        GL.Vertex(topRight);
+        GL.Vertex(topLeft);
+
+        GL.End();
     }
 }

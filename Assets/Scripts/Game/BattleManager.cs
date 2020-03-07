@@ -92,7 +92,7 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerEndTurn()
     {
-        gameplayState.ChangeState(GameplayState.PlayerTurnEnd);
+        gameplayState.ChangeState(GameplayState.EnemyTurnStart);
     }
 
     public void EnterUnitSelectionState()
@@ -102,16 +102,13 @@ public class BattleManager : MonoBehaviour
 
     public void EnterAppropriateActionState()
     {
-        if(CurrentSelectedUnit != null) 
+        if (CurrentSelectedUnit.CurrentUnitState == UnitState.Fresh)
         {
-            if(CurrentSelectedUnit.CurrentUnitState == UnitState.Fresh) 
-            {
-                gameplayState.ChangeState(GameplayState.ActionSelection);
-            }
-            else if(CurrentSelectedUnit.CurrentUnitState == UnitState.Moved) 
-            {
-                gameplayState.ChangeState(GameplayState.AttackSelection);
-            }
+            gameplayState.ChangeState(GameplayState.ActionSelection);                                                                                       
+        }
+        else if (CurrentSelectedUnit.CurrentUnitState == UnitState.Moved)
+        {
+            gameplayState.ChangeState(GameplayState.AttackSelection);
         }
     }
 
@@ -222,9 +219,9 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Enter ActionSelection State!");
         GetUnitMovementRange();
         DisplayUnitMovementRange();
+        InputManager.instance.OnTileMouseOver += RangeManager.Instance.AddToCurrentPath;
         //Display la bonne UI
 
-        InputManager.instance.OnTileMouseOver += RangeManager.Instance.AddToCurrentPath;
         InputManager.instance.OnTileSelection += OrderMovement;
         InputManager.instance.OnAttackButtonPress += EnterAttackTargetSelectionState;
         InputManager.instance.OnCancel += EnterUnitSelectionState;
@@ -234,11 +231,11 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log("Exit ActionSelection State!");
         InputManager.instance.OnTileMouseOver -= RangeManager.Instance.AddToCurrentPath;
+        RangeManager.Instance.ClearTiles();
         InputManager.instance.OnTileSelection -= OrderMovement;
         InputManager.instance.OnAttackButtonPress -= EnterAttackTargetSelectionState;
         InputManager.instance.OnCancel -= EnterUnitSelectionState;
 
-        RangeManager.Instance.ClearTiles();
         //Undisplay UI
     }
 
@@ -350,18 +347,15 @@ public class BattleManager : MonoBehaviour
 
     private void DisplayUnitMovementRange()
     {
-        //StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayMovementTiles));
-        //StartCoroutine(DelayMovementRangeDisplay());
-        RangeManager.Instance.DisplayMovementTiles();
+        StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayMovementTiles));
     }
 
     private void OrderMovement(Tile tile)
     {
-        if(tile != null && tilesInMovementRange.Contains(tile))
+        if(tilesInMovementRange.Contains(tile))
         {
             if (tile.unit != null)
                 isMerging = true;
-
             movementPath = RangeManager.Instance.GetCurrentPath();
 
             gameplayState.ChangeState(GameplayState.MovementPseudoState);
@@ -375,14 +369,12 @@ public class BattleManager : MonoBehaviour
 
     private void DisplayUnitAttackRange()
     {
-        //StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayAttackTiles));
-        //StartCoroutine(DelayAttackRangeDisplay());
-        RangeManager.Instance.DisplayAttackTiles();
+        StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayAttackTiles));
     }
 
     private void OrderAttack(Tile tile)
     {
-        if(tile != null && tilesInAttackRange.Contains(tile))
+        if(tilesInAttackRange.Contains(tile))
         {
             targets = RangeManager.Instance.GetTargets();
             if (CurrentSelectedUnit.UnitAttackPattern.type == AttackPatternType.Slice)
@@ -427,18 +419,18 @@ public class BattleManager : MonoBehaviour
             ShapeUnits.Remove((ShapeUnit)unit);
             unit.RemoveFromBoard();
         } 
-        else if (unit is Enemy && Enemies.Contains((Enemy)unit))
+        else if (unit is Enemy && ShapeUnits.Contains((ShapeUnit)unit))
         {
             Enemies.Remove((Enemy)unit);
             unit.RemoveFromBoard();
         } 
     }
 
-    //private IEnumerator DelayDisplay(Action display)
-    //{
-    //    yield return new WaitForFixedUpdate();
-    //    display?.Invoke();
-    //}
+    private IEnumerator DelayDisplay(Action display)
+    {
+        yield return new WaitForFixedUpdate();
+        display?.Invoke();
+    }
 
     private IEnumerator DelayMovementRangeDisplay()
     {

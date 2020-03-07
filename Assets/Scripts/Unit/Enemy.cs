@@ -16,7 +16,7 @@ public class Enemy : Unit
             {
                 currentTile.unit = null;
                 currentTile.type = TileType.Free;
-                currentTile = null;
+                CurrentTile = null;
             }
 
             if (value != null)
@@ -35,6 +35,6 @@ public class Enemy : Unit
 
     public override Color ColorInEditor()
     {
-        return base.ColorInEditor();
+        return Color.red;
     }
 }

@@ -13,7 +13,6 @@ public class Unit : LevelElement
 {
     [Header("Components")]
     [SerializeField] private UnitAnimator unitAnimator;
-    [SerializeField] private Jauge hp;
 
     public Vector2 debugTile;
 
@@ -43,16 +42,14 @@ public class Unit : LevelElement
     protected virtual void Awake()
     {
         currentTile = null;
-        ResetHealth();
-        Debug.Log(CurrentHitPoint + " " + gameObject.name);
     }
 
     public virtual void Start()
     {
         FaceCamera();
-        if(hp)
-            hp.UpdateJauge(CurrentHitPoint, MaxHealth);
     }
+
+    
 
     public virtual void SetUnitPosition(Tile tile)
     {
@@ -68,10 +65,10 @@ public class Unit : LevelElement
     public void DebugSetUnitPosition()
     {
         SetUnitPosition(Board.Instance.GetTile(debugTile));
-        ResetHealth();
+        DebugResetHealth();
     }
 
-    public virtual void ResetHealth()
+    public virtual void DebugResetHealth()
     {
         CurrentHitPoint = MaxHealth;
     }
@@ -100,14 +97,6 @@ public class Unit : LevelElement
     {
         SetAnimatorMoving(true);
 
-        TileType tempType = TileType.Free;
-
-        if(currentTile != null) 
-        {
-            currentTile.unit = null;
-            tempType = currentTile.type;
-            currentTile.type = TileType.Free;
-        }
         while (path.Count > 0)
         {
             if(path.Count == 1)
@@ -128,12 +117,7 @@ public class Unit : LevelElement
                 transform.position = Vector3.MoveTowards(transform.position, pos, UnitStats.moveSpeed);
                 yield return new WaitForFixedUpdate();
             }
-            CurrentTile = destinationTile;
-        }
-
-        if(currentTile != null) {
-            currentTile.unit = this;
-            currentTile.type = tempType;
+            CurrentTile = destinationTile; 
         }
 
         SetAnimatorMoving(false);
@@ -159,27 +143,24 @@ public class Unit : LevelElement
             case AttackPatternType.All:
                 foreach (Tile tile in tiles)
                 {
-                    if (tile.unit != null)
+                    if ((tile.unit?.GetComponent<Unit>()) != null)
                         tile.unit.TakeDamage(this);
                 }
                 break;
 
             case AttackPatternType.Single:
-                if (tiles.Count > 0 && tiles[0].unit != null)
+                if ((tiles[0].unit?.GetComponent<Unit>()) != null)
                     tiles[0].unit.TakeDamage(this);
                 break;
 
             case AttackPatternType.Slice:
                 Stack<Tile> attackDestination = new Stack<Tile>();
-                if(tiles.Count > 1) 
-                {
-                    attackDestination.Push(tiles[tiles.Count - 1]);
-                }
+                attackDestination.Push(tiles[tiles.Count - 1]);
 
                 List<Tile> unitTiles = new List<Tile>();
                 foreach (Tile tile in tiles)
                 {
-                    if (tile.unit != null)
+                    if ((tile.unit?.GetComponent<Unit>()) != null)
                         unitTiles.Add(tile);
                 }
 
@@ -201,10 +182,7 @@ public class Unit : LevelElement
     /// <param name="unit">Unit who inflict the damage</param>
     public virtual void TakeDamage(Unit unit)
     {
-        Debug.Log(gameObject.name + " took " + unit.Damage + " damage from " + unit.gameObject.name);
         CurrentHitPoint -= unit.Damage;
-        Debug.Log("He now has " + CurrentHitPoint);
-        if(hp)hp.UpdateJauge(CurrentHitPoint, MaxHealth);
 
         if (CurrentHitPoint <= 0)
         {
