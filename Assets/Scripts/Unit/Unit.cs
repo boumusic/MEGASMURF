@@ -168,7 +168,7 @@ public class Unit : LevelElement
                     tiles[0].unit.TakeDamage(this);
                 break;
 
-            case AttackPatternType.Slice:
+            case AttackPatternType.Slice:                                                       //Bricolage a reprendre avec les anims (sequenceur)
                 Stack<Tile> attackDestination = new Stack<Tile>();
                 if(tiles.Count > 1) 
                 {
