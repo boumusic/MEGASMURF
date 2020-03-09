@@ -260,7 +260,7 @@ public class RangeManager : MonoBehaviour
         }
     }
 
-    public Queue<Tile> AIPathfinding(Tile aiTile)
+    public Stack<Tile> AIPathfinding(Tile aiTile)
     {
         unitTile = aiTile;
         FindWayToUnits(aiTile, null, maxPathfindingDepth);
@@ -275,15 +275,16 @@ public class RangeManager : MonoBehaviour
                 }
             }
         }
-        Queue<Tile> path = new Queue<Tile>();
-        foreach (Tile t in rangePaths[closestUnitTile])
-        {
-            path.Enqueue(t);
-        }
+        Stack<Tile> path = new Stack<Tile>();
         if (closestUnitTile != null)
         {
-            path.Enqueue(closestUnitTile);
+            path.Push(closestUnitTile);
         }
+        foreach (Tile t in rangePaths[closestUnitTile])
+        {
+            path.Push(t);
+        }
+
         return path;
     }
 
