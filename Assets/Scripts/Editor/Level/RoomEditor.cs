@@ -64,7 +64,7 @@ public class RoomEditor : Editor
         CheckRequiredStuff();
         serializedObject.ApplyModifiedProperties();
 
-        if(EditorGUI.EndChangeCheck())
+        if (EditorGUI.EndChangeCheck())
         {
             EditorUtility.SetDirty(t);
         }
@@ -328,7 +328,14 @@ public class RoomEditor : Editor
 
 
                     EditorGUI.DrawRect(newRect, colorButton);
-                    //EditorGUI.LabelField(newRect, x.ToString() + " " +  y.ToString());
+
+                    int order = listElement[indexElement].orderInTurn;
+
+                    GUIStyle style = new GUIStyle();
+                    style.alignment = TextAnchor.MiddleCenter;
+                    style.normal.textColor = Color.black;
+                    style.fontStyle = FontStyle.Bold;
+                    if(order != 0) EditorGUI.LabelField(newRect, order.ToString(), style);
 
                     if (newRect.Contains(currentEvent.mousePosition))
                     {
@@ -341,33 +348,31 @@ public class RoomEditor : Editor
 
                         if (currentEvent.button == 0 && currentEvent.isMouse)
                         {
-                            /*
+
                             if (currentEvent.shift)
                             {
                                 if (listElement[indexElement].levelElement != null)
                                 {
-                                    SerializedProperty elements = serializedObject.FindProperty("elements");
+                                    SerializedProperty elements = serializedObject.FindProperty("entityElements");
                                     SerializedProperty element = elements.GetArrayElementAtIndex(indexElement);
                                     LevelElementWindow.Init(element, t);
-
                                 }
                             }
-                            
 
                             else
                             {
-                            */
-                            Undo.RecordObject(t, "Add Level Element");
 
-                            GameObject prefab = pool.prefab;
+                                Undo.RecordObject(t, "Add Level Element");
 
-                            LevelElement lvl = prefab.GetComponentInChildren<LevelElement>();
+                                GameObject prefab = pool.prefab;
 
-                            if (lvl)
-                            {
-                                listElement[indexElement].levelElement = lvl;
+                                LevelElement lvl = prefab.GetComponentInChildren<LevelElement>();
+
+                                if (lvl)
+                                {
+                                    listElement[indexElement].levelElement = lvl;
+                                }
                             }
-                            //}
                         }
 
                         if (currentEvent.button == 2 && currentEvent.isMouse)
