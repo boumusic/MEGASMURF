@@ -7,6 +7,7 @@ public class LevelElementRoomSettings
 {
     public LevelElement levelElement;
     public Vector3 pos;
+    public int orderInTurn = 0;
 }
 
 [CreateAssetMenu(fileName = "New Room.asset", menuName = "Level/Room", order = 140)]
