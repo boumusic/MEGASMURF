@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Tile
+  m_Name: M_TileCave
   m_Shader: {fileID: 4800000, guid: 64ebadc63a786d04c8529459a8741687, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 6
@@ -87,6 +87,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Sub: 0.26
+    - _TessPhongStrength: 0.5
     - _TessValue: 23.1
     - _ThresholdUV: -0.02
     - _UVSec: 0
