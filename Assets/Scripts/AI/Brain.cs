@@ -16,7 +16,7 @@ public class Brain
     public Brain(Enemy enemy/*, AIBehaviour behaviour*/)
     {
         BrainsUnit = enemy;
-        AIManager.instance.AddBrain(this);
+        
         //SetupAIBehaviour(behaviour);
     }
 

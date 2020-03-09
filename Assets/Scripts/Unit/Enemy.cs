@@ -7,6 +7,12 @@ public class Enemy : Unit
 {
     public Brain UnitBrain { get; set; }
 
+    protected override void Awake()
+    {
+        base.Awake();
+        UnitBrain = new Brain(this);
+    }
+
     public override Tile CurrentTile
     {
         get => currentTile;
@@ -53,9 +59,12 @@ public class Enemy : Unit
         }
     }
 
-    private void Awake()
+    protected override void Die()
     {
-        //UnitBrain = new Brain(this);
+        if (BattleManager.Instance.IsCurrentPlayerUnit(this))
+            AIManager.instance.AIDeathCallBack();
+        base.Die();
+        
     }
 
     public override Color ColorInEditor()

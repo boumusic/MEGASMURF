@@ -9,7 +9,7 @@ public enum UnitState
     Used
 }
 
-public class Unit : LevelElement
+public abstract class Unit : LevelElement
 {
     [Header("Components")]
     [SerializeField] private UnitAnimator unitAnimator;
