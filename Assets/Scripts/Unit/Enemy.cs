@@ -28,6 +28,31 @@ public class Enemy : Unit
         }
     }
 
+    public void Sequence()
+    {
+        if(CurrentUnitState == UnitState.Fresh)
+        {
+            CallAttack();
+        }
+        if(CurrentUnitState == UnitState.Fresh)
+        {
+            Stack<Tile> path = UnitBrain.FindClosestEnemyPath();
+            if (path != null && path.Count > 0)
+            {
+                MoveTo(path, CallAttack);
+            }
+        }
+    }
+
+    public void CallAttack()
+    {
+        List<Tile> targets = UnitBrain.FindEnemiesInRange();
+        if (targets.Count > 0)
+        {
+            Attack(targets);
+        }
+    }
+
     private void Awake()
     {
         //UnitBrain = new Brain(this);
