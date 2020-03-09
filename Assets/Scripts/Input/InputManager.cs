@@ -36,6 +36,12 @@ public class InputManager : MonoBehaviour
         CancelAction.performed += SendCancelEvent;
     }
 
+    private void OnDestroy()
+    {
+        AttackAction.performed -= SendAttackButtonEvent;
+        CancelAction.performed -= SendCancelEvent;
+    }
+
     public void TileClickCallBack(Tile tile)
     {
         if (tile.unit != null)
