@@ -16,7 +16,7 @@ public class Enemy : Unit
             {
                 currentTile.unit = null;
                 currentTile.type = TileType.Free;
-                CurrentTile = null;
+                currentTile = null;
             }
 
             if (value != null)
@@ -33,16 +33,8 @@ public class Enemy : Unit
         //UnitBrain = new Brain(this);
     }
 
-    public override void SetUnitPosition(Tile tile)
-    {
-        CurrentTile = tile;
-        transform.position = tile.transform.position;
-        tile.unit = this;
-        tile.type = TileType.Enemy;
-    }
-
     public override Color ColorInEditor()
     {
-        return Color.red;
+        return base.ColorInEditor();
     }
 }
