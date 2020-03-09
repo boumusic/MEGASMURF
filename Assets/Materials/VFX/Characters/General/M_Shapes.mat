@@ -127,7 +127,7 @@ Material:
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _Color: {r: 38.445354, g: 30.865637, b: 23.030943, a: 1}
+    - _Color: {r: 11.984314, g: 9.662745, b: 7.2156863, a: 1}
     - _EdgeBurnColor: {r: 1, g: 1, b: 1, a: 1}
     - _EdgeFadeU: {r: 0, g: 1, b: 1, a: 1}
     - _EdgeFadeV: {r: 0, g: 1, b: 1, a: 1}

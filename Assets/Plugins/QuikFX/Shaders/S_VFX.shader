@@ -8,7 +8,7 @@ Shader "QuikFX/VFX"
 		[PackedVectorDrawer(Tiling, ScrollingSpeed)] _TilingSpeedA("Tiling (XY) - Scrolling Speed (ZW)", Vector) = (1, 1, 0, 0)
 		_SpeedMultiplier("Speed Multiplier", Range(0, 10)) = 1
 		_FresnelColorPower("Fresnel Color Power", Range(0, 10)) = 0
-		[HDR]_FresnelColor ("Fresnel Color", Color) = (1,1,1,1)
+		_FresnelColor ("Fresnel Color", Color) = (1,1,1,1)
 
 		[Toggle(USE_SECONDARY_TEX)] _UseSecondaryTex ("Use Secondary Texture", Float) = 0
 		_BlendFactor ("Blend Factor", Range(0,1)) = 0.5
@@ -60,8 +60,6 @@ Shader "QuikFX/VFX"
 
 		_OffsetX ("Offset U", Range(-1,1)) = 0
 		_OffsetY ("Offset V", Range(-1,1)) = 0
-
-		[Toggle]_UseCustomData2("Use Custom Data 2", Float) = 0
     }
 
     SubShader
@@ -89,9 +87,8 @@ Shader "QuikFX/VFX"
                 float4 uv : TEXCOORD0;
 				float3 normal : NORMAL;
 				float4 customData : TEXCOORD1;
-				float4 customData2 : TEXCOORD2;
 				float4 color : COLOR;
-				float3 viewDir : TEXCOORD3;
+				float3 viewDir : TEXCOORD2;
             };
 
             struct v2f
@@ -101,8 +98,7 @@ Shader "QuikFX/VFX"
 				float4 customData : TEXCOORD1;
 				float4 color : COLOR;
 				float3 normal : NORMAL;
-				float3 viewDir : TEXCOORD3;
-				float4 customData2 : TEXCOORD2;
+				float3 viewDir : TEXCOORD2;
             };
 
             sampler2D _MainTex;
@@ -154,8 +150,6 @@ Shader "QuikFX/VFX"
 			float _OffsetX;
 			float _OffsetY;
 
-			float _UseCustomData2;
-
             v2f vert (appdata v)
             {
                 v2f o;
@@ -178,7 +172,6 @@ Shader "QuikFX/VFX"
 				o.viewDir = WorldSpaceViewDir(v.vertex);
                 o.vertex = UnityObjectToClipPos(v.vertex);
 				o.customData = v.customData;
-				o.customData2 = v.customData2;
 				o.color = v.color;
 				o.normal = v.normal;
 				return o;
@@ -252,27 +245,25 @@ Shader "QuikFX/VFX"
 				float evaluateSource = lerp(0, _AlphaSource, _UseSecondaryTex);
 				float4 alphaSource = lerp(mainTex, secondaryTex, evaluateSource);
 
-				float erosion = _Erosion + (i.uv.z * _UseCustomData);
+				float erosion = _Erosion + (i.uv.z);
 
 				float erodedAlpha = (alphaSource - (erosion - 0.5) * 2) * edgeFade * alphaFresnel;
 				float smoothstepAlpha = smoothstep(_Sharpness / 2, 1 - _Sharpness / 2, erodedAlpha);
 
 				float finalAlpha = saturate(smoothstepAlpha) * mainTex.a * secondaryTex.a;
-							
+				col.a = lerp(1, finalAlpha, _UseAlpha) * i.color.a;				
 				
 				float remappedNoiseEmissive = smoothstep(_Emissive.z, _Emissive.w, lerpedTex);
-				float emissive = lerp(_Emissive.x, _Emissive.y, remappedNoiseEmissive);				
+				float emissive = lerp(_Emissive.x, _Emissive.y, remappedNoiseEmissive) + i.customData.y;				
 
 				float erodedBurn = abs(_FlipEdgeBurn - alphaSource) - ((_EdgeBurnThreshold + erosion) - 0.5) * 2 * edgeFade;
 				float smoothstepBurn = smoothstep(_EdgeBurnSharpness / 2, 1 - _EdgeBurnSharpness / 2, 1 - erodedBurn);
 				float4 burnEmissive = smoothstepBurn * _EdgeBurnEmissive * _EdgeBurnColor;
 
-				fixed4 colFresnel =  (1 - fresneleffect(i.normal, i.viewDir, _FresnelColorPower)) * _FresnelColor;
-
 				float3 finalEmissive = lerp(col.rgb * emissive, col.rgb + burnEmissive, smoothstepBurn * _UseEdgeBurn);
-				float3 useEmissive = lerp(col.rgb, finalEmissive * i.customData.y, _UseEmissive);
-				col.rgb = useEmissive * i.color.rgb + float3(i.customData.zw, i.customData2.x) * _UseCustomData2;
-				col.a = lerp(1, finalAlpha, _UseAlpha) * i.color.a;
+				float3 useEmissive = lerp(col.rgb, finalEmissive, _UseEmissive);
+				col.rgb = useEmissive * i.color.rgb;
+
                 return col;
             }
             ENDCG
