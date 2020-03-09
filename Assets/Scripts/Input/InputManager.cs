@@ -11,11 +11,11 @@ public class InputManager : MonoBehaviour
 
     private GameObject objectUnderMouse;
 
-    public event Action OnCancel;
-    public event Action OnAttackButtonPress;
-    public event Action<Tile> OnTileMouseOver;
-    public event Action<Unit> OnUnitSelection;
-    public event Action<Tile> OnTileSelection;
+    public Action OnCancel;
+    public Action OnAttackButtonPress;
+    public Action<Tile> OnTileMouseOver;
+    public Action<Unit> OnUnitSelection;
+    public Action<Tile> OnTileSelection;
 
     private PlayerInput playerInput;
 
@@ -34,6 +34,12 @@ public class InputManager : MonoBehaviour
 
         AttackAction.performed += SendAttackButtonEvent;
         CancelAction.performed += SendCancelEvent;
+    }
+
+    private void OnDestroy()
+    {
+        AttackAction.performed -= SendAttackButtonEvent;
+        CancelAction.performed -= SendCancelEvent;
     }
 
     public void TileClickCallBack(Tile tile)
