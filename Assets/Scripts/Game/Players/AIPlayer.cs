@@ -7,7 +7,7 @@ public class AIPlayer : Player
     public override void EnableInput()
     {
         InputManager.instance.OnCancel += BattleManager.Instance.OpenGameplayMenu;
-        //Lance Le process de L'IAManager
+        AIManager.instance.StartTurn();
     }
 
     public override void DisableInput()

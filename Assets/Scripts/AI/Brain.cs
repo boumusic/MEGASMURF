@@ -16,7 +16,7 @@ public class Brain
     public Brain(Enemy enemy/*, AIBehaviour behaviour*/)
     {
         BrainsUnit = enemy;
-        AIManager.instance.AddBrain(this);
+        
         //SetupAIBehaviour(behaviour);
     }
 
@@ -52,7 +52,7 @@ public class Brain
 
     public Stack<Tile> FindClosestEnemyPath()
     {
-        if(BrainsUnit == null || BrainsUnit.UnitMovementPattern == null)
+        if (BrainsUnit == null || BrainsUnit.UnitMovementPattern == null)
         {
             return null;
         }
@@ -74,14 +74,14 @@ public class Brain
                     closestUnit = u;
                 }
             }
-            if (closestUnit != null) 
+            if (closestUnit != null)
             {
                 foreach (Vector2 v in BrainsUnit.UnitMovementPattern.range.coords)
                 {
                     Tile t = Board.Instance.GetTile(v + BrainsUnit.CurrentTile.Coords);
                     if (t != null && (destination.Count == 0 || Vector2.Distance(t.Coords, closestUnit.CurrentTile.Coords) < Vector2.Distance(destination.Peek().Coords, closestUnit.CurrentTile.Coords)))
                     {
-                        while(destination.Count > 0)
+                        while (destination.Count > 0)
                         {
                             destination.Pop();
                         }
@@ -90,19 +90,16 @@ public class Brain
                 }
             }
         }
-        else if(BrainsUnit.UnitMovementPattern.type == MovementPatternType.Walk)
+        else if (BrainsUnit.UnitMovementPattern.type == MovementPatternType.Walk)
         {
-            Queue<Tile> path = RangeManager.Instance.AIPathfinding(BrainsUnit.CurrentTile);
-            while(path.Count > 0)
+            Stack<Tile> path = RangeManager.Instance.AIPathfinding(BrainsUnit.CurrentTile);
+            if (path.Count > 0)
             {
-                if(path.Count == 1)
-                {
-                    closestUnit = path.Dequeue().unit;
-                }
-                else
-                {
-                    destination.Push(path.Dequeue());
-                }
+                closestUnit = path.Pop().unit;
+            }
+            while (path.Count > 0 && BrainsUnit.UnitMovementPattern.range.coords.Contains(destination.Peek().Coords - BrainsUnit.CurrentTile.Coords))
+            {
+                destination.Push(path.Pop());
             }
         }
         return destination;
