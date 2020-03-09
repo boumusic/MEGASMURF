@@ -36,9 +36,76 @@ public class Brain
         //execute les intentions
     }
 
-    public Unit FindClosestEnemy()
+    public List<Tile> FindEnemiesInRange()
     {
-        throw new NotImplementedException();
+        List<Tile> targets = new List<Tile>();
+        foreach(Vector2 v in BrainsUnit.UnitAttackPattern.range.coords)
+        {
+            Tile t = Board.Instance.GetTile(v + BrainsUnit.CurrentTile.Coords);
+            if(t != null && t.type == TileType.Ally)
+            {
+                targets.Add(t);
+            }
+        }
+        return targets;
+    }
+
+    public Stack<Tile> FindClosestEnemyPath()
+    {
+        if(BrainsUnit == null || BrainsUnit.UnitMovementPattern == null)
+        {
+            return null;
+        }
+        Unit closestUnit = null;
+        Stack<Tile> destination = new Stack<Tile>();
+        if (BrainsUnit.UnitMovementPattern.type == MovementPatternType.Teleport)
+        {
+            foreach (Unit u in GameManager.units)
+            {
+                if (closestUnit != null)
+                {
+                    if (Vector2.Distance(closestUnit.CurrentTile.Coords, BrainsUnit.CurrentTile.Coords) > Vector2.Distance(u.CurrentTile.Coords, BrainsUnit.CurrentTile.Coords))
+                    {
+                        closestUnit = u;
+                    }
+                }
+                else
+                {
+                    closestUnit = u;
+                }
+            }
+            if (closestUnit != null) 
+            {
+                foreach (Vector2 v in BrainsUnit.UnitMovementPattern.range.coords)
+                {
+                    Tile t = Board.Instance.GetTile(v + BrainsUnit.CurrentTile.Coords);
+                    if (t != null && (destination.Count == 0 || Vector2.Distance(t.Coords, closestUnit.CurrentTile.Coords) < Vector2.Distance(destination.Peek().Coords, closestUnit.CurrentTile.Coords)))
+                    {
+                        while(destination.Count > 0)
+                        {
+                            destination.Pop();
+                        }
+                        destination.Push(t);
+                    }
+                }
+            }
+        }
+        else if(BrainsUnit.UnitMovementPattern.type == MovementPatternType.Walk)
+        {
+            Queue<Tile> path = RangeManager.Instance.AIPathfinding(BrainsUnit.CurrentTile);
+            while(path.Count > 0)
+            {
+                if(path.Count == 1)
+                {
+                    closestUnit = path.Dequeue().unit;
+                }
+                else
+                {
+                    destination.Push(path.Dequeue());
+                }
+            }
+        }
+        return destination;
     }
 
     public float EvaluateIntentionSafeness(Intention intention)
