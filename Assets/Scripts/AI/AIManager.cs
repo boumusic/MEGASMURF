@@ -15,7 +15,6 @@ public class AIManager : MonoBehaviour
 
     public void StartTurn()
     {
-        
         for (unitIterrator = 0; unitIterrator < BattleManager.Instance.playerUnits[BattleManager.Instance.CurrentPlayerID].Count; unitIterrator++)
         {
             Enemy currentEnemy;

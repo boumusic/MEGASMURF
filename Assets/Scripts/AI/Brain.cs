@@ -60,7 +60,7 @@ public class Brain
         Stack<Tile> destination = new Stack<Tile>();
         if (BrainsUnit.UnitMovementPattern.type == MovementPatternType.Teleport)
         {
-            foreach (Unit u in GameManager.units)
+            foreach (Unit u in BattleManager.Instance.playerUnits[0])
             {
                 if (closestUnit != null)
                 {
@@ -97,7 +97,7 @@ public class Brain
             {
                 closestUnit = path.Pop().unit;
             }
-            while (path.Count > 0 && BrainsUnit.UnitMovementPattern.range.coords.Contains(destination.Peek().Coords - BrainsUnit.CurrentTile.Coords))
+            while (path.Count > 0 && BrainsUnit.UnitMovementPattern.range.coords.Contains(path.Peek().Coords + BrainsUnit.CurrentTile.Coords))
             {
                 destination.Push(path.Pop());
             }
