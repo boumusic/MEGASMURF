@@ -37,7 +37,7 @@ public class BattleManager : MonoBehaviour
     private void Awake()
     {
         playerUnits = new List<List<Unit>>();
-        for(int i =0; i < players.Length; i++)
+        for(int i = 0; i < players.Length; i++)
         {
             playerUnits.Add(new List<Unit>());
         }
@@ -50,8 +50,8 @@ public class BattleManager : MonoBehaviour
         if (debugMode)
         {
             StartingPlayer = debugStartingPlayer;
-            FillPlayerUnitList(1, debugPlayer1StartingUnits);
-            FillPlayerUnitList(2, debugPlayer2StartingUnits);
+            FillPlayerUnitList(0, debugPlayer1StartingUnits);
+            FillPlayerUnitList(1, debugPlayer2StartingUnits);
             DebugSetupAllUnits();
         }
 
@@ -60,8 +60,6 @@ public class BattleManager : MonoBehaviour
 
     public void Initialize()
     {
-        PhaseManager.Instance.Initialize();
-
         PhaseManager.Instance.levelStartEnter += LevelStartEnter;
         PhaseManager.Instance.levelStartExit += LevelStartExit;
         PhaseManager.Instance.levelEndEnter += LevelEndEnter;
@@ -82,6 +80,8 @@ public class BattleManager : MonoBehaviour
         PhaseManager.Instance.attackTargetSelectionExit += AttackTargetSelectionExit;
         PhaseManager.Instance.attackPseudoStateEnter += AttackPseudoStateEnter;
         PhaseManager.Instance.attackPseudoStateExit += AttackPseudoStateExit;
+
+        PhaseManager.Instance.Initialize();
     }
 
     public void StartLevel()
@@ -116,7 +116,7 @@ public class BattleManager : MonoBehaviour
         OnPlayerTurnStart?.Invoke();
                                                                                                               
         FreshupUnits(playerUnits[CurrentPlayerID]);
-
+        
         PhaseManager.Instance.gameplayState.ChangeState(GameplayState.UnitSelection);
     }
 
