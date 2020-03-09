@@ -17,8 +17,11 @@ public class LevelElementWindow : EditorWindow
 
     private void OnGUI()
     {
-        CustomEditorUtility.DrawTitle("hahaaa prankeed useless window XDDD");
+        CustomEditorUtility.DrawTitle("Level Element Properties");
 
+        SerializedProperty order = element.FindPropertyRelative("orderInTurn");
+        EditorGUILayout.PropertyField(order);
+        
         element.serializedObject.ApplyModifiedProperties();
     }
 }
