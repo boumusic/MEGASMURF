@@ -11,11 +11,11 @@ public class InputManager : MonoBehaviour
 
     private GameObject objectUnderMouse;
 
-    public event Action OnCancel;
-    public event Action OnAttackButtonPress;
-    public event Action<Tile> OnTileMouseOver;
-    public event Action<Unit> OnUnitSelection;
-    public event Action<Tile> OnTileSelection;
+    public Action OnCancel;
+    public Action OnAttackButtonPress;
+    public Action<Tile> OnTileMouseOver;
+    public Action<Unit> OnUnitSelection;
+    public Action<Tile> OnTileSelection;
 
     private PlayerInput playerInput;
 
