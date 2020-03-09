@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_TileCave
+  m_Name: M_TileKitchen
   m_Shader: {fileID: 4800000, guid: 64ebadc63a786d04c8529459a8741687, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 6
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: ce9d94e00ce00724abb314cc9fd5d163, type: 3}
+        m_Texture: {fileID: 2800000, guid: e20bfd70a85eefd4ea8608465e371084, type: 3}
         m_Scale: {x: 0.05, y: 0.05}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Height:
-        m_Texture: {fileID: 2800000, guid: 63957a08f8a791e4e9ad3e084840e5a1, type: 3}
+        m_Texture: {fileID: 2800000, guid: cf1e0b7411a8f974a839682c98da5e24, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: 7be7989e1b9718042baa959b89690916, type: 3}
+        m_Texture: {fileID: 2800000, guid: cc7a259745765f24fbcd5dab97a2f0ca, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
