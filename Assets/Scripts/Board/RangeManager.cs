@@ -285,6 +285,8 @@ public class RangeManager : MonoBehaviour
             }
         }
 
+        ClearTiles();
+
         return path;
     }
 
@@ -298,7 +300,6 @@ public class RangeManager : MonoBehaviour
         }
         if (previous != null)
         {
-            tile.TriggerAnimation(TileAnim.Attack);
             if (tile.type == TileType.Ally)
             {
                 if (rangePaths.ContainsKey(tile))
