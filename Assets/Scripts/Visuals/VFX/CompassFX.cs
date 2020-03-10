@@ -6,6 +6,7 @@ public class CompassFX : MonoBehaviour
 {
     public Animator animator;
     public ParticleSystem startTracing;
+    public ParticleSystem inPs;
     public ParticleSystem appear;
     public bool playOnStart = false;
 
@@ -25,11 +26,16 @@ public class CompassFX : MonoBehaviour
     public void Play()
     {
         animator.SetTrigger("In");
-        appear.Play();
+        inPs.Play();
     }
 
     public void StartTracing()
     {
         startTracing.Play();
+    }
+
+    public void Appear()
+    {
+        appear.Play();
     }
 }
