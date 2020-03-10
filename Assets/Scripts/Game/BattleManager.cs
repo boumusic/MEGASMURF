@@ -362,10 +362,15 @@ public class BattleManager : MonoBehaviour
     {
         foreach (GameObject unitGameObject in startingUnits)
         {
-            Unit unit;
-            if ((unit = unitGameObject.GetComponent<Unit>()) != null && playerID < playerUnits.Count)
-                playerUnits[playerID].Add(unit);
+            AddUnitToPlayerUnitList(playerID, unitGameObject);
         }
+    }
+
+    public void AddUnitToPlayerUnitList(int playerID, GameObject unitGameObject)
+    {
+        Unit unit;
+        if ((unit = unitGameObject.GetComponent<Unit>()) != null && playerID < playerUnits.Count)
+            playerUnits[playerID].Add(unit);
     }
 
     public void RemoveUnitFromPlay(Unit unit)

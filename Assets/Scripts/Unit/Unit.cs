@@ -109,16 +109,6 @@ public abstract class Unit : LevelElement
         }
         while (path.Count > 0)
         {
-            if(path.Count == 1)
-            {
-                if(path.Peek().type == TileType.Ally)
-                {
-                    (path.Pop().unit as ShapeUnit).InitiateMergeAlly(this as ShapeUnit);
-                    currentTile = null;
-                    break;
-                }
-            }
-
             Tile destinationTile = path.Pop();
             Vector3 pos = destinationTile.transform.position;
             transform.forward = (pos - transform.position).normalized;
