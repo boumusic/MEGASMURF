@@ -28,9 +28,10 @@ public class BattleManager : MonoBehaviour
 
 
     public Unit CurrentSelectedUnit { get; private set; }
+    public BaseUnitType SelectedUnitTypeToBeSummon { get; private set; }
     private List<Tile> tilesInMovementRange;
     private Stack<Tile> movementPath;
-    private List<Tile> tilesInAttackRange;
+    private List<Tile> tilesInActionRange;
     private List<Tile> targets;
     private bool isMerging;
 
@@ -70,16 +71,18 @@ public class BattleManager : MonoBehaviour
         PhaseManager.Instance.playerTurnEndExit += PlayerTurnEndExit;
         PhaseManager.Instance.unitSelectionEnter += UnitSelectionEnter;
         PhaseManager.Instance.unitSelectionExit += UnitSelectionExit;
-        PhaseManager.Instance.actionSelectionEnter += ActionSelectionEnter;
-        PhaseManager.Instance.actionSelectionExit += ActionSelectionExit;
+        PhaseManager.Instance.movementSelectionEnter += MovementSelectionEnter;
+        PhaseManager.Instance.movementSelectionExit += MovementSelectionExit;
         PhaseManager.Instance.movementPseudoStateEnter += MovementPseudoStateEnter;
         PhaseManager.Instance.movementPseudoStateExit += MovementPseudoStateExit;
-        PhaseManager.Instance.attackSelectionEnter += AttackSelectionEnter;
-        PhaseManager.Instance.attackSelectionExit += AttackSelectionExit;
-        PhaseManager.Instance.attackTargetSelectionEnter += AttackTargetSelectionEnter;
-        PhaseManager.Instance.attackTargetSelectionExit += AttackTargetSelectionExit;
-        PhaseManager.Instance.attackPseudoStateEnter += AttackPseudoStateEnter;
-        PhaseManager.Instance.attackPseudoStateExit += AttackPseudoStateExit;
+        PhaseManager.Instance.actionSelectionEnter += ActionSelectionEnter;
+        PhaseManager.Instance.actionSelectionExit += ActionSelectionExit;
+        PhaseManager.Instance.maestroActionInterSelectionEnter += MaestroActionInterSelectionEnter;
+        PhaseManager.Instance.maestroActionInterSelectionExit += MaestroActionInterSelectionExit;
+        PhaseManager.Instance.actionTargetSelectionEnter += ActionTargetSelectionEnter;
+        PhaseManager.Instance.actionTargetSelectionExit += ActionTargetSelectionExit;
+        PhaseManager.Instance.actionPseudoStateEnter += ActionPseudoStateEnter;
+        PhaseManager.Instance.actionPseudoStateExit += ActionPseudoStateExit;
 
         PhaseManager.Instance.Initialize();
     }
@@ -113,11 +116,11 @@ public class BattleManager : MonoBehaviour
     private void PlayerTurnStartEnter()
     {
         //Anim de debut de tour
-        OnPlayerTurnStart?.Invoke();
-                                                                                                              
-        FreshupUnits(playerUnits[CurrentPlayerID]);
-        
-        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.UnitSelection);
+        SequenceManager.Instance.EnQueueAction(OnPlayerTurnStart, ActionType.AutomaticResume);
+
+        SequenceManager.Instance.EnQueueAction(FreshenUpCurrentPlayerUnits, ActionType.AutomaticResume);
+
+        SequenceManager.Instance.EnQueueAction(EnterUnitSelectionState, ActionType.AutomaticResume);
     }
 
     private void PlayerTurnStartExit()
@@ -127,13 +130,13 @@ public class BattleManager : MonoBehaviour
 
     private void PlayerTurnEndEnter()
     {
-        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.PlayerTurnStart);                                                                      //Change Current Player!
+        SequenceManager.Instance.EnQueueAction(EnterPlayerTurnStartState, ActionType.AutomaticResume);                                                                     //Change Current Player!
     }
 
     private void PlayerTurnEndExit()
     {
-        CurrentPlayer.DisableInput();
-        CurrentPlayerID = (CurrentPlayerID + 1) % players.Length;
+        SequenceManager.Instance.EnQueueAction(CurrentPlayer.DisableInput, ActionType.AutomaticResume);
+        SequenceManager.Instance.EnQueueAction(NextPlayer, ActionType.AutomaticResume);
     }
 
     private void UnitSelectionEnter()
@@ -155,7 +158,7 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
-        CurrentPlayer.EnableInput();
+        SequenceManager.Instance.EnQueueAction(CurrentPlayer.EnableInput, ActionType.AutomaticResume);
     }
 
     private void UnitSelectionExit()
@@ -164,7 +167,7 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnUnitSelection -= SelectUnit;
     }
 
-    private void ActionSelectionEnter()
+    private void MovementSelectionEnter()
     {
         GetUnitMovementRange();
         if (CurrentPlayer.areRangeDisplayed)
@@ -175,15 +178,15 @@ public class BattleManager : MonoBehaviour
 
         CurrentPlayer.OnTileMouseOver += RangeManager.Instance.AddToCurrentPath;
         CurrentPlayer.OnTileSelection += OrderMovement;
-        CurrentPlayer.OnAttackButtonPress += EnterAttackTargetSelectionState;
+        CurrentPlayer.OnActionButtonPress += EnterActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
     }
 
-    private void ActionSelectionExit()
+    private void MovementSelectionExit()
     {
         CurrentPlayer.OnTileMouseOver -= RangeManager.Instance.AddToCurrentPath;
         CurrentPlayer.OnTileSelection -= OrderMovement;
-        CurrentPlayer.OnAttackButtonPress -= EnterAttackTargetSelectionState;
+        CurrentPlayer.OnActionButtonPress -= EnterActionTargetSelectionState;
         CurrentPlayer.OnCancel -= EnterUnitSelectionState;
 
         RangeManager.Instance.ClearTiles();
@@ -201,7 +204,7 @@ public class BattleManager : MonoBehaviour
         if (isMerging)
             PhaseManager.Instance.gameplayState.ChangeState(GameplayState.UnitSelection);
         else
-            PhaseManager.Instance.gameplayState.ChangeState(GameplayState.AttackSelection);
+            PhaseManager.Instance.gameplayState.ChangeState(GameplayState.ActionSelection);
 
     }
 
@@ -211,38 +214,54 @@ public class BattleManager : MonoBehaviour
         movementPath = null;
     }
 
-    private void AttackSelectionEnter()
+    private void ActionSelectionEnter()
     {
-        CurrentPlayer.OnAttackButtonPress += EnterAttackTargetSelectionState;
+        CurrentPlayer.OnActionButtonPress += EnterActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
     }
 
-    private void AttackSelectionExit()
+    private void ActionSelectionExit()
     {
-        CurrentPlayer.OnAttackButtonPress -= EnterAttackTargetSelectionState;
+        CurrentPlayer.OnActionButtonPress -= EnterActionTargetSelectionState;
         CurrentPlayer.OnCancel -= EnterUnitSelectionState;
     }
 
-    private void AttackTargetSelectionEnter()
+    private void MaestroActionInterSelectionEnter()
+    {
+        CurrentPlayer.OnCircleButtonPress += SelectCircleShape;
+        CurrentPlayer.OnTriangleButtonPress += SelectTriangleShape;
+        CurrentPlayer.OnSquareButtonPress += SelectSquareShape;
+        CurrentPlayer.OnCancel += EnterActionSelectionState;
+    }
+    
+    private void MaestroActionInterSelectionExit()
+    {
+        CurrentPlayer.OnCircleButtonPress -= SelectCircleShape;
+        CurrentPlayer.OnTriangleButtonPress -= SelectTriangleShape;
+        CurrentPlayer.OnSquareButtonPress -= SelectSquareShape;
+        CurrentPlayer.OnCancel -= EnterActionSelectionState;
+    }
+
+    private void ActionTargetSelectionEnter()                                                                                       // BIG CHANGES
     {
         GetUnitAttackRange();
         
         if(CurrentPlayer.areRangeDisplayed)
         {
-            DisplayUnitAttackRange();
+            DisplayUnitActionRange();
             //Display UI
         }
 
         CurrentPlayer.OnTileMouseOver += RangeManager.Instance.TargetTile;
-        CurrentPlayer.OnTileSelection += OrderAttack;
-        CurrentPlayer.OnCancel += EnterAppropriateActionState;
+        CurrentPlayer.OnTileSelection += OrderAction;
+        CurrentPlayer.OnCancel += EnterAppropriateActionState;                                                           
     }
 
-    private void AttackTargetSelectionExit()
+    private void ActionTargetSelectionExit()
     {
         CurrentPlayer.OnTileMouseOver -= RangeManager.Instance.TargetTile;
         RangeManager.Instance.ClearTiles();
-        CurrentPlayer.OnTileSelection -= OrderAttack;
+        CurrentPlayer.OnTileSelection -= OrderAction;
         CurrentPlayer.OnCancel -= EnterAppropriateActionState;
 
         if (CurrentPlayer.areRangeDisplayed)
@@ -251,16 +270,17 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    private void AttackPseudoStateEnter()
+    private void ActionPseudoStateEnter()
     {
-        CurrentSelectedUnit.Attack(targets);
-        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.UnitSelection);
+        CurrentSelectedUnit.Action(targets);
+        EnterAppropriateActionState();
     }
 
-    private void AttackPseudoStateExit()
+    private void ActionPseudoStateExit()
     {
-        tilesInAttackRange = null;
+        tilesInActionRange = null;
         targets = null;
+        SelectedUnitTypeToBeSummon = BaseUnitType.NONE;
     }
     #endregion
 
@@ -278,6 +298,11 @@ public class BattleManager : MonoBehaviour
         //Remettre l'ancien delegate de cancel dans cancel
     }
 
+    public void EnterPlayerTurnStartState()
+    {
+        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.PlayerTurnStart);
+    }
+
     public void PlayerEndTurn()
     {
         PhaseManager.Instance.gameplayState.ChangeState(GameplayState.PlayerTurnEnd);
@@ -288,19 +313,24 @@ public class BattleManager : MonoBehaviour
         PhaseManager.Instance.gameplayState.ChangeState(GameplayState.UnitSelection);
     }
 
+    public void EnterMovementSelectionState()
+    {
+        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.MovementSelection);
+    }
+
     public void EnterActionSelectionState()
     {
         PhaseManager.Instance.gameplayState.ChangeState(GameplayState.ActionSelection);
     }
 
-    public void EnterAttackSelectionState()
+    public void EnterMaestroActionInterSelectionState()
     {
-        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.AttackSelection);
+        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.MaestroActionInterSelection);
     }
 
-    public void EnterAttackTargetSelectionState()
+    public void EnterActionTargetSelectionState()
     {
-        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.AttackTargetSelection);
+        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.ActionTargetSelection);
     }
 
     public void EnterAppropriateActionState()
@@ -309,11 +339,15 @@ public class BattleManager : MonoBehaviour
         {
             if (CurrentSelectedUnit.CurrentUnitState == UnitState.Fresh)
             {
-                PhaseManager.Instance.gameplayState.ChangeState(GameplayState.ActionSelection);
+                PhaseManager.Instance.gameplayState.ChangeState(GameplayState.MovementSelection);
             }
             else if (CurrentSelectedUnit.CurrentUnitState == UnitState.Moved)
             {
-                PhaseManager.Instance.gameplayState.ChangeState(GameplayState.AttackSelection);
+                PhaseManager.Instance.gameplayState.ChangeState(GameplayState.ActionSelection);
+            }
+            else if(CurrentSelectedUnit.CurrentUnitState == UnitState.Used)
+            {
+                PhaseManager.Instance.gameplayState.ChangeState(GameplayState.UnitSelection);
             }
         }
     }
@@ -332,6 +366,16 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    public void SelectAction()
+    {
+        if (CurrentSelectedUnit is Maestro)
+        {
+            EnterMaestroActionInterSelectionState();
+        }
+        else
+            EnterActionTargetSelectionState();
+    }
+
     public void OrderMovement(Tile tile)
     {
         if (tile != null && tilesInMovementRange.Contains(tile))
@@ -345,19 +389,25 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    private void OrderAttack(Tile tile)
+    private void OrderAction(Tile tile)
     {
-        if (tile != null && tilesInAttackRange.Contains(tile))
+        if (tile != null && tilesInActionRange.Contains(tile))
         {
             targets = RangeManager.Instance.GetTargets();
             if (CurrentSelectedUnit.UnitAttackPattern.type == AttackPatternType.Slice)
                 targets.Add(tile);
-            PhaseManager.Instance.gameplayState.ChangeState(GameplayState.AttackPseudoState);
+            PhaseManager.Instance.gameplayState.ChangeState(GameplayState.ActionPseudoState);
         }
     }
     #endregion
 
     #region Utility
+
+    private void NextPlayer()
+    {
+        CurrentPlayerID = (CurrentPlayerID + 1) % players.Length;
+    }
+
     private void FillPlayerUnitList(int playerID, GameObject[] startingUnits)
     {
         foreach (GameObject unitGameObject in startingUnits)
@@ -369,7 +419,7 @@ public class BattleManager : MonoBehaviour
     public void AddUnitToPlayerUnitList(int playerID, GameObject unitGameObject)
     {
         Unit unit;
-        if ((unit = unitGameObject.GetComponent<Unit>()) != null && playerID < playerUnits.Count)
+        if ((unit = unitGameObject.GetComponent<Unit>()) != null && playerID < players.Length)
             playerUnits[playerID].Add(unit);
     }
 
@@ -411,12 +461,35 @@ public class BattleManager : MonoBehaviour
         return true;
     }
 
+    private void FreshenUpCurrentPlayerUnits()
+    {
+        FreshupUnits(playerUnits[CurrentPlayerID]);
+    }
+
     private void FreshupUnits(List<Unit> units)
     {
         foreach(Unit unit in units)
         {
             unit.FreshenUp();
         }
+    }
+
+    private void SelectCircleShape()
+    {
+        SelectedUnitTypeToBeSummon = BaseUnitType.Circle;
+        EnterActionTargetSelectionState();
+    }
+
+    private void SelectTriangleShape()
+    {
+        SelectedUnitTypeToBeSummon = BaseUnitType.Triangle;
+        EnterActionTargetSelectionState();
+    }
+
+    private void SelectSquareShape()
+    {
+        SelectedUnitTypeToBeSummon = BaseUnitType.Square;
+        EnterActionTargetSelectionState();
     }
 
     private void GetUnitMovementRange()
@@ -426,7 +499,7 @@ public class BattleManager : MonoBehaviour
 
     private void GetUnitAttackRange()
     {
-        tilesInAttackRange = RangeManager.Instance.GetTilesInAttackRange(CurrentSelectedUnit.CurrentTile);
+        tilesInActionRange = RangeManager.Instance.GetTilesInAttackRange(CurrentSelectedUnit.CurrentTile);
     }
 
     private void DisplayUnitMovementRange()
@@ -436,7 +509,7 @@ public class BattleManager : MonoBehaviour
         RangeManager.Instance.DisplayMovementTiles();
     }
 
-    private void DisplayUnitAttackRange()
+    private void DisplayUnitActionRange()
     {
         //StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayAttackTiles));
         //StartCoroutine(DelayAttackRangeDisplay());

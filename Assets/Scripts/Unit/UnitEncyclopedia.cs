@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewUnitEncyclopedia", menuName = "Gameplay/UnitEncylopedia", order = 150)]
 public class UnitEncyclopedia : ScriptableObject
 {
-    public UnitPage[] unitPages;
+    public UnitBlueprint[] unitBlueprints;
 }

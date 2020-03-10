@@ -13,7 +13,10 @@ public class HumanPlayer : Player
         {
             isEnable = true;
             InputManager.instance.OnCancel += CallOnCancel;
-            InputManager.instance.OnAttackButtonPress += CallOnAttackButtonPress;
+            InputManager.instance.OnActionButtonPress += CallOnActionButtonPress;
+            InputManager.instance.OnCircleButtonPress += CallOnCircleButtonPress;
+            InputManager.instance.OnTriangleButtonPress += CallOnTriangleButtonPress;
+            InputManager.instance.OnSquareButtonPress += CallOnSquareButtonPress;
             InputManager.instance.OnTileMouseOver += CallOnTileMouseOver;
             InputManager.instance.OnUnitSelection += CallOnUnitSelection;
             InputManager.instance.OnTileSelection += CallOnTileSelection;
@@ -26,7 +29,10 @@ public class HumanPlayer : Player
         {
             isEnable = false;
             InputManager.instance.OnCancel -= CallOnCancel;
-            InputManager.instance.OnAttackButtonPress -= CallOnAttackButtonPress;
+            InputManager.instance.OnActionButtonPress -= CallOnActionButtonPress;
+            InputManager.instance.OnCircleButtonPress -= CallOnCircleButtonPress;
+            InputManager.instance.OnTriangleButtonPress -= CallOnTriangleButtonPress;
+            InputManager.instance.OnSquareButtonPress -= CallOnSquareButtonPress;
             InputManager.instance.OnTileMouseOver -= CallOnTileMouseOver;
             InputManager.instance.OnUnitSelection -= CallOnUnitSelection;
             InputManager.instance.OnTileSelection -= CallOnTileSelection;
