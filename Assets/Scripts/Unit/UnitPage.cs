@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct UnitPage
+public struct UnitBlueprint
 {
-    public BaseUnitType unitType;
     public GameObject unitPrefab;
 }
