@@ -21,7 +21,7 @@ public abstract class Unit : LevelElement
 
     protected Tile currentTile;
     public virtual Tile CurrentTile { get; protected set; }
-    
+
     public virtual BaseUnitType UnitType => unitBase.unitType;
 
     public UnitState CurrentUnitState { get; private set; }
@@ -49,7 +49,7 @@ public abstract class Unit : LevelElement
     public virtual void Start()
     {
         FaceCamera();
-        if(hp)
+        if (hp)
             hp.UpdateJauge(CurrentHitPoint, MaxHealth);
     }
 
@@ -101,7 +101,7 @@ public abstract class Unit : LevelElement
 
         TileType tempType = TileType.Free;
 
-        if(currentTile != null) 
+        if (currentTile != null)
         {
             currentTile.unit = null;
             tempType = currentTile.type;
@@ -120,7 +120,7 @@ public abstract class Unit : LevelElement
             CurrentTile = destinationTile;
         }
 
-        if(currentTile != null) {
+        if (currentTile != null) {
             currentTile.unit = this;
             currentTile.type = tempType;
         }
@@ -139,6 +139,11 @@ public abstract class Unit : LevelElement
     {
         Vector3 forward = GameCamera.Instance.Forward;
         transform.forward = new Vector3(-forward.x, 0f, -forward.z);
+    }
+
+    public virtual void Action(List<Tile> tile)
+    {
+        Attack(tile);
     }
 
     public virtual void Attack(List<Tile> tiles)

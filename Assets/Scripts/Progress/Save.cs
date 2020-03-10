@@ -8,12 +8,16 @@ public class UnitTemplate
     [SerializeField]
     public int[] combination;
     [SerializeField]
+    public int[] position;
+    [SerializeField]
     public int equipment;
 
     public UnitTemplate(ShapeUnit shape)
     {
         combination = new int[3];
         combination[0] = (int)(shape.unitBase.unitType);
+        position = new int[2];
+
         if(shape.ArmUnit != null)
         {
             combination[1] = (int)(shape.ArmUnit.unitBase.unitType);
@@ -22,7 +26,7 @@ public class UnitTemplate
         {
             combination[1] = (int)(BaseUnitType.NONE);
         }
-        if (shape.ArmUnit != null)
+        if (shape.ArmUnit != null && shape.HeadUnit != null)
         {
             combination[2] = (int)(shape.HeadUnit.unitBase.unitType);
         }
@@ -30,53 +34,25 @@ public class UnitTemplate
         {
             combination[2] = (int)(BaseUnitType.NONE);
         }
+
+        position[0] = (int)shape.CurrentTile.Coords.x;
+        position[1] = (int)shape.CurrentTile.Coords.y;
+
         equipment = shape.equipement.id;
     }
 
     public ShapeUnit GetUnit()
     {
-        //ShapeUnit unit = new ShapeUnit();
-        //switch (combination[0])
-        //{
-        //    case (int)BaseUnitType.NONE:
-        //        return null;
-        //    case (int)BaseUnitType.Circle:
-        //        unit.unitBase = SaveManager.Instance.unitFactory.circle.unitBase;
-        //        break;
-        //    case (int)BaseUnitType.Square:
-        //        unit.unitBase = SaveManager.Instance.unitFactory.square.unitBase;
-        //        break;
-        //    case (int)BaseUnitType.Triangle:
-        //        unit.unitBase = SaveManager.Instance.unitFactory.triangle.unitBase;
-        //        break;
-        //}
-        //ShapeUnit legUnitUnitFactory = UnitFactory.Instance.CreateUnit((BaseUnitType)combination[0]).GetComponent<ShapeUnit>();
-        //switch (combination[1])
-        //{
-        //    case (int)BaseUnitType.Circle:
-        //        unit.ArmUnit.unitBase = SaveManager.Instance.unitFactory.circle.unitBase;
-        //        break;
-        //    case (int)BaseUnitType.Square:
-        //        unit.ArmUnit.unitBase = SaveManager.Instance.unitFactory.square.unitBase;
-        //        break;
-        //    case (int)BaseUnitType.Triangle:
-        //        unit.ArmUnit.unitBase = SaveManager.Instance.unitFactory.triangle.unitBase;
-        //        break;
-        //}
-        //switch (combination[2])
-        //{
-        //    case (int)BaseUnitType.Circle:
-        //        unit.HeadUnit.unitBase = SaveManager.Instance.unitFactory.circle.unitBase;
-        //        break;
-        //    case (int)BaseUnitType.Square:
-        //        unit.HeadUnit.unitBase = SaveManager.Instance.unitFactory.square.unitBase;
-        //        break;
-        //    case (int)BaseUnitType.Triangle:
-        //        unit.HeadUnit.unitBase = SaveManager.Instance.unitFactory.triangle.unitBase;
-        //        break;
-        //}
-        //return unit;
-        return null;
+        ShapeUnit unit = new ShapeUnit();
+        
+        ShapeUnit legUnit = UnitFactory.Instance.CreateUnit((BaseUnitType)combination[0]).GetComponent<ShapeUnit>();
+        ShapeUnit armUnit = UnitFactory.Instance.CreateUnit((BaseUnitType)combination[1]).GetComponent<ShapeUnit>();
+        ShapeUnit headUnit = UnitFactory.Instance.CreateUnit((BaseUnitType)combination[2]).GetComponent<ShapeUnit>();
+
+        legUnit.NonGampelayMerge(armUnit);
+        legUnit.NonGampelayMerge(headUnit);
+
+        return legUnit;
     }
 }
 
