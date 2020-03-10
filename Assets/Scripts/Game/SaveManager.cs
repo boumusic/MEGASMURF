@@ -9,7 +9,10 @@ public class SaveManager: MonoBehaviour
 
     public static SaveManager Instance;
 
-    public UnitFactory unitFactory;
+    public bool resetSave;
+    public int debugMud;
+
+    //public UnitFactory unitFactory;
 
     public void Awake()
     {
@@ -21,7 +24,7 @@ public class SaveManager: MonoBehaviour
 
     private void Start()
     {
-        SaveGame();
+        LoadGame();
     }
 
     public void SaveGame()
@@ -49,8 +52,27 @@ public class SaveManager: MonoBehaviour
             Save save = (Save)bf.Deserialize(file);
             file.Close();
 
-            GameManager.ShapeMud = save.shapemud;
-            GameManager.SkillTree.tree = save.skilltree;
+            if (debugMud > 0)
+            {
+                GameManager.ShapeMud = debugMud;
+            }
+            else
+            {
+                GameManager.ShapeMud = save.shapemud;
+            }
+            if (resetSave || save.skilltree == null || save.skilltree.Count == 0)
+            {
+                GameManager.SkillTree = new SkillTree();
+                for (int i = 0; i < 24; i++)
+                {
+                    GameManager.SkillTree.tree.Add(i,false);
+                }
+            }
+            else
+            {
+                GameManager.SkillTree = new SkillTree();
+                GameManager.SkillTree.tree = save.skilltree;
+            }
             //GameManager.units = save.team.GetUnits();
 
             Debug.Log("Game Loaded");

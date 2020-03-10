@@ -59,5 +59,6 @@ public class Maestro : Unit
             BattleManager.Instance.AddUnitToPlayerUnitList(BattleManager.Instance.CurrentPlayerID, newUnitGameObject);
             newUnit.GetComponent<ShapeUnit>()?.SetUnitPosition(tile);
         }
+        BecomeExhausted();
     }
 }

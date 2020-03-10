@@ -20,7 +20,9 @@ public class ImageScrolling : MonoBehaviour
     {
         if (image != null)
         {
-            image.uvRect.Set(image.uvRect.x + speed.x * Time.deltaTime, image.uvRect.y + speed.y * Time.deltaTime, image.uvRect.width, image.uvRect.height);
+            Rect rect = new Rect();
+            rect.Set(image.uvRect.x + speed.x * Time.deltaTime, image.uvRect.y + speed.y * Time.deltaTime, image.uvRect.width, image.uvRect.height);
+            image.uvRect = rect;
         }
     }
 }
