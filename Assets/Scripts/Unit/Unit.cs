@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,9 +41,13 @@ public abstract class Unit : LevelElement
 
     public UnitAnimator UnitAnimator { get => unitAnimator; }
 
+    private List<Tile> tempTileToAttack;
+    private Action tempAction;
+
     protected virtual void Awake()
     {
         currentTile = null;
+        tempTileToAttack = new List<Tile>();
         ResetHealth();
     }
 
@@ -84,7 +89,7 @@ public abstract class Unit : LevelElement
 
     public virtual void MoveTo(Stack<Tile> path)
     {
-        StartCoroutine(MovingTo(path, SequenceManager.Instance.Resume));
+        StartCoroutine(MovingTo(path, null));
     }
 
     public virtual void MoveTo(Stack<Tile> path, System.Action action)
@@ -125,8 +130,10 @@ public abstract class Unit : LevelElement
 
         SetAnimatorMoving(false);
         FaceCamera();
-        action?.Invoke();
+        
         BecomeMoved();
+
+        action?.Invoke();
     }
 
     public virtual void SetAnimatorMoving(bool moving)
@@ -140,12 +147,12 @@ public abstract class Unit : LevelElement
         transform.forward = new Vector3(-forward.x, 0f, -forward.z);
     }
 
-    public virtual void Action(List<Tile> tile)
+    public virtual void Action(List<Tile> tiles, Action action = null)
     {
-        Attack(tile);
+        Attack(tiles, action);
     }
 
-    public virtual void Attack(List<Tile> tiles)
+    public virtual void Attack(List<Tile> tiles, Action action = null)
     {
         switch (UnitAttackPattern.type)
         {
@@ -155,11 +162,15 @@ public abstract class Unit : LevelElement
                     if (tile.unit != null)
                         tile.unit.TakeDamage(this);
                 }
+                BecomeExhausted();
+                action?.Invoke();
                 break;
 
             case AttackPatternType.Single:
                 if (tiles.Count > 0 && tiles[0].unit != null)
                     tiles[0].unit.TakeDamage(this);
+                BecomeExhausted();
+                action?.Invoke();
                 break;
 
             case AttackPatternType.Slice:                                                       //Bricolage a reprendre avec les anims (sequenceur)
@@ -169,23 +180,29 @@ public abstract class Unit : LevelElement
                     attackDestination.Push(tiles[tiles.Count - 1]);
                 }
 
-                List<Tile> unitTiles = new List<Tile>();
+                
                 foreach (Tile tile in tiles)
                 {
                     if (tile.unit != null)
-                        unitTiles.Add(tile);
+                    {
+                        tempTileToAttack.Add(tile);
+                        tempAction = action;
+                    }
                 }
 
-                StartCoroutine(MovingTo(attackDestination, null));
-                
-                foreach(Tile tile in unitTiles)
-                {
-                    tile.unit.TakeDamage(this);
-                }
+                MoveTo(attackDestination, OnAttackAnimationEnd);
                 break;
         }
+    }
 
+    private void OnAttackAnimationEnd()
+    {
+        foreach (Tile tile in tempTileToAttack)
+        {
+            tile.unit.TakeDamage(this);
+        }
         BecomeExhausted();
+        tempAction?.Invoke();
     }
 
     /// <summary>

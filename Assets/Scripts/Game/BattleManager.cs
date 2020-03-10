@@ -144,7 +144,7 @@ public class BattleManager : MonoBehaviour
         SequenceManager.Instance.EnQueueAction(UnitSelectionVariableInitialization, ActionType.AutomaticResume);
         SequenceManager.Instance.EnQueueAction(UnitSelectionActivateInputs, ActionType.AutomaticResume); 
         SequenceManager.Instance.EnQueueAction(CheckAutomaticTurnEnd, ActionType.AutomaticResume);
-        SequenceManager.Instance.EnQueueAction(CurrentPlayer.EnableInput, ActionType.AutomaticResume);
+        SequenceManager.Instance.EnQueueAction(CurrentPlayer.EnableInput, ActionType.ManualResume);
     }
 
     private void UnitSelectionExit()
@@ -230,7 +230,7 @@ public class BattleManager : MonoBehaviour
 
     private void MovementPseudoStateMove()
     {
-        CurrentSelectedUnit.MoveTo(movementPath);
+        CurrentSelectedUnit.MoveTo(movementPath, SequenceManager.Instance.Resume);
     }
 
     private void MovementPseudoStateChangeState()
@@ -356,7 +356,7 @@ public class BattleManager : MonoBehaviour
 
     private void ActionPseudoStateAction()
     {
-        CurrentSelectedUnit.Action(targets);
+        CurrentSelectedUnit.Action(targets, SequenceManager.Instance.Resume);
     }
 
     private void ActionPseudoStateChangeState()

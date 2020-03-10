@@ -8,6 +8,7 @@ public class ShapeUnit : Unit
     [Header("Components")]
     [SerializeField] private UnitMerger unitMergeAnimator;
     [SerializeField] public Transform mergeParent;
+    private Action OnMergedFinished;
 
     public override Tile CurrentTile
     {
@@ -99,9 +100,9 @@ public class ShapeUnit : Unit
     private IEnumerator MovingTo(Stack<Tile> path, System.Action action)
     {
         SetAnimatorMoving(true);
-
+        bool isMerging = false;
         TileType tempType = TileType.Free;
-
+        
         if (currentTile != null)
         {
             currentTile.unit = null;
@@ -114,8 +115,9 @@ public class ShapeUnit : Unit
             {
                 if (path.Peek().type == TileType.Ally)
                 {
-                    (path.Pop().unit as ShapeUnit).InitiateMergeAlly(this as ShapeUnit);
+                    (path.Pop().unit as ShapeUnit).InitiateMergeAlly(this as ShapeUnit, SequenceManager.Instance.Resume);
                     currentTile = null;
+                    isMerging = true;
                     break;
                 }
             }
@@ -139,9 +141,11 @@ public class ShapeUnit : Unit
 
         SetAnimatorMoving(false);
         FaceCamera();
-        action?.Invoke();
 
         BecomeMoved();
+
+        if (!isMerging)
+            action?.Invoke();
     }
 
     public void InitiateMergeAlly(ShapeUnit shape)
@@ -153,17 +157,18 @@ public class ShapeUnit : Unit
     /// Takes a unit and merges it on top of itself.
     /// </summary>
     /// <param name="shape">The shape that will be merged on top of this shape.</param>
-    public void InitiateMergeAlly(ShapeUnit shape, System.Action onFinished)
+    public void InitiateMergeAlly(ShapeUnit shape, System.Action onFinishedAdditionalAction)
     {
         if (shape.UnitMergeLevel == 0)
         {
             if (UnitMergeLevel < 2)
             {
-                onFinished += FinishedMerging;
-                onFinished += ResetHealth;
+                OnMergedFinished += FinishedMerging;
+                OnMergedFinished += ResetHealth;
+                OnMergedFinished += onFinishedAdditionalAction;
                 shapeBeingMerged = shape;
                 mergedUnits.Add(shape);
-                shape.unitMergeAnimator.MergeOnTopOf(this, onFinished);
+                shape.unitMergeAnimator.MergeOnTopOf(this, OnMergedFinished);
                 BattleManager.Instance.RemoveUnitFromPlay(mergedUnits[mergedUnits.Count - 1]);
             }
             else
@@ -205,8 +210,6 @@ public class ShapeUnit : Unit
         {
             shapeBeingMerged = null;
         }
-
-        SequenceManager.Instance.Resume();
         // Autre check 
         // Vanish d'equipement + Refund
     }

@@ -48,8 +48,8 @@ public class SequenceManager : MonoBehaviour
 
     private void ManualAction(Action action)
     {
-        action?.Invoke();
         isWaitingForResume = true;
+        action?.Invoke();
     }
 
     public void Resume()
