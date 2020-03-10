@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a5d308be88dce459d4943a6850774a, type: 3}
   m_Name: Bombi
   m_EditorClassIdentifier: 
-  unitType: 6
+  unitType: 7
   attackPatterns:
   - {fileID: 11400000, guid: 1258298f89511bd429466ba2a4b2461c, type: 2}
   movementPatterns:
