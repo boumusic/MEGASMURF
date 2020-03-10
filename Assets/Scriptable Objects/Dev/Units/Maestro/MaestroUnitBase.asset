@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a5d308be88dce459d4943a6850774a, type: 3}
   m_Name: MaestroUnitBase
   m_EditorClassIdentifier: 
-  unitType: 0
+  unitType: 1
   attackPatterns:
   - {fileID: 11400000, guid: 16fa2559b90905445853270cbc0fb043, type: 2}
   movementPatterns:

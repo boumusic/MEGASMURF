@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a5d308be88dce459d4943a6850774a, type: 3}
   m_Name: Bombito
   m_EditorClassIdentifier: 
-  unitType: 7
+  unitType: 8
   attackPatterns:
   - {fileID: 11400000, guid: 0cf106dd2fd42e946b14539915a00351, type: 2}
   movementPatterns:
