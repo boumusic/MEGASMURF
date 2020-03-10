@@ -15,12 +15,18 @@ public class AIManager : MonoBehaviour
 
     public void StartTurn()
     {
-        
         for (unitIterrator = 0; unitIterrator < BattleManager.Instance.playerUnits[BattleManager.Instance.CurrentPlayerID].Count; unitIterrator++)
         {
             Enemy currentEnemy;
             if ((currentEnemy = BattleManager.Instance.playerUnits[BattleManager.Instance.CurrentPlayerID][unitIterrator] as Enemy) != null)
                 currentEnemy.Sequence();
+        }
+
+        for (unitIterrator = 0; unitIterrator < BattleManager.Instance.playerUnits[BattleManager.Instance.CurrentPlayerID].Count; unitIterrator++)
+        {
+            Enemy currentEnemy;
+            if ((currentEnemy = BattleManager.Instance.playerUnits[BattleManager.Instance.CurrentPlayerID][unitIterrator] as Enemy) != null)
+                currentEnemy.activated = false;
         }
 
         BattleManager.Instance.PlayerEndTurn();

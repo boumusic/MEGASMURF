@@ -17141,6 +17141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitAnimator: {fileID: 745006353}
+  hp: {fileID: 0}
   debugTile: {x: 9, y: 10}
   unitBase: {fileID: 11400000, guid: c73100e77d004d14187c5ecbaaa755ed, type: 2}
 --- !u!4 &1047992548 stripped
@@ -25404,6 +25405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitAnimator: {fileID: 581930509}
+  hp: {fileID: 0}
   debugTile: {x: 9, y: 11}
   unitBase: {fileID: 11400000, guid: 586b2868df8b7964fac64a6c14860527, type: 2}
 --- !u!4 &1652866788 stripped
@@ -27369,6 +27371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitAnimator: {fileID: 860094691}
+  hp: {fileID: 0}
   debugTile: {x: 9, y: 12}
   unitBase: {fileID: 11400000, guid: c19dbe63de61ee642a9b7b78942affac, type: 2}
 --- !u!4 &1765727579 stripped
@@ -34119,5 +34122,11 @@ PrefabInstance:
       propertyPath: totalHeight
       value: 23.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: debugRoom
+      value: 
+      objectReference: {fileID: 11400000, guid: 99f8bdb635b961b42bd72ba140ca1566,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f, type: 3}

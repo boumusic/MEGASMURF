@@ -74,7 +74,7 @@ public class RangeManager : MonoBehaviour
                 foreach (Vector2 v in startTile.unit.UnitMovementPattern.range.coords)
                 {
                     Tile check = Board.Instance.GetTile(v + unitTile.Coords);
-                    if (check != null && !AbortTileCondition(check, startTile.unit.UnitMovementPattern.range))
+                    if (check != null && !AbortTileCondition(check, startTile.unit.UnitMovementPattern.range, true))
                     {
                         rangePaths.Add(check, new List<Tile>());
                     }
@@ -195,7 +195,7 @@ public class RangeManager : MonoBehaviour
         }
     }
 
-    private bool AbortTileCondition(Tile tile, Range comparedRange)
+    private bool AbortTileCondition(Tile tile, Range comparedRange, bool correctRange)
     {
         if (tile == null)
         {
@@ -212,7 +212,7 @@ public class RangeManager : MonoBehaviour
             return true;
         }
         // Tile is out of range or tile is not free or occupied by ally
-        if (!comparedRange.coords.Contains(tile.Coords - unitTile.Coords) || (tile.type != TileType.Free && tile.type != TileType.Ally))
+        if ((correctRange && !comparedRange.coords.Contains(tile.Coords - unitTile.Coords)) || (!correctRange && !comparedRange.coords.Contains(tile.Coords)) || (tile.type != TileType.Free && tile.type != TileType.Ally))
         {
             return true;
         }
@@ -228,7 +228,7 @@ public class RangeManager : MonoBehaviour
         }
         if (previous != null)
         {
-            if (AbortTileCondition(tile, comparedRange))
+            if (AbortTileCondition(tile, comparedRange, true))
             {
                 return;
             }
@@ -279,17 +279,20 @@ public class RangeManager : MonoBehaviour
         if (closestUnitTile != null)
         {
             path.Push(closestUnitTile);
+            foreach (Tile t in rangePaths[closestUnitTile])
+            {
+                path.Push(t);
+            }
         }
-        foreach (Tile t in rangePaths[closestUnitTile])
-        {
-            path.Push(t);
-        }
+
+        ClearTiles();
 
         return path;
     }
 
     private void FindWayToUnits(Tile tile, List<Tile> previous, int endlessLoopSecurity)
     {
+        
         List<Tile> newPrevious = new List<Tile>();
         if (tile == null || endlessLoopSecurity <= 0)
         {
@@ -305,17 +308,14 @@ public class RangeManager : MonoBehaviour
                     {
                         rangePaths[tile] = previous;
                     }
-                    else
-                    {
-                        return;
-                    }
                 }
                 else
                 {
                     rangePaths.Add(tile, previous);
                 }
+                return;
             }
-            if (AbortTileCondition(tile, fullRange))
+            if (AbortTileCondition(tile, fullRange, false))
             {
                 return;
             }

@@ -122,7 +122,7 @@ public class BattleManager : MonoBehaviour
 
     private void PlayerTurnStartExit()
     {
-        CurrentPlayer.EnableInput();
+        
     }
 
     private void PlayerTurnEndEnter()
@@ -154,6 +154,8 @@ public class BattleManager : MonoBehaviour
             PhaseManager.Instance.gameplayState.ChangeState(GameplayState.PlayerTurnEnd);
             return;
         }
+
+        CurrentPlayer.EnableInput();
     }
 
     private void UnitSelectionExit()
