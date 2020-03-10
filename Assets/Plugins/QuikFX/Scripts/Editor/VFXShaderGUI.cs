@@ -239,7 +239,6 @@ namespace Pataya.QuikFX
             GUILayout.Label("Custom Datas", EditorStyles.boldLabel);
             ;
             MaterialProperty useCustom = ShaderProperty("_UseCustomData", "Stream custom vertex data from the particle system to the shader.");
-            MaterialProperty useCustom2 = ShaderProperty("_UseCustomData2", "Stream custom vertex data from the particle system to the shader.");
 
             if (useCustom.floatValue == 1)
             {

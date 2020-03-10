@@ -17,6 +17,13 @@ public class PlaceholderMergeUtility : MonoBehaviour
         }
 
         selected.MoveTo(path, PathComplete);
+
+        //Invoke("TakeDamage", 1);
+    }
+
+    private void TakeDamage()
+    {
+        selected.TakeDamage(target);
     }
 
     private void PathComplete()

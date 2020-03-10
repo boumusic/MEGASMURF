@@ -16,14 +16,14 @@ public class Brain
     public Brain(Enemy enemy/*, AIBehaviour behaviour*/)
     {
         BrainsUnit = enemy;
-        AIManager.instance.AddBrain(this);
+        
         //SetupAIBehaviour(behaviour);
     }
 
     public void SetBrainsUnit(Enemy enemy)
     {
         
-        enemy.UnitBrain = this;
+       // enemy.UnitBrain = this;
     }
 
     public Intention DefineIntention()
@@ -34,11 +34,6 @@ public class Brain
     public void Execute()
     {
         //execute les intentions
-    }
-
-    public Unit FindClosestEnemy()
-    {
-        throw new NotImplementedException();
     }
 
     public float EvaluateIntentionSafeness(Intention intention)

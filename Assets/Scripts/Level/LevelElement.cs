@@ -22,6 +22,12 @@ public class LevelElement : Entity
 
     public virtual Color ColorInEditor()
     {
+        LevelElementColor color;
+        if(TryGetComponent(out color))
+        {
+            return color.color;
+        }
+
         return Color.grey;
     }
 }

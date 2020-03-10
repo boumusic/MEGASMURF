@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_ShapeTest
-  m_Shader: {fileID: 4800000, guid: bac7a4fadf99ec947a0a7dca95545c5d, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -113,7 +113,7 @@ Material:
     - _FresnelShadow: 0
     - _FresnelStrength: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0
     - _GlossyReflections: 1
     - _GradientY: 0
     - _LineSharpness: 0
@@ -151,10 +151,10 @@ Material:
     - __dirty: 0
     m_Colors:
     - _ASEOutlineColor: {r: 1, g: 1, b: 1, a: 0}
-    - _Color: {r: 1, g: 0.85776526, b: 0.5518868, a: 0}
+    - _Color: {r: 0.4764151, g: 0.7471775, b: 1, a: 0}
     - _Color2: {r: 0.745283, g: 0.48696512, b: 0.15819688, a: 0}
-    - _ColorA: {r: 0.24313676, g: 0.58965015, b: 0.972549, a: 0}
-    - _ColorB: {r: 0.2941172, g: 0.4676295, b: 0.96078426, a: 0}
+    - _ColorA: {r: 0.24313673, g: 0.58965015, b: 0.972549, a: 0}
+    - _ColorB: {r: 0.29411718, g: 0.4676295, b: 0.96078426, a: 0}
     - _Emission: {r: 0.0754717, g: 0.072350666, b: 0.07013172, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EyeColor: {r: 0, g: 0, b: 0, a: 1}
