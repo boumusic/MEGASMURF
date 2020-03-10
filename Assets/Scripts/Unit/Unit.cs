@@ -84,15 +84,13 @@ public abstract class Unit : LevelElement
 
     public virtual void MoveTo(Stack<Tile> path)
     {
-        StartCoroutine(MovingTo(path, null));
-        BecomeMoved();
+        StartCoroutine(MovingTo(path, SequenceManager.Instance.Resume));
     }
 
     public virtual void MoveTo(Stack<Tile> path, System.Action action)
     {
         // Lancer une coroutine qui fait parcourir le chemin
         StartCoroutine(MovingTo(path, action));
-        BecomeMoved();
     }
 
     private IEnumerator MovingTo(Stack<Tile> path, System.Action action)
@@ -128,6 +126,7 @@ public abstract class Unit : LevelElement
         SetAnimatorMoving(false);
         FaceCamera();
         action?.Invoke();
+        BecomeMoved();
     }
 
     public virtual void SetAnimatorMoving(bool moving)

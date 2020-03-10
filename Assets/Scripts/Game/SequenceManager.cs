@@ -16,12 +16,19 @@ public class SequenceManager : MonoBehaviour
 
     private Queue<Action> actionQueue;
     private Queue<ActionType> actionTypeQueue;
+    private bool isWaitingForResume;
+    private void Awake()
+    {
+        actionQueue = new Queue<Action>();
+        actionTypeQueue = new Queue<ActionType>();
+        isWaitingForResume = false;
+    }
 
     public void EnQueueAction(Action action, ActionType actionType)
     {
-        if(actionQueue.Count == 0 && actionTypeQueue.Count == 0)
+        if(actionQueue.Count == 0 && actionTypeQueue.Count == 0 && !isWaitingForResume)
         {
-            if (actionTypeQueue.Dequeue() == ActionType.AutomaticResume)
+            if (actionType == ActionType.AutomaticResume)
                 AutomaticAction(action);
             else
                 ManualAction(action);
@@ -31,7 +38,6 @@ public class SequenceManager : MonoBehaviour
             actionQueue.Enqueue(action);
             actionTypeQueue.Enqueue(actionType);
         }
-        
     }
 
     private void AutomaticAction(Action action)
@@ -43,11 +49,14 @@ public class SequenceManager : MonoBehaviour
     private void ManualAction(Action action)
     {
         action?.Invoke();
+        isWaitingForResume = true;
     }
 
     public void Resume()
     {
-        if(actionQueue.Count > 0 && actionTypeQueue.Count > 0)
+        isWaitingForResume = false;
+
+        if (actionQueue.Count > 0 && actionTypeQueue.Count > 0)
         {
             if (actionTypeQueue.Dequeue() == ActionType.AutomaticResume)
                 AutomaticAction(actionQueue.Dequeue());

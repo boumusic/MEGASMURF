@@ -140,6 +140,8 @@ public class ShapeUnit : Unit
         SetAnimatorMoving(false);
         FaceCamera();
         action?.Invoke();
+
+        BecomeMoved();
     }
 
     public void InitiateMergeAlly(ShapeUnit shape)
@@ -204,6 +206,7 @@ public class ShapeUnit : Unit
             shapeBeingMerged = null;
         }
 
+        SequenceManager.Instance.Resume();
         // Autre check 
         // Vanish d'equipement + Refund
     }
