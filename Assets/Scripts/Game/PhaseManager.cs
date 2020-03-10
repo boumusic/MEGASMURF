@@ -10,11 +10,12 @@ public enum GameplayState
     PlayerTurnStart,
     PlayerTurnEnd,
     UnitSelection,
-    ActionSelection,
+    MovementSelection,
     MovementPseudoState,
-    AttackSelection,
-    AttackTargetSelection,
-    AttackPseudoState
+    ActionSelection,
+    MaestroActionInterSelection,
+    ActionTargetSelection,
+    ActionPseudoState
 }
 
 public class PhaseManager : MonoBehaviour
@@ -35,16 +36,18 @@ public class PhaseManager : MonoBehaviour
     public GameEvent playerTurnEndExit;
     public GameEvent unitSelectionEnter;
     public GameEvent unitSelectionExit;
-    public GameEvent actionSelectionEnter;
-    public GameEvent actionSelectionExit;
+    public GameEvent movementSelectionEnter;
+    public GameEvent movementSelectionExit;
     public GameEvent movementPseudoStateEnter;
     public GameEvent movementPseudoStateExit;
-    public GameEvent attackSelectionEnter;
-    public GameEvent attackSelectionExit;
-    public GameEvent attackTargetSelectionEnter;
-    public GameEvent attackTargetSelectionExit;
-    public GameEvent attackPseudoStateEnter;
-    public GameEvent attackPseudoStateExit;
+    public GameEvent actionSelectionEnter;
+    public GameEvent actionSelectionExit;
+    public GameEvent maestroActionInterSelectionEnter;
+    public GameEvent maestroActionInterSelectionExit;
+    public GameEvent actionTargetSelectionEnter;
+    public GameEvent actionTargetSelectionExit;
+    public GameEvent actionPseudoStateEnter;
+    public GameEvent actionPseudoStateExit;
 
     public StateMachine<GameplayState> gameplayState;
 
@@ -123,16 +126,16 @@ public class PhaseManager : MonoBehaviour
         unitSelectionExit?.Invoke();
     }
 
-    private void ActionSelection_Enter()
+    private void MovementSelection_Enter()
     {
-        PrintDebugMessage("Enter ActionSelection State!");
-        actionSelectionEnter?.Invoke();
+        PrintDebugMessage("Enter MovementSelection State!");
+        movementSelectionEnter?.Invoke();
     }
 
-    private void ActionSelection_Exit()
+    private void MovementSelection_Exit()
     {
-        PrintDebugMessage("Exit ActionSelection State!");
-        actionSelectionExit?.Invoke();
+        PrintDebugMessage("Exit MovementSelection State!");
+        movementSelectionExit?.Invoke();
     }
 
     private void MovementPseudoState_Enter()
@@ -147,40 +150,52 @@ public class PhaseManager : MonoBehaviour
         movementPseudoStateExit?.Invoke();
     }
 
-    private void AttackSelection_Enter()
+    private void ActionSelection_Enter()
     {
-        PrintDebugMessage("Enter AttackSelection State!");
-        attackSelectionEnter?.Invoke();
+        PrintDebugMessage("Enter ActionSelection State!");
+        actionSelectionEnter?.Invoke();
     }
 
-    private void AttackSelection_Exit()
+    private void ActionSelection_Exit()
     {
-        PrintDebugMessage("Exit AttackSelection State!");
-        attackSelectionExit?.Invoke();
+        PrintDebugMessage("Exit ActionSelection State!");
+        actionSelectionExit?.Invoke();
     }
 
-    private void AttackTargetSelection_Enter()
+    private void MaestroActionInterSelection_Enter()
     {
-        PrintDebugMessage("Enter AttackTargetSelection State!");
-        attackTargetSelectionEnter?.Invoke();
+        PrintDebugMessage("Enter MaestroActionInterSelection State!");
+        maestroActionInterSelectionEnter?.Invoke();
     }
 
-    private void AttackTargetSelection_Exit()
+    private void MaestroActionInterSelection_Exit()
     {
-        PrintDebugMessage("Exit AttackTargetSelection State!");
-        attackTargetSelectionExit?.Invoke();
+        PrintDebugMessage("Exit MaestroActionInterSelection State!");
+        maestroActionInterSelectionExit?.Invoke();
     }
 
-    private void AttackPseudoState_Enter()
+    private void ActionTargetSelection_Enter()
     {
-        PrintDebugMessage("Enter AttackPseudoState State!");
-        attackPseudoStateEnter?.Invoke();
+        PrintDebugMessage("Enter ActionTargetSelection State!");
+        actionTargetSelectionEnter?.Invoke();
     }
 
-    private void AttackPseudoState_Exit()
+    private void ActionTargetSelection_Exit()
     {
-        PrintDebugMessage("Exit AttackPseudoState State!");
-        attackPseudoStateExit?.Invoke();
+        PrintDebugMessage("Exit ActionTargetSelection State!");
+        actionTargetSelectionExit?.Invoke();
+    }
+
+    private void ActionPseudoState_Enter()
+    {
+        PrintDebugMessage("Enter ActionPseudoState State!");
+        actionPseudoStateEnter?.Invoke();
+    }
+
+    private void ActionPseudoState_Exit()
+    {
+        PrintDebugMessage("Exit ActionPseudoState State!");
+        actionPseudoStateExit?.Invoke();
     }
     #endregion
 }

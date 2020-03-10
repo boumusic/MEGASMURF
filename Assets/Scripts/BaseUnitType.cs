@@ -5,9 +5,14 @@ using UnityEngine;
 public enum BaseUnitType
 {
     NONE,
+    Maestro,
     Triangle,
     Circle,
     Square,
-    ShapeComposite
+    ShapeComposite,
     // Enemy Type
+    Nene,
+    Bombi,
+    Bombito,
+    Patrolio
 }

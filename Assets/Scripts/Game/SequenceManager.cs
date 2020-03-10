@@ -55,4 +55,10 @@ public class SequenceManager : MonoBehaviour
                 ManualAction(actionQueue.Dequeue());
         }
     }
+
+    public void Clear()
+    {
+        actionQueue.Clear();
+        actionTypeQueue.Clear();
+    }
 }
