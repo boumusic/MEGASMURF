@@ -270,15 +270,18 @@ public class Enemy : Unit
     {
         if (BattleManager.Instance.IsCurrentPlayerUnit(this))
             AIManager.instance.AIDeathCallBack();
+        Tile tile = currentTile;
         base.Die();
-        if(unitBase.unitType == BaseUnitType.Bombi)
+        if (unitBase.unitType == BaseUnitType.Bombi)
         {
             GameObject bombito = UnitFactory.Instance.CreateUnit(BaseUnitType.Bombito);
             if (bombito != null)
             {
                 Enemy script = bombito.GetComponent<Enemy>();
-                if (script != null) {
-                    script.SetUnitPosition(currentTile);
+                BattleManager.Instance.AddUnitToPlayerUnitList(BattleManager.Instance.CurrentPlayerID, bombito);
+                if (script != null) 
+                {
+                    script.SetUnitPosition(tile);
                     script.BecomeExhausted();
                 }
             }
