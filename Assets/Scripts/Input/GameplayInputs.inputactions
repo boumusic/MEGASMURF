@@ -30,9 +30,33 @@
                     "interactions": "Press"
                 },
                 {
-                    "name": "Attack",
+                    "name": "Action",
                     "type": "Button",
                     "id": "fe6a4782-8b47-484a-9d20-60152bac403d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Triangle",
+                    "type": "Button",
+                    "id": "9ef3ac7d-473c-4e58-a026-605618798b07",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Circle",
+                    "type": "Button",
+                    "id": "f4a990f1-c0dd-4937-bf64-b448b0ab59ee",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Square",
+                    "type": "Button",
+                    "id": "dbb90e4b-af65-4f24-bea4-1d5676e1cf85",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press"
@@ -140,17 +164,6 @@
                 },
                 {
                     "name": "",
-                    "id": "283f68fd-7f7b-4bc6-a120-c2bde534ac40",
-                    "path": "<Keyboard>/#(C)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e8539e77-8832-4fa9-86a2-fdf8a1a25e1f",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -167,7 +180,40 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Attack",
+                    "action": "Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bdb8ae41-5985-4077-bcb2-465d7a5e6c63",
+                    "path": "<Keyboard>/#(T)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Triangle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f1b2aac-dc6e-4f89-967d-471f36cf514a",
+                    "path": "<Keyboard>/#(C)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Circle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab2a982d-663d-4c19-919d-8a3c0b4d1beb",
+                    "path": "<Keyboard>/#(S)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Square",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

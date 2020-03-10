@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a5d308be88dce459d4943a6850774a, type: 3}
   m_Name: Grabb
   m_EditorClassIdentifier: 
-  unitType: 2
+  unitType: 0
   attackPatterns:
   - {fileID: 11400000, guid: 9a54618e973647b4b9fbf960e75d0585, type: 2}
   movementPatterns:

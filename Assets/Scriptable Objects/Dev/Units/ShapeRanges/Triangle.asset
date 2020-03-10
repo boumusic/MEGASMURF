@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a5d308be88dce459d4943a6850774a, type: 3}
   m_Name: Triangle
   m_EditorClassIdentifier: 
-  unitType: 1
+  unitType: 2
   attackPatterns:
   - {fileID: 11400000, guid: dac9466cfd3083d419d964dc2be78ba5, type: 2}
   - {fileID: 11400000, guid: ff373f1c83cfe4743aea0fb005f57f1d, type: 2}

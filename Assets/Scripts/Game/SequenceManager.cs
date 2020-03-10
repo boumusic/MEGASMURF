@@ -11,8 +11,8 @@ public enum ActionType
 
 public class SequenceManager : MonoBehaviour
 {
-    private static BattleManager instance;
-    public static BattleManager Instance { get { if (!instance) instance = FindObjectOfType<BattleManager>(); return instance; } }
+    private static SequenceManager instance;
+    public static SequenceManager Instance { get { if (!instance) instance = FindObjectOfType<SequenceManager>(); return instance; } }
 
     private Queue<Action> actionQueue;
     private Queue<ActionType> actionTypeQueue;
@@ -54,5 +54,11 @@ public class SequenceManager : MonoBehaviour
             else
                 ManualAction(actionQueue.Dequeue());
         }
+    }
+
+    public void Clear()
+    {
+        actionQueue.Clear();
+        actionTypeQueue.Clear();
     }
 }

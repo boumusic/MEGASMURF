@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a5d308be88dce459d4943a6850774a, type: 3}
   m_Name: Rond
   m_EditorClassIdentifier: 
-  unitType: 2
+  unitType: 3
   attackPatterns:
   - {fileID: 11400000, guid: 34c5d417ea80fb941a4c7b61ed785596, type: 2}
   - {fileID: 11400000, guid: 9695c9bc90897964791764aa4158e77d, type: 2}
