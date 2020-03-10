@@ -186,16 +186,6 @@ public abstract class Unit : LevelElement
                 break;
         }
 
-        if(unitBase.unitType == BaseUnitType.Bombi)
-        {
-            Die();
-            //SpawnBombito
-        }
-        if (unitBase.unitType == BaseUnitType.Bombito)
-        {
-            Die();
-        }
-
         BecomeExhausted();
     }
 

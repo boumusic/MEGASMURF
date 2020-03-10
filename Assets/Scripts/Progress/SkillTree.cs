@@ -28,15 +28,15 @@ public class SkillTree
             case SkillType.IncreaseArmy:
                 if (tree[(int)type + 3]) 
                 {
-                    effect += 2;
+                    effect += 1;
                 }
                 if (tree[(int)type + 2])
                 {
-                    effect += 2;
+                    effect += 1;
                 }
                 if (tree[(int)type + 1])
                 {
-                    effect += 2;
+                    effect += 1;
                 }
                 return effect;
             case SkillType.MoreLoot:

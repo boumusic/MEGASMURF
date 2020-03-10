@@ -51,7 +51,7 @@ public class SaveManager: MonoBehaviour
 
             GameManager.ShapeMud = save.shapemud;
             GameManager.SkillTree.tree = save.skilltree;
-            GameManager.units = save.team.GetUnits();
+            //GameManager.units = save.team.GetUnits();
 
             Debug.Log("Game Loaded");
         }
