@@ -88,13 +88,14 @@ public class Save
     public int shapemud;
     [SerializeField]
     public Dictionary<int, bool> skilltree;
-    [SerializeField]
-    public Team team;
+    
+    /*[SerializeField]
+    public Team team;*/
 
     public Save()
     {
         shapemud = GameManager.ShapeMud;
         skilltree = GameManager.SkillTree.tree;
-        team = new Team(GameManager.units);
+        //team = new Team(GameManager.units);
     }
 }
