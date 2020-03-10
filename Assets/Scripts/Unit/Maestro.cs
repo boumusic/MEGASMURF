@@ -8,12 +8,9 @@ public class Maestro : Unit
     private int maxShapes;
 
     [HideInInspector]
-    public Range maestroRange;
+    public int rangeLvl;
 
-    public Range rangeLvl0;
-    public Range rangeLvl1;
-    public Range rangeLvl2;
-    public Range rangeLvl3;
+    public int summonCost;
 
     public override Tile CurrentTile
     {
@@ -39,21 +36,7 @@ public class Maestro : Unit
     public void InitMaestro()
     {
         maxShapes = 4 + GameManager.SkillTree.CheckEffect(SkillType.IncreaseArmy);
-        switch (GameManager.SkillTree.CheckEffect(SkillType.MaestroMobility))
-        {
-            case 1:
-                maestroRange = rangeLvl1;
-                break;
-            case 2:
-                maestroRange = rangeLvl2;
-                break;
-            case 3:
-                maestroRange = rangeLvl3;
-                break;
-            default:
-                maestroRange = rangeLvl0;
-                break;
-        }
+        rangeLvl = GameManager.SkillTree.CheckEffect(SkillType.MaestroMobility);
         unitBase.unitStats.maxHealth = 3 + GameManager.SkillTree.CheckEffect(SkillType.MaestroLife);
     }
 
