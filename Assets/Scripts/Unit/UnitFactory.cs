@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitFactory : ScriptableObject
+public class UnitFactory : MonoBehaviour
 {
     private static UnitFactory instance;
     public static UnitFactory Instance { get { if (!instance) instance = FindObjectOfType<UnitFactory>(); return instance; } }

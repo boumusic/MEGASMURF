@@ -406,7 +406,7 @@ public class BattleManager : MonoBehaviour
     public void AddUnitToPlayerUnitList(int playerID, GameObject unitGameObject)
     {
         Unit unit;
-        if ((unit = unitGameObject.GetComponent<Unit>()) != null && playerID < playerUnits.Count)
+        if ((unit = unitGameObject.GetComponent<Unit>()) != null && playerID < players.Length)
             playerUnits[playerID].Add(unit);
     }
 
