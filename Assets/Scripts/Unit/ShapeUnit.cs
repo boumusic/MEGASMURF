@@ -83,6 +83,65 @@ public class ShapeUnit : Unit
 
     private ShapeUnit shapeBeingMerged;
 
+    public override void MoveTo(Stack<Tile> path)
+    {
+        StartCoroutine(MovingTo(path, null));
+        BecomeMoved();
+    }
+
+    public override void MoveTo(Stack<Tile> path, System.Action action)
+    {
+        // Lancer une coroutine qui fait parcourir le chemin
+        StartCoroutine(MovingTo(path, action));
+        BecomeMoved();
+    }
+
+    private IEnumerator MovingTo(Stack<Tile> path, System.Action action)
+    {
+        SetAnimatorMoving(true);
+
+        TileType tempType = TileType.Free;
+
+        if (currentTile != null)
+        {
+            currentTile.unit = null;
+            tempType = currentTile.type;
+            currentTile.type = TileType.Free;
+        }
+        while (path.Count > 0)
+        {
+            if (path.Count == 1)
+            {
+                if (path.Peek().type == TileType.Ally)
+                {
+                    (path.Pop().unit as ShapeUnit).InitiateMergeAlly(this as ShapeUnit);
+                    currentTile = null;
+                    break;
+                }
+            }
+
+            Tile destinationTile = path.Pop();
+            Vector3 pos = destinationTile.transform.position;
+            transform.forward = (pos - transform.position).normalized;
+            while (transform.position != pos)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, pos, UnitStats.moveSpeed);
+                yield return new WaitForFixedUpdate();
+            }
+            CurrentTile = destinationTile;
+        }
+
+        if (currentTile != null)
+        {
+            currentTile.unit = this;
+            currentTile.type = tempType;
+        }
+
+        SetAnimatorMoving(false);
+        FaceCamera();
+        action?.Invoke();
+    }
+
     public void InitiateMergeAlly(ShapeUnit shape)
     {
         InitiateMergeAlly(shape, null);
