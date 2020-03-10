@@ -40,4 +40,19 @@ public class Maestro : Unit
         unitBase.unitStats.maxHealth = 3 + GameManager.SkillTree.CheckEffect(SkillType.MaestroLife);
     }
 
+    public override void Attack(List<Tile> tiles)
+    {
+        //No Attack
+    }
+
+    public void SummonUnit(BaseUnitType unitType, Tile tile)
+    {
+        GameObject newUnitGameObject = UnitFactory.Instance.CreateUnit(unitType);
+        ShapeUnit newUnit;
+        if ((newUnit = newUnitGameObject.GetComponent<ShapeUnit>()) != null)
+        {
+            BattleManager.Instance.AddUnitToPlayerUnitList(BattleManager.Instance.CurrentPlayerID, newUnitGameObject);
+            newUnit.GetComponent<ShapeUnit>()?.SetUnitPosition(tile);
+        }
+    }
 }
