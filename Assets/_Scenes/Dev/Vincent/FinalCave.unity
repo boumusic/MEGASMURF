@@ -6379,7 +6379,7 @@ PrefabInstance:
         type: 3}
       propertyPath: debugRoom
       value: 
-      objectReference: {fileID: 11400000, guid: 99f8bdb635b961b42bd72ba140ca1566,
+      objectReference: {fileID: 11400000, guid: b58e27139d11fd3488fa3d6d4f6a6983,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f, type: 3}
