@@ -116,11 +116,11 @@ public class BattleManager : MonoBehaviour
     private void PlayerTurnStartEnter()
     {
         //Anim de debut de tour
-        OnPlayerTurnStart?.Invoke();
-                                                                                                              
-        FreshupUnits(playerUnits[CurrentPlayerID]);
-        
-        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.UnitSelection);
+        SequenceManager.Instance.EnQueueAction(OnPlayerTurnStart, ActionType.AutomaticResume);
+
+        SequenceManager.Instance.EnQueueAction(FreshenUpCurrentPlayerUnits, ActionType.AutomaticResume);
+
+        SequenceManager.Instance.EnQueueAction(EnterUnitSelectionState, ActionType.AutomaticResume);
     }
 
     private void PlayerTurnStartExit()
@@ -130,13 +130,13 @@ public class BattleManager : MonoBehaviour
 
     private void PlayerTurnEndEnter()
     {
-        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.PlayerTurnStart);                                                                      //Change Current Player!
+        SequenceManager.Instance.EnQueueAction(EnterPlayerTurnStartState, ActionType.AutomaticResume);                                                                     //Change Current Player!
     }
 
     private void PlayerTurnEndExit()
     {
-        CurrentPlayer.DisableInput();
-        CurrentPlayerID = (CurrentPlayerID + 1) % players.Length;
+        SequenceManager.Instance.EnQueueAction(CurrentPlayer.DisableInput, ActionType.AutomaticResume);
+        SequenceManager.Instance.EnQueueAction(NextPlayer, ActionType.AutomaticResume);
     }
 
     private void UnitSelectionEnter()
@@ -158,7 +158,7 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
-        CurrentPlayer.EnableInput();
+        SequenceManager.Instance.EnQueueAction(CurrentPlayer.EnableInput, ActionType.AutomaticResume);
     }
 
     private void UnitSelectionExit()
@@ -298,6 +298,11 @@ public class BattleManager : MonoBehaviour
         //Remettre l'ancien delegate de cancel dans cancel
     }
 
+    public void EnterPlayerTurnStartState()
+    {
+        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.PlayerTurnStart);
+    }
+
     public void PlayerEndTurn()
     {
         PhaseManager.Instance.gameplayState.ChangeState(GameplayState.PlayerTurnEnd);
@@ -397,6 +402,12 @@ public class BattleManager : MonoBehaviour
     #endregion
 
     #region Utility
+
+    private void NextPlayer()
+    {
+        CurrentPlayerID = (CurrentPlayerID + 1) % players.Length;
+    }
+
     private void FillPlayerUnitList(int playerID, GameObject[] startingUnits)
     {
         foreach (GameObject unitGameObject in startingUnits)
@@ -448,6 +459,11 @@ public class BattleManager : MonoBehaviour
                 return false;
         }
         return true;
+    }
+
+    private void FreshenUpCurrentPlayerUnits()
+    {
+        FreshupUnits(playerUnits[CurrentPlayerID]);
     }
 
     private void FreshupUnits(List<Unit> units)
