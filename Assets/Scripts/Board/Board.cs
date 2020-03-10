@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+public enum Direction
+{
+    Up,
+    Down,
+    Left,
+    Right
+}
+
 public class Board : MonoBehaviour
 {
 
@@ -179,6 +187,48 @@ public class Board : MonoBehaviour
             {
                 tiles.Add(t);
             }
+        }
+        return tiles;
+    }
+
+    public List<Tile> GetTilesInLine(Tile tile, Direction dir)
+    {
+        List<Tile> tiles = new List<Tile>();
+        Vector2 v = tile.Coords;
+        switch (dir)
+        {
+            case Direction.Down:
+                v = new Vector2(v.x, v.y - 1);
+                while(GetTile(v) != null)
+                {
+                    tiles.Add(GetTile(v));
+                    v = new Vector2(v.x, v.y - 1);
+                }
+                break;
+            case Direction.Up:
+                v = new Vector2(v.x, v.y + 1);
+                while (GetTile(v) != null)
+                {
+                    tiles.Add(GetTile(v));
+                    v = new Vector2(v.x, v.y - 1);
+                }
+                break;
+            case Direction.Left:
+                v = new Vector2(v.x - 1, v.y);
+                while (GetTile(v) != null)
+                {
+                    tiles.Add(GetTile(v));
+                    v = new Vector2(v.x - 1, v.y);
+                }
+                break;
+            case Direction.Right:
+                v = new Vector2(v.x + 1, v.y);
+                while (GetTile(v) != null)
+                {
+                    tiles.Add(GetTile(v));
+                    v = new Vector2(v.x + 1, v.y);
+                }
+                break;
         }
         return tiles;
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a5d308be88dce459d4943a6850774a, type: 3}
   m_Name: Patrolio
   m_EditorClassIdentifier: 
-  unitType: 2
+  unitType: 8
   attackPatterns:
   - {fileID: 11400000, guid: 349314bee17aab546b90f63e762003db, type: 2}
   movementPatterns:

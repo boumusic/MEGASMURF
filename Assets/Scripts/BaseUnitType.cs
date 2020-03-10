@@ -8,6 +8,10 @@ public enum BaseUnitType
     Triangle,
     Circle,
     Square,
-    ShapeComposite
+    ShapeComposite,
     // Enemy Type
+    Nene,
+    Bombi,
+    Bombito,
+    Patrolio
 }
