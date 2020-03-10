@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a5d308be88dce459d4943a6850774a, type: 3}
   m_Name: Nene
   m_EditorClassIdentifier: 
-  unitType: 3
+  unitType: 5
   attackPatterns:
   - {fileID: 11400000, guid: b86e8f1f951aabf4a9c018b4ba1bc381, type: 2}
   movementPatterns:
