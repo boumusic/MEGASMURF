@@ -199,10 +199,6 @@ public class Enemy : Unit
         else if (UnitMovementPattern.type == MovementPatternType.Walk)
         {
             Stack<Tile> path = RangeManager.Instance.AIPathfinding(CurrentTile);
-            if (path.Count > 0 && path.Peek().type == TileType.Ally)
-            {
-                closestUnit = path.Pop().unit;
-            }
             while (path.Count > 0)
             {
                 if(UnitMovementPattern.range.coords.Contains(path.Peek().Coords - CurrentTile.Coords))

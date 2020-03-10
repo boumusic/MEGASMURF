@@ -278,7 +278,7 @@ public class RangeManager : MonoBehaviour
         Stack<Tile> path = new Stack<Tile>();
         if (closestUnitTile != null)
         {
-            path.Push(closestUnitTile);
+            //path.Push(closestUnitTile);
             foreach (Tile t in rangePaths[closestUnitTile])
             {
                 path.Push(t);
