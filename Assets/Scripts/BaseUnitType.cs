@@ -5,6 +5,7 @@ using UnityEngine;
 public enum BaseUnitType
 {
     NONE,
+    Maestro,
     Triangle,
     Circle,
     Square,

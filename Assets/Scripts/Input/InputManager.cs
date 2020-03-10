@@ -12,15 +12,21 @@ public class InputManager : MonoBehaviour
     private GameObject objectUnderMouse;
 
     public Action OnCancel;
-    public Action OnAttackButtonPress;
+    public Action OnActionButtonPress;
+    public Action OnCircleButtonPress;
+    public Action OnTriangleButtonPress;
+    public Action OnSquareButtonPress;
     public Action<Tile> OnTileMouseOver;
     public Action<Unit> OnUnitSelection;
     public Action<Tile> OnTileSelection;
 
     private PlayerInput playerInput;
 
-    private InputAction AttackAction;
+    private InputAction ActionAction;
     private InputAction CancelAction;
+    private InputAction CircleAction;
+    private InputAction TriangleAction;
+    private InputAction SquareAction;
 
     public Tile currentTile { get; private set; }
     
@@ -29,16 +35,22 @@ public class InputManager : MonoBehaviour
         instance = this;
 
         playerInput = GetComponent<PlayerInput>();
-        AttackAction = playerInput.actions.FindAction("Attack");
+        ActionAction = playerInput.actions.FindAction("Action");
         CancelAction = playerInput.actions.FindAction("Cancel");
+        CircleAction = playerInput.actions.FindAction("Circle");
+        TriangleAction = playerInput.actions.FindAction("Triangle");
+        SquareAction = playerInput.actions.FindAction("Square");
 
-        AttackAction.performed += SendAttackButtonEvent;
+        ActionAction.performed += SendActionButtonEvent;
         CancelAction.performed += SendCancelEvent;
+        CircleAction.performed += SendCircleButtonEvent;
+        TriangleAction.performed += SendTriangleButtonEvent;
+        SquareAction.performed += SendSquareButtonEvent;
     }
 
     private void OnDestroy()
     {
-        AttackAction.performed -= SendAttackButtonEvent;
+        ActionAction.performed -= SendActionButtonEvent;
         CancelAction.performed -= SendCancelEvent;
     }
 
@@ -57,13 +69,36 @@ public class InputManager : MonoBehaviour
         OnCancel?.Invoke();
     }
 
-    public void SendAttackButtonEvent(InputAction.CallbackContext context)
+    public void SendActionButtonEvent(InputAction.CallbackContext context)
     {
-
         if (context.phase != InputActionPhase.Performed)
             return;
 
-        OnAttackButtonPress?.Invoke();
+        OnActionButtonPress?.Invoke();
+    }
+
+    public void SendCircleButtonEvent(InputAction.CallbackContext context)
+    {
+        if (context.phase != InputActionPhase.Performed)
+            return;
+
+        OnCircleButtonPress?.Invoke();
+    }
+
+    public void SendTriangleButtonEvent(InputAction.CallbackContext context)
+    {
+        if (context.phase != InputActionPhase.Performed)
+            return;
+
+        OnTriangleButtonPress?.Invoke();
+    }
+
+    public void SendSquareButtonEvent(InputAction.CallbackContext context)
+    {
+        if (context.phase != InputActionPhase.Performed)
+            return;
+
+        OnSquareButtonPress?.Invoke();
     }
 
     public void SendUnitSelection(Unit unit)

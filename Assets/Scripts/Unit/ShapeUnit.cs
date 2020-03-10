@@ -207,4 +207,18 @@ public class ShapeUnit : Unit
         // Autre check 
         // Vanish d'equipement + Refund
     }
+
+    public void NonGampelayMerge(ShapeUnit shape)
+    {
+        if (shape.UnitMergeLevel == 0)
+        {
+            if (UnitMergeLevel < 2)
+                mergedUnits.Add(shape);
+            else
+                Debug.LogError("Illicite Merge: bottom unit is already at max level");
+        }
+        else
+            Debug.LogError("Illicite Merge: intiating unit is not level 0");
+
+    }
 }

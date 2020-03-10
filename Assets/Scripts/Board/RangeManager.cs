@@ -115,6 +115,17 @@ public class RangeManager : MonoBehaviour
             }
         }
         attackRange = Board.Instance.GetTiles(correctedRange.coords);
+        if(unitTile.type == TileType.Obstacle)
+        {
+            foreach(Tile t in attackRange)
+            {
+                if(t.type == TileType.Free)
+                {
+                    attackPaths.Add(t, new List<Tile> { t });
+                }
+            }
+            return;
+        }
         switch (pattern.type)
         {
             case AttackPatternType.All:
@@ -464,13 +475,27 @@ public class RangeManager : MonoBehaviour
                     }
                     else
                     {
-                        tile.TriggerAnimation(TileAnim.Attack);
+                        if (unitTile.type == TileType.Obstacle)
+                        {
+                            tile.TriggerAnimation(TileAnim.Summon);
+                        }
+                        else
+                        {
+                            tile.TriggerAnimation(TileAnim.Attack);
+                        }
 
                     }
                 }
                 else
                 {
-                    tile.TriggerAnimation(TileAnim.Attack);
+                    if (unitTile.type == TileType.Obstacle)
+                    {
+                        tile.TriggerAnimation(TileAnim.Summon);
+                    }
+                    else
+                    {
+                        tile.TriggerAnimation(TileAnim.Attack);
+                    }
                 }
             }
             else

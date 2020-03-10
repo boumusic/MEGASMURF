@@ -8,10 +8,14 @@ public abstract class Player : MonoBehaviour
     public bool areRangeDisplayed;
 
     public Action OnCancel;
-    public Action OnAttackButtonPress;
+    public Action OnActionButtonPress;
+    public Action OnCircleButtonPress;
+    public Action OnTriangleButtonPress;
+    public Action OnSquareButtonPress;
     public Action<Tile> OnTileMouseOver;
     public Action<Unit> OnUnitSelection;
     public Action<Tile> OnTileSelection;
+
 
     public abstract void EnableInput();
 
@@ -22,9 +26,24 @@ public abstract class Player : MonoBehaviour
         OnCancel?.Invoke();
     }
 
-    public virtual void CallOnAttackButtonPress()
+    public virtual void CallOnActionButtonPress()
     {
-        OnAttackButtonPress?.Invoke();
+        OnActionButtonPress?.Invoke();
+    }
+
+    public virtual void CallOnCircleButtonPress()
+    {
+        OnCircleButtonPress?.Invoke();
+    }
+
+    public virtual void CallOnTriangleButtonPress()
+    {
+        OnTriangleButtonPress?.Invoke();
+    }
+
+    public virtual void CallOnSquareButtonPress()
+    {
+        OnSquareButtonPress?.Invoke();
     }
 
     public virtual void CallOnTileMouseOver(Tile tile)

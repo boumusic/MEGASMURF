@@ -19,10 +19,11 @@ public class UnitFactory : ScriptableObject
 
     private void InitializeDictionary()
     {
-        foreach(UnitPage unitPage in unitEncylopedia.unitPages)
+        foreach(UnitBlueprint unitBlueprint in unitEncylopedia.unitBlueprints)
         {
-            if (!unitDictionary.ContainsKey(unitPage.unitType))
-                unitDictionary.Add(unitPage.unitType, unitPage.unitPrefab);
+            BaseUnitType currentUnitType = unitBlueprint.unitPrefab.GetComponent<Unit>().unitBase.unitType;
+            if (!unitDictionary.ContainsKey(currentUnitType))
+                unitDictionary.Add(currentUnitType, unitBlueprint.unitPrefab);
             else
                 Debug.LogError("UnitEncylopedia: The encylopedia contains 2 units with the same type!");
         }

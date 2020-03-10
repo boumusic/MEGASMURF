@@ -19,6 +19,7 @@ public enum TileAnim
     MovementMouseOver,
     Attack,
     AttackMouseOver,
+    Summon,
     Disabled
 }
 
@@ -124,6 +125,9 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
                     break;
                 case TileAnim.AttackMouseOver:
                     animator.SetTrigger("AttackMouseOver");
+                    break;
+                case TileAnim.Summon:
+                    animator.SetTrigger("Summon");
                     break;
                 case TileAnim.Disabled:
                     animator.SetTrigger("Disabled");

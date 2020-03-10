@@ -9,6 +9,8 @@ public class Enemy : Unit
     public bool activated;
     public int calls;
 
+    private Tile priorityDestination;
+
     protected override void Awake()
     {
         base.Awake();
@@ -41,6 +43,7 @@ public class Enemy : Unit
     {
         if (!activated)
         {
+            priorityDestination = null;
             calls++;
             activated = true;
             if (CurrentUnitState == UnitState.Fresh)
@@ -67,70 +70,99 @@ public class Enemy : Unit
         }
     }
 
+    public List<Tile> IsInPatrolRange(Tile tile)
+    {
+        List<Tile> targets = new List<Tile>();
+
+        if(tile == null || (!tile.Equals(currentTile) && tile.type != TileType.Free))
+        {
+            return targets;
+        }
+        List<Tile> upLine = Board.Instance.GetTilesInLine(tile, Direction.Up);
+        List<Tile> downLine = Board.Instance.GetTilesInLine(tile, Direction.Down);
+        List<Tile> leftLine = Board.Instance.GetTilesInLine(tile, Direction.Left);
+        List<Tile> rightLine = Board.Instance.GetTilesInLine(tile, Direction.Right);
+
+        List<Tile> tempLine = new List<Tile>();
+        foreach (Tile t in upLine)
+        {
+            if (t.type == TileType.Ally)
+            {
+                tempLine.Add(t);
+            }
+        }
+        upLine.Clear();
+        upLine.AddRange(tempLine);
+        targets = upLine;
+        tempLine.Clear();
+        foreach (Tile t in downLine)
+        {
+            if (t.type == TileType.Ally)
+            {
+                tempLine.Add(t);
+            }
+        }
+        downLine.Clear();
+        downLine.AddRange(tempLine);
+        if (downLine.Count > targets.Count)
+        {
+            targets = downLine;
+        }
+        tempLine.Clear();
+        foreach (Tile t in leftLine)
+        {
+            if (t.type == TileType.Ally)
+            {
+                tempLine.Add(t);
+            }
+        }
+        leftLine.Clear();
+        leftLine.AddRange(tempLine);
+        if (leftLine.Count > targets.Count)
+        {
+            targets = leftLine;
+        }
+        tempLine.Clear();
+        foreach (Tile t in rightLine)
+        {
+            if (t.type == TileType.Ally)
+            {
+                tempLine.Add(t);
+            }
+        }
+        rightLine.Clear();
+        rightLine.AddRange(tempLine);
+        if (rightLine.Count > targets.Count)
+        {
+            targets = rightLine;
+        }
+        tempLine.Clear();
+
+        return targets;
+    }
+
     public List<Tile> FindEnemiesInRange()
     {
         List<Tile> targets = new List<Tile>();
+        priorityDestination = null;
         if (unitBase.unitType == BaseUnitType.Patrolio)
         {
-            List<Tile> upLine = Board.Instance.GetTilesInLine(currentTile, Direction.Up);
-            List<Tile> downLine = Board.Instance.GetTilesInLine(currentTile, Direction.Down);
-            List<Tile> leftLine = Board.Instance.GetTilesInLine(currentTile, Direction.Left);
-            List<Tile> rightLine = Board.Instance.GetTilesInLine(currentTile, Direction.Right);
+            targets = IsInPatrolRange(currentTile);
 
-            List<Tile> tempLine = new List<Tile>();
-            foreach(Tile t in upLine)
+            if(targets.Count == 0)
             {
-                if(t.type == TileType.Ally)
+                foreach(Tile t in currentTile.GetNeighbors())
                 {
-                    tempLine.Add(t);
+                    List<Tile> newTargets = IsInPatrolRange(t);
+                    if (newTargets.Count > targets.Count)
+                    {
+                        targets.Clear();
+                        targets.AddRange(newTargets);
+                        priorityDestination = t;
+                    }
                 }
+                targets.Clear();
             }
-            upLine.Clear();
-            upLine.AddRange(tempLine);
-            targets = upLine;
-            tempLine.Clear();
-            foreach (Tile t in downLine)
-            {
-                if (t.type == TileType.Ally)
-                {
-                    tempLine.Add(t);
-                }
-            }
-            downLine.Clear();
-            downLine.AddRange(tempLine);
-            if (downLine.Count > targets.Count)
-            {
-                targets = downLine;
-            }
-            tempLine.Clear();
-            foreach (Tile t in leftLine)
-            {
-                if (t.type == TileType.Ally)
-                {
-                    tempLine.Add(t);
-                }
-            }
-            leftLine.Clear();
-            leftLine.AddRange(tempLine);
-            if (leftLine.Count > targets.Count)
-            {
-                targets = leftLine;
-            }
-            tempLine.Clear();
-            foreach (Tile t in rightLine)
-            {
-                if (t.type == TileType.Ally)
-                {
-                    tempLine.Add(t);
-                }
-            }
-            rightLine.Clear();
-            rightLine.AddRange(tempLine);
-            if (rightLine.Count > targets.Count)
-            {
-                targets = rightLine;
-            }
-            tempLine.Clear();
 
             return targets;
         }
@@ -198,6 +230,12 @@ public class Enemy : Unit
         }
         else if (UnitMovementPattern.type == MovementPatternType.Walk)
         {
+            if(priorityDestination != null)
+            {
+                Stack<Tile> priorityPath = new Stack<Tile>();
+                priorityPath.Push(priorityDestination);
+                return priorityPath;
+            }
             Stack<Tile> path = RangeManager.Instance.AIPathfinding(CurrentTile);
             while (path.Count > 0)
             {
@@ -214,12 +252,37 @@ public class Enemy : Unit
         return destination;
     }
 
+    public override void Attack(List<Tile> tiles)
+    {
+        base.Attack(tiles);
+
+        if (unitBase.unitType == BaseUnitType.Bombi)
+        {
+            Die();
+        }
+        if (unitBase.unitType == BaseUnitType.Bombito)
+        {
+            Die();
+        }
+    }
+
     protected override void Die()
     {
         if (BattleManager.Instance.IsCurrentPlayerUnit(this))
             AIManager.instance.AIDeathCallBack();
         base.Die();
-        
+        if(unitBase.unitType == BaseUnitType.Bombi)
+        {
+            GameObject bombito = UnitFactory.Instance.CreateUnit(BaseUnitType.Bombito);
+            if (bombito != null)
+            {
+                Enemy script = bombito.GetComponent<Enemy>();
+                if (script != null) {
+                    script.SetUnitPosition(currentTile);
+                    script.BecomeExhausted();
+                }
+            }
+        }
     }
 
     public override Color ColorInEditor()
