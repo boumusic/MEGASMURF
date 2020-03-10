@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Smoke
+  m_Name: M_Smoke_Radial
   m_Shader: {fileID: 4800000, guid: 9cc45e8f7db43e54f8cea791ac9420db, type: 3}
   m_ShaderKeywords: USE_DISTORTION USE_GRADIENT_MAP USE_SECONDARY_TEX _USEALPHA_ON
     _USECUSTOMDATA_ON _USEEMISSIVE_ON
