@@ -231,6 +231,7 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnCircleButtonPress += SelectCircleShape;
         CurrentPlayer.OnTriangleButtonPress += SelectTriangleShape;
         CurrentPlayer.OnSquareButtonPress += SelectSquareShape;
+        CurrentPlayer.OnCancel += EnterActionSelectionState;
     }
     
     private void MaestroActionInterSelectionExit()
@@ -238,6 +239,7 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnCircleButtonPress -= SelectCircleShape;
         CurrentPlayer.OnTriangleButtonPress -= SelectTriangleShape;
         CurrentPlayer.OnSquareButtonPress -= SelectSquareShape;
+        CurrentPlayer.OnCancel -= EnterActionSelectionState;
     }
 
     private void ActionTargetSelectionEnter()                                                                                       // BIG CHANGES
@@ -459,16 +461,19 @@ public class BattleManager : MonoBehaviour
     private void SelectCircleShape()
     {
         SelectedUnitTypeToBeSummon = BaseUnitType.Circle;
+        EnterActionTargetSelectionState();
     }
 
     private void SelectTriangleShape()
     {
         SelectedUnitTypeToBeSummon = BaseUnitType.Triangle;
+        EnterActionTargetSelectionState();
     }
 
     private void SelectSquareShape()
     {
         SelectedUnitTypeToBeSummon = BaseUnitType.Square;
+        EnterActionTargetSelectionState();
     }
 
     private void GetUnitMovementRange()
