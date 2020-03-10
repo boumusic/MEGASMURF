@@ -252,12 +252,37 @@ public class Enemy : Unit
         return destination;
     }
 
+    public override void Attack(List<Tile> tiles)
+    {
+        base.Attack(tiles);
+
+        if (unitBase.unitType == BaseUnitType.Bombi)
+        {
+            Die();
+        }
+        if (unitBase.unitType == BaseUnitType.Bombito)
+        {
+            Die();
+        }
+    }
+
     protected override void Die()
     {
         if (BattleManager.Instance.IsCurrentPlayerUnit(this))
             AIManager.instance.AIDeathCallBack();
         base.Die();
-        
+        if(unitBase.unitType == BaseUnitType.Bombi)
+        {
+            GameObject bombito = UnitFactory.Instance.CreateUnit(BaseUnitType.Bombito);
+            if (bombito != null)
+            {
+                Enemy script = bombito.GetComponent<Enemy>();
+                if (script != null) {
+                    script.SetUnitPosition(currentTile);
+                    script.BecomeExhausted();
+                }
+            }
+        }
     }
 
     public override Color ColorInEditor()
