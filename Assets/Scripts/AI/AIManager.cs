@@ -15,21 +15,27 @@ public class AIManager : MonoBehaviour
 
     public void StartTurn()
     {
-        for (unitIterrator = 0; unitIterrator < BattleManager.Instance.playerUnits[BattleManager.Instance.CurrentPlayerID].Count; unitIterrator++)
+        unitIterrator = 0;
+        SequenceManager.Instance.EnQueueAction(ExecuteNextUnitActionsequence, ActionType.ManualResume);
+    }
+
+    private void ExecuteNextUnitActionsequence()
+    {
+        if(unitIterrator < BattleManager.Instance.playerUnits[BattleManager.Instance.CurrentPlayerID].Count)
         {
             Enemy currentEnemy;
             if ((currentEnemy = BattleManager.Instance.playerUnits[BattleManager.Instance.CurrentPlayerID][unitIterrator] as Enemy) != null)
                 currentEnemy.Sequence();
+            SequenceManager.Instance.EnQueueAction(ExecuteNextUnitActionsequence, ActionType.ManualResume);
+            unitIterrator++;
+            SequenceManager.Instance.Resume();
         }
-
-        for (unitIterrator = 0; unitIterrator < BattleManager.Instance.playerUnits[BattleManager.Instance.CurrentPlayerID].Count; unitIterrator++)
+        else
         {
-            Enemy currentEnemy;
-            if ((currentEnemy = BattleManager.Instance.playerUnits[BattleManager.Instance.CurrentPlayerID][unitIterrator] as Enemy) != null)
-                currentEnemy.activated = false;
+            SequenceManager.Instance.Resume();
+            SequenceManager.Instance.EnQueueAction(BattleManager.Instance.PlayerEndTurn, ActionType.AutomaticResume);
         }
-
-        BattleManager.Instance.PlayerEndTurn();
+            
     }
 
     public void AddBrain(Brain brain)

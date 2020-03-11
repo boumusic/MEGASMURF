@@ -18,7 +18,7 @@ public class UI_ShapeSlotBehavior : MonoBehaviour, IPointerEnterHandler, IPointe
 
     void Start()
     {
-      updateDamageText();
+      updateDamageText(healthValue);
         selectedSlotSprite = gameObject.transform.GetChild(0).GetComponent<Image>();
         hoveredSlotSprite = gameObject.transform.GetChild(1).GetComponent<Image>();
     }
@@ -37,8 +37,9 @@ public class UI_ShapeSlotBehavior : MonoBehaviour, IPointerEnterHandler, IPointe
         shapeIcon.sprite = newShapeIcon;
     }
 
-    public void updateDamageText()
+    public void updateDamageText(int newHealthValue)
     {
+        healthValue = newHealthValue;
         healthText = gameObject.transform.Find("ParentPanel/HealthIcon/HealthNumberText").GetComponent<TextMeshProUGUI>();
         healthText.text = healthValue.ToString();
     }
@@ -61,10 +62,8 @@ public class UI_ShapeSlotBehavior : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void selectSlot()
     {
-        Debug.Log("Personnage selectionné");
+        Debug.Log("Personnage selectionné -- Penser à changer le sprite et faire apparaitre le perso en bas à droite");
         selectedSlotSprite.enabled = true;
-
-
     }
 
 
