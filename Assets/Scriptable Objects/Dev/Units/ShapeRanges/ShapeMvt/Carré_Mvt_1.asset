@@ -14,11 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   range:
-    size: 3
+    size: 4
     coords:
-    - {x: -1, y: 3}
-    - {x: 0, y: 3}
-    - {x: 1, y: 3}
     - {x: 1, y: 0}
     - {x: 2, y: 0}
     - {x: 0, y: -2}
