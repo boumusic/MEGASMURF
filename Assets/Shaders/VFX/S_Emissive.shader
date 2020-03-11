@@ -6,7 +6,7 @@ Shader "Emissive"
 	{
 		_MainTex("MainTex", 2D) = "white" {}
 		[HDR]_Color("Color", Color) = (1,1,1,1)
-		[HideInInspector] _tex4coord( "", 2D ) = "white" {}
+		[HideInInspector] _tex3coord( "", 2D ) = "white" {}
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 		[HideInInspector] __dirty( "", Int ) = 1
 	}
@@ -25,7 +25,7 @@ Shader "Emissive"
 		{
 			float2 uv_texcoord;
 			float4 vertexColor : COLOR;
-			float4 uv_tex4coord;
+			float3 uv_tex3coord;
 		};
 
 		uniform float4 _Color;
@@ -41,7 +41,7 @@ Shader "Emissive"
 		{
 			float2 uv_MainTex = i.uv_texcoord * _MainTex_ST.xy + _MainTex_ST.zw;
 			float4 tex2DNode1 = tex2D( _MainTex, uv_MainTex );
-			o.Emission = ( _Color * ( tex2DNode1 * i.vertexColor ) * ( i.uv_tex4coord.z + 1.0 ) ).rgb;
+			o.Emission = ( _Color * ( tex2DNode1 * i.vertexColor ) * ( i.uv_tex3coord.z + 1.0 ) ).rgb;
 			o.Alpha = ( tex2DNode1.a * i.vertexColor.a );
 		}
 
@@ -74,7 +74,7 @@ Shader "Emissive"
 			{
 				V2F_SHADOW_CASTER;
 				float2 customPack1 : TEXCOORD1;
-				float4 customPack2 : TEXCOORD2;
+				float3 customPack2 : TEXCOORD2;
 				float3 worldPos : TEXCOORD3;
 				half4 color : COLOR0;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -90,8 +90,8 @@ Shader "Emissive"
 				half3 worldNormal = UnityObjectToWorldNormal( v.normal );
 				o.customPack1.xy = customInputData.uv_texcoord;
 				o.customPack1.xy = v.texcoord;
-				o.customPack2.xyzw = customInputData.uv_tex4coord;
-				o.customPack2.xyzw = v.texcoord;
+				o.customPack2.xyz = customInputData.uv_tex3coord;
+				o.customPack2.xyz = v.texcoord;
 				o.worldPos = worldPos;
 				TRANSFER_SHADOW_CASTER_NORMALOFFSET( o )
 				o.color = v.color;
@@ -107,7 +107,7 @@ Shader "Emissive"
 				Input surfIN;
 				UNITY_INITIALIZE_OUTPUT( Input, surfIN );
 				surfIN.uv_texcoord = IN.customPack1.xy;
-				surfIN.uv_tex4coord = IN.customPack2.xyzw;
+				surfIN.uv_tex3coord = IN.customPack2.xyz;
 				float3 worldPos = IN.worldPos;
 				half3 worldViewDir = normalize( UnityWorldSpaceViewDir( worldPos ) );
 				surfIN.vertexColor = IN.color;
@@ -129,16 +129,18 @@ Shader "Emissive"
 }
 /*ASEBEGIN
 Version=15900
--1807;93;1758;929;1795.487;828.1177;2.396771;True;True
-Node;AmplifyShaderEditor.SamplerNode;1;-632,-74.5;Float;True;Property;_MainTex;MainTex;0;0;Create;True;0;0;False;0;8e93893d51465814dadd058a1c604c6d;9780406aca1a4974ea5d126218973c92;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+-1920;129;1758;893;941.1301;178.1964;1;True;True
+Node;AmplifyShaderEditor.SamplerNode;1;-632,-74.5;Float;True;Property;_MainTex;MainTex;0;0;Create;True;0;0;False;0;8e93893d51465814dadd058a1c604c6d;14c69c4acbd8fc94cb9dc6d1ac52a448;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;6;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.VertexColorNode;4;-379,276.5;Float;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.TextureCoordinatesNode;8;-88,112;Float;False;0;-1;4;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.TextureCoordinatesNode;8;-88,112;Float;False;0;-1;3;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;2;-148,-23.5;Float;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;9;130.6066,174.629;Float;False;2;2;0;FLOAT;0;False;1;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.ColorNode;7;-171,-207.5;Float;False;Property;_Color;Color;1;1;[HDR];Create;True;0;0;False;0;1,1,1,1;1,1,1,1;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ColorNode;7;-171,-207.5;Float;False;Property;_Color;Color;1;1;[HDR];Create;True;0;0;False;0;1,1,1,1;2.297397,2.297397,2.297397,1;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.PosVertexDataNode;13;-475.4043,478.8979;Float;False;0;0;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;6;194.2,-57.1;Float;False;3;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;5;-108.2,382.7;Float;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;10;201.0639,-317.3275;Float;False;Constant;_Float0;Float 0;2;0;Create;True;0;0;False;0;1;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.DepthFade;12;-178.7153,494.984;Float;False;True;True;True;2;1;FLOAT3;0,0,0;False;0;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;5;47.8,332.7;Float;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.StandardSurfaceOutputNode;0;712.4,89.8;Float;False;True;2;Float;ASEMaterialInspector;0;0;Unlit;Emissive;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;False;False;False;False;False;Off;0;False;-1;0;False;-1;False;0;False;-1;0;False;-1;False;0;Transparent;0.5;True;True;0;False;Transparent;;Transparent;All;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;0;False;-1;False;0;False;-1;255;False;-1;255;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;-1;False;2;15;10;25;False;0.5;True;2;5;False;-1;10;False;-1;0;0;False;-1;0;False;-1;0;False;-1;0;False;-1;0;False;0;0,0,0,0;VertexOffset;True;False;Cylindrical;False;Relative;0;;-1;-1;-1;-1;0;False;0;0;False;-1;-1;0;False;-1;0;0;0;15;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT;0;False;4;FLOAT;0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0;False;9;FLOAT;0;False;10;FLOAT;0;False;13;FLOAT3;0,0,0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
 WireConnection;2;0;1;0
 WireConnection;2;1;4;0
@@ -146,9 +148,10 @@ WireConnection;9;0;8;3
 WireConnection;6;0;7;0
 WireConnection;6;1;2;0
 WireConnection;6;2;9;0
+WireConnection;12;1;13;0
 WireConnection;5;0;1;4
 WireConnection;5;1;4;4
 WireConnection;0;2;6;0
 WireConnection;0;9;5;0
 ASEEND*/
-//CHKSM=84B7FA0803B6282F899A1C60491BBE065ED1E4A5
+//CHKSM=057B609753F6AF544B6DF8626E859FBCD1793896
