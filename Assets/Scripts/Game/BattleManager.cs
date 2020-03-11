@@ -144,7 +144,7 @@ public class BattleManager : MonoBehaviour
         SequenceManager.Instance.EnQueueAction(UnitSelectionVariableInitialization, ActionType.AutomaticResume);
         SequenceManager.Instance.EnQueueAction(UnitSelectionActivateInputs, ActionType.AutomaticResume); 
         SequenceManager.Instance.EnQueueAction(CheckAutomaticTurnEnd, ActionType.AutomaticResume);
-        SequenceManager.Instance.EnQueueAction(CurrentPlayer.EnableInput, ActionType.ManualResume);
+        SequenceManager.Instance.EnQueueAction(CurrentPlayer.EnableInput, ActionType.AutomaticResume);
     }
 
     private void UnitSelectionExit()

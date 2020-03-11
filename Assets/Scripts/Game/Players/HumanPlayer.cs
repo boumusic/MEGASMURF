@@ -21,7 +21,6 @@ public class HumanPlayer : Player
             InputManager.instance.OnUnitSelection += CallOnUnitSelection;
             InputManager.instance.OnTileSelection += CallOnTileSelection;
         }
-        SequenceManager.Instance.Resume();
     }
 
     public override void DisableInput()

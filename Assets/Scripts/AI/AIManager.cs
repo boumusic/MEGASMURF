@@ -16,7 +16,7 @@ public class AIManager : MonoBehaviour
     public void StartTurn()
     {
         unitIterrator = 0;
-        SequenceManager.Instance.EnQueueAction(ExecuteNextUnitActionsequence, ActionType.AutomaticResume);
+        SequenceManager.Instance.EnQueueAction(ExecuteNextUnitActionsequence, ActionType.ManualResume);
     }
 
     private void ExecuteNextUnitActionsequence()
@@ -26,11 +26,13 @@ public class AIManager : MonoBehaviour
             Enemy currentEnemy;
             if ((currentEnemy = BattleManager.Instance.playerUnits[BattleManager.Instance.CurrentPlayerID][unitIterrator] as Enemy) != null)
                 currentEnemy.Sequence();
-            SequenceManager.Instance.EnQueueAction(ExecuteNextUnitActionsequence, ActionType.AutomaticResume);
+            SequenceManager.Instance.EnQueueAction(ExecuteNextUnitActionsequence, ActionType.ManualResume);
             unitIterrator++;
+            SequenceManager.Instance.Resume();
         }
         else
         {
+            SequenceManager.Instance.Resume();
             SequenceManager.Instance.EnQueueAction(BattleManager.Instance.PlayerEndTurn, ActionType.AutomaticResume);
         }
             
