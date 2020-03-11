@@ -31,8 +31,23 @@ public class Maestro : Unit
                 currentTile.unit = this;
                 currentTile.type = TileType.Obstacle;               //LUL
                 RecoltShapeMud();
+                if (value is ExitTile)
+                {
+                    SpawnID = ((ExitTile)value).id;
+                    //Board.Instance.NextRoom();
+                }
+                else
+                {
+                    SpawnID = -1;
+                }
             }
         }
+    }
+
+    public override void SpawnUnit(Tile tile)
+    {
+        base.SpawnUnit(tile);
+        BattleManager.Instance.AddUnitToPlayerUnitList(0,gameObject);
     }
 
     public void InitMaestro()
