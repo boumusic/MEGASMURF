@@ -40,6 +40,14 @@ public class Maestro : Unit
                 {
                     SpawnID = -1;
                 }
+                if(value is Spawner)
+                {
+                    ((Spawner)value).activeSpawn = false;
+                }
+                else if(value is ImmediateSpawner)
+                {
+                    ((ImmediateSpawner)value).activeSpawn = false;
+                }
             }
         }
     }

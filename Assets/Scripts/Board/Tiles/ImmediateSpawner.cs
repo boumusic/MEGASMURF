@@ -17,6 +17,7 @@ public class ImmediateSpawner : Tile
     private void Awake()
     {
         currentTurn = 0;
+        activeSpawn = true;
     }
 
     public void Spawn()
@@ -24,6 +25,7 @@ public class ImmediateSpawner : Tile
         GameObject unitObject = UnitFactory.Instance.CreateUnit(spawnedType);
         Unit u = unitObject.GetComponent<Unit>();
         u.SpawnUnit(this);
+        currentTurn = 0;
     }
 
     public void NewTurn()
