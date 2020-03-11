@@ -85,7 +85,6 @@ public class Maestro : Unit
     {
         if(currentTile.MudAmount > 0)
         {
-            //Animation
             GameManager.ShapeMud += currentTile.MudAmount;
             currentTile.MudAmount = 0;
         }
