@@ -59,6 +59,11 @@ public class Board : MonoBehaviour
     private List<Tile> exitTiles;
     private List<Tile> spawnTiles;
 
+    [HideInInspector]
+    public List<Spawner> spawners;
+    [HideInInspector]
+    public List<ImmediateSpawner> immediateSpawners;
+
     public void InitializeBoard()
     {
         InitializeBoard(debugRoom);
@@ -84,6 +89,18 @@ public class Board : MonoBehaviour
         else
         {
             EndDungeon();
+        }
+    }
+
+    public void NewSpawnersTurn()
+    {
+        foreach(Spawner s in spawners)
+        {
+            s.NewTurn();
+        }
+        foreach (ImmediateSpawner s in immediateSpawners)
+        {
+            s.NewTurn();
         }
     }
 
@@ -130,6 +147,8 @@ public class Board : MonoBehaviour
         tiles = new Tile[columns, rows];
         spawnTiles = new List<Tile>();
         exitTiles = new List<Tile>();
+        spawners = new List<Spawner>();
+        immediateSpawners = new List<ImmediateSpawner>();
         for (int i = 0; i < columns; i++)
         {
             for (int j = 0; j < rows; j++)
@@ -171,8 +190,23 @@ public class Board : MonoBehaviour
                                 Enemy enemy = PoolManager.Instance.GetEntityOfType(entity.GetType()) as Enemy;
                                 if (enemy != null)
                                 {
-                                    enemy.gameObject.SetActive(true);
-                                    enemy.SpawnUnit(newTile);
+                                    if (newTile is ImmediateSpawner)
+                                    {
+                                        ((ImmediateSpawner)newTile).spawnedType = enemy.UnitType;
+                                        enemy.gameObject.SetActive(true);
+                                        enemy.SpawnUnit(newTile);
+                                        immediateSpawners.Add((ImmediateSpawner)newTile);
+                                    }
+                                    else if (newTile is Spawner)
+                                    {
+                                        ((Spawner)newTile).spawnedType = enemy.UnitType;
+                                        spawners.Add(((Spawner)newTile));
+                                    }
+                                    else
+                                    {
+                                        enemy.gameObject.SetActive(true);
+                                        enemy.SpawnUnit(newTile);
+                                    }
                                 }
                             }
                             else
