@@ -17120,7 +17120,6 @@ MonoBehaviour:
   hp: {fileID: 0}
   debugTile: {x: 14, y: 14}
   unitBase: {fileID: 11400000, guid: c19dbe63de61ee642a9b7b78942affac, type: 2}
-  activated: 0
   calls: 0
 --- !u!4 &1051304559 stripped
 Transform:
@@ -33057,7 +33056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b5a4b482c91b764bb265b1cb2edbea6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetSave: 0
+  resetSave: 1
   debugMud: 0
 --- !u!4 &2143539943
 Transform:
@@ -33779,6 +33778,145 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1319174026222144641, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 14905ac88e967dc448b07b8bcea3e916,
+        type: 2}
+    - target: {fileID: 1632781866968766861, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: df4fe0136676a1641b9fed478794f06e,
+        type: 2}
+    - target: {fileID: 1632781867378042963, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e9e33696d3185d449f86275cdb7bd17,
+        type: 2}
+    - target: {fileID: 1632781867435810421, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 4bc0ad28d08f68c4489e1a892c510a22,
+        type: 2}
+    - target: {fileID: 1632781867636736665, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 4bc0ad28d08f68c4489e1a892c510a22,
+        type: 2}
+    - target: {fileID: 1632781867815498239, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c171b0efb884c142ac668aa1627b2a6,
+        type: 2}
+    - target: {fileID: 1632781867906327064, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 56de2a186507e9a43abe72bbc05980b8,
+        type: 2}
+    - target: {fileID: 1632781868060477864, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c171b0efb884c142ac668aa1627b2a6,
+        type: 2}
+    - target: {fileID: 1632781868171389866, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e9e33696d3185d449f86275cdb7bd17,
+        type: 2}
+    - target: {fileID: 1632781868308935994, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: df4fe0136676a1641b9fed478794f06e,
+        type: 2}
+    - target: {fileID: 1632781868318889848, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e9e33696d3185d449f86275cdb7bd17,
+        type: 2}
+    - target: {fileID: 1632781868415407168, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 56de2a186507e9a43abe72bbc05980b8,
+        type: 2}
+    - target: {fileID: 1632781868450130375, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 56de2a186507e9a43abe72bbc05980b8,
+        type: 2}
+    - target: {fileID: 1632781868462504108, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c171b0efb884c142ac668aa1627b2a6,
+        type: 2}
+    - target: {fileID: 1632781868621960158, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: df4fe0136676a1641b9fed478794f06e,
+        type: 2}
+    - target: {fileID: 1632781868665527467, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: c4550a9f088441c48a5f1ac20ae041ae,
+        type: 2}
+    - target: {fileID: 1632781868713768799, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: c4550a9f088441c48a5f1ac20ae041ae,
+        type: 2}
+    - target: {fileID: 1632781868847921249, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: c4550a9f088441c48a5f1ac20ae041ae,
+        type: 2}
+    - target: {fileID: 7845338276559848997, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: skillDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 4bc0ad28d08f68c4489e1a892c510a22,
+        type: 2}
+    - target: {fileID: 8907291781016553234, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: m_Text
+      value: Ouai ouai
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186046993484610797, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: m_text
+      value: Ouai le skill ouai
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186046993484610797, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186046993484610797, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186046993484610797, guid: 0217b08a54624a9419bee0c7bcc8431a,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 9186046993746438891, guid: 0217b08a54624a9419bee0c7bcc8431a,
         type: 3}
       propertyPath: m_Name
