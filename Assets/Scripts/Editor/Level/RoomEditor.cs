@@ -192,7 +192,6 @@ public class RoomEditor : Editor
                                 colors.Add(pM.pools[i].prefab.GetComponentInChildren<LevelElement>().ColorInEditor());
                             }
                         }
-
                         else
                         {
                             if (!prefab.GetComponentInChildren<Tile>())

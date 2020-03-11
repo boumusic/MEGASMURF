@@ -18,6 +18,6 @@ public static class GameManager
         }
     }
     public static SkillTree SkillTree;
-    public static List<ShapeUnit> units = new List<ShapeUnit>();
+    public static List<Unit> units;
 
 }

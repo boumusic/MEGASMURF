@@ -174,7 +174,7 @@ public class RangeManager : MonoBehaviour
                     {
                         bool clear = false;
                         List<Tile> between = new List<Tile>();
-                        foreach (Tile t in Board.Instance.GetTilesBetween(unitTile, sliceCheck, false))
+                        foreach (Tile t in Board.Instance.GetTilesBetween(unitTile, sliceCheck, true))
                         {
                             if (CanTarget(t))
                             {
@@ -208,6 +208,10 @@ public class RangeManager : MonoBehaviour
 
     private bool AbortTileCondition(Tile tile, Range comparedRange, bool correctRange)
     {
+        if(unitTile.unit == null)
+        {
+            return true;
+        }
         if (tile == null)
         {
             return true;

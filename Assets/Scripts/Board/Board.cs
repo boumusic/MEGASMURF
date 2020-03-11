@@ -41,6 +41,8 @@ public class Board : MonoBehaviour
     [Range(2, 50)] private int rows = 15;
     public float tileDelay = 0.005f;
 
+    public List<Room> dungeon;
+
     [SerializeField] private Room debugRoom;
     //public float tilesOffset;
 
@@ -48,7 +50,14 @@ public class Board : MonoBehaviour
 
     private Tile[,] tiles;
 
+    private Maestro maestro;
+
     private Room currentRoom;
+
+    private int roomId;
+
+    private List<Tile> exitTiles;
+    private List<Tile> spawnTiles;
 
     public void InitializeBoard()
     {
@@ -64,9 +73,63 @@ public class Board : MonoBehaviour
         GenerateUnits();
     }
 
+    public void NextRoom()
+    {
+        roomId++;
+        ClearRoom();
+        if (roomId < dungeon.Count)
+        {
+            InitializeBoard(dungeon[roomId]);
+        }
+        else
+        {
+            EndDungeon();
+        }
+    }
+
+    public void ClearRoom()
+    {
+        GameManager.units = new List<Unit>();
+        foreach(Tile t in exitTiles)
+        {
+            if (t.unit != null && (t.type == TileType.Ally || t.type == TileType.Obstacle))
+            {
+                GameManager.units.Add(t.unit);
+                t.unit.UnspawnUnit();
+            }
+        }
+
+        DestroyTiles();
+
+        BattleManager.Instance.playerUnits[0].Clear();
+        BattleManager.Instance.playerUnits[1].Clear();
+    }
+
+    public void EndDungeon()
+    {
+
+    }
+
+    private void DestroyTiles()
+    {
+        for (int i = 0; i < columns; i++)
+        {
+            for (int j = 0; j < rows; j++)
+            {
+                if(tiles[i,j].unit != null && !GameManager.units.Contains(tiles[i,j].unit))
+                {
+                    tiles[i, j].unit.UnspawnUnit();
+                }
+                tiles[i, j].gameObject.SetActive(false);
+            }
+        }
+    }
+
     private void GenerateTiles()
     {
         tiles = new Tile[columns, rows];
+        spawnTiles = new List<Tile>();
+        exitTiles = new List<Tile>();
         for (int i = 0; i < columns; i++)
         {
             for (int j = 0; j < rows; j++)
@@ -86,22 +149,43 @@ public class Board : MonoBehaviour
                         newTile.Coords = new Vector2Int(i, j);
                         newTile.transform.position = position;
                         tiles[i, j] = newTile;
+                        if(tiles[i,j] is SpawnTile)
+                        {
+                            spawnTiles.Add(tiles[i, j]);
+                        }
+                        else if (tiles[i, j] is ExitTile)
+                        {
+                            ((ExitTile)tiles[i, j]).id = exitTiles.Count;
+                            exitTiles.Add(tiles[i, j]);
+
+                        }
                         string name = "Tile (" + i + "," + j + ")";
                         newTile.gameObject.name = name;
                         newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), 1f, totalHeight / (rows - 1));
-                    }
-                }
 
-                
-                LevelElement entity = currentRoom.GetEntity(i, j);
-                if(entity)
-                {
-                    LevelElement newEntity = PoolManager.Instance.GetEntityOfType(entity.GetType()) as LevelElement;
+                        LevelElement entity = currentRoom.GetEntity(i, j);
+                        if (entity)
+                        {
+                            if (entity is Enemy)
+                            {
+                                Enemy enemy = PoolManager.Instance.GetEntityOfType(entity.GetType()) as Enemy;
+                                if (enemy != null)
+                                {
+                                    enemy.gameObject.SetActive(true);
+                                    enemy.SpawnUnit(newTile);
+                                }
+                            }
+                            else
+                            {
+                                LevelElement newEntity = PoolManager.Instance.GetEntityOfType(entity.GetType()) as LevelElement;
 
-                    if (newEntity != null)
-                    {
-                        newEntity.gameObject.SetActive(true);
-                        newEntity.transform.position = position;
+                                if (newEntity != null)
+                                {
+                                    newEntity.gameObject.SetActive(true);
+                                    newEntity.transform.position = position;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -152,7 +236,25 @@ public class Board : MonoBehaviour
 
     public void GenerateUnits()
     {
-
+        if (maestro == null)
+        {
+            GameObject maestroObject = UnitFactory.Instance.CreateUnit(BaseUnitType.Maestro);
+            if(maestroObject != null)
+            {
+                maestro = maestroObject.GetComponent<Maestro>();
+                maestro.SpawnUnit(spawnTiles[0]);
+            }
+        }
+        if (GameManager.units != null)
+        {
+            foreach (Unit u in GameManager.units)
+            {
+                if (spawnTiles.Count > u.SpawnID)
+                {
+                    u.SpawnUnit(spawnTiles[u.SpawnID]);
+                }
+            }
+        }
     }
 
     public Tile GetTile(int x, int y)

@@ -8,7 +8,7 @@ using TMPro;
 public class UI_ShapemudFill : MonoBehaviour
 {
     public float lerpSpeed = 4f;
-    public float ShapemudValue, oldShapemudValue;
+    public int ShapemudValue, oldShapemudValue;
     private float FillAmount, oldFillAmount;
     private TextMeshProUGUI ShapemudValueText;
     public bool launchLerp;
@@ -18,33 +18,33 @@ public class UI_ShapemudFill : MonoBehaviour
     {
         ShapemudFill = gameObject.transform.GetChild(0).GetComponent<Image>();
         ShapemudValueText = gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        oldShapemudValue = ShapemudValue;
-       
-        oldFillAmount = oldShapemudValue / 200f;
-        FillAmount = ShapemudValue / 200f;
+        
     }
-    public void UpdateShapemudText(float newShapemudValue)
+    public void UpdateShapemudText(int newShapemudValue)
     {
         oldShapemudValue = ShapemudValue;
         ShapemudValue = newShapemudValue;
-        oldFillAmount = oldShapemudValue / 200;
-        FillAmount = ShapemudValue / 200;
+        oldFillAmount = oldShapemudValue / 200f;
+        FillAmount = ShapemudValue / 200f;
 
         launchLerp = true;
 
     }
-    private void FixedUpdate()
+    private void Update()
     {
         if (launchLerp)
         {
             
-            Mathf.Lerp(oldShapemudValue, ShapemudValue, lerpSpeed * Time.deltaTime);
-            Mathf.Lerp(oldFillAmount, FillAmount, lerpSpeed * Time.deltaTime);
-            ShapemudFill.fillAmount = oldFillAmount;
+            oldShapemudValue = (int)Mathf.Lerp(oldShapemudValue, ShapemudValue, lerpSpeed * Time.deltaTime);
+
+            ShapemudFill.fillAmount = Mathf.Lerp((float)oldShapemudValue / 200f, (float)ShapemudValue / 200f, lerpSpeed * Time.deltaTime);
             ShapemudValueText.text = oldShapemudValue.ToString();
+
+            lerpSpeed++;
             if (oldShapemudValue == ShapemudValue)
             {
                 launchLerp = false;
+                lerpSpeed = 0;
             }
         } 
 
