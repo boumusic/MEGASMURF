@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5956df9750d229c479e5665f26fc87ac, type: 3}
   m_Name: F1
   m_EditorClassIdentifier: 
-  skillName: I got a snake in my boot
-  description: "Augmente le d\xE9placement du Polytechniform"
+  skillName: A way out
+  description: Augmente la taille de la zone de sortie
