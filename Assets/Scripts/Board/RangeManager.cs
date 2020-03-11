@@ -94,7 +94,7 @@ public class RangeManager : MonoBehaviour
 
     private bool CanTarget(Tile tile)
     {
-        return tile != null && (((unitTile.type == TileType.Ally || unitTile.type == TileType.Obstacle) && tile.type == TileType.Enemy) || ((unitTile.type == TileType.Enemy && (tile.type == TileType.Obstacle || tile.type == TileType.Enemy))));
+        return tile != null && (((unitTile.type == TileType.Ally || unitTile.type == TileType.Obstacle) && tile.type == TileType.Enemy) || ((unitTile.type == TileType.Enemy && (tile.type == TileType.Obstacle || tile.type == TileType.Ally))));
     }
 
     private void ProcessAttackRange(AttackPattern pattern)
@@ -278,7 +278,7 @@ public class RangeManager : MonoBehaviour
         Tile closestUnitTile = null;
         foreach (Tile t in rangePaths.Keys)
         {
-            if (t.type == TileType.Ally)
+            if (t.type == TileType.Ally || t.type == TileType.Obstacle)
             {
                 if (closestUnitTile == null || rangePaths[t].Count < rangePaths[closestUnitTile].Count)
                 {
@@ -311,7 +311,7 @@ public class RangeManager : MonoBehaviour
         }
         if (previous != null)
         {
-            if (tile.type == TileType.Ally)
+            if (tile.type == TileType.Ally || tile.type == TileType.Obstacle)
             {
                 if (rangePaths.ContainsKey(tile))
                 {

@@ -138,7 +138,10 @@ public abstract class Unit : LevelElement
 
     public virtual void SetAnimatorMoving(bool moving)
     {
-        unitAnimator.SetIsMoving(moving);
+        if (unitAnimator != null)
+        {
+            unitAnimator.SetIsMoving(moving);
+        }
     }
 
     public void FaceCamera()
