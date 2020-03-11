@@ -310,7 +310,7 @@ public class BattleManager : MonoBehaviour
 
     private void ActionTargetSelectionGetAndDisplayInformation()
     {
-        GetUnitAttackRange();
+        GetUnitActionRange();
 
         if (CurrentPlayer.areRangeDisplayed)
         {
@@ -496,6 +496,48 @@ public class BattleManager : MonoBehaviour
             PhaseManager.Instance.gameplayState.ChangeState(GameplayState.ActionPseudoState);
         }
     }
+
+    private void SelectCircleShape()
+    {
+        if(UnitFactory.Instance.UnitDictionary[BaseUnitType.Circle].unitCost > GameManager.ShapeMud)
+        {
+            //UISendNotEnoughShapemudFeedBack();
+        }
+        else
+        {
+            SelectedUnitTypeToBeSummon = BaseUnitType.Circle;
+            PayShapeMudCost(UnitFactory.Instance.UnitDictionary[BaseUnitType.Circle].unitCost);
+            EnterActionTargetSelectionState();
+        }
+    }
+
+    private void SelectTriangleShape()
+    {
+        if (UnitFactory.Instance.UnitDictionary[BaseUnitType.Triangle].unitCost > GameManager.ShapeMud)
+        {
+            //UISendNotEnoughShapemudFeedBack();
+        }
+        else
+        {
+            SelectedUnitTypeToBeSummon = BaseUnitType.Triangle;
+            PayShapeMudCost(UnitFactory.Instance.UnitDictionary[BaseUnitType.Triangle].unitCost);
+            EnterActionTargetSelectionState();
+        }
+    }
+
+    private void SelectSquareShape()
+    {
+        if (UnitFactory.Instance.UnitDictionary[BaseUnitType.Square].unitCost > GameManager.ShapeMud)
+        {
+            //UISendNotEnoughShapemudFeedBack();
+        }
+        else
+        {
+            SelectedUnitTypeToBeSummon = BaseUnitType.Square;
+            PayShapeMudCost(UnitFactory.Instance.UnitDictionary[BaseUnitType.Square].unitCost);
+            EnterActionTargetSelectionState();
+        }
+    }
     #endregion
 
     #region Utility
@@ -522,8 +564,6 @@ public class BattleManager : MonoBehaviour
             {
                 unitList.Remove(unit);
                 unit.RemoveFromBoard();
-                if (unitList.Count <= 0)
-                    CheckWinCondition();
                 return;                                                                         //Une unit ne peut appartenir qu'a un seul joueur
             }
         }
@@ -584,30 +624,12 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    private void SelectCircleShape()
-    {
-        SelectedUnitTypeToBeSummon = BaseUnitType.Circle;
-        EnterActionTargetSelectionState();
-    }
-
-    private void SelectTriangleShape()
-    {
-        SelectedUnitTypeToBeSummon = BaseUnitType.Triangle;
-        EnterActionTargetSelectionState();
-    }
-
-    private void SelectSquareShape()
-    {
-        SelectedUnitTypeToBeSummon = BaseUnitType.Square;
-        EnterActionTargetSelectionState();
-    }
-
     private void GetUnitMovementRange()
     {
         tilesInMovementRange = RangeManager.Instance.GetTilesInMovementRange(CurrentSelectedUnit.CurrentTile);
     }
 
-    private void GetUnitAttackRange()
+    private void GetUnitActionRange()
     {
         tilesInActionRange = RangeManager.Instance.GetTilesInAttackRange(CurrentSelectedUnit.CurrentTile);
     }
@@ -615,38 +637,17 @@ public class BattleManager : MonoBehaviour
     private void DisplayUnitMovementRange()
     {
         StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayMovementTiles));
-        //StartCoroutine(DelayMovementRangeDisplay());
-        //RangeManager.Instance.DisplayMovementTiles();
     }
 
     private void DisplayUnitActionRange()
     {
         StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayAttackTiles));
-        //StartCoroutine(DelayAttackRangeDisplay());
-        //RangeManager.Instance.DisplayAttackTiles();
     }
 
     private IEnumerator DelayDisplay(Action display)
     {
         yield return new WaitForFixedUpdate();
         display?.Invoke();
-    }
-
-    //private IEnumerator DelayMovementRangeDisplay()
-    //{
-    //    yield return new WaitForFixedUpdate();
-    //    RangeManager.Instance.DisplayMovementTiles();
-    //}
-
-    //private IEnumerator DelayAttackRangeDisplay()
-    //{
-    //    yield return new WaitForFixedUpdate();
-    //    RangeManager.Instance.DisplayAttackTiles();
-    //}
-
-    private void CheckWinCondition()
-    {
-
     }
     #endregion
 
@@ -660,6 +661,15 @@ public class BattleManager : MonoBehaviour
                 unit.DebugSetUnitPosition();
             }
         }
+    }
+    #endregion
+
+    #region Don t belong here
+    public void PayShapeMudCost(int cost, Action action = null)
+    {
+        //Animation
+        action?.Invoke();
+        GameManager.ShapeMud -= cost;
     }
     #endregion
 }
