@@ -13,8 +13,9 @@ public class UI_UnitSlotContainer : MonoBehaviour
 
     private void Awake()
     {
-     
+        addUnitButton.transform.localPosition = slotOrigin;
     }
+
     public void Add(GameObject unitSlot)
     {
         UI_ShapeSlotBehavior unitSlotBehaviour = unitSlot.GetComponent<UI_ShapeSlotBehavior>();

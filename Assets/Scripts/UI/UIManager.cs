@@ -12,6 +12,11 @@ public class UIManager : MonoBehaviour
     public UI_SelectedUnitSlot SelectedUnitSlot;
     public UI_ShapeSlotBehavior UnitSlotBehaviourPrefab;
 
+    private void Start()
+    {
+        DebugSpawnUnitSlot();
+    }
+
     public void UpdateShapeMud(int newValue)
     {
         uIShapemud.UpdateShapemudText(newValue);
@@ -40,5 +45,21 @@ public class UIManager : MonoBehaviour
     public void RemoveUnitUISlot(Unit unit)
     {
         uIUnitSlotContainer.Remove(unit);
+    }
+
+    private void DebugSpawnUnitSlot()
+    {
+        StartCoroutine(Debugging());
+    }
+
+    private IEnumerator Debugging()
+    {
+        yield return new WaitForSeconds(1);
+
+        AddNewUnitUISlot(null);
+
+        yield return new WaitForSeconds(1);
+
+        AddNewUnitUISlot(null);
     }
 }

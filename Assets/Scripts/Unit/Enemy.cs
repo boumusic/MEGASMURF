@@ -7,7 +7,7 @@ public class Enemy : Unit
 {
     [HideInInspector]
     public int calls;
-
+    public int mudAmountDrop = 10;
     private Tile priorityDestination;
 
     protected override void Awake()
@@ -296,6 +296,7 @@ public class Enemy : Unit
             AIManager.instance.AIDeathCallBack();
         Tile tile = currentTile;
         base.Die();
+        DropShapeMud(tile);
         if (unitBase.unitType == BaseUnitType.Bombi)
         {
             GameObject bombito = UnitFactory.Instance.CreateUnit(BaseUnitType.Bombito);
@@ -315,5 +316,12 @@ public class Enemy : Unit
     public override Color ColorInEditor()
     {
         return base.ColorInEditor();
+    }
+
+    private void DropShapeMud(Tile tile)
+    {
+        //Animation
+        //Spawn mud
+        tile.MudAmount = mudAmountDrop;
     }
 }

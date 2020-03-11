@@ -87,6 +87,8 @@ public class Maestro : Unit
         {
             GameManager.ShapeMud += currentTile.MudAmount;
             currentTile.MudAmount = 0;
+            //Animation
+            //Remove Mud asset
         }
     }
 }
