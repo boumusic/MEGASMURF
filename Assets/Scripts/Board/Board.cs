@@ -190,22 +190,22 @@ public class Board : MonoBehaviour
                                 Enemy enemy = PoolManager.Instance.GetEntityOfType(entity.GetType()) as Enemy;
                                 if (enemy != null)
                                 {
-                                    if (newTile is ImmediateSpawner)
+                                    if (tiles[i, j] is ImmediateSpawner)
                                     {
-                                        ((ImmediateSpawner)newTile).spawnedType = enemy.UnitType;
+                                        ((ImmediateSpawner)tiles[i,j]).spawnedType = enemy.UnitType;
                                         enemy.gameObject.SetActive(true);
-                                        enemy.SpawnUnit(newTile);
-                                        immediateSpawners.Add((ImmediateSpawner)newTile);
+                                        enemy.SpawnUnit(tiles[i, j]);
+                                        immediateSpawners.Add((ImmediateSpawner)tiles[i, j]);
                                     }
-                                    else if (newTile is Spawner)
+                                    else if (tiles[i, j] is Spawner)
                                     {
-                                        ((Spawner)newTile).spawnedType = enemy.UnitType;
-                                        spawners.Add(((Spawner)newTile));
+                                        ((Spawner)tiles[i, j]).spawnedType = enemy.UnitType;
+                                        spawners.Add(((Spawner)tiles[i, j]));
                                     }
                                     else
                                     {
                                         enemy.gameObject.SetActive(true);
-                                        enemy.SpawnUnit(newTile);
+                                        enemy.SpawnUnit(tiles[i, j]);
                                     }
                                 }
                             }

@@ -45,7 +45,7 @@ public abstract class Unit : LevelElement
         protected set
         {
             currentHealth = value;
-            UIManager.Instance.UpdateUnitHealth(this, value);
+            //UIManager.Instance.UpdateUnitHealth(this, value);
         }
     }
 

@@ -39,32 +39,11 @@ public class BattleManager : MonoBehaviour
     {
         playerUnits = new List<List<Unit>>();
         GameManager.units = new List<Unit>();
-        for(int i = 0; i < players.Length; i++)
-        {
-            playerUnits.Add(new List<Unit>());
-        }
-
-        if (Board.Instance.dungeon.Count > 0)
-        {
-            Board.Instance.InitializeBoard(Board.Instance.dungeon[0]);
-        }
-        else
-        {
-            Board.Instance.InitializeBoard();
-        }
     }
 
     private void Start()
     {
-        if (debugMode)
-        {
-            StartingPlayer = debugStartingPlayer;
-            FillPlayerUnitList(0, debugPlayer1StartingUnits);
-            FillPlayerUnitList(1, debugPlayer2StartingUnits);
-            DebugSetupAllUnits();
-        }
 
-        Initialize();
     }
 
     public void Initialize()
@@ -97,6 +76,28 @@ public class BattleManager : MonoBehaviour
 
     public void StartLevel()
     {
+        for (int i = 0; i < players.Length; i++)
+        {
+            playerUnits.Add(new List<Unit>());
+        }
+
+        if (Board.Instance.dungeon.Count > 0)
+        {
+            Board.Instance.InitializeBoard(Board.Instance.dungeon[0]);
+        }
+        else
+        {
+            Board.Instance.InitializeBoard();
+        }
+        if (debugMode)
+        {
+            StartingPlayer = debugStartingPlayer;
+            FillPlayerUnitList(0, debugPlayer1StartingUnits);
+            FillPlayerUnitList(1, debugPlayer2StartingUnits);
+            DebugSetupAllUnits();
+        }
+
+        Initialize();
         CurrentPlayerID = StartingPlayer;
     }
 
