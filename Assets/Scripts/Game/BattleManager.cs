@@ -614,23 +614,23 @@ public class BattleManager : MonoBehaviour
 
     private void DisplayUnitMovementRange()
     {
-        //StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayMovementTiles));
+        StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayMovementTiles));
         //StartCoroutine(DelayMovementRangeDisplay());
-        RangeManager.Instance.DisplayMovementTiles();
+        //RangeManager.Instance.DisplayMovementTiles();
     }
 
     private void DisplayUnitActionRange()
     {
-        //StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayAttackTiles));
+        StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayAttackTiles));
         //StartCoroutine(DelayAttackRangeDisplay());
-        RangeManager.Instance.DisplayAttackTiles();
+        //RangeManager.Instance.DisplayAttackTiles();
     }
 
-    //private IEnumerator DelayDisplay(Action display)
-    //{
-    //    yield return new WaitForFixedUpdate();
-    //    display?.Invoke();
-    //}
+    private IEnumerator DelayDisplay(Action display)
+    {
+        yield return new WaitForFixedUpdate();
+        display?.Invoke();
+    }
 
     //private IEnumerator DelayMovementRangeDisplay()
     //{
