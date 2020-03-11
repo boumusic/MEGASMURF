@@ -8,8 +8,9 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get { if (!instance) instance = FindObjectOfType<UIManager>(); return instance; } }
 
     public UI_ShapemudFill uIShapemud;
-    public UI_ShapeSlotContainer uIUnitSlotContainer;
-    public UI_ShapeSlotSelected SelectedUnitSlot;
+    public UI_UnitSlotContainer uIUnitSlotContainer;
+    public UI_SelectedUnitSlot SelectedUnitSlot;
+    public UI_ShapeSlotBehavior UnitSlotBehaviourPrefab;
 
     public void UpdateShapeMud(int newValue)
     {
@@ -29,7 +30,7 @@ public class UIManager : MonoBehaviour
 
     public void AddNewUnitUISlot(Unit unit)
     {
-        GameObject unitSlot = PoolManager.Instance.GetEntityOfType(UI_ShapeSlotBehavior);
+        GameObject unitSlot = PoolManager.Instance.GetEntityOfType(UnitSlotBehaviourPrefab.GetType()).gameObject;
 
         unitSlot.GetComponent<UI_ShapeSlotBehavior>().Initialize(unit);
 
