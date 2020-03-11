@@ -22,7 +22,7 @@ public class Maestro : Unit
             {
                 currentTile.unit = null;
                 currentTile.type = TileType.Free;
-                CurrentTile = null;
+                currentTile = null;
             }
 
             if (value != null)
@@ -30,6 +30,7 @@ public class Maestro : Unit
                 currentTile = value;
                 currentTile.unit = this;
                 currentTile.type = TileType.Obstacle;               //LUL
+                RecoltShapeMud();
             }
         }
     }
@@ -63,5 +64,15 @@ public class Maestro : Unit
             action?.Invoke();
         }
         BecomeExhausted();
+    }
+
+    public void RecoltShapeMud()
+    {
+        if(currentTile.MudAmount > 0)
+        {
+            //Animation
+            GameManager.ShapeMud += currentTile.MudAmount;
+            currentTile.MudAmount = 0;
+        }
     }
 }
