@@ -37,6 +37,12 @@ public class Enemy : Unit
         }
     }
 
+    public override void SpawnUnit(Tile tile)
+    {
+        base.SpawnUnit(tile);
+        BattleManager.Instance.AddUnitToPlayerUnitList(1, gameObject);
+    }
+
     public void Sequence()
     {
         priorityDestination = null;
@@ -186,7 +192,7 @@ public class Enemy : Unit
         foreach (Vector2 v in UnitAttackPattern.range.coords)
         {
             Tile t = Board.Instance.GetTile(v + CurrentTile.Coords);
-            if (t != null && t.type == TileType.Ally)
+            if (t != null && (t.type == TileType.Ally || t.type == TileType.Obstacle))
             {
                 targets.Add(t);
             }

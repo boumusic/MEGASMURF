@@ -27,6 +27,14 @@ public class ShapeUnit : Unit
                 currentTile = value;
                 currentTile.unit = this;
                 currentTile.type = TileType.Ally;
+                if (value is ExitTile)
+                {
+                    SpawnID = ((ExitTile)value).id;
+                }
+                else
+                {
+                    SpawnID = -1;
+                }
             }
         }
     }
@@ -83,6 +91,12 @@ public class ShapeUnit : Unit
     }
 
     private ShapeUnit shapeBeingMerged;
+
+    public override void SpawnUnit(Tile tile)
+    {
+        base.SpawnUnit(tile);
+        BattleManager.Instance.AddUnitToPlayerUnitList(0, gameObject);
+    }
 
     public override void MoveTo(Stack<Tile> path)
     {
