@@ -32,7 +32,6 @@ public class ShapeUnit : Unit
     }
 
     public override BaseUnitType UnitType => BaseUnitType.ShapeComposite;
-    public Equipement equipement { get; set; }
 
     private List<ShapeUnit> mergedUnits;
     public bool IsUnitComposite => mergedUnits.Count > 0;
