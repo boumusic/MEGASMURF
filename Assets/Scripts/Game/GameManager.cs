@@ -14,7 +14,7 @@ public static class GameManager
         set
         {
             shapeMud = value;
-            //UIManager.Instance.UpdateShapeMud(value);
+            UIManager.Instance.UpdateShapeMud(value);
         }
     }
     public static SkillTree SkillTree;
