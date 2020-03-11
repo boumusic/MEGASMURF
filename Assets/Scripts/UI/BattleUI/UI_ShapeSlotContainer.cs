@@ -11,6 +11,8 @@ public class UI_ShapeSlotContainer : MonoBehaviour
     private GameObject addUnitButton;
     private float currentOffset;
 
+    //truc
+
     public void Add(GameObject unitSlot)
     {
         UI_ShapeSlotBehavior unitSlotBehaviour = unitSlot.GetComponent<UI_ShapeSlotBehavior>();
