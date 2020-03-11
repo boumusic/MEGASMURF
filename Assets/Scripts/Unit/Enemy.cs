@@ -262,6 +262,7 @@ public class Enemy : Unit
                 }
                 else
                 {
+                    destination.Clear();
                     path.Pop();
                 }
             }
@@ -295,7 +296,7 @@ public class Enemy : Unit
             if (bombito != null)
             {
                 Enemy script = bombito.GetComponent<Enemy>();
-                BattleManager.Instance.AddUnitToPlayerUnitList(BattleManager.Instance.CurrentPlayerID, bombito);
+                BattleManager.Instance.AddUnitToPlayerUnitList(1, bombito);
                 if (script != null) 
                 {
                     script.SetUnitPosition(tile);
