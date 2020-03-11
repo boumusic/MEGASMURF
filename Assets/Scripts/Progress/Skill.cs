@@ -12,9 +12,9 @@ public enum SkillType
     SaferZone = 20,
 }
 
+[CreateAssetMenu(fileName = "NewSkill", menuName = "Gameplay/Skill", order = 200)]
 public class Skill : ScriptableObject
 {
-    public int id;
 
     public string skillName;
     public string description;

@@ -6,7 +6,6 @@ using UnityEngine;
 public class Enemy : Unit
 {
     [HideInInspector]
-    public bool activated;
     public int calls;
 
     private Tile priorityDestination;
@@ -14,7 +13,6 @@ public class Enemy : Unit
     protected override void Awake()
     {
         base.Awake();
-        activated = false;
         calls = 0;
     }
 
@@ -41,32 +39,51 @@ public class Enemy : Unit
 
     public void Sequence()
     {
-        if (!activated)
+        priorityDestination = null;
+        calls++;
+
+        SequenceManager.Instance.EnQueueAction(CheckAttack, ActionType.ManualResume);
+        SequenceManager.Instance.EnQueueAction(CheckMovement, ActionType.ManualResume);
+        SequenceManager.Instance.EnQueueAction(CheckAttack, ActionType.ManualResume);
+    }
+    
+    private void CheckMovement()
+    {
+        if (CurrentUnitState == UnitState.Fresh)
         {
-            priorityDestination = null;
-            calls++;
-            activated = true;
-            if (CurrentUnitState == UnitState.Fresh)
+            Stack<Tile> path = FindClosestEnemyPath();
+            if (path != null && path.Count > 0)
             {
-                CallAttack();
+                MoveTo(path, SequenceManager.Instance.Resume);
             }
-            if (CurrentUnitState == UnitState.Fresh)
+            else
             {
-                Stack<Tile> path = FindClosestEnemyPath();
-                if (path != null && path.Count > 0)
-                {
-                    MoveTo(path, CallAttack);
-                }
+                SequenceManager.Instance.Resume();
             }
+        }
+        else
+        {
+            SequenceManager.Instance.Resume();
         }
     }
 
-    public void CallAttack()
+    public void CheckAttack()
     {
-        List<Tile> targets = FindEnemiesInRange();
-        if (targets.Count > 0)
+        if (CurrentUnitState != UnitState.Used)
         {
-            Attack(targets);
+            List<Tile> targets = FindEnemiesInRange();
+            if (targets.Count > 0)
+            {
+                Attack(targets, SequenceManager.Instance.Resume);
+            }
+            else
+            {
+                SequenceManager.Instance.Resume();
+            }
+        }
+        else
+        {
+            SequenceManager.Instance.Resume();
         }
     }
 
@@ -245,6 +262,7 @@ public class Enemy : Unit
                 }
                 else
                 {
+                    destination.Clear();
                     path.Pop();
                 }
             }
@@ -252,9 +270,9 @@ public class Enemy : Unit
         return destination;
     }
 
-    public override void Attack(List<Tile> tiles)
+    public override void Attack(List<Tile> tiles, Action action = null)
     {
-        base.Attack(tiles);
+        base.Attack(tiles, action);
 
         if (unitBase.unitType == BaseUnitType.Bombi)
         {
@@ -278,7 +296,7 @@ public class Enemy : Unit
             if (bombito != null)
             {
                 Enemy script = bombito.GetComponent<Enemy>();
-                BattleManager.Instance.AddUnitToPlayerUnitList(BattleManager.Instance.CurrentPlayerID, bombito);
+                BattleManager.Instance.AddUnitToPlayerUnitList(1, bombito);
                 if (script != null) 
                 {
                     script.SetUnitPosition(tile);

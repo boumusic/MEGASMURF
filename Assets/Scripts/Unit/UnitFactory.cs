@@ -8,11 +8,11 @@ public class UnitFactory : MonoBehaviour
     public static UnitFactory Instance { get { if (!instance) instance = FindObjectOfType<UnitFactory>(); return instance; } }
 
     public UnitEncyclopedia unitEncylopedia;
-    private Dictionary<BaseUnitType, GameObject> unitDictionary;
+    public Dictionary<BaseUnitType, UnitBlueprint> UnitDictionary { get; private set; }
 
     private void Awake()
     {
-        unitDictionary = new Dictionary<BaseUnitType, GameObject>();
+        UnitDictionary = new Dictionary<BaseUnitType, UnitBlueprint>();
         InitializeDictionary();
     }
 
@@ -22,8 +22,8 @@ public class UnitFactory : MonoBehaviour
         foreach(UnitBlueprint unitBlueprint in unitEncylopedia.unitBlueprints)
         {
             BaseUnitType currentUnitType = unitBlueprint.unitPrefab.GetComponent<Unit>().unitBase.unitType;
-            if (!unitDictionary.ContainsKey(currentUnitType))
-                unitDictionary.Add(currentUnitType, unitBlueprint.unitPrefab);
+            if (!UnitDictionary.ContainsKey(currentUnitType))
+                UnitDictionary.Add(currentUnitType, unitBlueprint);
             else
                 Debug.LogError("UnitEncylopedia: The encylopedia contains 2 units with the same type!");
         }
@@ -31,8 +31,8 @@ public class UnitFactory : MonoBehaviour
 
     public GameObject CreateUnit(BaseUnitType baseUnitType)
     {
-        if (unitDictionary.ContainsKey(baseUnitType))
-            return Instantiate(unitDictionary[baseUnitType]) as GameObject;
+        if (UnitDictionary.ContainsKey(baseUnitType))
+            return Instantiate(UnitDictionary[baseUnitType].unitPrefab) as GameObject;
         else
         {
             Debug.LogError("UnitFactory: Trying to create unknown unit");
