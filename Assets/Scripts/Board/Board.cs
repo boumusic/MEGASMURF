@@ -118,7 +118,7 @@ public class Board : MonoBehaviour
             {
                 if(tiles[i,j].unit != null && !GameManager.units.Contains(tiles[i,j].unit))
                 {
-                    BattleManager.Instance.RemoveUnitFromPlay(tiles[i, j].unit);
+                    tiles[i, j].unit.UnspawnUnit();
                 }
                 tiles[i, j].gameObject.SetActive(false);
             }

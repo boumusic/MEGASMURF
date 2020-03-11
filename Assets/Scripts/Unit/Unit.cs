@@ -69,12 +69,13 @@ public abstract class Unit : LevelElement
     {
         currentTile.unit = null;
         currentTile = null;
+        BattleManager.Instance.RemoveUnitFromPlay(this);
+        gameObject.SetActive(false);
     }
 
     public void RemoveFromBoard()
     {
         CurrentTile = null;
-        gameObject.SetActive(false);
     }
 
     public virtual void SetUnitPosition(Tile tile)
