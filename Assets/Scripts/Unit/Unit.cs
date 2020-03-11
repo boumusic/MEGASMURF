@@ -29,6 +29,8 @@ public abstract class Unit : LevelElement
 
     public virtual int UnitMergeLevel => 0;
 
+    public int SpawnID { get; set; }
+
     //A Initialiser
     public float CurrentHitPoint { get; protected set; }
 
@@ -58,15 +60,27 @@ public abstract class Unit : LevelElement
             hp.UpdateJauge(CurrentHitPoint, MaxHealth);
     }
 
-    public virtual void SetUnitPosition(Tile tile)
+    public virtual void SpawnUnit(Tile tile)
     {
-        CurrentTile = tile;
-        transform.position = tile.transform.position;
+        SetUnitPosition(tile);
+    }
+
+    public virtual void UnspawnUnit()
+    {
+        currentTile.unit = null;
+        currentTile = null;
     }
 
     public void RemoveFromBoard()
     {
         CurrentTile = null;
+        gameObject.SetActive(false);
+    }
+
+    public virtual void SetUnitPosition(Tile tile)
+    {
+        CurrentTile = tile;
+        transform.position = tile.transform.position;
     }
 
     public void DebugSetUnitPosition()

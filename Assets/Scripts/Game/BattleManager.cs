@@ -38,12 +38,20 @@ public class BattleManager : MonoBehaviour
     private void Awake()
     {
         playerUnits = new List<List<Unit>>();
+        GameManager.units = new List<Unit>();
         for(int i = 0; i < players.Length; i++)
         {
             playerUnits.Add(new List<Unit>());
         }
 
-        Board.Instance.InitializeBoard();
+        if (Board.Instance.dungeon.Count > 0)
+        {
+            Board.Instance.InitializeBoard(Board.Instance.dungeon[0]);
+        }
+        else
+        {
+            Board.Instance.InitializeBoard();
+        }
     }
 
     private void Start()
@@ -591,7 +599,7 @@ public class BattleManager : MonoBehaviour
     {
         if (playerUnits[CurrentPlayerID].Count == 0)                                                        
         {
-            Debug.LogError("Player " + CurrentPlayerID + " has no unit left!");
+            Debug.Log("Player " + CurrentPlayerID + " has no unit left!");
             return;                                                                                                 //A enlever
         }
 
