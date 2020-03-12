@@ -10,7 +10,7 @@ public class CompassFX : MonoBehaviour
     public ParticleSystem appear;
     public bool playOnStart = false;
 
-    private void Start()
+    private void OnEnable()
     {
         if(playOnStart) Play();
     }

@@ -19,7 +19,12 @@ public abstract class Unit : LevelElement
     public Vector2 debugTile;
 
     public UnitBase unitBase;     //Passage en UnitBase
+
+    [Header("UI Icons")]
     public Sprite unitIcon;
+    public Sprite selectedUnitIcon;
+    public Sprite unitActionIcon;
+    public Sprite unitActionIconPressed;
     
     public bool HasInfiniteMoveRange { get; set; }
 
@@ -205,7 +210,10 @@ public abstract class Unit : LevelElement
                 foreach (Tile tile in tiles)
                 {
                     if (tile.unit != null && !BattleManager.Instance.IsCurrentPlayerUnit(tile.unit))
+                    {
+                        tile.ReceiveAttack(this);
                         tile.unit.TakeDamage(this);
+                    }
                 }
                 BecomeExhausted();
                 action?.Invoke();
@@ -213,7 +221,10 @@ public abstract class Unit : LevelElement
 
             case AttackPatternType.Single:
                 if (tiles.Count > 0 && tiles[0].unit != null && !BattleManager.Instance.IsCurrentPlayerUnit(tiles[0].unit))
+                {
                     tiles[0].unit.TakeDamage(this);
+                    tiles[0].ReceiveAttack(this);
+                }
                 BecomeExhausted();
                 action?.Invoke();
                 break;
@@ -225,6 +236,8 @@ public abstract class Unit : LevelElement
                     attackDestination.Push(tiles[tiles.Count - 1]);
                 }
 
+
+                tempTileToAttack.Clear();
                 
                 foreach (Tile tile in tiles)
                 {
@@ -245,6 +258,7 @@ public abstract class Unit : LevelElement
         foreach (Tile tile in tempTileToAttack)
         {
             tile.unit.TakeDamage(this);
+            tile.ReceiveAttack(this);
         }
         BecomeExhausted();
         tempAction?.Invoke();
