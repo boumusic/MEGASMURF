@@ -13,19 +13,27 @@ MonoBehaviour:
   m_Name: AnUnitEncyclopediaByAnUnknownMagician
   m_EditorClassIdentifier: 
   unitBlueprints:
-  - unitPrefab: {fileID: 4564527293712767121, guid: b92a0ad3e9b477e46a84dbda50c9ccdd,
+  - unitCost: 10
+    unitPrefab: {fileID: 4564527293712767121, guid: b92a0ad3e9b477e46a84dbda50c9ccdd,
       type: 3}
-  - unitPrefab: {fileID: 5441548972385544480, guid: a22490eabe3061a4f8c4ea80b3d405b4,
+  - unitCost: 10
+    unitPrefab: {fileID: 5441548972385544480, guid: a22490eabe3061a4f8c4ea80b3d405b4,
       type: 3}
-  - unitPrefab: {fileID: 7025876197048975598, guid: 9ddb8a5d29f718346babf52a944045cb,
+  - unitCost: 10
+    unitPrefab: {fileID: 7025876197048975598, guid: 9ddb8a5d29f718346babf52a944045cb,
       type: 3}
-  - unitPrefab: {fileID: 4873826357415292950, guid: 510179844b663904fa152155c8921223,
+  - unitCost: 0
+    unitPrefab: {fileID: 4873826357415292950, guid: 510179844b663904fa152155c8921223,
       type: 3}
-  - unitPrefab: {fileID: 2527252273252254862, guid: 8777a6d007f454348bc6372630e56319,
+  - unitCost: 0
+    unitPrefab: {fileID: 2527252273252254862, guid: 8777a6d007f454348bc6372630e56319,
       type: 3}
-  - unitPrefab: {fileID: 1006566879641911214, guid: 49d8bdf5b74dcb54ab49e6b98dce9ae5,
+  - unitCost: 0
+    unitPrefab: {fileID: 1006566879641911214, guid: 49d8bdf5b74dcb54ab49e6b98dce9ae5,
       type: 3}
-  - unitPrefab: {fileID: 6000850892917198341, guid: d0fbc22970f082349b827ec9a54b74d5,
+  - unitCost: 0
+    unitPrefab: {fileID: 6000850892917198341, guid: d0fbc22970f082349b827ec9a54b74d5,
       type: 3}
-  - unitPrefab: {fileID: 3386662215874345876, guid: 2b422d4698b4cc14c932392297e8058a,
+  - unitCost: 0
+    unitPrefab: {fileID: 3386662215874345876, guid: 2b422d4698b4cc14c932392297e8058a,
       type: 3}
