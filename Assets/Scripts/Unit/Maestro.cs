@@ -10,6 +10,7 @@ public class Maestro : Unit
 
     [HideInInspector]
     public int rangeLvl;
+    public override MovementPattern UnitMovementPattern => HasInfiniteMoveRange ? unitBase.movementPatterns[unitBase.movementPatterns.Length-1] : unitBase.movementPatterns[rangeLvl];
 
     public int summonCost;
 
