@@ -62,11 +62,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _NoiseA:
         m_Texture: {fileID: 2800000, guid: e6fd03e3048f75b4e902f1dcc5e59bff, type: 3}
-        m_Scale: {x: 1, y: 0.7}
+        m_Scale: {x: 3, y: 1.5}
         m_Offset: {x: -0.01, y: -0.2}
     - _NoiseB:
         m_Texture: {fileID: 2800000, guid: e6fd03e3048f75b4e902f1dcc5e59bff, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: -3.21, y: 0.53}
         m_Offset: {x: 0.02, y: -0.1}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
@@ -140,8 +140,8 @@ Material:
     - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorA: {r: 0.93725497, g: 0.227451, b: 0.9686275, a: 0}
-    - _ColorB: {r: 0.35849053, g: 0.09976856, b: 0.35849053, a: 0}
+    - _ColorA: {r: 0.7924528, g: 0.20558919, b: 0.64790064, a: 0}
+    - _ColorB: {r: 0.33962262, g: 0.0016019973, b: 0.33962262, a: 0}
     - _EdgeBurnColor: {r: 1, g: 1, b: 1, a: 1}
     - _EdgeFadeU: {r: 0, g: 1, b: 1, a: 1}
     - _EdgeFadeV: {r: 0, g: 1, b: 1, a: 1}
