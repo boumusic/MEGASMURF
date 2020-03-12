@@ -15,6 +15,8 @@ MonoBehaviour:
   type: 1
   unit: {fileID: 0}
   animator: {fileID: 9128739997284247450}
+  attackedByShape: {fileID: 9208297265515423968}
+  attackedByEnemy: {fileID: 6682589000421317600}
   spawnedType: 0
   activeSpawn: 0
   turnDelay: 3
@@ -25,6 +27,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4329939266026484931, guid: 41519bd1cb215f346a08d865540ae9cf,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6212784851330426394, guid: 41519bd1cb215f346a08d865540ae9cf,
         type: 3}
       propertyPath: m_Name
@@ -85,6 +92,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7186080408072047735, guid: 41519bd1cb215f346a08d865540ae9cf,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7532405276391412249, guid: 41519bd1cb215f346a08d865540ae9cf,
         type: 3}
       propertyPath: color.r
@@ -121,6 +133,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2194278458542269600}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9208297265515423968 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7041893905554164800, guid: 41519bd1cb215f346a08d865540ae9cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2194278458542269600}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978532ae3005bbd4494b02fe71c31c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6682589000421317600 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4814057644249562944, guid: 41519bd1cb215f346a08d865540ae9cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2194278458542269600}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 978532ae3005bbd4494b02fe71c31c9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6599249170957028911
 PrefabInstance:
   m_ObjectHideFlags: 0

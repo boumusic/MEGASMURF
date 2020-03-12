@@ -22,11 +22,6 @@ public class ShapeUnitAnimationsList : MonoBehaviour
         {
             animDict.Add(animations[i].name, animations[i]);
         }
-
-        for (int i = 0; i < animDict.Count; i++)
-        {
-            Debug.Log(animDict.Values);
-        }
     }
 
     public ShapeUnitAnimation GetUnitAnimation(string name)
