@@ -48,6 +48,8 @@ public class Board : MonoBehaviour
 
     public GameObject tilePrefab;
 
+    public GameObject skillTree;
+
     private Tile[,] tiles;
 
     [HideInInspector]
@@ -118,6 +120,7 @@ public class Board : MonoBehaviour
     public void NextRoom()
     {
         roomId++;
+        skillTree.SetActive(true);
         ClearRoom();
         if (roomId < dungeon.Count)
         {
