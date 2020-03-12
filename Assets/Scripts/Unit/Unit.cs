@@ -19,8 +19,14 @@ public abstract class Unit : LevelElement
     public Vector2 debugTile;
 
     public UnitBase unitBase;     //Passage en UnitBase
+
+    [Header("UI Icons")]
     public Sprite unitIcon;
+    public Sprite selectedUnitIcon;
+    public Sprite unitActionIcon;
+    public Sprite unitActionIconPressed;
     
+    public bool HasInfiniteMoveRange { get; set; }
 
     protected Tile currentTile;
     public virtual Tile CurrentTile { get; protected set; }
@@ -76,9 +82,15 @@ public abstract class Unit : LevelElement
             hp.UpdateJauge(CurrentHitPoint, MaxHealth);
     }
 
+    public virtual void OnEnable()
+    {
+
+    }
+
     public virtual void SpawnUnit(Tile tile)
     {
         SetUnitPosition(tile);
+        HasInfiniteMoveRange = false;
     }
 
     public virtual void UnspawnUnit()
@@ -197,16 +209,22 @@ public abstract class Unit : LevelElement
             case AttackPatternType.All:
                 foreach (Tile tile in tiles)
                 {
-                    if (tile.unit != null)
+                    if (tile.unit != null && !BattleManager.Instance.IsCurrentPlayerUnit(tile.unit))
+                    {
+                        tile.ReceiveAttack(this);
                         tile.unit.TakeDamage(this);
+                    }
                 }
                 BecomeExhausted();
                 action?.Invoke();
                 break;
 
             case AttackPatternType.Single:
-                if (tiles.Count > 0 && tiles[0].unit != null)
+                if (tiles.Count > 0 && tiles[0].unit != null && !BattleManager.Instance.IsCurrentPlayerUnit(tiles[0].unit))
+                {
                     tiles[0].unit.TakeDamage(this);
+                    tiles[0].ReceiveAttack(this);
+                }
                 BecomeExhausted();
                 action?.Invoke();
                 break;
@@ -218,15 +236,17 @@ public abstract class Unit : LevelElement
                     attackDestination.Push(tiles[tiles.Count - 1]);
                 }
 
+
+                tempTileToAttack.Clear();
                 
                 foreach (Tile tile in tiles)
                 {
-                    if (tile.unit != null)
+                    if (tile.unit != null && !BattleManager.Instance.IsCurrentPlayerUnit(tile.unit))
                     {
-                        tempTileToAttack.Add(tile);
-                        tempAction = action;
+                        tempTileToAttack.Add(tile);                       
                     }
                 }
+                tempAction = action;
 
                 MoveTo(attackDestination, OnAttackAnimationEnd);
                 break;
@@ -238,6 +258,7 @@ public abstract class Unit : LevelElement
         foreach (Tile tile in tempTileToAttack)
         {
             tile.unit.TakeDamage(this);
+            tile.ReceiveAttack(this);
         }
         BecomeExhausted();
         tempAction?.Invoke();
@@ -249,9 +270,9 @@ public abstract class Unit : LevelElement
     /// <param name="unit">Unit who inflict the damage</param>
     public virtual void TakeDamage(Unit unit)
     {
-        Debug.Log(gameObject.name + " took " + unit.Damage + " damage from " + unit.gameObject.name);
+        //Debug.Log(gameObject.name + " took " + unit.Damage + " damage from " + unit.gameObject.name);
         CurrentHitPoint -= unit.Damage;
-        Debug.Log("He now has " + CurrentHitPoint);
+        //Debug.Log("He now has " + CurrentHitPoint);
         if(hp)hp.UpdateJauge(CurrentHitPoint, MaxHealth);
 
         if (CurrentHitPoint <= 0)

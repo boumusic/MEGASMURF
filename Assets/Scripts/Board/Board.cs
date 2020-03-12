@@ -39,7 +39,7 @@ public class Board : MonoBehaviour
     [Range(1, 40f)] public float totalHeight = 20;
     [Range(2, 50)] private int columns = 15;
     [Range(2, 50)] private int rows = 15;
-    public float tileDelay = 0.005f;
+    public float tileDelay = 0.0000001f;
 
     public List<Room> dungeon;
 
@@ -53,9 +53,13 @@ public class Board : MonoBehaviour
     [HideInInspector]
     public  Maestro maestro;
 
+    public List<GameObject> environments;
+
     private Room currentRoom;
 
     private int roomId;
+
+    private GameObject currentEnvironment;
 
     private List<Tile> exitTiles;
     private List<Tile> spawnTiles;
@@ -79,12 +83,48 @@ public class Board : MonoBehaviour
         GenerateUnits();
     }
 
+    public void InitializeEnvironment(GameObject environment)
+    {
+        if (environment != null)
+        {
+            if (currentEnvironment != null)
+            {
+                currentEnvironment.SetActive(false);
+                currentEnvironment = environment;
+                currentEnvironment.SetActive(true);
+            }
+        }
+    }
+
+    public bool SpawnersActive()
+    {
+        foreach(Spawner s in spawners)
+        {
+            if (s.activeSpawn)
+            {
+                return true;
+            }
+        }
+        foreach (ImmediateSpawner s in immediateSpawners)
+        {
+            if (s.activeSpawn)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void NextRoom()
     {
         roomId++;
         ClearRoom();
         if (roomId < dungeon.Count)
         {
+            if(roomId < environments.Count)
+            {
+                InitializeEnvironment(environments[roomId]);
+            }
             InitializeBoard(dungeon[roomId]);
         }
         else

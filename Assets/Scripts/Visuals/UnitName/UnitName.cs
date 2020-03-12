@@ -10,7 +10,7 @@ public class UnitName : MonoBehaviour
 
     private void Start()
     {
-        unitName = UnitNameManager.Instance.GetName();
+        unitName = UnitSettingsManager.Instance.GetName();
         UpdateText();
     }
 

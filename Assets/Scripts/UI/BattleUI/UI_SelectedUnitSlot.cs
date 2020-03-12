@@ -9,17 +9,48 @@ public class UI_SelectedUnitSlot : UIElement
     private int healthValue;
     public TextMeshProUGUI unitName;
     public TextMeshProUGUI unitHealthText;
-    public Image unitIconSolo, unitIconDuo, UniIconTrio;
-    public Toggle battleModeToggle;
+    public Image unitIconSolo, unitIconDuo, unitIconTrio;
+    public Image actionIcon;
+    public Image actionIconPressed;
 
     public void SelectUnit(Unit unit)
     {
         gameObject.SetActive(true);
         unitName = UIManager.Instance.uIUnitSlotContainer.UnitSlotBehaviourDictionary[unit].shapeName;
-        unitIconSolo.sprite = unit.unitIcon;                                                                //Solo pour l'instant
+        ChangeUnitIcons(unit);                                                     //Solo pour l'instant
         UpdateHealthText(unit.CurrentHitPoint);
-        SetBattleToStandBy();
         //SetRightButtonAction()
+    }
+
+    public void ChangeUnitIcons(Unit unit)
+    {
+        //Animation
+        UpdateUnitIcons(unit);
+    }
+
+    public void UpdateUnitIcons(Unit unit)
+    {
+        unitIconSolo.sprite = unit.selectedUnitIcon;
+        actionIcon.sprite = unit.unitActionIcon;
+        actionIconPressed.sprite = unit.unitActionIconPressed;
+
+        if (unit is ShapeUnit)
+        {
+            ShapeUnit shapeUnit = (ShapeUnit)unit;
+            if (shapeUnit.ArmUnit != null)
+                unitIconDuo.sprite = shapeUnit.ArmUnit.selectedUnitIcon;
+            else
+                unitIconDuo.sprite = null;
+            if (shapeUnit.LegUnit != null)
+                unitIconTrio.sprite = shapeUnit.HeadUnit.selectedUnitIcon;
+            else
+                unitIconDuo.sprite = shapeUnit.ArmUnit.selectedUnitIcon;
+        }
+        else
+        {
+            unitIconDuo.sprite = null;
+            unitIconDuo.sprite = null;
+        }
     }
 
     public void UnselectUnit()
@@ -32,16 +63,6 @@ public class UI_SelectedUnitSlot : UIElement
         healthValue = newHealthValue;
 
         unitHealthText.text = healthValue.ToString();
-    }
-
-    public void SetBattleToAction()
-    {
-        battleModeToggle.isOn = true;
-    }
-
-    public void SetBattleToStandBy()
-    {
-        battleModeToggle.isOn = false;
     }
 
     //ANIMATIONS

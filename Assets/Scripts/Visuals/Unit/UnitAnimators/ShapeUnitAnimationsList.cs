@@ -26,6 +26,12 @@ public class ShapeUnitAnimationsList : MonoBehaviour
 
     public ShapeUnitAnimation GetUnitAnimation(string name)
     {
+        for (int i = 0; i < animations.Count; i++)
+        {
+            if (animations[i].name == name) return animations[i];
+        }
+
+        return null;
         return animDict[name];
     }
 }

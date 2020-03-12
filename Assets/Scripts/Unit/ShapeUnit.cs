@@ -77,8 +77,43 @@ public class ShapeUnit : Unit
     }
     public override int Damage => (ArmUnit != null) ? ArmUnit.Damage : unitBase.unitStats.damage;
 
-    public override AttackPattern UnitAttackPattern => (ArmUnit != null) ? ArmUnit.unitBase.attackPatterns[1] : unitBase.attackPatterns[0]; // Ajout range level 3 (item)
-    public override MovementPattern UnitMovementPattern => unitBase.movementPatterns[(mergedUnits.Count > 0) ? 1 : 0];  // Ajout range level 3 (item)
+    public override AttackPattern UnitAttackPattern
+    {
+        get
+        {
+
+            if (ArmUnit != null && unitBase.unitType == ArmUnit.UnitType)
+            {
+                return unitBase.attackPatterns[1];
+            }
+            else
+            {
+                return unitBase.attackPatterns[0];
+            }
+        }
+    }
+
+    public override MovementPattern UnitMovementPattern 
+    {
+        get
+        {
+            if (HasInfiniteMoveRange)
+            {
+                return unitBase.movementPatterns[unitBase.movementPatterns.Length - 1];
+            }
+            else
+            {
+                if(ArmUnit != null && unitBase.unitType == ArmUnit.UnitType)
+                {
+                   return unitBase.movementPatterns[1];
+                }
+                else
+                {
+                   return unitBase.movementPatterns[0];
+                }
+            }
+        }
+    }
 
     //public Transform MergeParent { get => mergeParent; set => mergeParent = value; }
     public Transform MergeParent => mergedUnits.Count > 1 ? mergedUnits[mergedUnits.Count - 2].mergeParent : mergeParent;
@@ -108,6 +143,12 @@ public class ShapeUnit : Unit
         // Lancer une coroutine qui fait parcourir le chemin
         StartCoroutine(MovingTo(path, action));
         BecomeMoved();
+    }
+
+    public override void TakeDamage(Unit unit)
+    {
+        base.TakeDamage(unit);
+        ShapeUnitAnimator.PlaySpecial("SimpleHit");
     }
 
     private IEnumerator MovingTo(Stack<Tile> path, System.Action action)
