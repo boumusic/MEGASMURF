@@ -10,36 +10,34 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
     [Header("Displayed Stuff")]
     public int healthValue;
 
-    public TextMeshProUGUI shapeName;
-    //public TextMeshProUGUI ShapeName
-    //{
-    //    get
-    //    {
-    //        return shapeName;
-    //    }
-    //    set
-    //    {
-    //        shapeName = value;
-    //    }
-    //}
-
-    //[Header("Masked Stuff")]
+    public TextMeshProUGUI unitNameTMP;
     public TextMeshProUGUI healthText;
     public Image itemIcon, shapeIcon, shapeIconMiddle, shapeIconTop, hoveredSlotSprite, selectedSlotSprite;
 
     public Unit SlotUnit { get; private set; }
     private Animator ShapeSlot_anim;
-    
+    private string unitName;
 
     private void Awake()
     {
         
     }
 
+    private void Update()
+    {
+        if(unitNameTMP.text != unitName)
+        {
+            unitName = unitNameTMP.text;
+            SlotUnit.name = unitName;
+            UIManager.Instance.UpdateSelectedUnitName(SlotUnit);
+        }
+    }
+
     public void Initialize(Unit unit)
     {
         SlotUnit = unit;
-        shapeName.text = unit.name;
+        unitName = unit.name;
+        unitNameTMP.text = unit.name;
         UpdateDamageText(unit.CurrentHitPoint);
         ChangeshapeIcon(unit.unitIcon);
         

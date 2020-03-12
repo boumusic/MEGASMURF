@@ -19,6 +19,7 @@ public class BattleManager : MonoBehaviour
     [Header("Players Settings")]
     public Player[] players;
     public List<List<Unit>> playerUnits;
+    public Maestro MaestroUnit { get; private set; }
 
     private int StartingPlayer { get; set; }
     public Player CurrentPlayer => (CurrentPlayerID < players.Length) ? players[CurrentPlayerID] : null;
@@ -403,6 +404,12 @@ public class BattleManager : MonoBehaviour
     #endregion
 
     #region Phase Call and Menu
+
+    public void ResetState()
+    {
+        PhaseManager.Instance.ResetState();
+    }
+
     public void OpenGameplayMenu()
     {
         //OpenUi
@@ -598,7 +605,11 @@ public class BattleManager : MonoBehaviour
         {
             playerUnits[playerID].Add(unit);
             if (playerID == 0)
+            {
                 UIManager.Instance.AddNewUnitUISlot(unit);
+                if (unit is Maestro)
+                    MaestroUnit = (Maestro)unit;
+            }
         }
     }
 

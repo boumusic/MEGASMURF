@@ -25,7 +25,9 @@ public abstract class Unit : LevelElement
     public Sprite selectedUnitIcon;
     public Sprite unitActionIcon;
     public Sprite unitActionIconPressed;
-    
+    public Sprite unitActionIconTouched;
+
+
     public bool HasInfiniteMoveRange { get; set; }
 
     protected Tile currentTile;

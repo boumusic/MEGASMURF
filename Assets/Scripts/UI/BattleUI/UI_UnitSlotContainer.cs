@@ -9,7 +9,7 @@ public class UI_UnitSlotContainer : UIElement
     public GameObject scrollViewContent;
     //public GameObject addUnitButton;
 
-    private List<Unit> unitList;
+    public List<Unit> unitList;
     public Dictionary<Unit, GameObject> UnitSlotDictionary { get; private set; }
     public Dictionary<Unit, UI_ShapeSlotBehavior> UnitSlotBehaviourDictionary { get; private set; }
     
@@ -33,12 +33,8 @@ public class UI_UnitSlotContainer : UIElement
             UnitSlotBehaviourDictionary.Add(unitSlotBehaviour.SlotUnit, unitSlotBehaviour);
 
             unitSlot.transform.parent = scrollViewContent.transform;
-            unitSlot.transform.localPosition = slotOrigin.x * Vector3.right + (-spaceBeetweenSlot * (unitList.Count - 1) + slotOrigin.y) * Vector3.up;
-
             unitSlot.SetActive(true);
             //Animation
-
-            //addUnitButton.transform.localPosition = slotOrigin.x * Vector3.right + (- spaceBeetweenSlot * unitList.Count + slotOrigin.y)* Vector3.up;
         }
     }
 
@@ -48,13 +44,11 @@ public class UI_UnitSlotContainer : UIElement
         {
             //RemoveAnimation(SlotDictionary[unit])
             UnitSlotDictionary[unit].SetActive(false);
-            int removedUnitIndex = unitList.IndexOf(unit);
+            UIManager.Instance.CheckSelectedUnitRemoved(unit);
 
             unitList.Remove(unit);
             UnitSlotDictionary.Remove(unit);
             UnitSlotBehaviourDictionary.Remove(unit);
-
-            UpdateUnitSlotPosition(removedUnitIndex);
         }
     }
 
@@ -79,13 +73,8 @@ public class UI_UnitSlotContainer : UIElement
             UnitSlotBehaviourDictionary[unit].UnselectUnit();
     }
 
-    public void UpdateUnitSlotPosition(int removedUnitIndex)
+    public Unit GetNextUnit(int index)
     {
-        //Rajouter du smooth
-        for(int i = removedUnitIndex; i < unitList.Count; i++)
-        {
-            GameObject unitSlot = UnitSlotDictionary[unitList[i]];
-            unitSlot.transform.localPosition = slotOrigin.x * Vector3.right + (-spaceBeetweenSlot * i + slotOrigin.y) * Vector3.up;
-        }
+        return unitList[(index + 1) % unitList.Count];
     }
 }

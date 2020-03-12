@@ -5,6 +5,7 @@ using MonsterLove.StateMachine;
 
 public enum GameplayState
 {
+    Root,
     LevelStart,
     LevelEnd,
     PlayerTurnStart,
@@ -57,6 +58,11 @@ public class PhaseManager : MonoBehaviour
         gameplayState.ManualUpdate = true;
 
         gameplayState.ChangeState(GameplayState.PlayerTurnStart);           // Bof... A mettre ailleur (autre appel du battleManager
+    }
+
+    public void ResetState()
+    {
+        gameplayState.ChangeState(GameplayState.Root);
     }
 
     private void PrintDebugMessage(string message)
