@@ -17,7 +17,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 16fa2559b90905445853270cbc0fb043, type: 2}
   movementPatterns:
   - {fileID: 11400000, guid: 040db8521c2184c4bb3764ba6a51875d, type: 2}
-  - {fileID: 11400000, guid: 040db8521c2184c4bb3764ba6a51875d, type: 2}
-  - {fileID: 11400000, guid: 040db8521c2184c4bb3764ba6a51875d, type: 2}
+  - {fileID: 11400000, guid: b8f163e72fddced41bf580f749982704, type: 2}
+  - {fileID: 11400000, guid: 361c22303ee917b4c8a72d1cf8d1874c, type: 2}
   - {fileID: 11400000, guid: fbe683f259a8d3149b086500ca390320, type: 2}
+  - {fileID: 11400000, guid: ce8056801c054264ba05ed01cf4e4ea0, type: 2}
   unitStats: {fileID: 11400000, guid: c0a2a0c872d6f4f4c8d629cb53a2949e, type: 2}
