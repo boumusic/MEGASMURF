@@ -103,6 +103,11 @@ public class BattleManager : MonoBehaviour
         CurrentPlayerID = StartingPlayer;
     }
 
+    public void LightStart()
+    {
+        CurrentPlayerID = StartingPlayer;
+    }
+
     #region State Actions
     private void LevelStartEnter()
     {

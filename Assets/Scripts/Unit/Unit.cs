@@ -364,6 +364,11 @@ public abstract class Unit : LevelElement
         {
             visuals[i].SetActive(true);
         }
+        if (unitBase.unitType == BaseUnitType.Maestro)
+        {
+            Board.Instance.gameOverScreen.SetActive(true);
+            SequenceManager.Instance.Clear();
+        }
         gameObject.SetActive(false);
     }
 
