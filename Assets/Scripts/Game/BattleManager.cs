@@ -25,6 +25,7 @@ public class BattleManager : MonoBehaviour
     public int CurrentPlayerID { get; private set; }
 
     public event Action OnPlayerTurnStart;
+    public Action OnBattleModeButtonPress;
 
 
     public Unit CurrentSelectedUnit { get; private set; }
@@ -163,6 +164,7 @@ public class BattleManager : MonoBehaviour
 
     private void UnitSelectionVariableInitialization()
     {
+        UIManager.Instance.UnselectUnit(CurrentSelectedUnit);
         CurrentSelectedUnit = null;
         isMerging = false;
     }
@@ -215,6 +217,7 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnTileMouseOver += RangeManager.Instance.AddToCurrentPath;
         CurrentPlayer.OnTileSelection += OrderMovement;
         CurrentPlayer.OnActionButtonPress += EnterRightActionTargetSelectionState;
+        OnBattleModeButtonPress += EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
     }
 
@@ -223,6 +226,7 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnTileMouseOver -= RangeManager.Instance.AddToCurrentPath;
         CurrentPlayer.OnTileSelection -= OrderMovement;
         CurrentPlayer.OnActionButtonPress -= EnterRightActionTargetSelectionState;
+        OnBattleModeButtonPress -= EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel -= EnterUnitSelectionState;
     }
 
@@ -270,12 +274,14 @@ public class BattleManager : MonoBehaviour
     private void ActionSelectionActivateInput()
     {
         CurrentPlayer.OnActionButtonPress += EnterRightActionTargetSelectionState;
+        OnBattleModeButtonPress += EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
     }
 
     private void ActionSelectionDeactivateInput()
     {
         CurrentPlayer.OnActionButtonPress -= EnterRightActionTargetSelectionState;
+        OnBattleModeButtonPress -= EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel -= EnterUnitSelectionState;
     }
 
@@ -291,18 +297,22 @@ public class BattleManager : MonoBehaviour
 
     private void MaestroActionInterSelectionActivateInput()
     {
+        //Activate ShapeSelectionUI
         CurrentPlayer.OnCircleButtonPress += SelectCircleShape;
         CurrentPlayer.OnTriangleButtonPress += SelectTriangleShape;
         CurrentPlayer.OnSquareButtonPress += SelectSquareShape;
-        CurrentPlayer.OnCancel += EnterActionSelectionState;
+        OnBattleModeButtonPress += EnterAppropriateActionState;
+        CurrentPlayer.OnCancel += EnterAppropriateActionState;
     }
 
     private void MaestroActionInterSelectionDeactivateInput()
     {
+        //deactivate ShapeSelectionUI
         CurrentPlayer.OnCircleButtonPress -= SelectCircleShape;
         CurrentPlayer.OnTriangleButtonPress -= SelectTriangleShape;
         CurrentPlayer.OnSquareButtonPress -= SelectSquareShape;
-        CurrentPlayer.OnCancel -= EnterActionSelectionState;
+        OnBattleModeButtonPress -= EnterAppropriateActionState;
+        CurrentPlayer.OnCancel -= EnterAppropriateActionState;
     }
 
     private void ActionTargetSelectionEnter()                                                                                       // BIG CHANGES
@@ -342,6 +352,7 @@ public class BattleManager : MonoBehaviour
     {
         CurrentPlayer.OnTileMouseOver += RangeManager.Instance.TargetTile;
         CurrentPlayer.OnTileSelection += OrderAction;
+        OnBattleModeButtonPress += CancelToRightActionSelectionState;
         CurrentPlayer.OnCancel += CancelToRightActionSelectionState;
     }
 
@@ -349,6 +360,7 @@ public class BattleManager : MonoBehaviour
     {
         CurrentPlayer.OnTileMouseOver -= RangeManager.Instance.TargetTile;
         CurrentPlayer.OnTileSelection -= OrderAction;
+        OnBattleModeButtonPress -= CancelToRightActionSelectionState;
         CurrentPlayer.OnCancel -= CancelToRightActionSelectionState;
     }
 
@@ -477,6 +489,7 @@ public class BattleManager : MonoBehaviour
             if (unit.CurrentUnitState == UnitState.Fresh || unit.CurrentUnitState == UnitState.Moved)
             {
                 CurrentSelectedUnit = unit;
+                UIManager.Instance.SelectUnit(unit);
                 EnterAppropriateActionState();
             }
         }
@@ -547,6 +560,11 @@ public class BattleManager : MonoBehaviour
             EnterActionTargetSelectionState();
         }
     }
+
+    public void CallOnBattleModeButtonPress()
+    {
+        OnBattleModeButtonPress?.Invoke();
+    }
     #endregion
 
     #region Utility
@@ -562,7 +580,11 @@ public class BattleManager : MonoBehaviour
     {
         Unit unit;
         if ((unit = unitGameObject.GetComponent<Unit>()) != null && playerID < players.Length)
+        {
             playerUnits[playerID].Add(unit);
+            if (playerID == 0)
+                UIManager.Instance.AddNewUnitUISlot(unit);
+        }
     }
 
     public void RemoveUnitFromPlay(Unit unit)
@@ -573,6 +595,7 @@ public class BattleManager : MonoBehaviour
             {
                 unitList.Remove(unit);
                 unit.RemoveFromBoard();
+                UIManager.Instance.RemoveUnitUISlot(unit);
                 return;                                                                         //Une unit ne peut appartenir qu'a un seul joueur
             }
         }

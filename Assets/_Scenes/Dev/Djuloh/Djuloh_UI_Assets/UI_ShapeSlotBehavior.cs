@@ -5,11 +5,23 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Displayed Stuff")]
     public int healthValue;
+
     public TextMeshProUGUI shapeName;
+    //public TextMeshProUGUI ShapeName
+    //{
+    //    get
+    //    {
+    //        return shapeName;
+    //    }
+    //    set
+    //    {
+    //        shapeName = value;
+    //    }
+    //}
 
     //[Header("Masked Stuff")]
     public TextMeshProUGUI healthText;
@@ -21,14 +33,16 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
 
     private void Awake()
     {
-
+        
     }
 
     public void Initialize(Unit unit)
     {
         SlotUnit = unit;
+        shapeName.text = unit.name;
         UpdateDamageText(unit.CurrentHitPoint);
         ChangeshapeIcon(unit.unitIcon);
+        
         //ChangeItemIcon(unit.CurrentEquipement.equipementIcon);
     }
 
@@ -80,12 +94,21 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
 
     //SELECTION
 
-    public void selectSlot()
+    public void OnSelectSlotButtonPress()
     {
         Debug.Log("Personnage selectionné -- Penser à changer le sprite et faire apparaitre le perso en bas à droite");
+        InputManager.instance.SendUnitSelection(SlotUnit);
+    }
+
+    public void SelectUnit()
+    {
         selectedSlotSprite.enabled = true;
     }
 
+    public void UnselectUnit()
+    {
+        selectedSlotSprite.enabled = false;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -97,8 +120,5 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
         hoveredSlotSprite.enabled = false;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
+    
 }

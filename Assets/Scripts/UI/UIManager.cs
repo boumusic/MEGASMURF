@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        DebugSpawnUnitSlot();
+        SelectedUnitSlot.UnselectUnit();
     }
 
     public void UpdateShapeMud(int newValue)
@@ -31,6 +31,12 @@ public class UIManager : MonoBehaviour
     {
         uIUnitSlotContainer.SelectUnit(unit);
         SelectedUnitSlot.SelectUnit(unit);
+    }
+
+    public void UnselectUnit(Unit unit)
+    {
+        uIUnitSlotContainer.UnselectUnit(unit);
+        SelectedUnitSlot.UnselectUnit();
     }
 
     public void AddNewUnitUISlot(Unit unit)

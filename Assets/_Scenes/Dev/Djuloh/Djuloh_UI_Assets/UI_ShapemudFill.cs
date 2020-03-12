@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 
-public class UI_ShapemudFill : MonoBehaviour
+public class UI_ShapemudFill : UIElement
 {
     public float lerpSpeed = 4f;
     public int ShapemudValue, oldShapemudValue;
