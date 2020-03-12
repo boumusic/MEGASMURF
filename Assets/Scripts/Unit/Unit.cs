@@ -19,9 +19,12 @@ public abstract class Unit : LevelElement
     public Vector2 debugTile;
 
     public UnitBase unitBase;     //Passage en UnitBase
+    public Sprite unitIcon;
+    
 
     protected Tile currentTile;
     public virtual Tile CurrentTile { get; protected set; }
+
 
     public virtual BaseUnitType UnitType => unitBase.unitType;
 
@@ -29,8 +32,22 @@ public abstract class Unit : LevelElement
 
     public virtual int UnitMergeLevel => 0;
 
+    public int SpawnID { get; set; }
+
     //A Initialiser
-    public float CurrentHitPoint { get; protected set; }
+    private int currentHealth;
+    public int CurrentHitPoint
+    {
+        get
+        {
+            return currentHealth;
+        }
+        protected set
+        {
+            currentHealth = value;
+            UIManager.Instance.UpdateUnitHealth(this, value);
+        }
+    }
 
     public virtual int MaxHealth => unitBase.unitStats.maxHealth;
     public virtual int Damage => unitBase.unitStats.damage;
@@ -38,6 +55,7 @@ public abstract class Unit : LevelElement
     public virtual AttackPattern UnitAttackPattern => unitBase.attackPatterns[0];
     public virtual MovementPattern UnitMovementPattern => unitBase.movementPatterns[0];
     public virtual UnitStatistics UnitStats => unitBase.unitStats;
+    public Equipement CurrentEquipement { get; set; }
 
     public UnitAnimator UnitAnimator { get => unitAnimator; }
 
@@ -58,15 +76,28 @@ public abstract class Unit : LevelElement
             hp.UpdateJauge(CurrentHitPoint, MaxHealth);
     }
 
-    public virtual void SetUnitPosition(Tile tile)
+    public virtual void SpawnUnit(Tile tile)
     {
-        CurrentTile = tile;
-        transform.position = tile.transform.position;
+        SetUnitPosition(tile);
+    }
+
+    public virtual void UnspawnUnit()
+    {
+        currentTile.unit = null;
+        currentTile = null;
+        BattleManager.Instance.RemoveUnitFromPlay(this);
+        gameObject.SetActive(false);
     }
 
     public void RemoveFromBoard()
     {
         CurrentTile = null;
+    }
+
+    public virtual void SetUnitPosition(Tile tile)
+    {
+        CurrentTile = tile;
+        transform.position = tile.transform.position;
     }
 
     public void DebugSetUnitPosition()

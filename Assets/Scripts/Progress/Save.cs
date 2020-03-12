@@ -38,7 +38,7 @@ public class UnitTemplate
         position[0] = (int)shape.CurrentTile.Coords.x;
         position[1] = (int)shape.CurrentTile.Coords.y;
 
-        equipment = shape.equipement.id;
+        equipment = shape.CurrentEquipement.id;
     }
 
     public ShapeUnit GetUnit()

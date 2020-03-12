@@ -28,6 +28,7 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     public TileType type;
     public Unit unit;
     public Animator animator;
+
     public int MudAmount { get; set; }
 
     private Vector2 _coords;

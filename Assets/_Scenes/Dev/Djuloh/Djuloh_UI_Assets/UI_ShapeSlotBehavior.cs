@@ -5,42 +5,76 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class UI_ShapeSlotBehavior : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Displayed Stuff")]
     public int healthValue;
+
     public TextMeshProUGUI shapeName;
+    //public TextMeshProUGUI ShapeName
+    //{
+    //    get
+    //    {
+    //        return shapeName;
+    //    }
+    //    set
+    //    {
+    //        shapeName = value;
+    //    }
+    //}
 
-    [Header("Masked Stuff")]
-    private TextMeshProUGUI healthText;
-    private Image itemIcon, shapeIcon, hoveredSlotSprite, selectedSlotSprite;
+    //[Header("Masked Stuff")]
+    public TextMeshProUGUI healthText;
+    public Image itemIcon, shapeIcon, shapeIconMiddle, shapeIconTop, hoveredSlotSprite, selectedSlotSprite;
+
+    public Unit SlotUnit { get; private set; }
     private Animator ShapeSlot_anim;
+    
 
-    void Start()
+    private void Awake()
     {
-      updateDamageText(healthValue);
-        selectedSlotSprite = gameObject.transform.GetChild(0).GetComponent<Image>();
-        hoveredSlotSprite = gameObject.transform.GetChild(1).GetComponent<Image>();
+        
+    }
+
+    public void Initialize(Unit unit)
+    {
+        SlotUnit = unit;
+        shapeName.text = unit.name;
+        UpdateDamageText(unit.CurrentHitPoint);
+        ChangeshapeIcon(unit.unitIcon);
+        
+        //ChangeItemIcon(unit.CurrentEquipement.equipementIcon);
+    }
+
+    public void UpdateHealth(int newHealth)
+    {
+        if(newHealth < healthValue)
+        {
+            shapeSlotDamageAnim();
+        }
+        else if(newHealth > healthValue)
+        {
+            shapeSlotHealAnim();
+        }
+
+        UpdateDamageText(newHealth);
     }
 
     //ICONES ET TEXTE
-    public void changeItemIcon(Sprite newItemIcon) 
+    public void ChangeItemIcon(Sprite newItemIcon) 
     {
-        itemIcon = gameObject.transform.Find("ParentPanel/ItemIcon").GetComponent<Image>();
         itemIcon.sprite = newItemIcon;
-    
     }
 
-    public void changeshapeIcon(Sprite newShapeIcon)
+    public void ChangeshapeIcon(Sprite newShapeIcon)
     {
-        shapeIcon = gameObject.transform.Find("ParentPanel/ShapeIcon_Background/ShapeIcon").GetComponent<Image>();
         shapeIcon.sprite = newShapeIcon;
     }
 
-    public void updateDamageText(int newHealthValue)
+    public void UpdateDamageText(int newHealthValue)
     {
         healthValue = newHealthValue;
-        healthText = gameObject.transform.Find("ParentPanel/HealthIcon/HealthNumberText").GetComponent<TextMeshProUGUI>();
+        
         healthText.text = healthValue.ToString();
     }
 
@@ -49,33 +83,63 @@ public class UI_ShapeSlotBehavior : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void shapeSlotDamageAnim()
     {
-
+        //A call quand l'unité se fait taper.
     }
 
     public void shapeSlotHealAnim()
     {
-
+        //A call quand l'unité se fait soigner
     }
 
+   public void hoverSlotAnim()
+    {
+        //Quand le joueur a la souris par dessus
+    }
+
+    public void onSelectedSlotAnim()
+    {
+        //Quand l'unité est sélectionnée NOTE : Cette anim loop 
+    }
+
+    public void fusionDoubleAnim()
+    {
+        // A jouer quand l'unité passe d'une shape à deux shapes. Le toggle on/off des images se fait 
+        //Dans l'anim je disable l'image de l'unité seule
+    }
+
+    public void fusionTripleAnim()
+    {
+        //Dans l'anim je disable les images des autres unités pour faire apparaître les triples
+    }
 
     //SELECTION
 
-    public void selectSlot()
+    public void OnSelectSlotButtonPress()
     {
         Debug.Log("Personnage selectionné -- Penser à changer le sprite et faire apparaitre le perso en bas à droite");
+        InputManager.instance.SendUnitSelection(SlotUnit);
+    }
+
+    public void SelectUnit()
+    {
         selectedSlotSprite.enabled = true;
     }
 
+    public void UnselectUnit()
+    {
+        selectedSlotSprite.enabled = false;
+
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        
         hoveredSlotSprite.enabled = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        
         hoveredSlotSprite.enabled = false;
     }
+
+    
 }

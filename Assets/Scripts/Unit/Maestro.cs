@@ -31,8 +31,31 @@ public class Maestro : Unit
                 currentTile.unit = this;
                 currentTile.type = TileType.Obstacle;               //LUL
                 RecoltShapeMud();
+                if (value is ExitTile)
+                {
+                    SpawnID = ((ExitTile)value).id;
+                    //Board.Instance.NextRoom();
+                }
+                else
+                {
+                    SpawnID = -1;
+                }
+                if(value is Spawner)
+                {
+                    ((Spawner)value).activeSpawn = false;
+                }
+                else if(value is ImmediateSpawner)
+                {
+                    ((ImmediateSpawner)value).activeSpawn = false;
+                }
             }
         }
+    }
+
+    public override void SpawnUnit(Tile tile)
+    {
+        base.SpawnUnit(tile);
+        BattleManager.Instance.AddUnitToPlayerUnitList(0,gameObject);
     }
 
     public void InitMaestro()
@@ -70,9 +93,10 @@ public class Maestro : Unit
     {
         if(currentTile.MudAmount > 0)
         {
-            //Animation
             GameManager.ShapeMud += currentTile.MudAmount;
             currentTile.MudAmount = 0;
+            //Animation
+            //Remove Mud asset
         }
     }
 }

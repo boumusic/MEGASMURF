@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelTest
   m_EditorClassIdentifier: 
   rooms:
-  - {fileID: 11400000, guid: 99f8bdb635b961b42bd72ba140ca1566, type: 2}
-  - {fileID: 11400000, guid: 99f8bdb635b961b42bd72ba140ca1566, type: 2}
+  - {fileID: 11400000, guid: b58e27139d11fd3488fa3d6d4f6a6983, type: 2}
+  - {fileID: 11400000, guid: cfd4cf8eb29a8474b829cf0763905f03, type: 2}
   - {fileID: 11400000, guid: 99f8bdb635b961b42bd72ba140ca1566, type: 2}
   - {fileID: 11400000, guid: 99f8bdb635b961b42bd72ba140ca1566, type: 2}

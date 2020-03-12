@@ -4,9 +4,20 @@ using UnityEngine;
 
 public static class GameManager
 {
-
-    public static int ShapeMud;
+    private static int shapeMud;
+    public static int ShapeMud 
+    {
+        get
+        {
+            return shapeMud;
+        }
+        set
+        {
+            shapeMud = value;
+            UIManager.Instance.UpdateShapeMud(value);
+        }
+    }
     public static SkillTree SkillTree;
-    public static List<ShapeUnit> units = new List<ShapeUnit>();
+    public static List<Unit> units;
 
 }

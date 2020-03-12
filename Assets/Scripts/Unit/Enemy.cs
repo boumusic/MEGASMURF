@@ -7,7 +7,7 @@ public class Enemy : Unit
 {
     [HideInInspector]
     public int calls;
-
+    public int mudAmountDrop = 10;
     private Tile priorityDestination;
 
     protected override void Awake()
@@ -35,6 +35,12 @@ public class Enemy : Unit
                 currentTile.type = TileType.Enemy;
             }
         }
+    }
+
+    public override void SpawnUnit(Tile tile)
+    {
+        base.SpawnUnit(tile);
+        BattleManager.Instance.AddUnitToPlayerUnitList(1, gameObject);
     }
 
     public void Sequence()
@@ -186,7 +192,7 @@ public class Enemy : Unit
         foreach (Vector2 v in UnitAttackPattern.range.coords)
         {
             Tile t = Board.Instance.GetTile(v + CurrentTile.Coords);
-            if (t != null && t.type == TileType.Ally)
+            if (t != null && (t.type == TileType.Ally || t.type == TileType.Obstacle))
             {
                 targets.Add(t);
             }
@@ -290,6 +296,7 @@ public class Enemy : Unit
             AIManager.instance.AIDeathCallBack();
         Tile tile = currentTile;
         base.Die();
+        DropShapeMud(tile);
         if (unitBase.unitType == BaseUnitType.Bombi)
         {
             GameObject bombito = UnitFactory.Instance.CreateUnit(BaseUnitType.Bombito);
@@ -309,5 +316,12 @@ public class Enemy : Unit
     public override Color ColorInEditor()
     {
         return base.ColorInEditor();
+    }
+
+    private void DropShapeMud(Tile tile)
+    {
+        //Animation
+        //Spawn mud
+        tile.MudAmount = mudAmountDrop;
     }
 }

@@ -5,46 +5,47 @@ using UnityEngine.UI;
 using TMPro;
 
 
-public class UI_ShapemudFill : MonoBehaviour
+public class UI_ShapemudFill : UIElement
 {
-    public float lerpSpeed = 4f;
-    public float ShapemudValue, oldShapemudValue;
-    private float FillAmount, oldFillAmount;
-    private TextMeshProUGUI ShapemudValueText;
+    [Header("Debug")]
+    private float lerpSpeed = 3f;
+    public int ShapemudValue, oldShapemudValue;
     public bool launchLerp;
-    private Image ShapemudFill;
+
+    [Header("References")]
+    public Image ShapemudFill;
+    public TextMeshProUGUI ShapemudValueText;
 
     private void Start()
     {
         ShapemudFill = gameObject.transform.GetChild(0).GetComponent<Image>();
         ShapemudValueText = gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        oldShapemudValue = ShapemudValue;
-       
-        oldFillAmount = oldShapemudValue / 200f;
-        FillAmount = ShapemudValue / 200f;
+        
     }
-    public void UpdateShapemudText(float newShapemudValue)
+    public void UpdateShapemudText(int newShapemudValue)
     {
         oldShapemudValue = ShapemudValue;
         ShapemudValue = newShapemudValue;
-        oldFillAmount = oldShapemudValue / 200;
-        FillAmount = ShapemudValue / 200;
+        
 
         launchLerp = true;
 
     }
-    private void FixedUpdate()
+    private void Update()
     {
         if (launchLerp)
         {
             
-            Mathf.Lerp(oldShapemudValue, ShapemudValue, lerpSpeed * Time.deltaTime);
-            Mathf.Lerp(oldFillAmount, FillAmount, lerpSpeed * Time.deltaTime);
-            ShapemudFill.fillAmount = oldFillAmount;
+            oldShapemudValue = (int)Mathf.Lerp(oldShapemudValue, ShapemudValue, lerpSpeed * Time.deltaTime);
+
+            ShapemudFill.fillAmount = Mathf.Lerp((float)oldShapemudValue / 200f, (float)ShapemudValue / 200f, lerpSpeed * Time.deltaTime);
             ShapemudValueText.text = oldShapemudValue.ToString();
+
+            lerpSpeed++;
             if (oldShapemudValue == ShapemudValue)
             {
                 launchLerp = false;
+                lerpSpeed = 3f;
             }
         } 
 

@@ -19,12 +19,13 @@ public class SaveManager: MonoBehaviour
         if(SaveManager.Instance == null)
         {
             SaveManager.Instance = this;
+            LoadGame();
         }
     }
 
     private void Start()
     {
-        LoadGame();
+
     }
 
     public void SaveGame()
@@ -81,6 +82,7 @@ public class SaveManager: MonoBehaviour
         {
             Debug.Log("No game saved!");
         }
+        BattleManager.Instance.StartLevel();
     }
 
 }
