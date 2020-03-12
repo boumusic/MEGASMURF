@@ -91,7 +91,7 @@ public abstract class Unit : LevelElement
     public override void Appear()
     {
         base.Appear();
-        GetComponentInChildren<ShapeAppear>(true)?.Appear();
+        GetComponent<ShapeAppear>().Appear();
     }
 
     private void Update()

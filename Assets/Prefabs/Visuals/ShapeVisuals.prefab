@@ -940,7 +940,6 @@ GameObject:
   - component: {fileID: 101812427093185595}
   - component: {fileID: 2333068994756385537}
   - component: {fileID: 5702839670627198989}
-  - component: {fileID: 4207132879532193540}
   m_Layer: 0
   m_Name: ShapeVisuals
   m_TagString: Untagged
@@ -1067,22 +1066,6 @@ MonoBehaviour:
     color: {r: 0.36405307, g: 0.48174068, b: 0.764151, a: 0}
   - name: _ColorB
     color: {r: 0.23718406, g: 0.5240272, b: 0.7735849, a: 0}
---- !u!114 &4207132879532193540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4428802084059770371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aaa9c52b842512488562b01c5e12cbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  appearDelay: 1.5
-  appearAnticipation: {fileID: 1089008002360648698}
-  appearClimax: {fileID: 5646670335792472616}
-  animator: {fileID: 0}
 --- !u!1 &5369994606937002886
 GameObject:
   m_ObjectHideFlags: 0
