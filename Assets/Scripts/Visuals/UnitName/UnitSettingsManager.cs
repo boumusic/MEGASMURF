@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitNameManager : MonoBehaviour
+public class UnitSettingsManager : MonoBehaviour
 {
-    private static UnitNameManager instance;
-    public static UnitNameManager Instance { get { if (!instance) instance = FindObjectOfType<UnitNameManager>(); return instance; } }
+    private static UnitSettingsManager instance;
+    public static UnitSettingsManager Instance { get { if (!instance) instance = FindObjectOfType<UnitSettingsManager>(); return instance; } }
 
-    public UnitNameSettings settings;
+    public UnitNameSettings nameSettings;
+    public UnitGeneralSettings generalSettings;
     private List<string> names = new List<string>();
     public bool allowDuplicates = false;
 
     private void Awake()
     {
-        for (int i = 0; i < settings.names.Count; i++)
+        for (int i = 0; i < nameSettings.names.Count; i++)
         {
-            names.Add(settings.names[i]);
+            names.Add(nameSettings.names[i]);
         }
     }
 
