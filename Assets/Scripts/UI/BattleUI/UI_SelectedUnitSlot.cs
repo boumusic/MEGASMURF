@@ -21,6 +21,11 @@ public class UI_SelectedUnitSlot : UIElement
         //SetRightButtonAction()
     }
 
+    public void ChangeUnitIconSprite()
+    {
+
+    }
+
     public void UnselectUnit()
     {
         gameObject.SetActive(false);
