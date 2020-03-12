@@ -1070,7 +1070,7 @@ MonoBehaviour:
     type: 3}
   EndTurnButton: {fileID: 2778131793976123804}
   NextLevelButton: {fileID: 1152822503754430417}
-  ShapeSelectionUI: {fileID: 0}
+  ShapeSelectionUI: {fileID: 3117675093060529480}
 --- !u!1 &8317329940070476353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1699,18 +1699,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ea9e766159e01847985ea4598d35c96, type: 3}
---- !u!114 &2614812281477772116 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4629170321891176726, guid: 6ea9e766159e01847985ea4598d35c96,
+--- !u!1 &3117675093060529480 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5707051326519750410, guid: 6ea9e766159e01847985ea4598d35c96,
     type: 3}
   m_PrefabInstance: {fileID: 7239448487963984450}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57558ccffbe61094ea3c2ccfccf35aa2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3949545739121785980 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5960561281442774590, guid: 6ea9e766159e01847985ea4598d35c96,
@@ -1735,6 +1729,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7239448487963984450}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2614812281477772116 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4629170321891176726, guid: 6ea9e766159e01847985ea4598d35c96,
+    type: 3}
+  m_PrefabInstance: {fileID: 7239448487963984450}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57558ccffbe61094ea3c2ccfccf35aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5072474993429199358 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2455232737199733692, guid: 6ea9e766159e01847985ea4598d35c96,

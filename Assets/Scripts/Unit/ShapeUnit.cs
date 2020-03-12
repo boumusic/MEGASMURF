@@ -10,6 +10,10 @@ public class ShapeUnit : Unit
     [SerializeField] public Transform mergeParent;
     private Action OnMergedFinished;
 
+    public Sprite shapeLegIcon;
+    public Sprite shapeArmIcon;
+    public Sprite shapeHeadIcon;
+
     public override Tile CurrentTile
     {
         get => currentTile;

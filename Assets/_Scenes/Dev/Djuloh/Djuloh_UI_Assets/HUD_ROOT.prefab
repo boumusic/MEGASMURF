@@ -1064,8 +1064,9 @@ MonoBehaviour:
   unitHealthText: {fileID: 5960561282511682745}
   unitIconSolo: {fileID: 5960561280620895330}
   unitIconDuo: {fileID: 5960561281481053533}
-  UniIconTrio: {fileID: 5960561280710528339}
-  battleModeToggle: {fileID: 0}
+  unitIconTrio: {fileID: 5960561280710528339}
+  actionButton: {fileID: 5055965946760965154}
+  actionIcon: {fileID: 3482030436343324674}
 --- !u!1 &3122976282547757313
 GameObject:
   m_ObjectHideFlags: 0
@@ -4900,9 +4901,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 117a0113180bf3d4da998383bf06fcc4, type: 3}
+--- !u!114 &3482030436343324674 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6663603363957468344, guid: 117a0113180bf3d4da998383bf06fcc4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7794455315325373626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &452780460616987124 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7666233369928138062, guid: 117a0113180bf3d4da998383bf06fcc4,
     type: 3}
   m_PrefabInstance: {fileID: 7794455315325373626}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5055965946760965154 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3026720157037191320, guid: 117a0113180bf3d4da998383bf06fcc4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7794455315325373626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
