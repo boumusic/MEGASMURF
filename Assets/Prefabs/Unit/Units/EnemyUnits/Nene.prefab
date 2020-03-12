@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 762165db3f18f144f80224980fc56a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitAnimator: {fileID: 0}
+  unitAnimator: {fileID: 4526875744455353001}
   hp: {fileID: 7511827662043159174}
   debugTile: {x: 0, y: 0}
   unitBase: {fileID: 11400000, guid: 586b2868df8b7964fac64a6c14860527, type: 2}
   unitIcon: {fileID: 0}
+  selectedUnitIcon: {fileID: 0}
+  unitActionIcon: {fileID: 0}
+  unitActionIconPressed: {fileID: 0}
   calls: 0
   mudAmountDrop: 10
 --- !u!114 &6340309468539860915
@@ -488,6 +491,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3473872296555385155}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4526875744455353001 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1073859968179303402, guid: 2bbe777a5f518c043b1efbfe08967beb,
+    type: 3}
+  m_PrefabInstance: {fileID: 3473872296555385155}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201888315286198417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d9e9f0f62d7a9419e9abb594a4aa47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5796753507102398780 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6937681877181892735, guid: 2bbe777a5f518c043b1efbfe08967beb,
