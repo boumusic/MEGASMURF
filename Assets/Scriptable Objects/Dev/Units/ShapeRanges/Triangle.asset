@@ -18,5 +18,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dac9466cfd3083d419d964dc2be78ba5, type: 2}
   movementPatterns:
   - {fileID: 11400000, guid: 54701afd74b55374e826a7dec829f3c7, type: 2}
-  - {fileID: 11400000, guid: 54701afd74b55374e826a7dec829f3c7, type: 2}
+  - {fileID: 11400000, guid: e78c2631d5812724cb4014b31e3b618c, type: 2}
+  - {fileID: 11400000, guid: ce8056801c054264ba05ed01cf4e4ea0, type: 2}
   unitStats: {fileID: 11400000, guid: 4acf8a31d1b4f2e4498a6f904ee8efc3, type: 2}

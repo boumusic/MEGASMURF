@@ -32,6 +32,7 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     [Header("Feedbacks")]
     public QuikFeedback attackedByShape;
     public QuikFeedback attackedByEnemy;
+    private bool isAppeared = false;
 
     public int MudAmount { get; set; }
 
@@ -79,9 +80,13 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
         _currentAnim = TileAnim.None;
     }
 
-    public void Appear()
+    public override void Appear()
     {
-        animator.SetTrigger("In");
+        if (!isAppeared)
+        {
+            animator.SetTrigger("In");
+            isAppeared = true;
+        }
     }
 
     public List<Tile> GetNeighbors()

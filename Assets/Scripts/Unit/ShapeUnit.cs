@@ -52,6 +52,7 @@ public class ShapeUnit : Unit
     public ShapeUnit HeadUnit => (mergedUnits.Count > 1) ? mergedUnits[1] : null;
     public ShapeUnit ArmUnit => (mergedUnits.Count > 0) ? mergedUnits[0] : null;
     public ShapeUnit LegUnit => this;
+    public override UnitDeathSettings DeathSettings => UnitSettingsManager.Instance.generalSettings.shapeDeath;
 
     public ShapeUnitAnimator ShapeUnitAnimator => UnitAnimator as ShapeUnitAnimator;
 
