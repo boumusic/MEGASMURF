@@ -108,7 +108,7 @@ public class BattleManager : MonoBehaviour
     #region State Actions
     private void LevelStartEnter()
     {
-
+        SequenceManager.Instance.EnQueueAction(EnterPlayerTurnStartState, ActionType.AutomaticResume);
     }
 
     private void LevelStartExit()
