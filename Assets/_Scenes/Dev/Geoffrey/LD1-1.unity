@@ -36901,7 +36901,7 @@ PrefabInstance:
     - target: {fileID: 3210752234990675187, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.010981959
+      value: 0.00006540399
       objectReference: {fileID: 0}
     - target: {fileID: 3210752234990675187, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
@@ -37076,7 +37076,7 @@ PrefabInstance:
     - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: dungeon.Array.size
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
@@ -37103,7 +37103,25 @@ PrefabInstance:
         type: 3}
       propertyPath: dungeon.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: b58e27139d11fd3488fa3d6d4f6a6983,
+      objectReference: {fileID: 11400000, guid: cfd4cf8eb29a8474b829cf0763905f03,
+        type: 2}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: dungeon.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 25b5b6e82a2dd2246babbb6948132144,
+        type: 2}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: dungeon.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5d9f8474b0e204e45ba590fc1f64d792,
+        type: 2}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: dungeon.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: b242ef2b6cf50a44d93ae14921ba519e,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f, type: 3}
