@@ -36733,6 +36733,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: b242ef2b6cf50a44d93ae14921ba519e,
         type: 2}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: tileDelay
+      value: 0.0001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f, type: 3}
 --- !u!4 &1181957418 stripped
