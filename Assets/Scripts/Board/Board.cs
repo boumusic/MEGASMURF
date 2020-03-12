@@ -58,6 +58,8 @@ public class Board : MonoBehaviour
 
     public GameObject skillTree;
 
+    public GameObject gameOverScreen;
+
     private Tile[,] tiles;
     private List<Tile> tileList = new List<Tile>();
 
@@ -85,6 +87,19 @@ public class Board : MonoBehaviour
     private void Update()
     {
         AppearUpdate();
+    }
+
+    public void ReinitBoard()
+    {
+        roomId = -1;
+        exitTiles.Clear();
+        spawnTiles.Clear();
+        if (maestro != null)
+        {
+            Destroy(maestro.gameObject);
+            maestro = null;
+        }
+        NextRoom();
     }
 
     public void InitializeBoard()
@@ -136,7 +151,10 @@ public class Board : MonoBehaviour
     public void NextRoom()
     {
         roomId++;
-        skillTree.SetActive(true);
+        if (roomId > 0)
+        {
+            skillTree.SetActive(true);
+        }
         ClearRoom();
         if (roomId < dungeon.Count)
         {
@@ -146,6 +164,7 @@ public class Board : MonoBehaviour
             }
             InitializeBoard(dungeon[roomId]);
             BattleManager.Instance.ResetState();
+            BattleManager.Instance.LightStart();
         }
         else
         {
@@ -230,6 +249,7 @@ public class Board : MonoBehaviour
                         newTile.Coords = new Vector2Int(i, j);
                         newTile.transform.position = position;
                         tiles[i, j] = newTile;
+                        tiles[i, j].MudAmount = 0;
                         if (tiles[i, j] is SpawnTile)
                         {
                             spawnTiles.Add(tiles[i, j]);

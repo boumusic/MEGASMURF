@@ -66,6 +66,12 @@ public class Maestro : Unit
         unitBase.unitStats.maxHealth = 3 + GameManager.SkillTree.CheckEffect(SkillType.MaestroLife);
     }
 
+    public void RegenMaestro()
+    {
+        InitMaestro();
+        CurrentHitPoint = unitBase.unitStats.maxHealth;
+    }
+
     public override void Action(List<Tile> tile, Action action = null)
     {
         SummonUnit(BattleManager.Instance.SelectedUnitTypeToBeSummon, tile[0], action);

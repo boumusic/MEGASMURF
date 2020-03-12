@@ -105,10 +105,15 @@ public class BattleManager : MonoBehaviour
         PhaseManager.Instance.gameplayState.ChangeState(GameplayState.LevelStart);
     }
 
+    public void LightStart()
+    {
+        CurrentPlayerID = StartingPlayer;
+    }
+
     #region State Actions
     private void LevelStartEnter()
     {
-
+        SequenceManager.Instance.EnQueueAction(EnterPlayerTurnStartState, ActionType.AutomaticResume);
     }
 
     private void LevelStartExit()
