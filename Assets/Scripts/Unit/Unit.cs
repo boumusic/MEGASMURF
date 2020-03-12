@@ -19,9 +19,12 @@ public abstract class Unit : LevelElement
     public Vector2 debugTile;
 
     public UnitBase unitBase;     //Passage en UnitBase
+
+    [Header("UI Icons")]
     public Sprite unitIcon;
     public Sprite selectedUnitIcon;
-    public Sprite unitAction;
+    public Sprite unitActionIcon;
+    public Sprite unitActionIconPressed;
     
 
     protected Tile currentTile;
@@ -225,7 +228,9 @@ public abstract class Unit : LevelElement
                     attackDestination.Push(tiles[tiles.Count - 1]);
                 }
 
-                
+
+                tempTileToAttack.Clear();
+
                 foreach (Tile tile in tiles)
                 {
                     if (tile.unit != null)

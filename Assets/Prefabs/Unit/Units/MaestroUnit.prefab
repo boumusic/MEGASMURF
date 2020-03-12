@@ -792,7 +792,9 @@ MonoBehaviour:
   hp: {fileID: 388372923603800324}
   debugTile: {x: 0, y: 0}
   unitBase: {fileID: 11400000, guid: 1eceaa681821bd4409a3d074e3ab74b7, type: 2}
-  unitIcon: {fileID: 0}
+  unitIcon: {fileID: 21300000, guid: 90b92138b8b36ce41b3fc10738a46385, type: 3}
+  selectedUnitIcon: {fileID: 21300000, guid: 90b92138b8b36ce41b3fc10738a46385, type: 3}
+  unitAction: {fileID: 0}
   rangeLvl: 0
   summonCost: 10
 --- !u!114 &3638235312477342729
@@ -5757,13 +5759,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   feedbacks:
   - {fileID: 0}
-  legAnimator: {fileID: 0}
+  legAnimator:
+    animator: {fileID: 0}
+    animatorOverrideController: {fileID: 0}
   armsAnimator:
-  - {fileID: 0}
-  - {fileID: 0}
+  - animator: {fileID: 0}
+    animatorOverrideController: {fileID: 0}
+  - animator: {fileID: 0}
+    animatorOverrideController: {fileID: 0}
   face: {fileID: 0}
   legs: {fileID: 0}
   arms: {fileID: 0}
+  list: {fileID: 0}
 --- !u!1 &8651603782823569149
 GameObject:
   m_ObjectHideFlags: 0
