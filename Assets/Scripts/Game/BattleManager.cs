@@ -614,11 +614,30 @@ public class BattleManager : MonoBehaviour
                 return;                                                                         //Une unit ne peut appartenir qu'a un seul joueur
             }
         }
+        CheckForInfiniteRange();
     }
 
     private void ChangeCurrentPlayer()
     {
         CurrentPlayerID = (CurrentPlayerID + 1) % players.Length;
+    }
+
+    private void CheckForInfiniteRange()
+    {
+        if(playerUnits != null & playerUnits.Count > 1 && playerUnits[1].Count == 0 && !Board.Instance.SpawnersActive())
+        {
+            foreach(Unit u in playerUnits[0])
+            {
+                u.HasInfiniteMoveRange = true;
+            }
+        }
+        else
+        {
+            foreach (Unit u in playerUnits[0])
+            {
+                u.HasInfiniteMoveRange = false;
+            }
+        }
     }
 
     public bool IsCurrentPlayerUnit(Unit unit)
