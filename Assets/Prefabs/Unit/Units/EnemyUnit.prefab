@@ -4777,9 +4777,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitAnimator: {fileID: 1073859968179303402}
   hp: {fileID: 6344150237925870533}
+  visuals: []
   debugTile: {x: 0, y: 0}
   unitBase: {fileID: 11400000, guid: c19dbe63de61ee642a9b7b78942affac, type: 2}
   unitIcon: {fileID: 0}
+  selectedUnitIcon: {fileID: 0}
+  unitActionIcon: {fileID: 0}
+  unitActionIconPressed: {fileID: 0}
   calls: 0
   mudAmountDrop: 10
 --- !u!1001 &1121018279147268049
@@ -5072,6 +5076,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4914615656046016956, guid: 50213f4833c077c4fb15b57a2b11fabe,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914615656381275575, guid: 50213f4833c077c4fb15b57a2b11fabe,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4914615656449627168, guid: 50213f4833c077c4fb15b57a2b11fabe,
         type: 3}
       propertyPath: m_Name
@@ -5147,10 +5161,25 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.3
       objectReference: {fileID: 0}
-    - target: {fileID: 4914615656449627173, guid: 50213f4833c077c4fb15b57a2b11fabe,
+    - target: {fileID: 4914615657106520782, guid: 50213f4833c077c4fb15b57a2b11fabe,
         type: 3}
-      propertyPath: playOnStart
-      value: 1
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914615657263292304, guid: 50213f4833c077c4fb15b57a2b11fabe,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914615657692894053, guid: 50213f4833c077c4fb15b57a2b11fabe,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914615658060723386, guid: 50213f4833c077c4fb15b57a2b11fabe,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50213f4833c077c4fb15b57a2b11fabe, type: 3}
@@ -5224,7 +5253,7 @@ PrefabInstance:
     - target: {fileID: 1776543282803582477, guid: b5de573a3d505c647b81c6561a17a605,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1776543282803582477, guid: b5de573a3d505c647b81c6561a17a605,
         type: 3}
@@ -5250,6 +5279,11 @@ PrefabInstance:
         type: 3}
       propertyPath: color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597433740043860668, guid: b5de573a3d505c647b81c6561a17a605,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6230010613138883686, guid: b5de573a3d505c647b81c6561a17a605, type: 3}

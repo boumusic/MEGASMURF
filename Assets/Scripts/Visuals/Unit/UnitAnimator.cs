@@ -41,6 +41,7 @@ public class OverridableAnimator
     public void Play(string name, AnimationClip clip)
     {
         clipOverrides[name] = clip;
+        animatorOverrideController.ApplyOverrides(clipOverrides);
         animator.SetTrigger(name);
     }
 }

@@ -171,8 +171,7 @@ public abstract class Unit : LevelElement
         {
             Tile destinationTile = path.Pop();
             Vector3 pos = destinationTile.transform.position;
-            Vector3 fwd = (pos - transform.position).normalized;
-            SetDesiredForward(fwd);
+            FaceTile(destinationTile);
             while (transform.position != pos)
             {
                 float speed = UnitSettingsManager.Instance.generalSettings.moveSpeed;
@@ -189,6 +188,8 @@ public abstract class Unit : LevelElement
 
         SetAnimatorMoving(false);
         FaceCamera();
+
+        yield return new WaitForSeconds(0.5f);
         
         BecomeMoved();
 
@@ -201,6 +202,13 @@ public abstract class Unit : LevelElement
         {
             unitAnimator.SetIsMoving(moving);
         }
+    }
+
+    private void FaceTile(Tile tile)
+    {
+        Vector3 pos = tile.transform.position;
+        Vector3 fwd = (pos - transform.position).normalized;
+        SetDesiredForward(fwd);
     }
 
     public void FaceCamera()
@@ -230,6 +238,9 @@ public abstract class Unit : LevelElement
     public virtual void Attack(List<Tile> tiles, Action action = null)
     {
         UnitAnimator.PlaySpecial("Bump");
+        if(tiles.Count > 0 && tiles[0] != null)
+            FaceTile(tiles[0]);
+
         switch (UnitAttackPattern.type)
         {
             case AttackPatternType.All:
@@ -278,8 +289,7 @@ public abstract class Unit : LevelElement
                 break;
         }
     }
-
-
+    
     private void OnAttackAnimationEnd()
     {
         foreach (Tile tile in tempTileToAttack)

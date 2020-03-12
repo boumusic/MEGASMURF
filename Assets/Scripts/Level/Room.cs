@@ -41,7 +41,6 @@ public class Room : ScriptableObject
         {
             int x = (int)tileElements[i].pos.x;
             int y = (int)tileElements[i].pos.y;
-            Debug.Log(name);
             orderedTiles[x, y] = tileElements[i].levelElement;
             orderedEntities[x, y] = entityElements[i].levelElement;
         }

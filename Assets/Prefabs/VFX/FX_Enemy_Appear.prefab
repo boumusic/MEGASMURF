@@ -14642,7 +14642,7 @@ MonoBehaviour:
   startTracing: {fileID: 4914615657427238942}
   inPs: {fileID: 4914615656394046513}
   appear: {fileID: 4914615657106520782}
-  playOnStart: 0
+  playOnStart: 1
 --- !u!1 &4914615656708045869
 GameObject:
   m_ObjectHideFlags: 0
