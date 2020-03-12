@@ -1,9 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD:Assets/FBX/Character/Shapes/Animations/Materials/Anim_IdleJump_Arms-No Name.mat.meta
 guid: 904deaac6064b934e92604331ed6eead
 =======
 guid: 89403834c3cbeff46b89a7346dcd4799
 >>>>>>> 3c41a5b1a8831225c8b8c16dfe73d06d5d2264fb:Assets/AmplifyShaderEditor/Plugins/EditorResources/Templates/SRP/HDSRPTemplates (Legacy).unitypackage.meta
+=======
+guid: a086439d5c05f494d8a390988574b8d6
+>>>>>>> 5f3149e009d3d4922f1c671a4caa61390e8dce7f
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
