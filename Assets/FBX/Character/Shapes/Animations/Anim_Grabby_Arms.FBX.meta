@@ -1,11 +1,14 @@
 fileFormatVersion: 2
-guid: c9810bdeab90f9e47861c3e2903efcb0
+guid: 84b40374c42afa34a940bc6f0eed66a1
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: PTF_Walk
+    second: 
+  - first:
+      74: 1827226128182048838
+    second: ArmsGrabby
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,18 +38,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: PTF_Walk
+      name: ArmsGrabby
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 24
+      lastFrame: 19
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -66,7 +69,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 3.5
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -112,7 +115,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 3.5
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
