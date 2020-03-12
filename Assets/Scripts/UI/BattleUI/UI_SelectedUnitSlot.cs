@@ -10,8 +10,15 @@ public class UI_SelectedUnitSlot : UIElement
     public TextMeshProUGUI unitName;
     public TextMeshProUGUI unitHealthText;
     public Image unitIconSolo, unitIconDuo, unitIconTrio;
+    public Button actionButton;
     public Image actionIcon;
-    public Image actionIconPressed;
+
+    private SpriteState actionButtonSpriteState;
+
+    private void Start()
+    {
+        actionButtonSpriteState = new SpriteState();
+    }
 
     public void SelectUnit(Unit unit)
     {
@@ -32,7 +39,9 @@ public class UI_SelectedUnitSlot : UIElement
     {
         unitIconSolo.sprite = unit.selectedUnitIcon;
         actionIcon.sprite = unit.unitActionIcon;
-        actionIconPressed.sprite = unit.unitActionIconPressed;
+        
+        actionButtonSpriteState.pressedSprite = unit.unitActionIconPressed;
+        actionButton.spriteState = actionButtonSpriteState;
 
         if (unit is ShapeUnit)
         {
