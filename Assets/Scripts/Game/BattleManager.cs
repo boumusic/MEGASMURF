@@ -128,6 +128,8 @@ public class BattleManager : MonoBehaviour
         //Anim de debut de tour
         SequenceManager.Instance.EnQueueAction(OnPlayerTurnStart, ActionType.AutomaticResume);
 
+        SequenceManager.Instance.EnQueueAction(CheckForInfiniteRange, ActionType.AutomaticResume);
+
         SequenceManager.Instance.EnQueueAction(FreshenUpCurrentPlayerUnits, ActionType.AutomaticResume);
 
         SequenceManager.Instance.EnQueueAction(EnterUnitSelectionState, ActionType.AutomaticResume);
