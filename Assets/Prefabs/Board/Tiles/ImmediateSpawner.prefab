@@ -17,6 +17,7 @@ MonoBehaviour:
   animator: {fileID: 7062113006407021494}
   attackedByShape: {fileID: 7161875037748083916}
   attackedByEnemy: {fileID: 4617093140552273868}
+  hovered: {fileID: 419755114864995824}
   spawnedType: 0
   activeSpawn: 0
   turnDelay: 2
@@ -160,6 +161,12 @@ ParticleSystem:
 --- !u!198 &3212226679319531586 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3475224000107824238, guid: a323b7e1b46c3514e82792497e54f899,
+    type: 3}
+  m_PrefabInstance: {fileID: 2066702483736581164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &419755114864995824 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1836663771459172828, guid: a323b7e1b46c3514e82792497e54f899,
     type: 3}
   m_PrefabInstance: {fileID: 2066702483736581164}
   m_PrefabAsset: {fileID: 0}
