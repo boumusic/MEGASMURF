@@ -644,7 +644,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
 --- !u!1 &2971263797096196299
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,6 +799,9 @@ MonoBehaviour:
   unitActionIconPressed: {fileID: 21300000, guid: 5ccc302a2bd330941b7a04dacfc680e5,
     type: 3}
   unitActionIconTouched: {fileID: 0}
+  unitActionCancelIcon: {fileID: 0}
+  unitActionCancelIconPressed: {fileID: 0}
+  unitActionCancelIconTouched: {fileID: 0}
   rangeLvl: 0
   summonCost: 10
 --- !u!114 &3638235312477342729
@@ -874,7 +877,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 0.49019608}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5699,7 +5702,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8039444519918129938}
   - component: {fileID: 474051881849880368}
-  - component: {fileID: 2588143218724194643}
   - component: {fileID: 6020795832668137771}
   m_Layer: 0
   m_Name: MaestroVisuals
@@ -5737,19 +5739,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go: {fileID: 0}
---- !u!65 &2588143218724194643
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8039444519918129939}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.64, y: 0.7, z: 0.4}
-  m_Center: {x: 0, y: 0.51, z: 0}
 --- !u!114 &6020795832668137771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5835,7 +5824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.3160377, b: 0.3440514, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
