@@ -76,6 +76,11 @@ public abstract class Unit : LevelElement
             hp.UpdateJauge(CurrentHitPoint, MaxHealth);
     }
 
+    public virtual void OnEnable()
+    {
+
+    }
+
     public virtual void SpawnUnit(Tile tile)
     {
         SetUnitPosition(tile);
@@ -249,9 +254,9 @@ public abstract class Unit : LevelElement
     /// <param name="unit">Unit who inflict the damage</param>
     public virtual void TakeDamage(Unit unit)
     {
-        Debug.Log(gameObject.name + " took " + unit.Damage + " damage from " + unit.gameObject.name);
+        //Debug.Log(gameObject.name + " took " + unit.Damage + " damage from " + unit.gameObject.name);
         CurrentHitPoint -= unit.Damage;
-        Debug.Log("He now has " + CurrentHitPoint);
+        //Debug.Log("He now has " + CurrentHitPoint);
         if(hp)hp.UpdateJauge(CurrentHitPoint, MaxHealth);
 
         if (CurrentHitPoint <= 0)

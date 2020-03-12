@@ -53,7 +53,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -14681,7 +14681,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.8
+      scalar: 0.6
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -29047,8 +29047,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5ce3c320e784353468e2d4f633954222, type: 2}
-  - {fileID: 2100000, guid: 5ce3c320e784353468e2d4f633954222, type: 2}
+  - {fileID: 2100000, guid: 33a3c63ef79385a4e981d21f24fac376, type: 2}
+  - {fileID: 2100000, guid: 33a3c63ef79385a4e981d21f24fac376, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
