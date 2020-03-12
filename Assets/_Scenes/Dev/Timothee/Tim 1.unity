@@ -18710,7 +18710,7 @@ PrefabInstance:
     - target: {fileID: 3210752234990675187, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00010856731
+      value: -0.000010680337
       objectReference: {fileID: 0}
     - target: {fileID: 3210752234990675187, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
@@ -19331,7 +19331,7 @@ PrefabInstance:
         type: 3}
       propertyPath: debugRoom
       value: 
-      objectReference: {fileID: 11400000, guid: 843d331c3f489ff4b9e10263e951a6b1,
+      objectReference: {fileID: 11400000, guid: b58e27139d11fd3488fa3d6d4f6a6983,
         type: 2}
     - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}

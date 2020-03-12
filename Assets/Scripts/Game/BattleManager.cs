@@ -131,6 +131,8 @@ public class BattleManager : MonoBehaviour
         SequenceManager.Instance.EnQueueAction(FreshenUpCurrentPlayerUnits, ActionType.AutomaticResume);
 
         SequenceManager.Instance.EnQueueAction(EnterUnitSelectionState, ActionType.AutomaticResume);
+
+        
     }
 
     private void PlayerTurnStartExit()
@@ -140,7 +142,7 @@ public class BattleManager : MonoBehaviour
 
     private void PlayerTurnEndEnter()
     {
-        SequenceManager.Instance.EnQueueAction(EnterPlayerTurnStartState, ActionType.AutomaticResume);                                                                     //Change Current Player!
+        SequenceManager.Instance.EnQueueAction(EnterPlayerTurnStartState, ActionType.AutomaticResume); 
     }
 
     private void PlayerTurnEndExit()
@@ -173,11 +175,13 @@ public class BattleManager : MonoBehaviour
     {
         CurrentPlayer.OnCancel += PlayerEndTurn;                                                    //Debug (Normalement OpenGameplayMenu)
         CurrentPlayer.OnUnitSelection += SelectUnit;
+        CurrentPlayer.OnEndTurnInput += PlayerEndTurn;
     }
     private void UnitSelectionDeactivateInputs()
     {
         CurrentPlayer.OnCancel -= PlayerEndTurn;                    //Debug (Normalement OpenGameplayMenu)
         CurrentPlayer.OnUnitSelection -= SelectUnit;
+        CurrentPlayer.OnEndTurnInput -= PlayerEndTurn;
     }
 
     private void MovementSelectionEnter()
@@ -219,6 +223,7 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress += EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress += EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
+        CurrentPlayer.OnEndTurnInput += PlayerEndTurn;
     }
 
     private void MovementSelectionDeactivateInputs()
@@ -228,6 +233,7 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress -= EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress -= EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel -= EnterUnitSelectionState;
+        CurrentPlayer.OnEndTurnInput -= PlayerEndTurn;
     }
 
     private void MovementPseudoStateEnter()
@@ -276,6 +282,7 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress += EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress += EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
+        CurrentPlayer.OnEndTurnInput += PlayerEndTurn;
     }
 
     private void ActionSelectionDeactivateInput()
@@ -283,6 +290,7 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress -= EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress -= EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel -= EnterUnitSelectionState;
+        CurrentPlayer.OnEndTurnInput -= PlayerEndTurn;
     }
 
     private void MaestroActionInterSelectionEnter()
@@ -303,6 +311,7 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnSquareButtonPress += SelectSquareShape;
         OnBattleModeButtonPress += EnterAppropriateActionState;
         CurrentPlayer.OnCancel += EnterAppropriateActionState;
+        CurrentPlayer.OnEndTurnInput += PlayerEndTurn;
     }
 
     private void MaestroActionInterSelectionDeactivateInput()
@@ -313,6 +322,7 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnSquareButtonPress -= SelectSquareShape;
         OnBattleModeButtonPress -= EnterAppropriateActionState;
         CurrentPlayer.OnCancel -= EnterAppropriateActionState;
+        CurrentPlayer.OnEndTurnInput -= PlayerEndTurn;
     }
 
     private void ActionTargetSelectionEnter()                                                                                       // BIG CHANGES
@@ -354,6 +364,7 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnTileSelection += OrderAction;
         OnBattleModeButtonPress += CancelToRightActionSelectionState;
         CurrentPlayer.OnCancel += CancelToRightActionSelectionState;
+        CurrentPlayer.OnEndTurnInput += PlayerEndTurn;
     }
 
     private void ActionTargetSelectionDeactivateInput()
@@ -362,6 +373,7 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnTileSelection -= OrderAction;
         OnBattleModeButtonPress -= CancelToRightActionSelectionState;
         CurrentPlayer.OnCancel -= CancelToRightActionSelectionState;
+        CurrentPlayer.OnEndTurnInput -= PlayerEndTurn;
     }
 
     private void ActionPseudoStateEnter()
@@ -415,6 +427,12 @@ public class BattleManager : MonoBehaviour
     public void PlayerEndTurn()
     {
         PhaseManager.Instance.gameplayState.ChangeState(GameplayState.PlayerTurnEnd);
+        //Clean Sequencer?
+    }
+    
+    public void PlayerEndTurnDelay()
+    {
+        SequenceManager.Instance.EnQueueAction(PlayerEndTurn, ActionType.AutomaticResume);
     }
 
     public void EnterUnitSelectionState()
