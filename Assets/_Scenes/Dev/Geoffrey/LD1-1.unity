@@ -46308,15 +46308,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 498060388}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
---- !u!1 &658380717 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5464433108500297431, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1172010313}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &663180659
-=======
 --- !u!1001 &916335855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46476,7 +46467,6 @@ PrefabInstance:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72d3c9fb9820d5248a43649e5fefc44d, type: 3}
 --- !u!1001 &918337404
->>>>>>> db6b7a22e61438af0c4f99b367f1ebb18eeefb84
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -86225,23 +86215,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6291128006386475451, guid: 0bb0135bd84b024469c93705781cfddf,
         type: 3}
-<<<<<<< HEAD
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000013457926
-=======
       propertyPath: m_LocalRotation.x
       value: 0.70710677
->>>>>>> db6b7a22e61438af0c4f99b367f1ebb18eeefb84
       objectReference: {fileID: 0}
     - target: {fileID: 6291128006386475451, guid: 0bb0135bd84b024469c93705781cfddf,
         type: 3}
-<<<<<<< HEAD
-      propertyPath: m_AnchoredPosition.x
-      value: 0.000027801841
-=======
       propertyPath: m_LocalRotation.y
       value: -0
->>>>>>> db6b7a22e61438af0c4f99b367f1ebb18eeefb84
       objectReference: {fileID: 0}
     - target: {fileID: 6291128006386475451, guid: 0bb0135bd84b024469c93705781cfddf,
         type: 3}
@@ -86268,46 +86248,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-    - target: {fileID: 4130602902819360804, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4130602902819360804, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1304511395}
-    - target: {fileID: 4130602902819360804, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CallOnBattleModeButtonPress
-      objectReference: {fileID: 0}
-    - target: {fileID: 4231043780265483869, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4310743327333894551, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: ShapeSelectionUI
-      value: 
-      objectReference: {fileID: 357510118}
-    - target: {fileID: 4310743327333894551, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: skillTreeShapemud
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4849127357934220501, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5548507884119771895, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-=======
     - target: {fileID: 6291128006386475451, guid: 0bb0135bd84b024469c93705781cfddf,
->>>>>>> db6b7a22e61438af0c4f99b367f1ebb18eeefb84
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
@@ -86399,116 +86340,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: eaf96fd00f82d28499d62344eb8d4652,
         type: 3}
       propertyPath: m_Name
-<<<<<<< HEAD
-      value: ESSENTIALS
-      objectReference: {fileID: 0}
-    - target: {fileID: 7041749327786829483, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079422653865735094, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7257776145350359349, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1385708029}
-    - target: {fileID: 7257776145350359349, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SendCircleButtonEvent
-      objectReference: {fileID: 0}
-    - target: {fileID: 7287040957445061320, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1385708029}
-    - target: {fileID: 7287040957445061320, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SendTriangleButtonEvent
-      objectReference: {fileID: 0}
-    - target: {fileID: 7376705007536115578, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7376705007536115578, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8068950576948391116, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8068950576948391116, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: dungeon.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: totalHeight
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: totalWidth
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: debugRoom
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: dungeon.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 843d331c3f489ff4b9e10263e951a6b1,
-        type: 2}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: dungeon.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 843d331c3f489ff4b9e10263e951a6b1,
-        type: 2}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: dungeon.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 843d331c3f489ff4b9e10263e951a6b1,
-        type: 2}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: dungeon.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 5d9f8474b0e204e45ba590fc1f64d792,
-        type: 2}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: dungeon.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: b242ef2b6cf50a44d93ae14921ba519e,
-        type: 2}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: tileDelay
-      value: 0.0001
-=======
       value: SM_Planches_03 (5)
->>>>>>> db6b7a22e61438af0c4f99b367f1ebb18eeefb84
       objectReference: {fileID: 0}
     - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
