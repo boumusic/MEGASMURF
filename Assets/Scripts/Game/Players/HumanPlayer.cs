@@ -33,7 +33,7 @@ public class HumanPlayer : Player
             isEnable = false;
             InputManager.instance.OnCancel -= CallOnCancel;
             InputManager.instance.OnActionButtonPress -= CallOnActionButtonPress;
-            InputManager.instance.OnEndTurnInput += BattleManager.Instance.PlayerEndTurn;
+            InputManager.instance.OnEndTurnInput -= BattleManager.Instance.PlayerEndTurn;
             InputManager.instance.OnCircleButtonPress -= CallOnCircleButtonPress;
             InputManager.instance.OnTriangleButtonPress -= CallOnTriangleButtonPress;
             InputManager.instance.OnSquareButtonPress -= CallOnSquareButtonPress;
