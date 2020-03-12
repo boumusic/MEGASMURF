@@ -1227,7 +1227,8 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 6, y: 10, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 6339349401844312458, guid: 49d8bdf5b74dcb54ab49e6b98dce9ae5,
+      type: 3}
     pos: {x: 6, y: 11, z: 0}
     orderInTurn: 0
   - levelElement: {fileID: 0}
