@@ -230,7 +230,7 @@ public abstract class Unit : LevelElement
 
 
                 tempTileToAttack.Clear();
-
+                
                 foreach (Tile tile in tiles)
                 {
                     if (tile.unit != null)

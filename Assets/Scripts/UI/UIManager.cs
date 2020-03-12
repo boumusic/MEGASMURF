@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour
     public void UnselectUnit(Unit unit)
     {
         uIUnitSlotContainer.UnselectUnit(unit);
-        SelectedUnitSlot.UnselectUnit();
+        //SelectedUnitSlot.UnselectUnit();
     }
 
     public void EnableEndTurnButton()
