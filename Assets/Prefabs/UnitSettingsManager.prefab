@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameSettings: {fileID: 11400000, guid: 7fdd7286ac5a48a48b2c1cc9ceb5f721, type: 2}
-  generalSettings: {fileID: 0}
+  generalSettings: {fileID: 11400000, guid: eec5680dc24ace2478f62eb189985c2e, type: 2}
   allowDuplicates: 0

@@ -15,6 +15,7 @@ public abstract class Unit : LevelElement
     [Header("Components")]
     [SerializeField] private UnitAnimator unitAnimator;
     [SerializeField] private Jauge hp;
+    [SerializeField] private GameObject[] visuals;
 
     public Vector2 debugTile;
 
@@ -62,10 +63,14 @@ public abstract class Unit : LevelElement
     public virtual UnitStatistics UnitStats => unitBase.unitStats;
     public Equipement CurrentEquipement { get; set; }
 
+    public virtual UnitDeathSettings DeathSettings => UnitSettingsManager.Instance.generalSettings.playerDeath;
     public UnitAnimator UnitAnimator { get => unitAnimator; }
 
     private List<Tile> tempTileToAttack;
     private Action tempAction;
+
+    private Vector3 desiredForward;
+    private Vector3 currentVelForward;
 
     protected virtual void Awake()
     {
@@ -79,6 +84,11 @@ public abstract class Unit : LevelElement
         FaceCamera();
         if (hp)
             hp.UpdateJauge(CurrentHitPoint, MaxHealth);
+    }
+
+    private void Update()
+    {
+        UpdateForward();
     }
 
     public virtual void OnEnable()
@@ -159,10 +169,12 @@ public abstract class Unit : LevelElement
         {
             Tile destinationTile = path.Pop();
             Vector3 pos = destinationTile.transform.position;
-            transform.forward = (pos - transform.position).normalized;
+            Vector3 fwd = (pos - transform.position).normalized;
+            SetDesiredForward(fwd);
             while (transform.position != pos)
             {
-                transform.position = Vector3.MoveTowards(transform.position, pos, UnitStats.moveSpeed);
+                float speed = UnitSettingsManager.Instance.generalSettings.moveSpeed;
+                transform.position = Vector3.MoveTowards(transform.position, pos, speed);
                 yield return new WaitForFixedUpdate();
             }
             CurrentTile = destinationTile;
@@ -192,7 +204,20 @@ public abstract class Unit : LevelElement
     public void FaceCamera()
     {
         Vector3 forward = GameCamera.Instance.Forward;
-        transform.forward = new Vector3(-forward.x, 0f, -forward.z);
+        Vector3 desired = new Vector3(-forward.x, 0f, -forward.z);
+        SetDesiredForward(desired);
+    }
+
+    private void SetDesiredForward(Vector3 fwd)
+    {
+        desiredForward = fwd;
+    }
+
+    private void UpdateForward()
+    {
+        float smooth = UnitSettingsManager.Instance.generalSettings.forwardSmooth;
+        Vector3 newForward = Vector3.SmoothDamp(transform.forward, desiredForward, ref currentVelForward,smooth);
+        transform.forward = newForward;
     }
 
     public virtual void Action(List<Tile> tiles, Action action = null)
@@ -202,6 +227,7 @@ public abstract class Unit : LevelElement
 
     public virtual void Attack(List<Tile> tiles, Action action = null)
     {
+        UnitAnimator.PlaySpecial("Bump");
         switch (UnitAttackPattern.type)
         {
             case AttackPatternType.All:
@@ -248,6 +274,7 @@ public abstract class Unit : LevelElement
                 break;
         }
     }
+
 
     private void OnAttackAnimationEnd()
     {
@@ -298,6 +325,24 @@ public abstract class Unit : LevelElement
         }
         BattleManager.Instance.RemoveUnitFromPlay(this);
         //animation
+
+        StartCoroutine(Dying());
+    }
+
+    private IEnumerator Dying()
+    {
+        UnitAnimator.PlayFeedback("Death");
+        yield return new WaitForSeconds(DeathSettings.delayToggleVisuals);
+        for (int i = 0; i < visuals.Length; i++)
+        {
+            visuals[i].SetActive(false);
+        }
+
+        yield return new WaitForSeconds(DeathSettings.delayToggleGameObject);
+        for (int i = 0; i < visuals.Length; i++)
+        {
+            visuals[i].SetActive(true);
+        }
         gameObject.SetActive(false);
     }
 
