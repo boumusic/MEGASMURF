@@ -815,7 +815,7 @@ Transform:
   - {fileID: 1460173236}
   - {fileID: 268923439}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &29008061
 PrefabInstance:
@@ -40908,6 +40908,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72d3c9fb9820d5248a43649e5fefc44d, type: 3}
+--- !u!114 &896282561 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 312320576496950764, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1172010313}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &897089078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67539,6 +67551,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4260885327903601177, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: ShapemudValueText
+      value: 
+      objectReference: {fileID: 896282561}
     - target: {fileID: 4310743327333894551, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: ShapeSelectionUI
@@ -67754,6 +67771,11 @@ PrefabInstance:
       propertyPath: tileDelay
       value: 0.0001
       objectReference: {fileID: 0}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: skillTree
+      value: 
+      objectReference: {fileID: 1434708666}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f, type: 3}
 --- !u!4 &1178824627 stripped
@@ -77021,6 +77043,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48c42cadc8cb8f54db89ea9edad11098, type: 3}
+--- !u!1 &1434708666 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5464433108500297431, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1172010313}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1434828850 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 98138cf2f816bae4a9e4866456d71bfd,
@@ -86282,6 +86310,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1254032737}
     m_Modifications:
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: skillTree
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: eaf96fd00f82d28499d62344eb8d4652,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -86342,11 +86375,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Planches_03 (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
-        type: 3}
-      propertyPath: skillTree
-      value: 
-      objectReference: {fileID: 658380717}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eaf96fd00f82d28499d62344eb8d4652, type: 3}
 --- !u!1001 &1625246727

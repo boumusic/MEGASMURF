@@ -100,6 +100,7 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (GameManager.SkillTree.CheckDependencies(type, lvl) && GameManager.ShapeMud >= GameManager.SkillTree.CheckCost(type, lvl))
         {
             GameManager.SkillTree.Unlock(type, lvl);
+            GameManager.ShapeMud -= GameManager.SkillTree.CheckCost(type, lvl);
             SaveManager.Instance.SaveGame();
         }
     }
