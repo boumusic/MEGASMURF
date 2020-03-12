@@ -11,7 +11,18 @@ public class UI_SelectedUnitSlot : UIElement
     public TextMeshProUGUI unitHealthText;
     public Image unitIconSolo, unitIconDuo, unitIconTrio;
     public Button actionButton;
-    public Image actionIcon;
+    public Image actionButtonIcon;
+
+    private bool isShapeUnit;
+
+    private Sprite soloIcon, duoIcon, trioIcon;
+    private Sprite actionIcon;
+    private Sprite actionIconPressed;
+    private Sprite actionIconTouched;
+    private Sprite actionCancelIcon;
+    private Sprite actionCancelIconPressed;
+    private Sprite actionCancelIconTouched;
+    
 
     public Unit SelectedUnit { get; private set; }
 
@@ -26,47 +37,86 @@ public class UI_SelectedUnitSlot : UIElement
     {
         gameObject.SetActive(true);
         unitName = UIManager.Instance.uIUnitSlotContainer.UnitSlotBehaviourDictionary[unit].unitNameTMP;
-        ChangeUnitIcons(unit);                                                     //Solo pour l'instant
+
+        UpdateActionIcons(unit);
+
+        UpdateUnitIcons(unit);
+
+        DisplayUnitIcons();
+        DisplayActionIcons();
         UpdateHealthText(unit.CurrentHitPoint);
-        //SetRightButtonAction()
     }
 
-    public void ChangeUnitIcons(Unit unit)
+    public void UpdateActionIcons(Unit unit)
     {
-        //Animation
-        UpdateUnitIcons(unit);
+        actionIcon = unit.unitActionIcon;
+        actionIconPressed = unit.unitActionIconPressed;
+        actionIconTouched = unit.unitActionIconTouched;
+
+        actionCancelIcon = unit.unitActionCancelIcon;
+        actionCancelIconPressed = unit.unitActionCancelIconPressed;
+        actionCancelIconTouched = unit.unitActionCancelIconTouched;
+        DisplayActionIcons();
     }
 
     public void UpdateUnitIcons(Unit unit)
     {
-        actionIcon.sprite = unit.unitActionIcon;
-        
-        actionButtonSpriteState.pressedSprite = unit.unitActionIconPressed;
-        actionButtonSpriteState.highlightedSprite = unit.unitActionIconTouched;
-        actionButton.spriteState = actionButtonSpriteState;
-
-        if (unit is ShapeUnit)
+        if (isShapeUnit = unit is ShapeUnit)
         {
             ShapeUnit shapeUnit = (ShapeUnit)unit;
 
-            unitIconSolo.sprite = shapeUnit.selectedUnitIcon;
-            unitIconDuo.sprite = null;
-            unitIconTrio.sprite = null;
+            soloIcon = shapeUnit.selectedUnitIcon;
+            duoIcon = null;
+            trioIcon = null;
 
             if (shapeUnit.ArmUnit != null)
             {
-                unitIconSolo.sprite = shapeUnit.shapeLegIcon;
-                unitIconDuo.sprite = shapeUnit.ArmUnit.selectedUnitIcon;
-            }  
+                soloIcon = shapeUnit.shapeLegIcon;
+                duoIcon = shapeUnit.ArmUnit.selectedUnitIcon;
+            }
             if (shapeUnit.HeadUnit != null)
-                unitIconTrio.sprite = shapeUnit.HeadUnit.selectedUnitIcon;
+                trioIcon = shapeUnit.HeadUnit.selectedUnitIcon;
         }
-        else
+        DisplayUnitIcons();
+    }
+
+    public void DisplayUnitIcons()
+    {
+        //Animation
+        unitIconSolo.sprite = soloIcon;
+
+        if (isShapeUnit)
         {
-            unitIconSolo.sprite = unit.selectedUnitIcon;
-            unitIconDuo.sprite = null;
-            unitIconDuo.sprite = null;
+            if (unitIconDuo != null)
+            {
+                unitIconDuo.sprite = duoIcon;
+            }
+            if (unitIconTrio != null)
+                unitIconTrio.sprite = trioIcon;
         }
+    }
+
+    public void DisplayActionIcons()
+    {
+        actionButtonIcon.sprite = actionIcon;
+
+        actionButtonSpriteState.pressedSprite = actionIconPressed;
+        actionButtonSpriteState.highlightedSprite = actionIconTouched;
+        actionButton.spriteState = actionButtonSpriteState;
+    }
+
+    public void SwitchToCancelButton()
+    {
+        actionButtonSpriteState.pressedSprite = actionCancelIconPressed;
+        actionButtonSpriteState.highlightedSprite = actionCancelIconTouched;
+        actionButton.spriteState = actionButtonSpriteState;
+    }
+
+    public void SwitchToActionButton()
+    {
+        actionButtonSpriteState.pressedSprite = actionIconPressed;
+        actionButtonSpriteState.highlightedSprite = actionIconTouched;
+        actionButton.spriteState = actionButtonSpriteState;
     }
 
     public void UnselectUnit()

@@ -105,4 +105,21 @@ public class UIManager : MonoBehaviour
                 SelectUnit(uIUnitSlotContainer.GetNextUnit(uIUnitSlotContainer.unitList.IndexOf(unit)));
         }
     }
+
+    public void SwitchToActionButton()
+    {
+        SelectedUnitSlot.SwitchToActionButton();
+    }
+
+    public void SwitchToCancelButton()
+    {
+        SelectedUnitSlot.SwitchToCancelButton();
+    }
+
+    public void UpdateUnitIcon(Unit unit)
+    {
+        SelectedUnitSlot.UpdateUnitIcons(unit);
+    }
+
+    //DeactivationUI?
 }

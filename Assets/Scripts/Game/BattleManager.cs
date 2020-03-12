@@ -101,12 +101,19 @@ public class BattleManager : MonoBehaviour
 
         Initialize();
         CurrentPlayerID = StartingPlayer;
+
+        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.LevelStart);
+    }
+
+    public void LightStart()
+    {
+        CurrentPlayerID = StartingPlayer;
     }
 
     #region State Actions
     private void LevelStartEnter()
     {
-
+        SequenceManager.Instance.EnQueueAction(EnterPlayerTurnStartState, ActionType.AutomaticResume);
     }
 
     private void LevelStartExit()
@@ -229,6 +236,8 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress += EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress += EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
+
+        UIManager.Instance.SwitchToActionButton();
     }
 
     private void MovementSelectionDeactivateInputs()
@@ -286,6 +295,8 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress += EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress += EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
+
+        UIManager.Instance.SwitchToActionButton();
     }
 
     private void ActionSelectionDeactivateInput()
@@ -314,6 +325,7 @@ public class BattleManager : MonoBehaviour
         OnBattleModeButtonPress += EnterAppropriateActionState;
         CurrentPlayer.OnCancel += EnterAppropriateActionState;
         UIManager.Instance.EnableShapeSelectionUI();
+        UIManager.Instance.SwitchToCancelButton();
     }
 
     private void MaestroActionInterSelectionDeactivateInput()
@@ -366,6 +378,8 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnTileSelection += OrderAction;
         OnBattleModeButtonPress += CancelToRightActionSelectionState;
         CurrentPlayer.OnCancel += CancelToRightActionSelectionState;
+
+        UIManager.Instance.SwitchToCancelButton();
     }
 
     private void ActionTargetSelectionDeactivateInput()

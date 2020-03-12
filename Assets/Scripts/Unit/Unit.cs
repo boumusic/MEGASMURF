@@ -27,6 +27,9 @@ public abstract class Unit : LevelElement
     public Sprite unitActionIcon;
     public Sprite unitActionIconPressed;
     public Sprite unitActionIconTouched;
+    public Sprite unitActionCancelIcon;
+    public Sprite unitActionCancelIconPressed;
+    public Sprite unitActionCancelIconTouched;
 
 
     public bool HasInfiniteMoveRange { get; set; }
@@ -363,6 +366,11 @@ public abstract class Unit : LevelElement
         for (int i = 0; i < visuals.Length; i++)
         {
             visuals[i].SetActive(true);
+        }
+        if (unitBase.unitType == BaseUnitType.Maestro)
+        {
+            Board.Instance.gameOverScreen.SetActive(true);
+            SequenceManager.Instance.Clear();
         }
         gameObject.SetActive(false);
     }
