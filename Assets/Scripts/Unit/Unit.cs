@@ -21,6 +21,7 @@ public abstract class Unit : LevelElement
     public UnitBase unitBase;     //Passage en UnitBase
     public Sprite unitIcon;
     
+    public bool HasInfiniteMoveRange { get; set; }
 
     protected Tile currentTile;
     public virtual Tile CurrentTile { get; protected set; }
@@ -84,6 +85,7 @@ public abstract class Unit : LevelElement
     public virtual void SpawnUnit(Tile tile)
     {
         SetUnitPosition(tile);
+        HasInfiniteMoveRange = false;
     }
 
     public virtual void UnspawnUnit()
@@ -202,7 +204,7 @@ public abstract class Unit : LevelElement
             case AttackPatternType.All:
                 foreach (Tile tile in tiles)
                 {
-                    if (tile.unit != null)
+                    if (tile.unit != null && !BattleManager.Instance.IsCurrentPlayerUnit(tile.unit))
                         tile.unit.TakeDamage(this);
                 }
                 BecomeExhausted();
@@ -210,7 +212,7 @@ public abstract class Unit : LevelElement
                 break;
 
             case AttackPatternType.Single:
-                if (tiles.Count > 0 && tiles[0].unit != null)
+                if (tiles.Count > 0 && tiles[0].unit != null && !BattleManager.Instance.IsCurrentPlayerUnit(tiles[0].unit))
                     tiles[0].unit.TakeDamage(this);
                 BecomeExhausted();
                 action?.Invoke();
@@ -226,12 +228,12 @@ public abstract class Unit : LevelElement
                 
                 foreach (Tile tile in tiles)
                 {
-                    if (tile.unit != null)
+                    if (tile.unit != null && !BattleManager.Instance.IsCurrentPlayerUnit(tile.unit))
                     {
-                        tempTileToAttack.Add(tile);
-                        tempAction = action;
+                        tempTileToAttack.Add(tile);                       
                     }
                 }
+                tempAction = action;
 
                 MoveTo(attackDestination, OnAttackAnimationEnd);
                 break;
