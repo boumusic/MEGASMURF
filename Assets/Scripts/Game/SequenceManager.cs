@@ -70,5 +70,7 @@ public class SequenceManager : MonoBehaviour
     {
         actionQueue.Clear();
         actionTypeQueue.Clear();
+
+        isWaitingForResume = false;
     }
 }

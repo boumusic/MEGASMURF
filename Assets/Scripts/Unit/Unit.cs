@@ -27,6 +27,9 @@ public abstract class Unit : LevelElement
     public Sprite unitActionIcon;
     public Sprite unitActionIconPressed;
     public Sprite unitActionIconTouched;
+    public Sprite unitActionCancelIcon;
+    public Sprite unitActionCancelIconPressed;
+    public Sprite unitActionCancelIconTouched;
 
 
     public bool HasInfiniteMoveRange { get; set; }

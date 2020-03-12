@@ -101,6 +101,8 @@ public class BattleManager : MonoBehaviour
 
         Initialize();
         CurrentPlayerID = StartingPlayer;
+
+        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.LevelStart);
     }
 
     #region State Actions
@@ -229,6 +231,8 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress += EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress += EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
+
+        UIManager.Instance.SwitchToActionButton();
     }
 
     private void MovementSelectionDeactivateInputs()
@@ -286,6 +290,8 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress += EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress += EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
+
+        UIManager.Instance.SwitchToActionButton();
     }
 
     private void ActionSelectionDeactivateInput()
@@ -314,6 +320,7 @@ public class BattleManager : MonoBehaviour
         OnBattleModeButtonPress += EnterAppropriateActionState;
         CurrentPlayer.OnCancel += EnterAppropriateActionState;
         UIManager.Instance.EnableShapeSelectionUI();
+        UIManager.Instance.SwitchToCancelButton();
     }
 
     private void MaestroActionInterSelectionDeactivateInput()
@@ -366,6 +373,8 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnTileSelection += OrderAction;
         OnBattleModeButtonPress += CancelToRightActionSelectionState;
         CurrentPlayer.OnCancel += CancelToRightActionSelectionState;
+
+        UIManager.Instance.SwitchToCancelButton();
     }
 
     private void ActionTargetSelectionDeactivateInput()

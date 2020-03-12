@@ -269,6 +269,8 @@ public class ShapeUnit : Unit
         {
             shapeBeingMerged = null;
         }
+
+        UIManager.Instance.UpdateUnitIcon(this);
         // Autre check 
         // Vanish d'equipement + Refund
     }
