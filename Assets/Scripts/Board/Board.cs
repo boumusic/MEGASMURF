@@ -50,7 +50,8 @@ public class Board : MonoBehaviour
 
     private Tile[,] tiles;
 
-    private Maestro maestro;
+    [HideInInspector]
+    public  Maestro maestro;
 
     private Room currentRoom;
 
@@ -285,6 +286,7 @@ public class Board : MonoBehaviour
             {
                 if (spawnTiles.Count > u.SpawnID)
                 {
+                    u.gameObject.SetActive(true);
                     u.SpawnUnit(spawnTiles[u.SpawnID]);
                 }
             }

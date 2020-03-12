@@ -16,6 +16,7 @@ public class InputManager : MonoBehaviour
     public Action OnCircleButtonPress;
     public Action OnTriangleButtonPress;
     public Action OnSquareButtonPress;
+    public Action OnEndTurnInput;
     public Action<Tile> OnTileMouseOver;
     public Action<Unit> OnUnitSelection;
     public Action<Tile> OnTileSelection;
@@ -77,11 +78,21 @@ public class InputManager : MonoBehaviour
         OnActionButtonPress?.Invoke();
     }
 
+    public void SendEndTurnInput()
+    {
+        OnEndTurnInput?.Invoke();
+    }
+
     public void SendCircleButtonEvent(InputAction.CallbackContext context)
     {
         if (context.phase != InputActionPhase.Performed)
             return;
 
+        OnCircleButtonPress?.Invoke();
+    }
+    
+    public void SendCircleButtonEvent()
+    {
         OnCircleButtonPress?.Invoke();
     }
 
@@ -92,12 +103,22 @@ public class InputManager : MonoBehaviour
 
         OnTriangleButtonPress?.Invoke();
     }
+    
+    public void SendTriangleButtonEvent()
+    {
+        OnTriangleButtonPress?.Invoke();
+    }
 
     public void SendSquareButtonEvent(InputAction.CallbackContext context)
     {
         if (context.phase != InputActionPhase.Performed)
             return;
 
+        OnSquareButtonPress?.Invoke();
+    }
+    
+    public void SendSquareButtonEvent()
+    {
         OnSquareButtonPress?.Invoke();
     }
 
@@ -115,10 +136,5 @@ public class InputManager : MonoBehaviour
     {
         currentTile = tile;
         OnTileMouseOver?.Invoke(tile);
-    }
-
-    private void CreateGameplayActions()
-    {
-        var AttackAction = new InputAction("AttackAction");
     }
 }
