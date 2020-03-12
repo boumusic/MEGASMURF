@@ -12,9 +12,16 @@ public class UIManager : MonoBehaviour
     public UI_SelectedUnitSlot SelectedUnitSlot;
     public UI_ShapeSlotBehavior UnitSlotBehaviourPrefab;
 
-    private void Start()
+    public GameObject EndTurnButton;
+    public GameObject NextLevelButton;
+    public GameObject ShapeSelectionUI;
+
+    private void Awake()
     {
         SelectedUnitSlot.UnselectUnit();
+        DesableEndTurnButton();
+        DesableNextLevelButton();
+        DesableShapeSelectionUI();
     }
 
     public void UpdateShapeMud(int newValue)
@@ -39,6 +46,36 @@ public class UIManager : MonoBehaviour
         SelectedUnitSlot.UnselectUnit();
     }
 
+    public void EnableEndTurnButton()
+    {
+        EndTurnButton.SetActive(true);
+    }
+
+    public void DesableEndTurnButton()
+    {
+        EndTurnButton.SetActive(false);
+    }
+
+    public void EnableNextLevelButton()
+    {
+        NextLevelButton.SetActive(true);
+    }
+
+    public void DesableNextLevelButton()
+    {
+        NextLevelButton.SetActive(false);
+    }
+
+    public void EnableShapeSelectionUI()
+    {
+        ShapeSelectionUI.SetActive(true);
+    }
+
+    public void DesableShapeSelectionUI()
+    {
+        ShapeSelectionUI.SetActive(false);
+    }
+
     public void AddNewUnitUISlot(Unit unit)
     {
         GameObject unitSlot = PoolManager.Instance.GetEntityOfType(UnitSlotBehaviourPrefab.GetType()).gameObject;
@@ -51,21 +88,5 @@ public class UIManager : MonoBehaviour
     public void RemoveUnitUISlot(Unit unit)
     {
         uIUnitSlotContainer.Remove(unit);
-    }
-
-    private void DebugSpawnUnitSlot()
-    {
-        StartCoroutine(Debugging());
-    }
-
-    private IEnumerator Debugging()
-    {
-        yield return new WaitForSeconds(1);
-
-        AddNewUnitUISlot(null);
-
-        yield return new WaitForSeconds(1);
-
-        AddNewUnitUISlot(null);
     }
 }

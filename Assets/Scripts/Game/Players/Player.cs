@@ -9,6 +9,7 @@ public abstract class Player : MonoBehaviour
 
     public Action OnCancel;
     public Action OnActionButtonPress;
+    public Action OnEndTurnInput;
     public Action OnCircleButtonPress;
     public Action OnTriangleButtonPress;
     public Action OnSquareButtonPress;
@@ -59,5 +60,10 @@ public abstract class Player : MonoBehaviour
     public virtual void CallOnTileSelection(Tile tile)
     {
         OnTileSelection?.Invoke(tile);
+    }
+
+    public virtual void CallOnEndTurnInput()
+    {
+        OnEndTurnInput?.Invoke();
     }
 }
