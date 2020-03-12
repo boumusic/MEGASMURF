@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ShapeUnitAnimator : UnitAnimator
 {
     [Header("Components")]
@@ -11,8 +12,10 @@ public class ShapeUnitAnimator : UnitAnimator
     [SerializeField] private GameObject face;
     [SerializeField] private GameObject legs;
     [SerializeField] private GameObject arms;
+    [SerializeField] private ShapeUnitAnimationsList list;
 
     private List<Animator> allAnimators = new List<Animator>();
+
 
     private void Start()
     {
@@ -20,6 +23,15 @@ public class ShapeUnitAnimator : UnitAnimator
         for (int i = 0; i < armsAnimator.Length; i++)
         {
             allAnimators.Add(armsAnimator[i]);
+        }
+    }
+
+    public void PlaySpecial(string name)
+    {
+        ShapeUnitAnimation anim = list?.GetUnitAnimation(name);
+        if(anim != null)
+        {
+
         }
     }
 
