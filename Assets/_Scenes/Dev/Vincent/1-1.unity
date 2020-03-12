@@ -1379,8 +1379,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90372305}
   m_LocalRotation: {x: -0, y: 0.70780474, z: -0, w: 0.7064082}
-  m_LocalPosition: {x: 0.61, y: -0.8410001, z: -4.17}
-  m_LocalScale: {x: 17.459368, y: 1.68188, z: 34.389996}
+  m_LocalPosition: {x: 0.7, y: -0.8410001, z: -16.26}
+  m_LocalScale: {x: 1.6110777, y: 1.68188, z: 34.389996}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 71
@@ -36868,12 +36868,12 @@ PrefabInstance:
     - target: {fileID: 3210752234990675187, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00004709836
+      value: 0.000015596203
       objectReference: {fileID: 0}
     - target: {fileID: 3210752234990675187, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.00010494217
+      value: -0.00012831367
       objectReference: {fileID: 0}
     - target: {fileID: 3352209372851062577, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
@@ -36925,6 +36925,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6158700620859340176, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6595231082852328858, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_IsActive
@@ -36963,7 +36968,7 @@ PrefabInstance:
     - target: {fileID: 7041749327786829482, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 42
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7041749327786829482, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
@@ -49976,7 +49981,7 @@ PrefabInstance:
     - target: {fileID: 1720225988461072905, guid: 926387e506300734e94a8a77ca011c93,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.19
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 1720225988461072905, guid: 926387e506300734e94a8a77ca011c93,
         type: 3}
