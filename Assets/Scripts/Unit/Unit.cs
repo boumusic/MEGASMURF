@@ -32,7 +32,6 @@ public abstract class Unit : LevelElement
     protected Tile currentTile;
     public virtual Tile CurrentTile { get; protected set; }
 
-
     public virtual BaseUnitType UnitType => unitBase.unitType;
 
     public UnitState CurrentUnitState { get; private set; }
@@ -85,6 +84,12 @@ public abstract class Unit : LevelElement
         FaceCamera();
         if (hp)
             hp.UpdateJauge(CurrentHitPoint, MaxHealth);
+    }
+
+    public override void Appear()
+    {
+        base.Appear();
+        GetComponentInChildren<ShapeAppear>(true)?.Appear();
     }
 
     private void Update()
@@ -189,7 +194,7 @@ public abstract class Unit : LevelElement
         SetAnimatorMoving(false);
         FaceCamera();
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(UnitSettingsManager.Instance.generalSettings.endWalkDelay);
         
         BecomeMoved();
 
