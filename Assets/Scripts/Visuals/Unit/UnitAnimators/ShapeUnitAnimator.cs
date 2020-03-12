@@ -2,45 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationClipOverrides : List<KeyValuePair<AnimationClip, AnimationClip>>
-{
-    public AnimationClipOverrides(int capacity) : base(capacity) { }
-
-    public AnimationClip this[string name]
-    {
-        get { return this.Find(x => x.Key.name.Equals(name)).Value; }
-        set
-        {
-            int index = this.FindIndex(x => x.Key.name.Equals(name));
-            if (index != -1)
-                this[index] = new KeyValuePair<AnimationClip, AnimationClip>(this[index].Key, value);
-        }
-    }
-}
-
-[System.Serializable]
-public class OverridableAnimator
-{
-    public Animator animator;
-    public AnimatorOverrideController animatorOverrideController;
-    public AnimationClipOverrides clipOverrides;
-
-    public void Initialize()
-    {
-        animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
-        animator.runtimeAnimatorController = animatorOverrideController;
-
-        clipOverrides = new AnimationClipOverrides(animatorOverrideController.overridesCount);
-        animatorOverrideController.GetOverrides(clipOverrides);
-    }
-
-    public void Play(string name, AnimationClip clip)
-    {
-        clipOverrides[name] = clip;
-        animator.SetTrigger(name);
-    }
-}
-
 public class ShapeUnitAnimator : UnitAnimator
 {
     [Header("Components")]
@@ -53,8 +14,8 @@ public class ShapeUnitAnimator : UnitAnimator
     [SerializeField] private ShapeUnitAnimationsList list;
 
     private List<OverridableAnimator> allAnimators = new List<OverridableAnimator>();
-    
-    private void Start()
+
+    private void Awake()
     {
         allAnimators.Add(legAnimator);
         for (int i = 0; i < armsAnimator.Length; i++)
@@ -68,15 +29,21 @@ public class ShapeUnitAnimator : UnitAnimator
         }
     }
 
-    public void PlaySpecial(string name)
+    private void Start()
     {
+        
+    }
+
+    public override void PlaySpecial(string name)
+    {
+        base.PlaySpecial(name);
         ShapeUnitAnimation anim = list?.GetUnitAnimation(name);
-        if(anim != null)
+        if (anim != null)
         {
-            legAnimator.Play(name, anim.legs);
+            legAnimator.Play("Special", anim.legs) ;
             for (int i = 0; i < armsAnimator.Length; i++)
             {
-                armsAnimator[i].Play(name, anim.arms);
+                armsAnimator[i].Play("Special", anim.arms);
             }
         }
     }
