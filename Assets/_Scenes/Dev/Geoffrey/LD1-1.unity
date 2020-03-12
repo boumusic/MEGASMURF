@@ -1061,6 +1061,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 262321819}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &34503891 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6063279070202995264, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1172010313}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &35167614 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: aaa4ea28c13b51342852d21ed7b1609d,
@@ -67474,6 +67486,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CallOnBattleModeButtonPress
       objectReference: {fileID: 0}
+    - target: {fileID: 2614812281477772116, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: actionButtonIcon
+      value: 
+      objectReference: {fileID: 34503891}
     - target: {fileID: 3099967570557909773, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -101493,8 +101510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b5a4b482c91b764bb265b1cb2edbea6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetSave: 0
-  debugMud: 0
+  resetSave: 1
+  debugMud: 200
 --- !u!4 &2143539943
 Transform:
   m_ObjectHideFlags: 0
