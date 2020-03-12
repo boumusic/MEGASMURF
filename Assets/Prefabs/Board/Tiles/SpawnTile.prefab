@@ -17,6 +17,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   attackedByShape: {fileID: 9208297265515423968}
   attackedByEnemy: {fileID: 6682589000421317600}
+  hovered: {fileID: 1836663771459172828}
   id: 0
 --- !u!1001 &2194278458542269600
 PrefabInstance:
@@ -128,3 +129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978532ae3005bbd4494b02fe71c31c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1836663771459172828 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 508492627718643068, guid: 41519bd1cb215f346a08d865540ae9cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2194278458542269600}
+  m_PrefabAsset: {fileID: 0}
