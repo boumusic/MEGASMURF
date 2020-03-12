@@ -10,8 +10,6 @@ public class ShapeAppear : MonoBehaviour
     public QuikFeedback appearAnticipation;
     public QuikFeedback appearClimax;
 
-    public ShapeUnitAnimator animator;
-
     private void OnEnable()
     {
         StartCoroutine(Appearing());
@@ -27,6 +25,5 @@ public class ShapeAppear : MonoBehaviour
     public void DoAppear()
     {
         appearClimax.Play();
-        animator?.PlaySpecial("Spawn");
     }
 }
