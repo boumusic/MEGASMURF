@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:Assets/FBX/Character/Shapes/Animations/Materials/Anim_MegaHit_Arms-No Name.mat.meta
+guid: 62184fa4036dd9644a3011536bede8b0
+=======
+guid: 97b5f98eb1f092848a701c64284937cc
+>>>>>>> 3c41a5b1a8831225c8b8c16dfe73d06d5d2264fb:Assets/AmplifyShaderEditor/Plugins/EditorResources/Templates/SRP/LWSRPTemplates (Legacy).unitypackage.meta
+=======
 guid: 0fb63ab84493c694aa515367ec3723dd
+>>>>>>> 5f3149e009d3d4922f1c671a4caa61390e8dce7f
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
