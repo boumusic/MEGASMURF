@@ -89,7 +89,7 @@ Material:
     - _Sub: 0.26
     - _TessPhongStrength: 0.5
     - _TessValue: 23.1
-    - _ThresholdUV: -0.02
+    - _ThresholdUV: -0.04
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0

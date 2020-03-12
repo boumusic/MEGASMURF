@@ -37,6 +37,9 @@ MonoBehaviour:
   unitActionIconPressed: {fileID: 0}
   unitMergeAnimator: {fileID: 7068817320334795538}
   mergeParent: {fileID: 669235394645220367}
+  shapeLegIcon: {fileID: 0}
+  shapeArmIcon: {fileID: 0}
+  shapeHeadIcon: {fileID: 0}
 --- !u!114 &7068817320334795538
 MonoBehaviour:
   m_ObjectHideFlags: 0
