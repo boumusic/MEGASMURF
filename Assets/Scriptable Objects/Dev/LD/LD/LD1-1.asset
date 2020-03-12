@@ -785,7 +785,7 @@ MonoBehaviour:
       type: 3}
     pos: {x: 12, y: 12, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 6954165412556484173, guid: e30174b17a500b9409264d6700781ee6,
+  - levelElement: {fileID: 7447862868421375172, guid: 41519bd1cb215f346a08d865540ae9cf,
       type: 3}
     pos: {x: 12, y: 13, z: 0}
     orderInTurn: 0

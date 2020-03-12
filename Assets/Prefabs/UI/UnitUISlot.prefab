@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthValue: 5
-  shapeName: {fileID: 3083344743134531395}
+  unitNameTMP: {fileID: 3083344743134531395}
   healthText: {fileID: 7600729185260747288}
   itemIcon: {fileID: 0}
   shapeIcon: {fileID: 2051651807300166096}

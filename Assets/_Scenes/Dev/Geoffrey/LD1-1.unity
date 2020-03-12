@@ -67719,7 +67719,7 @@ PrefabInstance:
     - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: dungeon.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
@@ -67740,19 +67740,19 @@ PrefabInstance:
         type: 3}
       propertyPath: dungeon.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: b58e27139d11fd3488fa3d6d4f6a6983,
+      objectReference: {fileID: 11400000, guid: 9a37c7591aab7b5439717284fff98aab,
         type: 2}
     - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: dungeon.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 26d3bb1a6a98b9f4dbb7fe0bd681ab23,
+      objectReference: {fileID: 11400000, guid: 9a37c7591aab7b5439717284fff98aab,
         type: 2}
     - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: dungeon.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 25b5b6e82a2dd2246babbb6948132144,
+      objectReference: {fileID: 11400000, guid: 9a37c7591aab7b5439717284fff98aab,
         type: 2}
     - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
@@ -101510,8 +101510,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b5a4b482c91b764bb265b1cb2edbea6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetSave: 0
-  debugMud: 0
+  resetSave: 1
+  debugMud: 200
 --- !u!4 &2143539943
 Transform:
   m_ObjectHideFlags: 0
