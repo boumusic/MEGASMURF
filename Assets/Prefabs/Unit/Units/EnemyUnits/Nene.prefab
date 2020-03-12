@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitAnimator: {fileID: 4526875744455353001}
   hp: {fileID: 7511827662043159174}
+  visuals:
+  - {fileID: 201888315286198417}
   debugTile: {x: 0, y: 0}
   unitBase: {fileID: 11400000, guid: 586b2868df8b7964fac64a6c14860527, type: 2}
   unitIcon: {fileID: 0}
@@ -607,6 +609,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Nene
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: eecdc0f13dc9e9a4fa3591a0975e48c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3699557436196181217, guid: eecdc0f13dc9e9a4fa3591a0975e48c6,
         type: 3}

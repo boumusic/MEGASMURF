@@ -89,6 +89,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitAnimator: {fileID: 6801390036706432561}
   hp: {fileID: 616582787312021022}
+  visuals:
+  - {fileID: 7096711939895389193}
   debugTile: {x: 0, y: 0}
   unitBase: {fileID: 11400000, guid: c19dbe63de61ee642a9b7b78942affac, type: 2}
   unitIcon: {fileID: 0}

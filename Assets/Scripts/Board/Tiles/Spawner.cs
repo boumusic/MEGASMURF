@@ -15,10 +15,14 @@ public class Spawner : Tile
 
     private int currentTurn;
 
+    [Header("Spawner")]
+    public ParticleSystem[] levelVfx;
+
     private void Awake()
     {
         currentTurn = 0;
         activeSpawn = true;
+        UpdateVFX();
     }
 
     public void Spawn()
@@ -32,9 +36,21 @@ public class Spawner : Tile
     public void NewTurn()
     {
         currentTurn++;
+        UpdateVFX();
+
         if (activeSpawn && currentTurn >= turnDelay && unit == null && type == TileType.Free)
         {
             Spawn();
         }
+    }
+
+    private void UpdateVFX()
+    {
+        for (int i = 0; i < levelVfx.Length; i++)
+        {
+            levelVfx[i].gameObject.SetActive(false);
+        }
+
+        levelVfx[currentTurn].gameObject.SetActive(true);
     }
 }

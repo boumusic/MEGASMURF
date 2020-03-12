@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: EmptyRoom
   m_EditorClassIdentifier: 
   tileElements:
+<<<<<<< HEAD
   - levelElement: {fileID: 7447862868421375172, guid: 41519bd1cb215f346a08d865540ae9cf,
+=======
+  - levelElement: {fileID: 9095973034033209679, guid: a454e50d44db6394aa001150de31aaa1,
+>>>>>>> db6b7a22e61438af0c4f99b367f1ebb18eeefb84
       type: 3}
     pos: {x: 0, y: 0, z: 0}
     orderInTurn: 0
@@ -905,7 +909,11 @@ MonoBehaviour:
       type: 3}
     pos: {x: 14, y: 12, z: 0}
     orderInTurn: 0
+<<<<<<< HEAD
   - levelElement: {fileID: 7447862868421375172, guid: 41519bd1cb215f346a08d865540ae9cf,
+=======
+  - levelElement: {fileID: 9095973034033209679, guid: a454e50d44db6394aa001150de31aaa1,
+>>>>>>> db6b7a22e61438af0c4f99b367f1ebb18eeefb84
       type: 3}
     pos: {x: 14, y: 13, z: 0}
     orderInTurn: 0
