@@ -16,9 +16,12 @@ public class UIManager : MonoBehaviour
     public GameObject NextLevelButton;
     public GameObject ShapeSelectionUI;
 
-    private void Start()
+    private void Awake()
     {
         SelectedUnitSlot.UnselectUnit();
+        DesableEndTurnButton();
+        DesableNextLevelButton();
+        DesableShapeSelectionUI();
     }
 
     public void UpdateShapeMud(int newValue)
