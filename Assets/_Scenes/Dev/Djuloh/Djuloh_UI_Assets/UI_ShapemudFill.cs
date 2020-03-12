@@ -7,12 +7,14 @@ using TMPro;
 
 public class UI_ShapemudFill : UIElement
 {
-    public float lerpSpeed = 4f;
+    [Header("Debug")]
+    private float lerpSpeed = 3f;
     public int ShapemudValue, oldShapemudValue;
-    private float FillAmount, oldFillAmount;
-    private TextMeshProUGUI ShapemudValueText;
     public bool launchLerp;
-    private Image ShapemudFill;
+
+    [Header("References")]
+    public Image ShapemudFill;
+    public TextMeshProUGUI ShapemudValueText;
 
     private void Start()
     {
@@ -24,8 +26,7 @@ public class UI_ShapemudFill : UIElement
     {
         oldShapemudValue = ShapemudValue;
         ShapemudValue = newShapemudValue;
-        oldFillAmount = oldShapemudValue / 200f;
-        FillAmount = ShapemudValue / 200f;
+        
 
         launchLerp = true;
 
@@ -44,7 +45,7 @@ public class UI_ShapemudFill : UIElement
             if (oldShapemudValue == ShapemudValue)
             {
                 launchLerp = false;
-                lerpSpeed = 0;
+                lerpSpeed = 3f;
             }
         } 
 
