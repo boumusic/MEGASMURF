@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/FBX/Character/Shapes/Animations/Materials.meta
 guid: ed3faa5888acafb4b8ceb6867e4d7414
+=======
+guid: 5a6fb0de6cdaa914590d7f09a64a7428
+>>>>>>> 3c41a5b1a8831225c8b8c16dfe73d06d5d2264fb:Assets/AmplifyShaderEditor/Plugins/EditorResources/Templates/CustomRTTemplates.unitypackage.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
