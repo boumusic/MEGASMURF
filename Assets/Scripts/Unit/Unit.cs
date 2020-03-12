@@ -20,6 +20,8 @@ public abstract class Unit : LevelElement
 
     public UnitBase unitBase;     //Passage en UnitBase
     public Sprite unitIcon;
+    public Sprite selectedUnitIcon;
+    public Sprite unitAction;
     
 
     protected Tile currentTile;
