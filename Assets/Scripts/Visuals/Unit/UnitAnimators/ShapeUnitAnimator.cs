@@ -2,47 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class ShapeUnitAnimator : UnitAnimator
 {
     [Header("Components")]
-    [SerializeField] private Animator legAnimator;
-    [SerializeField] private Animator[] armsAnimator;
+    [SerializeField] private OverridableAnimator legAnimator;
+    [SerializeField] private OverridableAnimator[] armsAnimator;
 
     [SerializeField] private GameObject face;
     [SerializeField] private GameObject legs;
     [SerializeField] private GameObject arms;
     [SerializeField] private ShapeUnitAnimationsList list;
 
-    private List<Animator> allAnimators = new List<Animator>();
+    private List<OverridableAnimator> allAnimators = new List<OverridableAnimator>();
 
-
-    private void Start()
+    private void Awake()
     {
         allAnimators.Add(legAnimator);
         for (int i = 0; i < armsAnimator.Length; i++)
         {
             allAnimators.Add(armsAnimator[i]);
         }
+
+        for (int i = 0; i < allAnimators.Count; i++)
+        {
+            allAnimators[i].Initialize();
+        }
     }
 
-    public void PlaySpecial(string name)
+    private void Start()
     {
-        ShapeUnitAnimation anim = list?.GetUnitAnimation(name);
-        if(anim != null)
-        {
+        
+    }
 
+    public override void PlaySpecial(string name)
+    {
+        base.PlaySpecial(name);
+        ShapeUnitAnimation anim = list?.GetUnitAnimation(name);
+        if (anim != null)
+        {
+            legAnimator.Play("Special", anim.legs) ;
+            for (int i = 0; i < armsAnimator.Length; i++)
+            {
+                armsAnimator[i].Play("Special", anim.arms);
+            }
         }
     }
 
     public void ToggleLegAnimator(bool on)
     {
-        legAnimator.enabled = on;
+        legAnimator.animator.enabled = on;
     }
 
     public void ResetLegAnimator()
     {
-        legAnimator.Play("Idle", -1, 0f);
+        legAnimator.animator.Play("Idle", -1, 0f);
     }
 
     public void ToggleLegs(bool on)
@@ -66,7 +79,7 @@ public class ShapeUnitAnimator : UnitAnimator
 
         for (int i = 0; i < allAnimators.Count; i++)
         {
-            allAnimators[i].SetBool("isMoving", isMoving);
+            allAnimators[i].animator.SetBool("isMoving", isMoving);
         }
     }
 
