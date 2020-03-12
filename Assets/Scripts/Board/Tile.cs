@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Pataya.QuikFeedback;
 
 public enum TileType
 {
@@ -28,6 +29,9 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     public TileType type;
     public Unit unit;
     public Animator animator;
+    [Header("Feedbacks")]
+    public QuikFeedback attackedByShape;
+    public QuikFeedback attackedByEnemy;
 
     public int MudAmount { get; set; }
 
@@ -40,11 +44,24 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     public Vector2 Coords
     {
         get => _coords;
-        set 
+        set
         {
             _coords = value;
             CheckNeighbors();
-        } 
+        }
+    }
+
+    public void ReceiveAttack(Unit unit)
+    {
+        if (unit is Enemy)
+        {
+            attackedByEnemy.Play();
+        }
+
+        else if (unit is ShapeUnit)
+        {
+            attackedByShape.Play();
+        }
     }
 
     private void Awake()
@@ -55,7 +72,7 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     // Start is called before the first frame update
     void Start()
     {
-        if(animator == null)
+        if (animator == null)
         {
             animator = GetComponent<Animator>();
         }
@@ -107,7 +124,7 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
 
     public bool IsInLine(Tile other)
     {
-        return Coords.x == other.Coords.x || Coords.y == other.Coords.y || Mathf.Abs(Coords.x - other.Coords.x) == Mathf.Abs(Coords.y - other.Coords.y); 
+        return Coords.x == other.Coords.x || Coords.y == other.Coords.y || Mathf.Abs(Coords.x - other.Coords.x) == Mathf.Abs(Coords.y - other.Coords.y);
     }
 
     public bool Equals(Tile other)

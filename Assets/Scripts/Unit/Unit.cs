@@ -202,6 +202,7 @@ public abstract class Unit : LevelElement
             case AttackPatternType.All:
                 foreach (Tile tile in tiles)
                 {
+                    tile.ReceiveAttack(this);
                     if (tile.unit != null)
                         tile.unit.TakeDamage(this);
                 }
@@ -211,7 +212,10 @@ public abstract class Unit : LevelElement
 
             case AttackPatternType.Single:
                 if (tiles.Count > 0 && tiles[0].unit != null)
+                {
                     tiles[0].unit.TakeDamage(this);
+                    tiles[0].ReceiveAttack(this);
+                }
                 BecomeExhausted();
                 action?.Invoke();
                 break;
@@ -243,6 +247,7 @@ public abstract class Unit : LevelElement
         foreach (Tile tile in tempTileToAttack)
         {
             tile.unit.TakeDamage(this);
+            tile.ReceiveAttack(this);
         }
         BecomeExhausted();
         tempAction?.Invoke();
