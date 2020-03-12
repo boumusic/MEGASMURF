@@ -83,6 +83,10 @@ public abstract class Unit : LevelElement
 
     public virtual void UnspawnUnit()
     {
+        if (currentTile.unit != null)
+        {
+            currentTile.type = TileType.Free;
+        }
         currentTile.unit = null;
         currentTile = null;
         BattleManager.Instance.RemoveUnitFromPlay(this);
@@ -271,6 +275,10 @@ public abstract class Unit : LevelElement
     /// </summary>
     protected virtual void Die()
     {
+        if(currentTile != null)
+        {
+            currentTile.type = TileType.Free;
+        }
         BattleManager.Instance.RemoveUnitFromPlay(this);
         //animation
         gameObject.SetActive(false);

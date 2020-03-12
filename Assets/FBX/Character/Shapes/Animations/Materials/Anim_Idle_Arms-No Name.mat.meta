@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< HEAD:Assets/FBX/Character/Shapes/Animations/Materials/Anim_Idle_Arms-No Name.mat.meta
+guid: 3312fb6eb292e984f81614e68d658385
+=======
+guid: d45563a2082288f40b96355b1fcebdfd
+>>>>>>> 3c41a5b1a8831225c8b8c16dfe73d06d5d2264fb:Assets/AmplifyShaderEditor/Plugins/EditorResources/Templates/SRP/HDSRPTemplates.unitypackage.meta
+=======
+guid: d5de3cd274024774a82918363a4f1bbc
+>>>>>>> 5f3149e009d3d4922f1c671a4caa61390e8dce7f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

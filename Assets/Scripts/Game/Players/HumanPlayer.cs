@@ -14,7 +14,7 @@ public class HumanPlayer : Player
             isEnable = true;
             InputManager.instance.OnCancel += CallOnCancel;
             InputManager.instance.OnActionButtonPress += CallOnActionButtonPress;
-            InputManager.instance.OnEndTurnInput += CallOnEndTurnInput;
+            InputManager.instance.OnEndTurnInput += BattleManager.Instance.PlayerEndTurn;
             InputManager.instance.OnCircleButtonPress += CallOnCircleButtonPress;
             InputManager.instance.OnTriangleButtonPress += CallOnTriangleButtonPress;
             InputManager.instance.OnSquareButtonPress += CallOnSquareButtonPress;
@@ -33,7 +33,7 @@ public class HumanPlayer : Player
             isEnable = false;
             InputManager.instance.OnCancel -= CallOnCancel;
             InputManager.instance.OnActionButtonPress -= CallOnActionButtonPress;
-            InputManager.instance.OnEndTurnInput += CallOnEndTurnInput;
+            InputManager.instance.OnEndTurnInput -= BattleManager.Instance.PlayerEndTurn;
             InputManager.instance.OnCircleButtonPress -= CallOnCircleButtonPress;
             InputManager.instance.OnTriangleButtonPress -= CallOnTriangleButtonPress;
             InputManager.instance.OnSquareButtonPress -= CallOnSquareButtonPress;
