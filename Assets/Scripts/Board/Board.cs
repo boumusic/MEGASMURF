@@ -145,6 +145,7 @@ public class Board : MonoBehaviour
                 InitializeEnvironment(environments[roomId]);
             }
             InitializeBoard(dungeon[roomId]);
+            BattleManager.Instance.ResetState();
         }
         else
         {
