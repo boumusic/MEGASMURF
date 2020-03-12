@@ -20,6 +20,11 @@ public class LevelElement : Entity
         spawnPosition = elem.spawnPosition;
     }
 
+    public virtual void Appear()
+    {
+
+    }
+
     public virtual Color ColorInEditor()
     {
         LevelElementColor color;

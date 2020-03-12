@@ -8,19 +8,21 @@ public class CompassFX : MonoBehaviour
     public ParticleSystem startTracing;
     public ParticleSystem inPs;
     public ParticleSystem appear;
+    public GameObject toAppear;
     public bool playOnStart = false;
 
     private void OnEnable()
     {
         if(playOnStart) Play();
+        toAppear.SetActive(false);
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            Play();
-        }
+        //if(Input.GetKeyDown(KeyCode.R))
+        //{
+        //    Play();
+        //}
     }
 
     public void Play()
@@ -37,5 +39,6 @@ public class CompassFX : MonoBehaviour
     public void Appear()
     {
         appear.Play();
+        toAppear.SetActive(true);
     }
 }

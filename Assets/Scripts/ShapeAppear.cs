@@ -9,10 +9,12 @@ public class ShapeAppear : MonoBehaviour
 
     public QuikFeedback appearAnticipation;
     public QuikFeedback appearClimax;
+    public CompassFX compassFx;
 
-    private void OnEnable()
+    public void Appear()
     {
         StartCoroutine(Appearing());
+        compassFx?.Play();
     }
 
     private IEnumerator Appearing()

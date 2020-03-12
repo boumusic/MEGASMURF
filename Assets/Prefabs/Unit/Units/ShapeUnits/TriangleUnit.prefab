@@ -80,6 +80,42 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 4edfc232679a96743a7a0e09e854b276,
         type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: selectedUnitIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 4edfc232679a96743a7a0e09e854b276,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: shapeLegIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 89a7667adf18449448222b45acdc8edb,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: shapeArmIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 630900d393354fb419e61a00ed2e81c4,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: shapeHeadIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 630900d393354fb419e61a00ed2e81c4,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: unitActionIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 5626d18611345f3488a592ef9166e84c,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: unitActionIconPressed
+      value: 
+      objectReference: {fileID: 21300000, guid: 81a04989a727e3d49b865000ea525783,
+        type: 3}
     - target: {fileID: 5613015649589116677, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
         type: 3}
       propertyPath: m_LocalPosition.x

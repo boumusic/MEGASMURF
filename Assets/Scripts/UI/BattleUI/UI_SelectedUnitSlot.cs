@@ -13,6 +13,8 @@ public class UI_SelectedUnitSlot : UIElement
     public Button actionButton;
     public Image actionIcon;
 
+    public Unit SelectedUnit { get; private set; }
+
     private SpriteState actionButtonSpriteState;
 
     private void Start()
@@ -23,7 +25,7 @@ public class UI_SelectedUnitSlot : UIElement
     public void SelectUnit(Unit unit)
     {
         gameObject.SetActive(true);
-        unitName = UIManager.Instance.uIUnitSlotContainer.UnitSlotBehaviourDictionary[unit].shapeName;
+        unitName = UIManager.Instance.uIUnitSlotContainer.UnitSlotBehaviourDictionary[unit].unitNameTMP;
         ChangeUnitIcons(unit);                                                     //Solo pour l'instant
         UpdateHealthText(unit.CurrentHitPoint);
         //SetRightButtonAction()
@@ -37,26 +39,31 @@ public class UI_SelectedUnitSlot : UIElement
 
     public void UpdateUnitIcons(Unit unit)
     {
-        unitIconSolo.sprite = unit.selectedUnitIcon;
         actionIcon.sprite = unit.unitActionIcon;
         
         actionButtonSpriteState.pressedSprite = unit.unitActionIconPressed;
+        actionButtonSpriteState.highlightedSprite = unit.unitActionIconTouched;
         actionButton.spriteState = actionButtonSpriteState;
 
         if (unit is ShapeUnit)
         {
             ShapeUnit shapeUnit = (ShapeUnit)unit;
+
+            unitIconSolo.sprite = shapeUnit.selectedUnitIcon;
+            unitIconDuo.sprite = null;
+            unitIconTrio.sprite = null;
+
             if (shapeUnit.ArmUnit != null)
+            {
+                unitIconSolo.sprite = shapeUnit.shapeLegIcon;
                 unitIconDuo.sprite = shapeUnit.ArmUnit.selectedUnitIcon;
-            else
-                unitIconDuo.sprite = null;
-            if (shapeUnit.LegUnit != null)
+            }  
+            if (shapeUnit.HeadUnit != null)
                 unitIconTrio.sprite = shapeUnit.HeadUnit.selectedUnitIcon;
-            else
-                unitIconDuo.sprite = shapeUnit.ArmUnit.selectedUnitIcon;
         }
         else
         {
+            unitIconSolo.sprite = unit.selectedUnitIcon;
             unitIconDuo.sprite = null;
             unitIconDuo.sprite = null;
         }
@@ -96,6 +103,8 @@ public class UI_SelectedUnitSlot : UIElement
         //Mode attaque desactivé
     }
 
-    
-
+    public void UpdateName(Unit unit)
+    {
+        unitName.text = unit.name;
+    }
 }
