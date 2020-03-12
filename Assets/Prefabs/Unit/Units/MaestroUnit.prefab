@@ -1488,8 +1488,9 @@ MonoBehaviour:
   hp: {fileID: 388372923603800324}
   debugTile: {x: 0, y: 0}
   unitBase: {fileID: 11400000, guid: 1eceaa681821bd4409a3d074e3ab74b7, type: 2}
+  unitIcon: {fileID: 0}
   rangeLvl: 0
-  summonCost: 0
+  summonCost: 10
 --- !u!1 &3578279716750106473
 GameObject:
   m_ObjectHideFlags: 0

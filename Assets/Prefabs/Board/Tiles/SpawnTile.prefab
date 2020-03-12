@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   unit: {fileID: 0}
-  animator: {fileID: 9128739997284247450}
+  animator: {fileID: 0}
   id: 0
 --- !u!1001 &2194278458542269600
 PrefabInstance:
@@ -99,12 +99,6 @@ PrefabInstance:
 --- !u!1 &5209427019603788474 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6212784851330426394, guid: 41519bd1cb215f346a08d865540ae9cf,
-    type: 3}
-  m_PrefabInstance: {fileID: 2194278458542269600}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &9128739997284247450 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6979567908413440826, guid: 41519bd1cb215f346a08d865540ae9cf,
     type: 3}
   m_PrefabInstance: {fileID: 2194278458542269600}
   m_PrefabAsset: {fileID: 0}

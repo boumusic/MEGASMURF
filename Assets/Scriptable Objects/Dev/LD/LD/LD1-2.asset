@@ -253,7 +253,7 @@ MonoBehaviour:
       type: 3}
     pos: {x: 3, y: 14, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 7447862868421375172, guid: 41519bd1cb215f346a08d865540ae9cf,
+  - levelElement: {fileID: 7746147167090074951, guid: fea28f330a176d44dad07b4c27a23373,
       type: 3}
     pos: {x: 4, y: 0, z: 0}
     orderInTurn: 0
@@ -289,11 +289,11 @@ MonoBehaviour:
       type: 3}
     pos: {x: 4, y: 8, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 7447862868421375172, guid: 41519bd1cb215f346a08d865540ae9cf,
+  - levelElement: {fileID: 6996675980494376987, guid: 49368b0e7fb25f24fbca1c79833f1c93,
       type: 3}
     pos: {x: 4, y: 9, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 7447862868421375172, guid: 41519bd1cb215f346a08d865540ae9cf,
+  - levelElement: {fileID: 6996675980494376987, guid: 49368b0e7fb25f24fbca1c79833f1c93,
       type: 3}
     pos: {x: 4, y: 10, z: 0}
     orderInTurn: 0
@@ -313,7 +313,7 @@ MonoBehaviour:
       type: 3}
     pos: {x: 4, y: 14, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 7447862868421375172, guid: 41519bd1cb215f346a08d865540ae9cf,
+  - levelElement: {fileID: 7746147167090074951, guid: fea28f330a176d44dad07b4c27a23373,
       type: 3}
     pos: {x: 5, y: 0, z: 0}
     orderInTurn: 0
@@ -349,11 +349,11 @@ MonoBehaviour:
       type: 3}
     pos: {x: 5, y: 8, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 7447862868421375172, guid: 41519bd1cb215f346a08d865540ae9cf,
+  - levelElement: {fileID: 6996675980494376987, guid: 49368b0e7fb25f24fbca1c79833f1c93,
       type: 3}
     pos: {x: 5, y: 9, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 7447862868421375172, guid: 41519bd1cb215f346a08d865540ae9cf,
+  - levelElement: {fileID: 6996675980494376987, guid: 49368b0e7fb25f24fbca1c79833f1c93,
       type: 3}
     pos: {x: 5, y: 10, z: 0}
     orderInTurn: 0
@@ -373,7 +373,7 @@ MonoBehaviour:
       type: 3}
     pos: {x: 5, y: 14, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 7447862868421375172, guid: 41519bd1cb215f346a08d865540ae9cf,
+  - levelElement: {fileID: 7746147167090074951, guid: fea28f330a176d44dad07b4c27a23373,
       type: 3}
     pos: {x: 6, y: 0, z: 0}
     orderInTurn: 0
@@ -409,11 +409,11 @@ MonoBehaviour:
       type: 3}
     pos: {x: 6, y: 8, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 7447862868421375172, guid: 41519bd1cb215f346a08d865540ae9cf,
+  - levelElement: {fileID: 6996675980494376987, guid: 49368b0e7fb25f24fbca1c79833f1c93,
       type: 3}
     pos: {x: 6, y: 9, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 7447862868421375172, guid: 41519bd1cb215f346a08d865540ae9cf,
+  - levelElement: {fileID: 6996675980494376987, guid: 49368b0e7fb25f24fbca1c79833f1c93,
       type: 3}
     pos: {x: 6, y: 10, z: 0}
     orderInTurn: 0
