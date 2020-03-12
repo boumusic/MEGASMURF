@@ -34,6 +34,9 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     public QuikFeedback attackedByEnemy;
     private bool isAppeared = false;
 
+    [Header("UI")]
+    public GameObject hovered;
+
     public int MudAmount { get; set; }
 
     private Vector2 _coords;
@@ -78,6 +81,11 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
             animator = GetComponent<Animator>();
         }
         _currentAnim = TileAnim.None;
+    }
+
+    private void OnEnable()
+    {
+        hovered.SetActive(false);
     }
 
     public override void Appear()
@@ -141,6 +149,7 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     {
         if (animator != null && _currentAnim != anim)
         {
+            /*
             switch (anim)
             {
                 case TileAnim.Movement:
@@ -165,7 +174,10 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
                     animator.SetTrigger("None");
                     break;
             }
+            */
+
             _currentAnim = anim;
+            animator.SetTrigger(anim.ToString());
         }
     }
 
@@ -173,11 +185,13 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     {
         //Animation Si on est dans le bon State de BattleManager
         InputManager.instance.UpdateCurrentTile(this);
+        hovered.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         //throw new System.NotImplementedException();
+        hovered.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
