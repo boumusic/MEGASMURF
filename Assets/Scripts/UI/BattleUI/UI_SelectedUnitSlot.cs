@@ -10,7 +10,6 @@ public class UI_SelectedUnitSlot : UIElement
     public TextMeshProUGUI unitName;
     public TextMeshProUGUI unitHealthText;
     public Image unitIconSolo, unitIconDuo, UniIconTrio;
-    public Toggle battleModeToggle;
 
     public void SelectUnit(Unit unit)
     {
@@ -18,7 +17,6 @@ public class UI_SelectedUnitSlot : UIElement
         unitName = UIManager.Instance.uIUnitSlotContainer.UnitSlotBehaviourDictionary[unit].shapeName;
         unitIconSolo.sprite = unit.unitIcon;                                                                //Solo pour l'instant
         UpdateHealthText(unit.CurrentHitPoint);
-        SetBattleToStandBy();
         //SetRightButtonAction()
     }
 
@@ -32,16 +30,6 @@ public class UI_SelectedUnitSlot : UIElement
         healthValue = newHealthValue;
 
         unitHealthText.text = healthValue.ToString();
-    }
-
-    public void SetBattleToAction()
-    {
-        battleModeToggle.isOn = true;
-    }
-
-    public void SetBattleToStandBy()
-    {
-        battleModeToggle.isOn = false;
     }
 
     //ANIMATIONS
