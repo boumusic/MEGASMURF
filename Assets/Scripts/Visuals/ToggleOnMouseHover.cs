@@ -8,16 +8,19 @@ public class ToggleOnMouseHover : MonoBehaviour
 
     private void Start()
     {
-        go.SetActive(false);
+        if (go)
+            go.SetActive(false);
     }
 
     private void OnMouseEnter()
     {
-        go.SetActive(true);
+        if (go)
+            go.SetActive(true);
     }
 
     private void OnMouseExit()
     {
-        go.SetActive(false);
+        if (go)
+            go.SetActive(false);
     }
 }

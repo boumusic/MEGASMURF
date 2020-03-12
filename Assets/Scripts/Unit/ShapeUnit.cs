@@ -110,6 +110,12 @@ public class ShapeUnit : Unit
         BecomeMoved();
     }
 
+    public override void TakeDamage(Unit unit)
+    {
+        base.TakeDamage(unit);
+        ShapeUnitAnimator.PlaySpecial("SimpleHit");
+    }
+
     private IEnumerator MovingTo(Stack<Tile> path, System.Action action)
     {
         SetAnimatorMoving(true);

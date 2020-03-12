@@ -39,7 +39,7 @@ public class Board : MonoBehaviour
     [Range(1, 40f)] public float totalHeight = 20;
     [Range(2, 50)] private int columns = 15;
     [Range(2, 50)] private int rows = 15;
-    public float tileDelay = 0.005f;
+    public float tileDelay = 0.0000001f;
 
     public List<Room> dungeon;
 
@@ -50,7 +50,8 @@ public class Board : MonoBehaviour
 
     private Tile[,] tiles;
 
-    private Maestro maestro;
+    [HideInInspector]
+    public  Maestro maestro;
 
     private Room currentRoom;
 
@@ -285,6 +286,7 @@ public class Board : MonoBehaviour
             {
                 if (spawnTiles.Count > u.SpawnID)
                 {
+                    u.gameObject.SetActive(true);
                     u.SpawnUnit(spawnTiles[u.SpawnID]);
                 }
             }
