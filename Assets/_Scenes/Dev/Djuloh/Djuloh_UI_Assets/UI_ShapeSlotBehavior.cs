@@ -25,7 +25,7 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
 
     //[Header("Masked Stuff")]
     public TextMeshProUGUI healthText;
-    public Image itemIcon, shapeIcon, hoveredSlotSprite, selectedSlotSprite;
+    public Image itemIcon, shapeIcon, shapeIconMiddle, shapeIconTop, hoveredSlotSprite, selectedSlotSprite;
 
     public Unit SlotUnit { get; private set; }
     private Animator ShapeSlot_anim;
@@ -83,14 +83,34 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
 
     public void shapeSlotDamageAnim()
     {
-
+        //A call quand l'unité se fait taper.
     }
 
     public void shapeSlotHealAnim()
     {
-        
+        //A call quand l'unité se fait soigner
     }
 
+   public void hoverSlotAnim()
+    {
+        //Quand le joueur a la souris par dessus
+    }
+
+    public void onSelectedSlotAnim()
+    {
+        //Quand l'unité est sélectionnée NOTE : Cette anim loop 
+    }
+
+    public void fusionDoubleAnim()
+    {
+        // A jouer quand l'unité passe d'une shape à deux shapes. Le toggle on/off des images se fait 
+        //Dans l'anim je disable l'image de l'unité seule
+    }
+
+    public void fusionTripleAnim()
+    {
+        //Dans l'anim je disable les images des autres unités pour faire apparaître les triples
+    }
 
     //SELECTION
 
@@ -108,6 +128,7 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
     public void UnselectUnit()
     {
         selectedSlotSprite.enabled = false;
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)

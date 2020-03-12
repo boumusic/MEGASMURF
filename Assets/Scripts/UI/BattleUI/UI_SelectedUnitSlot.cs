@@ -43,4 +43,29 @@ public class UI_SelectedUnitSlot : UIElement
     {
         battleModeToggle.isOn = false;
     }
+
+    //ANIMATIONS
+
+    public void SelectedDamageAnim()
+    {
+        //Quand le joueur prend des dégâts
+    }
+
+    public void SelectedSwitchAnim()
+    {
+        //Quand le joueur change d'unités
+    }
+
+    public void SelectedBattleModeOnAnim()
+    {
+        //Mode attaque activé
+    }
+
+    public void SelectedBattleModeOffAnim()
+    {
+        //Mode attaque desactivé
+    }
+
+    
+
 }

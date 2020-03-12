@@ -1351,10 +1351,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59be39933e8602141874f2097f06b041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpSpeed: 3
+  lerpSpeed: 4
   ShapemudValue: 75
   oldShapemudValue: 0
   launchLerp: 1
+  ShapemudFill: {fileID: 5960561281782742095}
+  ShapemudValueText: {fileID: 5960561281137130955}
 --- !u!95 &5960561281442774579
 Animator:
   serializedVersion: 3
