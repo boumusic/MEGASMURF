@@ -16,6 +16,7 @@ public class UnitGeneralSettings : ScriptableObject
     [Range(0.01f, 0.3f)]
     public float moveSpeed = 0.07f;
     public float forwardSmooth = 0.07f;
+    public float endWalkDelay = 0.4f;
 
     [Header("Death")]
     public UnitDeathSettings shapeDeath;
