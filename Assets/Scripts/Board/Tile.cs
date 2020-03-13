@@ -97,6 +97,11 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
         }
     }
 
+    public void ResetAppeared() 
+    {
+        isAppeared = false;
+    }
+
     public List<Tile> GetNeighbors()
     {
         return _neighbors;

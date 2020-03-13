@@ -1086,8 +1086,7 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 3, y: 11, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 3, y: 12, z: 0}
     orderInTurn: 0
   - levelElement: {fileID: 0}
@@ -1177,8 +1176,7 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 5, y: 11, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 5, y: 12, z: 0}
     orderInTurn: 0
   - levelElement: {fileID: 0}
@@ -1268,8 +1266,7 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 7, y: 11, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 7, y: 12, z: 0}
     orderInTurn: 0
   - levelElement: {fileID: 0}
@@ -1314,8 +1311,7 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 8, y: 11, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 8, y: 12, z: 0}
     orderInTurn: 0
   - levelElement: {fileID: 0}
@@ -1360,8 +1356,7 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 9, y: 11, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 9, y: 12, z: 0}
     orderInTurn: 0
   - levelElement: {fileID: 0}
@@ -1406,8 +1401,7 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 10, y: 11, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 10, y: 12, z: 0}
     orderInTurn: 0
   - levelElement: {fileID: 0}
@@ -1452,8 +1446,7 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 11, y: 11, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 11, y: 12, z: 0}
     orderInTurn: 0
   - levelElement: {fileID: 0}

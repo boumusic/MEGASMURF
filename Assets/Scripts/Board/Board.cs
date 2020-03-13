@@ -153,7 +153,7 @@ public class Board : MonoBehaviour
         roomId++;
         if (roomId > 0)
         {
-            skillTree.SetActive(true);
+            //skillTree.SetActive(true);
         }
         ClearRoom();
         if (roomId < dungeon.Count)
@@ -217,6 +217,7 @@ public class Board : MonoBehaviour
                 {
                     tiles[i, j].unit.UnspawnUnit();
                 }
+                tiles[i, j].ResetAppeared();
                 tiles[i, j].gameObject.SetActive(false);
             }
         }
@@ -228,6 +229,7 @@ public class Board : MonoBehaviour
         spawnTiles = new List<Tile>();
         exitTiles = new List<Tile>();
         spawners = new List<Spawner>();
+        tileList = new List<Tile>();
         immediateSpawners = new List<ImmediateSpawner>();
         for (int i = 0; i < columns; i++)
         {
@@ -347,6 +349,7 @@ public class Board : MonoBehaviour
 
     private void FinishedTiles()
     {
+        appearProgress = 0f;
         StartCoroutine(AppearLevelElements());
     }
 
@@ -406,6 +409,8 @@ public class Board : MonoBehaviour
                 }
             }
         }
+
+        spawnTiles.Clear();
     }
 
     public Tile GetTile(int x, int y)
