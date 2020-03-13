@@ -127,7 +127,7 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         TriggerText(true);
         skillName.text = skillDetails.skillName;
-        skillDescription.text = skillDetails.description;
+        skillDescription.text = skillDetails.description + options;
     }
 
     public void OnPointerExit(PointerEventData eventData)

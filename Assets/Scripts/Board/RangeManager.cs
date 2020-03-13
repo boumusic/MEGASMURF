@@ -223,7 +223,7 @@ public class RangeManager : MonoBehaviour
             return true;
         }
         // Tile is unit tile or tile is occupied by full totem unit
-        if (tile.Equals(unitTile) || (tile.unit != null && tile.unit.UnitMergeLevel > 2))
+        if (tile.Equals(unitTile) || (tile.unit != null && tile.unit.UnitMergeLevel > 1))
         {
             return true;
         }
