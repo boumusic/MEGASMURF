@@ -30,6 +30,19 @@ public class PoolManager : MonoBehaviour
         }
     }
 
+    public LevelElement GetLevelElementOfName(string name)
+    {
+        for (int i = 0; i < pools.Count; i++)
+        {
+            if(pools[i].prefab.name == name)
+            {
+                return pools[i].prefab.GetComponent<LevelElement>();
+            }
+        }
+
+        return null;
+    }
+
     private void Start()
     {
         //Projectile p = GetEntity<Projectile>();
