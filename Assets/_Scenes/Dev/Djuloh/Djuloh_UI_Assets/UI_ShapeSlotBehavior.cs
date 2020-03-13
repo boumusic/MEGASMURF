@@ -18,7 +18,7 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
     private Sprite soloIcon, duoIcon, trioIcon;
 
     public Unit SlotUnit { get; private set; }
-    private Animator ShapeSlot_anim;
+    private Animator anim;
     private string unitName;
 
     private bool isShapeUnit;
@@ -26,7 +26,7 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
 
     private void Awake()
     {
-        
+        anim = gameObject.GetComponent<Animator>();
     }
 
     private void Update()
@@ -145,34 +145,61 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
     public void shapeSlotDamageAnim()
     {
         //A call quand l'unité se fait taper.
+        anim.Play("ShapeSlot_Damage");
     }
 
     public void shapeSlotHealAnim()
     {
         //A call quand l'unité se fait soigner
+        anim.Play("ShapeSlot_Heal");
     }
 
    public void hoverSlotAnim()
     {
         //Quand le joueur a la souris par dessus
+        anim.Play("ShapeSlot_Hover");
     }
 
     public void onSelectedSlotAnim()
     {
         //Quand l'unité est sélectionnée NOTE : Cette anim loop 
+        anim.Play("ShapeSlot_Pressed");
     }
 
     public void fusionDoubleAnim()
     {
         // A jouer quand l'unité passe d'une shape à deux shapes. Le toggle on/off des images se fait 
         //Dans l'anim je disable l'image de l'unité seule
+
+        anim.Play("SoloToDuo");
     }
 
     public void fusionTripleAnim()
     {
         //Dans l'anim je disable les images des autres unités pour faire apparaître les triples
+        anim.Play("DuoToTrio");
     }
 
+    public void DuoMode()
+    {
+        unitIconSolo.enabled = false;
+        unitIconDuo_1.enabled = true;
+        unitIconDuo_2.enabled = true;
+        unitIconTrio_1.enabled = false;
+        unitIconTrio_2.enabled = false;
+        unitIconTrio_3.enabled = false;
+
+    }
+
+    public void TrioMode()
+    {
+        unitIconSolo.enabled = false;
+        unitIconDuo_1.enabled = false;
+        unitIconDuo_2.enabled = false;
+        unitIconTrio_1.enabled = true;
+        unitIconTrio_2.enabled = true;
+        unitIconTrio_3.enabled = true;
+    }
     //SELECTION
 
     public void OnSelectSlotButtonPress()
