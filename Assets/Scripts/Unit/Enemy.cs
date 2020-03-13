@@ -20,6 +20,13 @@ public class Enemy : Unit
         calls = 0;
     }
 
+    public override void Start()
+    {
+        base.Start();
+        hp?.UpdateOrder(ID);
+
+    }
+
     public override Tile CurrentTile
     {
         get => currentTile;

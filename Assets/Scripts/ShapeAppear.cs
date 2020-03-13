@@ -22,8 +22,15 @@ public class ShapeAppear : MonoBehaviour
 
     public void Appear()
     {
+        StartCoroutine(Sound());
         StartCoroutine(Appearing());
         compassFx?.Play();
+    }
+
+    private IEnumerator Sound()
+    {
+        yield return new WaitForSeconds(0.7f);
+        AudioManager.Instance.PlaySFX("ShapeSpawn_01");
     }
 
     private IEnumerator Appearing()
