@@ -10,6 +10,8 @@ public class Enemy : Unit
     public int mudAmountDrop = 10;
     private Tile priorityDestination;
 
+    public int ID => BattleManager.Instance.playerUnits[1].IndexOf(this);
+
     public override UnitDeathSettings DeathSettings => UnitSettingsManager.Instance.generalSettings.enemyDeath;
 
     protected override void Awake()

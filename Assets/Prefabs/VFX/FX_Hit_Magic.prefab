@@ -1370,19 +1370,19 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.80738896, b: 0.41037738, a: 1}
-        key1: {r: 0.8018868, g: 0.41229087, b: 0.74343044, a: 1}
-        key2: {r: 0.5959519, g: 0.43614274, b: 0.9339623, a: 0.49019608}
-        key3: {r: 0.2750566, g: 0.23429157, b: 0.4245283, a: 0}
-        key4: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 0.7253471, g: 0.91336167, b: 0.9433962, a: 1}
+        key1: {r: 0.9339623, g: 0.6210078, b: 0.20705767, a: 1}
+        key2: {r: 0.3207547, g: 0.028746877, b: 0.18276991, a: 0.49019608}
+        key3: {r: 0.3798175, g: 0.27754536, b: 0.5943396, a: 0}
+        key4: {r: 0.2750566, g: 0.23429157, b: 0.4245283, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 14493
-        ctime2: 23420
-        ctime3: 65535
-        ctime4: 0
+        ctime1: 7037
+        ctime2: 14493
+        ctime3: 23420
+        ctime4: 65535
         ctime5: 0
         ctime6: 0
         ctime7: 0
@@ -1395,7 +1395,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 4
+        m_NumColorKeys: 5
         m_NumAlphaKeys: 4
       minGradient:
         serializedVersion: 2
@@ -4936,8 +4936,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.2
+      scalar: 0.4
+      minScalar: 0.25
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5043,7 +5043,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.5176471}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -6183,7 +6183,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -6191,18 +6191,18 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 0}
-        key3: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 1, g: 0.83555406, b: 0.5801887, a: 1}
+        key1: {r: 0.5385814, g: 0.7586988, b: 0.8584906, a: 1}
+        key2: {r: 0.4528302, g: 0.057671774, b: 0.25268123, a: 0}
+        key3: {r: 0.2502548, g: 0.08139017, b: 0.2924528, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 65535
-        ctime2: 0
-        ctime3: 0
+        ctime1: 11868
+        ctime2: 40644
+        ctime3: 65535
         ctime4: 0
         ctime5: 0
         ctime6: 0
@@ -6216,7 +6216,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 2
+        m_NumColorKeys: 4
         m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
@@ -9607,7 +9607,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 5968134628170f445beef2d175b3dce4, type: 2}
-  - {fileID: 2100000, guid: 5968134628170f445beef2d175b3dce4, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14698,8 +14698,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 0.42701125, b: 0.24056602, a: 1}
-      maxColor: {r: 0.3492346, g: 0.40473, b: 0.6792453, a: 1}
+      minColor: {r: 1, g: 0.6019888, b: 0.23921567, a: 1}
+      maxColor: {r: 0.5518868, g: 1, b: 0.89350253, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -18687,8 +18687,8 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   CustomDataModule:
-    enabled: 0
-    mode0: 0
+    enabled: 1
+    mode0: 1
     vectorComponentCount0: 4
     color0:
       serializedVersion: 2
@@ -18756,17 +18756,35 @@ ParticleSystem:
     colorLabel0: Color
     vector0_0:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 1
+      scalar: 8
       minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
+          value: 1
+          inSlope: -2
+          outSlope: -2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.20656508
+          value: 0.9282953
+          inSlope: -1.7542586
+          outSlope: -1.7542586
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.2080718
+          value: 0.29023802
+          inSlope: -1.4722685
+          outSlope: -1.4722685
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
@@ -18778,8 +18796,8 @@ ParticleSystem:
           outSlope: 0
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -19306,11 +19324,11 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0.5, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
+  m_UseCustomVertexStreams: 1
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
-  m_VertexStreams: 00010304
+  m_VertexStreams: 0001030422
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -20677,8 +20695,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.80920935, b: 0.3537736, a: 1}
-        key1: {r: 1, g: 0.44646394, b: 0.18396229, a: 1}
+        key0: {r: 0.6536134, g: 0.845716, b: 0.9056604, a: 1}
+        key1: {r: 0.47071913, g: 0.69482124, b: 0.8113208, a: 1}
         key2: {r: 0.15104248, g: 0.12135102, b: 0.254717, a: 0}
         key3: {r: 0.15104248, g: 0.12135102, b: 0.254717, a: 0}
         key4: {r: 0.15104248, g: 0.12135102, b: 0.254717, a: 0}
@@ -24422,7 +24440,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.500623, g: 0.8490566, b: 0.82209194, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -25570,14 +25588,14 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.99555403, g: 1, b: 0.8443396, a: 1}
+        key0: {r: 1, g: 1, b: 1, a: 1}
         key1: {r: 0.9981184, g: 0.9119545, b: 0.7463946, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 1}
-        key3: {r: 0, g: 0, b: 0, a: 0}
+        key2: {r: 0.3490566, g: 0, b: 0.2629073, a: 1}
+        key3: {r: 0.32941177, g: 0, b: 0.24705884, a: 0}
         key4: {r: 0.99885106, g: 0.8867997, b: 0.7184114, a: 0}
-        key5: {r: 1, g: 0.847352, b: 0.6745283, a: 0}
+        key5: {r: 1, g: 1, b: 1, a: 0}
         key6: {r: 1, g: 0.62340975, b: 0.4575472, a: 0}
-        key7: {r: 0, g: 0, b: 0, a: 0}
+        key7: {r: 1, g: 0.62340975, b: 0.4575472, a: 0}
         ctime0: 0
         ctime1: 17959
         ctime2: 18379
@@ -25585,7 +25603,7 @@ ParticleSystem:
         ctime4: 34238
         ctime5: 39489
         ctime6: 65535
-        ctime7: 0
+        ctime7: 65535
         atime0: 0
         atime1: 65535
         atime2: 65535
@@ -25595,7 +25613,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 7
+        m_NumColorKeys: 6
         m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
@@ -28392,8 +28410,8 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
   CustomDataModule:
-    enabled: 0
-    mode0: 0
+    enabled: 1
+    mode0: 1
     vectorComponentCount0: 4
     color0:
       serializedVersion: 2
@@ -28462,7 +28480,7 @@ ParticleSystem:
     vector0_0:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.62
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -29011,11 +29029,11 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
+  m_UseCustomVertexStreams: 1
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
-  m_VertexStreams: 00010304
+  m_VertexStreams: 0001030422
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
