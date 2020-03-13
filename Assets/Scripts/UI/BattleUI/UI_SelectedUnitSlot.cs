@@ -107,25 +107,34 @@ public class UI_SelectedUnitSlot : UIElement
         actionButtonSpriteState.highlightedSprite = actionIconTouched;
         actionButton.spriteState = actionButtonSpriteState;
 
+        mouseOverScript.baseSprite = actionIcon;
         mouseOverScript.mouseOverSprite = actionIconTouched;
     }
 
     public void SwitchToCancelButton()
     {
+        actionButtonIcon.sprite = actionCancelIcon;
+
         actionButtonSpriteState.pressedSprite = actionCancelIconPressed;
         actionButtonSpriteState.highlightedSprite = actionCancelIconTouched;
         actionButton.spriteState = actionButtonSpriteState;
 
+        mouseOverScript.baseSprite = actionCancelIcon;
         mouseOverScript.mouseOverSprite = actionCancelIconTouched;
+        mouseOverScript.UpdateSprites();
     }
 
     public void SwitchToActionButton()
     {
+        actionButtonIcon.sprite = actionIcon;
+
         actionButtonSpriteState.pressedSprite = actionIconPressed;
         actionButtonSpriteState.highlightedSprite = actionIconTouched;
         actionButton.spriteState = actionButtonSpriteState;
 
+        mouseOverScript.baseSprite = actionIcon;
         mouseOverScript.mouseOverSprite = actionIconTouched;
+        mouseOverScript.UpdateSprites();
     }
 
     public void UnselectUnit()
