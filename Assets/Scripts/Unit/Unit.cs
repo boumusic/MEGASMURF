@@ -384,4 +384,8 @@ public abstract class Unit : LevelElement
     {
         CurrentUnitState = UnitState.Used;
     }
+
+    public void Regen() {
+        CurrentHitPoint = unitBase.unitStats.maxHealth;
+    }
 }
