@@ -77,6 +77,12 @@ public class InputManager : MonoBehaviour
 
         OnActionButtonPress?.Invoke();
     }
+    
+    public void SendActionButtonEvent()
+    {
+        OnActionButtonPress?.Invoke();
+    }
+
 
     public void SendEndTurnInput()
     {

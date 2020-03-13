@@ -798,11 +798,11 @@ MonoBehaviour:
   unitActionIcon: {fileID: 21300000, guid: 90b92138b8b36ce41b3fc10738a46385, type: 3}
   unitActionIconPressed: {fileID: 21300000, guid: 5ccc302a2bd330941b7a04dacfc680e5,
     type: 3}
-  unitActionIconTouched: {fileID: 21300000, guid: 90b92138b8b36ce41b3fc10738a46385,
+  unitActionIconTouched: {fileID: 21300000, guid: 2597931d1f46b0e4483c92942e741731,
     type: 3}
-  unitActionCancelIcon: {fileID: 21300000, guid: 2597931d1f46b0e4483c92942e741731,
+  unitActionCancelIcon: {fileID: 21300000, guid: 26a9db8fd3490ea4bb81337757e9e59d,
     type: 3}
-  unitActionCancelIconPressed: {fileID: 21300000, guid: 2597931d1f46b0e4483c92942e741731,
+  unitActionCancelIconPressed: {fileID: 21300000, guid: 26a9db8fd3490ea4bb81337757e9e59d,
     type: 3}
   unitActionCancelIconTouched: {fileID: 21300000, guid: 2597931d1f46b0e4483c92942e741731,
     type: 3}
