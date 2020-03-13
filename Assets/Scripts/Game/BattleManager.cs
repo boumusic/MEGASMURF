@@ -567,7 +567,6 @@ public class BattleManager : MonoBehaviour
         else
         {
             SelectedUnitTypeToBeSummon = BaseUnitType.Circle;
-            PayShapeMudCost(UnitFactory.Instance.UnitDictionary[BaseUnitType.Circle].unitCost);
             EnterActionTargetSelectionState();
         }
     }
@@ -581,7 +580,6 @@ public class BattleManager : MonoBehaviour
         else
         {
             SelectedUnitTypeToBeSummon = BaseUnitType.Triangle;
-            PayShapeMudCost(UnitFactory.Instance.UnitDictionary[BaseUnitType.Triangle].unitCost);
             EnterActionTargetSelectionState();
         }
     }
@@ -595,7 +593,6 @@ public class BattleManager : MonoBehaviour
         else
         {
             SelectedUnitTypeToBeSummon = BaseUnitType.Square;
-            PayShapeMudCost(UnitFactory.Instance.UnitDictionary[BaseUnitType.Square].unitCost);
             EnterActionTargetSelectionState();
         }
     }
@@ -755,15 +752,6 @@ public class BattleManager : MonoBehaviour
                 unit.DebugSetUnitPosition();
             }
         }
-    }
-    #endregion
-
-    #region Don t belong here
-    public void PayShapeMudCost(int cost, Action action = null)
-    {
-        //Animation
-        action?.Invoke();
-        GameManager.ShapeMud -= cost;
     }
     #endregion
 }
