@@ -642,11 +642,14 @@ MonoBehaviour:
   unitNameTMP: {fileID: 4987200740335043211}
   healthText: {fileID: 4307571997615278477}
   itemIcon: {fileID: 0}
-  shapeIcon: {fileID: 32886614026740847}
-  shapeIconMiddle: {fileID: 2920042193132051604}
-  shapeIconTop: {fileID: 5490823597830319594}
   hoveredSlotSprite: {fileID: 6430087304100672516}
   selectedSlotSprite: {fileID: 8134638738659179426}
+  unitIconSolo: {fileID: 32886614026740847}
+  unitIconDuo_1: {fileID: 2920042193132051604}
+  unitIconDuo_2: {fileID: 3300041175576195719}
+  unitIconTrio_1: {fileID: 5490823597830319594}
+  unitIconTrio_2: {fileID: 715313549639495374}
+  unitIconTrio_3: {fileID: 2113133889919544387}
 --- !u!95 &7757052603481893517
 Animator:
   serializedVersion: 3
