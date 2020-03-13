@@ -21,7 +21,8 @@ public enum TileAnim
     Attack,
     AttackMouseOver,
     Summon,
-    Disabled
+    Disabled,
+    EnemyMovement
 }
 
 public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -164,7 +165,7 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
 
     public void TriggerAnimation(TileAnim anim)
     {
-        if (animator != null && _currentAnim != anim)
+        if (animator != null)// && _currentAnim != anim)
         {
             /*
             switch (anim)
@@ -202,11 +203,14 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     {
         //Animation Si on est dans le bon State de BattleManager
         InputManager.instance.UpdateCurrentTile(this);
-        if(type == TileType.Enemy)
+        if (unit != null)
         {
-            if (unit != null)
+            if (type == TileType.Enemy && BattleManager.Instance.CurrentPlayerID == 0 && (RangeManager.Instance.unitTile == null || RangeManager.Instance.unitTile.type == TileType.Enemy))
             {
-
+                RangeManager.Instance.ClearTiles();
+                RangeManager.Instance.GetTilesInMovementRange(this);
+                RangeManager.Instance.DisplayMovementTiles();
+                //BattleManager.Instance.DisplayUnitMovementRange();
             }
         }
         hovered.SetActive(true);
@@ -215,11 +219,25 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     public void OnPointerExit(PointerEventData eventData)
     {
         //throw new System.NotImplementedException();
+        if (BattleManager.Instance.CurrentPlayerID == 0 && RangeManager.Instance.unitTile != null && RangeManager.Instance.unitTile.type == TileType.Enemy)
+        {
+           RangeManager.Instance.ClearTiles();
+        }
         hovered.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (unit != null)
+        {
+            if (type == TileType.Enemy && BattleManager.Instance.CurrentPlayerID == 0 && (RangeManager.Instance.unitTile == null || RangeManager.Instance.unitTile.type == TileType.Enemy))
+            {
+                RangeManager.Instance.ClearTiles();
+                RangeManager.Instance.GetTilesInAttackRange(this);
+                RangeManager.Instance.DisplayAttackTiles();
+                //BattleManager.Instance.DisplayUnitActionRange();
+            }
+        }
         InputManager.instance.TileClickCallBack(this);
     }
 }
