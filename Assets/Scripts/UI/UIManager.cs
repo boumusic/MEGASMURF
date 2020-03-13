@@ -17,9 +17,13 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+    }
+    private void Start()
+    {
         DesableEndTurnButton();
         DesableNextLevelButton();
         DesableShapeSelectionUI();
+        
     }
 
     public void UpdateShapeMud(int newValue)

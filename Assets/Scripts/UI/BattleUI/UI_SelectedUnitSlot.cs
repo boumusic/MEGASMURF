@@ -14,7 +14,7 @@ public class UI_SelectedUnitSlot : UIElement
     public Image actionButtonIcon;
     //public MouseOverButton mouseOverScript;
 
-    
+
 
     private Sprite soloIcon, duoIcon, trioIcon;
     private Sprite actionIcon;
@@ -47,7 +47,7 @@ public class UI_SelectedUnitSlot : UIElement
 
     public void SelectUnit(Unit unit)
     {
-      //  gameObject.SetActive(true);
+        //  gameObject.SetActive(true);
         unitName = UIManager.Instance.uIUnitSlotContainer.UnitSlotBehaviourDictionary[unit].unitNameTMP;
 
         UpdateActionIcons(unit);
@@ -85,7 +85,7 @@ public class UI_SelectedUnitSlot : UIElement
         duoIcon = null;
         trioIcon = null;
         newUnitMergeLevel = 0;
-        
+
         if (isShapeUnit = unit is ShapeUnit)
         {
             ShapeUnit shapeUnit = (ShapeUnit)unit;
@@ -121,7 +121,7 @@ public class UI_SelectedUnitSlot : UIElement
             case 1:
                 unitIconDuo_1.sprite = soloIcon;
                 unitIconDuo_2.sprite = duoIcon;
-                
+
                 break;
             case 2:
                 unitIconTrio_1.sprite = soloIcon;
@@ -132,11 +132,11 @@ public class UI_SelectedUnitSlot : UIElement
                 break;
         }
 
-        if(unitMergeLevel == 0 && newUnitMergeLevel == 1)
+        if (unitMergeLevel == 0 && newUnitMergeLevel == 1)
         {
             SelectedSoloToDuo();
         }
-        else if(unitMergeLevel == 1 && newUnitMergeLevel == 2)
+        else if (unitMergeLevel == 1 && newUnitMergeLevel == 2)
         {
             SelectedDuoToTrio();
         }
@@ -230,7 +230,7 @@ public class UI_SelectedUnitSlot : UIElement
         //actionButtonSpriteState.highlightedSprite = actionIconTouched;
         actionButton.spriteState = actionButtonSpriteState;
 
-        
+
         //mouseOverScript.baseSprite = actionIcon;
         //mouseOverScript.mouseOverSprite = actionIconTouched;
         //mouseOverScript.UpdateSprites();
@@ -243,7 +243,7 @@ public class UI_SelectedUnitSlot : UIElement
 
     public void UpdateHealthText(int newHealthValue)
     {
-        if(newHealthValue < healthValue)
+        if (newHealthValue < healthValue)
             SelectedDamageAnim();
 
         healthValue = newHealthValue;
@@ -254,10 +254,10 @@ public class UI_SelectedUnitSlot : UIElement
     private void ResetSprite()
     {
         unitIconSolo.sprite = null;
-        
+
         unitIconDuo_1.sprite = null;
         unitIconDuo_2.sprite = null;
-        
+
         unitIconTrio_1.sprite = null;
         unitIconTrio_2.sprite = null;
         unitIconTrio_3.sprite = null;
@@ -265,17 +265,21 @@ public class UI_SelectedUnitSlot : UIElement
 
     public void UpdateUnitHealth(Unit unit, int newHealth)
     {
-        if(unit == SelectedUnit)
-        if (newHealth < healthValue)
+        if (unit == SelectedUnit)
         {
-            SelectedDamageAnim();
-        }
-        //else if (newHealth > healthValue)
-        //{
-        //    shapeSlotHealAnim();
-        //}
 
-        UpdateHealthText(newHealth);
+
+            if (newHealth < healthValue)
+            {
+                SelectedDamageAnim();
+            }
+            //else if (newHealth > healthValue)
+            //{
+            //    shapeSlotHealAnim();
+            //}
+
+            UpdateHealthText(newHealth);
+        }
     }
 
     //ANIMATIONS
@@ -309,7 +313,7 @@ public class UI_SelectedUnitSlot : UIElement
         anim.Play("SelectedOut");
     }
 
-   
+
 
     public void SelectedSoloToDuo()
     {

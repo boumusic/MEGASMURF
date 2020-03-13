@@ -16,6 +16,7 @@ public class UnitName : MonoBehaviour
 
     private void UpdateText()
     {
+        if(text)
         text.text = unitName;
     }
 }
