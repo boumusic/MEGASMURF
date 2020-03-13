@@ -6,7 +6,8 @@ using UnityEngine;
 public class Maestro : Unit
 {
 
-    private int maxShapes;
+    [HideInInspector]
+    public int maxShapes;
 
     [HideInInspector]
     public int rangeLvl;
@@ -89,6 +90,7 @@ public class Maestro : Unit
         ShapeUnit newUnit;
         if ((newUnit = newUnitGameObject.GetComponent<ShapeUnit>()) != null)
         {
+            AudioManager.Instance.PlaySFX("ShapeSpawn_01");
             BattleManager.Instance.AddUnitToPlayerUnitList(BattleManager.Instance.CurrentPlayerID, newUnitGameObject);
             newUnit.GetComponent<ShapeUnit>()?.SetUnitPosition(tile);
             //animation(action)

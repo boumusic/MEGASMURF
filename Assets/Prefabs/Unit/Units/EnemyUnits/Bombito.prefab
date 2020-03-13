@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitAnimator: {fileID: 8109282538448612625}
-  hp: {fileID: 7078991844853219590}
+  hp: {fileID: 8595106298129174762}
   visuals:
   - {fileID: 5518603185666234153}
   debugTile: {x: 0, y: 0}
@@ -284,6 +284,16 @@ PrefabInstance:
       propertyPath: materialProperties.Array.data[1].color.b
       value: 0.31043077
       objectReference: {fileID: 0}
+    - target: {fileID: 4924135086133565076, guid: 2bbe777a5f518c043b1efbfe08967beb,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924135086182966394, guid: 2bbe777a5f518c043b1efbfe08967beb,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6937681877181892735, guid: 2bbe777a5f518c043b1efbfe08967beb,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -425,9 +435,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 9110474678620069627}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7078991844853219590 stripped
+--- !u!114 &8595106298129174762 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2041056285805912061, guid: 2bbe777a5f518c043b1efbfe08967beb,
+  m_CorrespondingSourceObject: {fileID: 660089403789626897, guid: 2bbe777a5f518c043b1efbfe08967beb,
     type: 3}
   m_PrefabInstance: {fileID: 9110474678620069627}
   m_PrefabAsset: {fileID: 0}

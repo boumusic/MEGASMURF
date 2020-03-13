@@ -176,6 +176,10 @@ public class Board : MonoBehaviour
 
     public void NextRoom()
     {
+        if (roomId < environments.Count)
+        {
+            currentEnvironment = environments[roomId];
+        }
         roomId++;
         if (roomId > 0)
         {

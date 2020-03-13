@@ -1472,11 +1472,11 @@ MonoBehaviour:
     pos: {x: 5, y: 5, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
+  - levelElement: {fileID: 6339349401844312458, guid: 49d8bdf5b74dcb54ab49e6b98dce9ae5,
       type: 3}
     pos: {x: 5, y: 6, z: 0}
     orderInTurn: 0
-    name: Bombi
+    name: Bombito
   - levelElement: {fileID: 0}
     pos: {x: 5, y: 7, z: 0}
     orderInTurn: 0
@@ -1844,8 +1844,7 @@ MonoBehaviour:
     pos: {x: 11, y: 6, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 111116948502217079, guid: 49d8bdf5b74dcb54ab49e6b98dce9ae5,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 11, y: 7, z: 0}
     orderInTurn: 0
     name: 

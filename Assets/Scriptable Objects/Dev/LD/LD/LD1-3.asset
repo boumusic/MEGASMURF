@@ -1240,8 +1240,7 @@ MonoBehaviour:
     pos: {x: 1, y: 8, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 1, y: 9, z: 0}
     orderInTurn: 0
     name: 
@@ -1720,15 +1719,15 @@ MonoBehaviour:
     pos: {x: 9, y: 6, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 7792620425358419959, guid: d0fbc22970f082349b827ec9a54b74d5,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 9, y: 7, z: 0}
     orderInTurn: 0
-    name: Patrolio
-  - levelElement: {fileID: 0}
+    name: 
+  - levelElement: {fileID: 7792620425358419959, guid: d0fbc22970f082349b827ec9a54b74d5,
+      type: 3}
     pos: {x: 9, y: 8, z: 0}
     orderInTurn: 0
-    name: 
+    name: Patrolio
   - levelElement: {fileID: 0}
     pos: {x: 9, y: 9, z: 0}
     orderInTurn: 0
@@ -1830,28 +1829,28 @@ MonoBehaviour:
     pos: {x: 11, y: 3, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 8364527872295634520, guid: 510179844b663904fa152155c8921223,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 11, y: 4, z: 0}
     orderInTurn: 0
-    name: Nene
-  - levelElement: {fileID: 0}
+    name: 
+  - levelElement: {fileID: 8364527872295634520, guid: 510179844b663904fa152155c8921223,
+      type: 3}
     pos: {x: 11, y: 5, z: 0}
     orderInTurn: 0
-    name: 
+    name: Nene
   - levelElement: {fileID: 0}
     pos: {x: 11, y: 6, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 11, y: 7, z: 0}
     orderInTurn: 0
-    name: Bombi
-  - levelElement: {fileID: 0}
+    name: 
+  - levelElement: {fileID: 6339349401844312458, guid: 49d8bdf5b74dcb54ab49e6b98dce9ae5,
+      type: 3}
     pos: {x: 11, y: 8, z: 0}
     orderInTurn: 0
-    name: 
+    name: Bombito
   - levelElement: {fileID: 0}
     pos: {x: 11, y: 9, z: 0}
     orderInTurn: 0

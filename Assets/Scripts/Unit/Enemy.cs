@@ -10,12 +10,21 @@ public class Enemy : Unit
     public int mudAmountDrop = 10;
     private Tile priorityDestination;
 
+    public int ID => BattleManager.Instance.playerUnits[1].IndexOf(this);
+
     public override UnitDeathSettings DeathSettings => UnitSettingsManager.Instance.generalSettings.enemyDeath;
 
     protected override void Awake()
     {
         base.Awake();
         calls = 0;
+    }
+
+    public override void Start()
+    {
+        base.Start();
+        hp?.UpdateOrder(ID);
+
     }
 
     public override Tile CurrentTile
@@ -315,6 +324,7 @@ public class Enemy : Unit
                 BattleManager.Instance.AddUnitToPlayerUnitList(1, bombito);
                 if (script != null) 
                 {
+                    script.Appear();
                     script.SetUnitPosition(tile);
                     script.BecomeExhausted();
                 }

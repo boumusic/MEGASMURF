@@ -1225,8 +1225,7 @@ MonoBehaviour:
     pos: {x: 1, y: 5, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 1, y: 6, z: 0}
     orderInTurn: 0
     name: 
@@ -1235,8 +1234,7 @@ MonoBehaviour:
     pos: {x: 1, y: 7, z: 0}
     orderInTurn: 0
     name: Patrolio
-  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 1, y: 8, z: 0}
     orderInTurn: 0
     name: 
@@ -1291,8 +1289,7 @@ MonoBehaviour:
     pos: {x: 2, y: 5, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 2, y: 6, z: 0}
     orderInTurn: 0
     name: 
@@ -1316,11 +1313,10 @@ MonoBehaviour:
     pos: {x: 2, y: 11, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 2, y: 12, z: 0}
     orderInTurn: 0
-    name: Bombi
+    name: 
   - levelElement: {fileID: 0}
     pos: {x: 2, y: 13, z: 0}
     orderInTurn: 0
@@ -1377,10 +1373,11 @@ MonoBehaviour:
     pos: {x: 3, y: 11, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
+      type: 3}
     pos: {x: 3, y: 12, z: 0}
     orderInTurn: 0
-    name: 
+    name: Bombi
   - levelElement: {fileID: 0}
     pos: {x: 3, y: 13, z: 0}
     orderInTurn: 0
@@ -1860,8 +1857,7 @@ MonoBehaviour:
     pos: {x: 11, y: 9, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 111116948502217079, guid: 49d8bdf5b74dcb54ab49e6b98dce9ae5,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 11, y: 10, z: 0}
     orderInTurn: 0
     name: 

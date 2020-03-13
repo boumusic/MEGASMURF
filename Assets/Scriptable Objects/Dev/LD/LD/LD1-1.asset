@@ -1553,10 +1553,11 @@ MonoBehaviour:
     pos: {x: 6, y: 10, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 6339349401844312458, guid: 49d8bdf5b74dcb54ab49e6b98dce9ae5,
+      type: 3}
     pos: {x: 6, y: 11, z: 0}
     orderInTurn: 0
-    name: 
+    name: Bombito
   - levelElement: {fileID: 0}
     pos: {x: 6, y: 12, z: 0}
     orderInTurn: 0

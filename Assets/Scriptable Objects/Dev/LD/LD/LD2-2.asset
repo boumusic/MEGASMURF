@@ -1245,13 +1245,11 @@ MonoBehaviour:
     pos: {x: 1, y: 9, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 1, y: 10, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 3413823031108532823, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 1, y: 11, z: 0}
     orderInTurn: 0
     name: 
@@ -1628,11 +1626,10 @@ MonoBehaviour:
     pos: {x: 7, y: 12, z: 0}
     orderInTurn: 0
     name: 
-  - levelElement: {fileID: 7792620425358419959, guid: d0fbc22970f082349b827ec9a54b74d5,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 7, y: 13, z: 0}
     orderInTurn: 0
-    name: Patrolio
+    name: 
   - levelElement: {fileID: 0}
     pos: {x: 7, y: 14, z: 0}
     orderInTurn: 0

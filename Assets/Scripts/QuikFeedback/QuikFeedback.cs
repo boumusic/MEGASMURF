@@ -430,7 +430,7 @@ namespace Pataya.QuikFeedback
         {
             if (Input.GetKeyDown(debugKey))
             {
-                Play();
+                //Play();
             }
         }
 

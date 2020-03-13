@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class Bombito : Enemy
 {
-   
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        UnitAnimator.gameObject.SetActive(true);
+    }
 }

@@ -14,7 +14,7 @@ public class AnimationEventReceiver : MonoBehaviour
         string name = "Walking_0" + toPlay.ToString();
         AudioManager.Instance.PlaySFX(name);
 
-        if (side == 0) leftStep.Play();
-        else rightStep.Play();
+        if (side == 0) leftStep?.Play();
+        else rightStep?.Play();
     }
 }
