@@ -67,6 +67,7 @@ public class RoomEditor : Editor
         if (EditorGUI.EndChangeCheck())
         {
             EditorUtility.SetDirty(t);
+            AssetDatabase.SaveAssets();
         }
     }
 

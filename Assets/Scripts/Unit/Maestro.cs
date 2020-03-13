@@ -57,6 +57,7 @@ public class Maestro : Unit
     {
         base.SpawnUnit(tile);
         BattleManager.Instance.AddUnitToPlayerUnitList(0,gameObject);
+        InitMaestro();
     }
 
     public void InitMaestro()
