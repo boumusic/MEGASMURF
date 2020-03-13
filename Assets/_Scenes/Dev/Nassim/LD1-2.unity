@@ -67445,6 +67445,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 159451901401224306, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 505680a324e7036459446abdfca6092c,
+        type: 3}
     - target: {fileID: 557477965825672991, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -67695,6 +67701,16 @@ PrefabInstance:
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CallOnBattleModeButtonPress
       objectReference: {fileID: 0}
+    - target: {fileID: 4210672932226395139, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000033024946
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210672932226395139, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000028874725
+      objectReference: {fileID: 0}
     - target: {fileID: 4231043780265483869, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_IsActive
@@ -67930,6 +67946,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SendTriangleButtonEvent
       objectReference: {fileID: 0}
+    - target: {fileID: 7334492932380282079, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 505680a324e7036459446abdfca6092c,
+        type: 3}
     - target: {fileID: 7376705007536115578, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -68040,6 +68062,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SendTriangleButtonEvent
       objectReference: {fileID: 0}
+    - target: {fileID: 8346183919651456401, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2d2564c094011ce408d82c543831931e,
+        type: 3}
     - target: {fileID: 8599873249870767610, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -68139,6 +68167,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8599873250997914584, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8726596534548620348, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
