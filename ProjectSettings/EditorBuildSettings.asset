@@ -5,12 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/_Scenes/Dev/Geoffrey/LD1-1.unity
-    guid: c616b0d8442f87c498e47def97d6e872
+  - enabled: 1
+    path: Assets/_Scenes/Menu.unity
+    guid: f97f00602cdcc804aba076385a271be5
   - enabled: 1
     path: Assets/_Scenes/Dev/Nassim/LD1-2.unity
     guid: 76df25a6e89994844b332c31a0f42fd8
