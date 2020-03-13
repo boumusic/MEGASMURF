@@ -153,7 +153,7 @@ public class Board : MonoBehaviour
         roomId++;
         if (roomId > 0)
         {
-            //skillTree.SetActive(true);
+            skillTree.SetActive(true);
         }
         ClearRoom();
         if (roomId < dungeon.Count)
@@ -275,13 +275,14 @@ public class Board : MonoBehaviour
                                 Enemy enemy = PoolManager.Instance.GetEntityOfType(levelElement.GetType()) as Enemy;
                                 if (enemy != null)
                                 {
-                                    enemies.Add(enemy);
+                                    enemy.Regen();
                                     if (tiles[i, j] is ImmediateSpawner)
                                     {
                                         ((ImmediateSpawner)tiles[i, j]).spawnedType = enemy.UnitType;
                                         enemy.gameObject.SetActive(true);
                                         enemy.SpawnUnit(tiles[i, j]);
                                         immediateSpawners.Add((ImmediateSpawner)tiles[i, j]);
+                                        enemies.Add(enemy);
                                     }
                                     else if (tiles[i, j] is Spawner)
                                     {
@@ -292,6 +293,7 @@ public class Board : MonoBehaviour
                                     {
                                         enemy.gameObject.SetActive(true);
                                         enemy.SpawnUnit(tiles[i, j]);
+                                        enemies.Add(enemy);
                                     }
                                 }
                             }
