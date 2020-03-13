@@ -725,12 +725,12 @@ public class BattleManager : MonoBehaviour
         tilesInActionRange = RangeManager.Instance.GetTilesInAttackRange(CurrentSelectedUnit.CurrentTile);
     }
 
-    private void DisplayUnitMovementRange()
+    public void DisplayUnitMovementRange()
     {
         StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayMovementTiles));
     }
 
-    private void DisplayUnitActionRange()
+    public void DisplayUnitActionRange()
     {
         StartCoroutine(DelayDisplay(RangeManager.Instance.DisplayAttackTiles));
     }

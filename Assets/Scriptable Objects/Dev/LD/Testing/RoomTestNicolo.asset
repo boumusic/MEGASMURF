@@ -1127,8 +1127,7 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 4, y: 10, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 8364527872295634520, guid: 510179844b663904fa152155c8921223,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 4, y: 11, z: 0}
     orderInTurn: 0
   - levelElement: {fileID: 0}
@@ -1173,7 +1172,8 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 5, y: 10, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
+      type: 3}
     pos: {x: 5, y: 11, z: 0}
     orderInTurn: 0
   - levelElement: {fileID: 0}
@@ -1308,7 +1308,7 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 8, y: 10, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 8364527872295634520, guid: 510179844b663904fa152155c8921223,
+  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
       type: 3}
     pos: {x: 8, y: 11, z: 0}
     orderInTurn: 0

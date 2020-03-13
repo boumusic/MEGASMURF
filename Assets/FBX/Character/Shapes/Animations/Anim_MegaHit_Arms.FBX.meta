@@ -11,7 +11,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: No Name
-    second: {fileID: 2100000, guid: 94637d954c6a38a44a142325e0e4aa2a, type: 2}
+    second: {fileID: 2100000, guid: 63ab6598662425f46a0f9f0a05591a75, type: 2}
   materials:
     materialImportMode: 1
     materialName: 3
@@ -44,7 +44,7 @@ ModelImporter:
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 7
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
