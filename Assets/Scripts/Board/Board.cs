@@ -60,7 +60,8 @@ public class Board : MonoBehaviour
 
     public GameObject gameOverScreen;
 
-    private Tile[,] tiles;
+    [HideInInspector]
+    public Tile[,] tiles;
     private List<Tile> tileList = new List<Tile>();
 
     [HideInInspector]
