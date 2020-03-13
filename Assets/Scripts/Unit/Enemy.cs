@@ -324,6 +324,7 @@ public class Enemy : Unit
                 BattleManager.Instance.AddUnitToPlayerUnitList(1, bombito);
                 if (script != null) 
                 {
+                    script.Appear();
                     script.SetUnitPosition(tile);
                     script.BecomeExhausted();
                 }

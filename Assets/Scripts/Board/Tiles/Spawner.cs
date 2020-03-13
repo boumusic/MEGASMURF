@@ -30,6 +30,7 @@ public class Spawner : Tile
         GameObject unitObject = UnitFactory.Instance.CreateUnit(spawnedType);
         Unit u = unitObject.GetComponent<Unit>();
         u.SpawnUnit(this);
+        u.Appear();
         currentTurn = 0;
     }
 

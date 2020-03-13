@@ -5364,10 +5364,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3708884291671734082, guid: 20eb0b5ba466ca3459820359f508f2ac,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3708884291671734082, guid: 20eb0b5ba466ca3459820359f508f2ac,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3904847611657541795, guid: 20eb0b5ba466ca3459820359f508f2ac,
         type: 3}
       propertyPath: m_Name
       value: EnemyUnitHP
+      objectReference: {fileID: 0}
+    - target: {fileID: 4423497702366202250, guid: 20eb0b5ba466ca3459820359f508f2ac,
+        type: 3}
+      propertyPath: isEnemy
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7040116989946207994, guid: 20eb0b5ba466ca3459820359f508f2ac,
         type: 3}
