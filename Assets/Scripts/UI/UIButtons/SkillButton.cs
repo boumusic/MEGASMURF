@@ -33,6 +33,8 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public bool alwaysUnlocked;
 
+    private string options;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,19 +49,28 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void UpdateState()
     {
+        options = "\n";
         if (GameManager.SkillTree != null)
         {
             if (alwaysUnlocked || GameManager.SkillTree.tree[(int)type + lvl])
             {
                 Show(SkillState.Unlocked);
-            }
-            else if (GameManager.SkillTree.CheckDependencies(type, lvl) && GameManager.ShapeMud >= GameManager.SkillTree.CheckCost(type, lvl))
-            {
-                Show(SkillState.Unlockable);
+                options += "Acquired!";
             }
             else
             {
-                Show(SkillState.Disabled);
+                int cost = GameManager.SkillTree.CheckCost(type, lvl);
+                options += "Coût : " + cost.ToString();
+                if (GameManager.SkillTree.CheckDependencies(type, lvl) && GameManager.ShapeMud >= cost)
+                {
+                    Show(SkillState.Unlockable);
+                    
+                }
+                else
+                {
+                    Show(SkillState.Disabled);
+                    options += " (Locked)";
+                }
             }
         }
     }

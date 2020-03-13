@@ -17,8 +17,8 @@ MonoBehaviour:
   animator: {fileID: 0}
   attackedByShape: {fileID: 9208297265515423968}
   attackedByEnemy: {fileID: 6682589000421317600}
+  rend: {fileID: 4950543179645884936}
   mudFXPop: {fileID: 628810590578278034}
-  mudFXLoop: {fileID: 6646801219220782014}
   hovered: {fileID: 1836663771459172828}
   id: 0
 --- !u!1 &4375460196212335781
@@ -204,15 +204,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2194278458542269600}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &628810590578278034 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1642229774050908722, guid: 41519bd1cb215f346a08d865540ae9cf,
+--- !u!23 &4950543179645884936 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6539359060699037352, guid: 41519bd1cb215f346a08d865540ae9cf,
     type: 3}
   m_PrefabInstance: {fileID: 2194278458542269600}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &6646801219220782014 stripped
+--- !u!198 &628810590578278034 stripped
 ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4777627473447591710, guid: 41519bd1cb215f346a08d865540ae9cf,
+  m_CorrespondingSourceObject: {fileID: 1642229774050908722, guid: 41519bd1cb215f346a08d865540ae9cf,
     type: 3}
   m_PrefabInstance: {fileID: 2194278458542269600}
   m_PrefabAsset: {fileID: 0}

@@ -1121,7 +1121,7 @@ GameObject:
   - component: {fileID: 8774858511206769538}
   - component: {fileID: 8856591638459889066}
   - component: {fileID: 905260005906168202}
-  - component: {fileID: 2515552484191094243}
+  - component: {fileID: 7191251144178022527}
   m_Layer: 0
   m_Name: ActionButton
   m_TagString: Untagged
@@ -1243,20 +1243,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2515552484191094243
-MonoBehaviour:
+--- !u!95 &7191251144178022527
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2857397175099450433}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5764234f489911b4eabf3c047bab7b7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseSprite: {fileID: 0}
-  mouseOverSprite: {fileID: 0}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a19d1b433762a484da0eac06b319d16a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3282252203466328680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2574,11 +2579,14 @@ MonoBehaviour:
   unitName: {fileID: 8958873295345163429}
   unitHealthText: {fileID: 1730066116740458769}
   unitIconSolo: {fileID: 1730066118599772618}
-  unitIconDuo: {fileID: 1730066117724930293}
-  unitIconTrio: {fileID: 1730066118564763899}
+  unitIconDuo_1: {fileID: 0}
+  unitIconDuo_2: {fileID: 0}
+  unitIconTrio_1: {fileID: 0}
+  unitIconTrio_2: {fileID: 0}
+  unitIconTrio_3: {fileID: 0}
   actionButton: {fileID: 905260005906168202}
   actionButtonIcon: {fileID: 8856591638459889066}
-  mouseOverScript: {fileID: 2515552484191094243}
+  mouseOverScript: {fileID: 0}
 --- !u!114 &3989013829800781687
 MonoBehaviour:
   m_ObjectHideFlags: 0
