@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public enum Direction
@@ -128,6 +129,11 @@ public class Board : MonoBehaviour
                 currentEnvironment.SetActive(true);
             }
         }
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public bool SpawnersActive()
