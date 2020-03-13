@@ -622,7 +622,10 @@ public class BattleManager : MonoBehaviour
             {
                 UIManager.Instance.AddNewUnitUISlot(unit);
                 if (unit is Maestro)
+                {
                     MaestroUnit = (Maestro)unit;
+                    UIManager.Instance.SelectedUnitSlot.SelectUnit(unit);
+                }
             }
         }
     }

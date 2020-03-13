@@ -222,6 +222,7 @@ public class ShapeUnit : Unit
 
     public void InitiateMergeAlly(ShapeUnit shape)
     {
+        UIManager.Instance.SelectedUnitSlot.SelectUnit(shape);
         InitiateMergeAlly(shape, null);
     }
 

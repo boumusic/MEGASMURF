@@ -26,6 +26,7 @@ public class UI_SelectedUnitSlot : UIElement
 
     private bool isShapeUnit;
     private int unitMergeLevel;
+    private int newUnitMergeLevel;
 
     private Animator anim;
 
@@ -46,7 +47,7 @@ public class UI_SelectedUnitSlot : UIElement
 
     public void SelectUnit(Unit unit)
     {
-        gameObject.SetActive(true);
+      //  gameObject.SetActive(true);
         unitName = UIManager.Instance.uIUnitSlotContainer.UnitSlotBehaviourDictionary[unit].unitNameTMP;
 
         UpdateActionIcons(unit);
@@ -83,8 +84,8 @@ public class UI_SelectedUnitSlot : UIElement
         soloIcon = unit.selectedUnitIcon;
         duoIcon = null;
         trioIcon = null;
-        unitMergeLevel = 0;
-
+        newUnitMergeLevel = 0;
+        
         if (isShapeUnit = unit is ShapeUnit)
         {
             ShapeUnit shapeUnit = (ShapeUnit)unit;
@@ -93,12 +94,14 @@ public class UI_SelectedUnitSlot : UIElement
             {
                 soloIcon = shapeUnit.shapeLegIcon;
                 duoIcon = shapeUnit.ArmUnit.selectedUnitIcon;
-                unitMergeLevel = 1;
+                DisplayUnitIcons();
+                newUnitMergeLevel = 1;
             }
             if (shapeUnit.HeadUnit != null)
             {
                 trioIcon = shapeUnit.HeadUnit.selectedUnitIcon;
-                unitMergeLevel = 2;
+                DisplayUnitIcons();
+                newUnitMergeLevel = 2;
             }
         }
 
@@ -110,7 +113,7 @@ public class UI_SelectedUnitSlot : UIElement
         //Animation
         ResetSprite();
 
-        switch (unitMergeLevel)
+        switch (newUnitMergeLevel)
         {
             case 0:
                 unitIconSolo.sprite = soloIcon;
@@ -129,7 +132,20 @@ public class UI_SelectedUnitSlot : UIElement
                 break;
         }
 
-        ActivateUnitIcons(unitMergeLevel);
+        if(unitMergeLevel == 0 && newUnitMergeLevel == 1)
+        {
+            SelectedSoloToDuo();
+        }
+        else if(unitMergeLevel == 1 && newUnitMergeLevel == 2)
+        {
+            SelectedDuoToTrio();
+        }
+        else
+        {
+            ActivateUnitIcons(newUnitMergeLevel);
+        }
+
+        unitMergeLevel = newUnitMergeLevel;
     }
 
     public void DisplayActionIcons()
@@ -247,20 +263,34 @@ public class UI_SelectedUnitSlot : UIElement
         unitIconTrio_3.sprite = null;
     }
 
-
-
-    //ANIMATIONS
-    private void Update()
+    public void UpdateUnitHealth(Unit unit, int newHealth)
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if(unit == SelectedUnit)
+        if (newHealth < healthValue)
         {
             SelectedDamageAnim();
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SelectedSoloToDuo();
-        }
+        //else if (newHealth > healthValue)
+        //{
+        //    shapeSlotHealAnim();
+        //}
+
+        UpdateHealthText(newHealth);
     }
+
+    //ANIMATIONS
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.A))
+    //    {
+    //        SelectedDamageAnim();
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.R))
+    //    {
+    //        SelectedSoloToDuo();
+    //    }
+    //}
+
     public void SelectedDamageAnim()
     {
         //Quand le joueur prend des dégâts

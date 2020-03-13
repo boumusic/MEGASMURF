@@ -49,6 +49,8 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
         
         UIManager.Instance.UpdateSelectedUnitName(SlotUnit);
 
+
+        onSelectedSlotAnim();
         //ChangeItemIcon(unit.CurrentEquipement.equipementIcon);
     }
 
@@ -223,12 +225,11 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
     public void OnPointerEnter(PointerEventData eventData)
     {
         hoveredSlotSprite.enabled = true;
+        hoverSlotAnim();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         hoveredSlotSprite.enabled = false;
     }
-
-    
 }
