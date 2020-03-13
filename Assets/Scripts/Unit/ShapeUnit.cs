@@ -8,6 +8,7 @@ public class ShapeUnit : Unit
     [Header("Components")]
     [SerializeField] private UnitMerger unitMergeAnimator;
     [SerializeField] public Transform mergeParent;
+    public ParticleClearer death;
     private Action OnMergedFinished;
 
     public Sprite shapeLegIcon;
@@ -65,8 +66,8 @@ public class ShapeUnit : Unit
         get
         {
             int maxHealth = unitBase.unitStats.maxHealth;
-            
-            if(mergedUnits != null)
+
+            if (mergedUnits != null)
             {
                 if (mergedUnits.Count > 0)
                 {
@@ -76,7 +77,7 @@ public class ShapeUnit : Unit
                     }
                 }
             }
-            
+
             return maxHealth;
         }
     }
@@ -98,7 +99,7 @@ public class ShapeUnit : Unit
         }
     }
 
-    public override MovementPattern UnitMovementPattern 
+    public override MovementPattern UnitMovementPattern
     {
         get
         {
@@ -108,13 +109,13 @@ public class ShapeUnit : Unit
             }
             else
             {
-                if(ArmUnit != null && unitBase.unitType == ArmUnit.UnitType)
+                if (ArmUnit != null && unitBase.unitType == ArmUnit.UnitType)
                 {
-                   return unitBase.movementPatterns[1];
+                    return unitBase.movementPatterns[1];
                 }
                 else
                 {
-                   return unitBase.movementPatterns[0];
+                    return unitBase.movementPatterns[0];
                 }
             }
         }
@@ -135,6 +136,16 @@ public class ShapeUnit : Unit
     {
         base.SpawnUnit(tile);
         BattleManager.Instance.AddUnitToPlayerUnitList(0, gameObject);
+        int index = UnityEngine.Random.Range(0, 6);
+        AudioManager.Instance.PlaySFX("ShapeHappy_0" + index.ToString());
+    }
+
+    protected override void Die()
+    {
+        death.Play();
+        int index = UnityEngine.Random.Range(0, 3);
+        AudioManager.Instance.PlaySFX("ShapeDeath_0" + index.ToString());
+        base.Die();
     }
 
     public override void MoveTo(Stack<Tile> path)
@@ -154,6 +165,8 @@ public class ShapeUnit : Unit
     {
         base.TakeDamage(unit);
         ShapeUnitAnimator.PlaySpecial("SimpleHit");
+        int index = UnityEngine.Random.Range(0, 6);
+        AudioManager.Instance.PlaySFX("ShapeHit_0" + index.ToString());
     }
 
     private IEnumerator MovingTo(Stack<Tile> path, System.Action action)
@@ -161,7 +174,7 @@ public class ShapeUnit : Unit
         SetAnimatorMoving(true);
         bool isMerging = false;
         TileType tempType = TileType.Free;
-        
+
         if (currentTile != null)
         {
             currentTile.unit = null;
@@ -286,6 +299,6 @@ public class ShapeUnit : Unit
         }
         else
             Debug.LogError("Illicite Merge: intiating unit is not level 0");
-
     }
 }
+

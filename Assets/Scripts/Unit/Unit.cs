@@ -101,10 +101,11 @@ public abstract class Unit : LevelElement
     {
         UpdateForward();
 
+        /*
         if(Input.GetKeyDown(KeyCode.K))
         {
             Die();
-        }
+        }*/
     }
 
     public virtual void OnEnable()
@@ -326,6 +327,7 @@ public abstract class Unit : LevelElement
         CurrentHitPoint -= unit.Damage;
         //Debug.Log("He now has " + CurrentHitPoint);
         if(hp)hp.UpdateJauge(CurrentHitPoint, MaxHealth);
+        AudioManager.Instance.PlaySFX("Hit_01");
 
         if (CurrentHitPoint <= 0)
         {

@@ -45,6 +45,13 @@ public class Enemy : Unit
         BattleManager.Instance.AddUnitToPlayerUnitList(1, gameObject);
     }
 
+    public override void TakeDamage(Unit unit)
+    {
+        base.TakeDamage(unit);
+        int index = UnityEngine.Random.Range(0, 7);
+        AudioManager.Instance.PlaySFX("GrunteeHit_0" + index.ToString());
+    }
+
     public void Sequence()
     {
         priorityDestination = null;
