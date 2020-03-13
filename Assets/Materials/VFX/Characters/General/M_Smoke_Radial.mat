@@ -49,7 +49,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GradientTex:
-        m_Texture: {fileID: 2800000, guid: f7308737b40c93a43b72e63e3bb3a0b4, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -126,8 +126,8 @@ Material:
     - _Emissive: {r: 3, g: 5, b: 0.14527029, a: 0.48986486}
     - _EmissiveColor: {r: 1, g: 1, b: 1, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GradientRemap: {r: 0.02364862, g: 0.37500012, b: 0, a: 0}
+    - _GradientRemap: {r: 0, g: 0.8793229, b: 0, a: 0}
     - _TilingSpeedA: {r: 1, g: 1, b: 0.2, a: -1}
-    - _TilingSpeedB: {r: 1, g: 0.7, b: -0.1, a: -2}
+    - _TilingSpeedB: {r: 3, g: 0.7, b: -0.1, a: -5}
     - _TilingSpeedDisplacement: {r: 1, g: 1, b: 0, a: 0}
     - _TilingSpeedDistortion: {r: 0.2, g: 0.2, b: 0.1, a: -0.1}

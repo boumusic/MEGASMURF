@@ -14,7 +14,7 @@ public abstract class Unit : LevelElement
 {
     [Header("Components")]
     [SerializeField] private UnitAnimator unitAnimator;
-    [SerializeField] private UnitHP hp;
+    [SerializeField] protected UnitHP hp;
     [SerializeField] private GameObject[] visuals;
 
     public Vector2 debugTile;
@@ -339,6 +339,7 @@ public abstract class Unit : LevelElement
         if(hp)hp.UpdateHealth(CurrentHitPoint);
         AudioManager.Instance.PlaySFX("Hit_01");
         UnitAnimator.PlaySpecial("SimpleHit");
+        UnitAnimator.PlayFeedback("Hit");
 
         if (CurrentHitPoint <= 0)
         {
