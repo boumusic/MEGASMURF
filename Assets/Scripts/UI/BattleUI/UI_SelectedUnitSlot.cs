@@ -248,7 +248,14 @@ public class UI_SelectedUnitSlot : UIElement
     //ANIMATIONS
     private void Update()
     {
-       
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            SelectedDamageAnim();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SelectedSoloToDuo();
+        }
     }
     public void SelectedDamageAnim()
     {
@@ -290,5 +297,32 @@ public class UI_SelectedUnitSlot : UIElement
     public void SelectedInvokeShapesOff()
     {
         anim.Play("SelectedInvokeShapesOff");
+        //A JOUER UNE FOIS QUE LE JOUEUR A POSÉ SA MERDE
     }
+
+    public void DuoMode()
+    {
+        unitIconSolo.enabled = false;
+        unitIconDuo_1.enabled = true;
+        unitIconDuo_2.enabled = true;
+        unitIconTrio_1.enabled = false;
+        unitIconTrio_2.enabled = false;
+        unitIconTrio_3.enabled = false;
+
+    }
+
+    public void TrioMode()
+    {
+        unitIconSolo.enabled = false;
+        unitIconDuo_1.enabled = false;
+        unitIconDuo_2.enabled = false;
+        unitIconTrio_1.enabled = true;
+        unitIconTrio_2.enabled = true;
+        unitIconTrio_3.enabled = true;
+    }
+
+    //public void UpdateName(Unit unit)
+    //{
+    //    unitName.text = unit.name;
+    //}
 }

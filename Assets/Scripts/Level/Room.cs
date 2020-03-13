@@ -8,6 +8,7 @@ public class LevelElementRoomSettings
     public LevelElement levelElement;
     public Vector3 pos;
     public int orderInTurn = 0;
+    public string name = "";
 }
 
 [CreateAssetMenu(fileName = "New Room.asset", menuName = "Level/Room", order = 140)]
@@ -43,6 +44,35 @@ public class Room : ScriptableObject
             int y = (int)tileElements[i].pos.y;
             orderedTiles[x, y] = tileElements[i].levelElement;
             orderedEntities[x, y] = entityElements[i].levelElement;
+        }
+    }
+
+    public void FixLinks()
+    {
+        FixArray(tileElements);
+        FixArray(entityElements);
+    }
+
+    private void FixArray(List<LevelElementRoomSettings> elems)
+    {
+        for (int i = 0; i < elems.Count; i++)
+        {
+            if (elems[i].name != "" && elems[i].levelElement == null)
+            {
+                LevelElement elem = PoolManager.Instance.GetLevelElementOfName(elems[i].name);
+                if (elem)
+                    elems[i].levelElement = elem;
+                else
+                {
+                    elems[i].levelElement = null;
+                    elems[i].name = "";
+                }
+            }
+
+            if(elems[i].levelElement != null && elems[i].name == "")
+            {
+                elems[i].name = elems[i].levelElement.name;
+            }
         }
     }
 

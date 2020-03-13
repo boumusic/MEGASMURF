@@ -8,9 +8,11 @@ public class UnitHP : MonoBehaviour
     [Header("Components")]
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private Transform parent;
 
-    private void OnEnable()
+    private void Start()
     {
+        if(parent) transform.parent = parent;
         string name = UnitSettingsManager.Instance.GetName();
         UpdateName(name);
     }

@@ -62,7 +62,12 @@ public class RoomEditor : Editor
         EditorGUI.BeginChangeCheck();
 
         CheckRequiredStuff();
-        serializedObject.ApplyModifiedProperties();
+            t.FixLinks();
+        //if(GUILayout.Button("Fix Links"))
+        //{
+        //    Undo.RecordObject(t, "Fix");
+        //}
+            serializedObject.ApplyModifiedProperties();
 
         if (EditorGUI.EndChangeCheck())
         {
@@ -371,6 +376,7 @@ public class RoomEditor : Editor
                                 if (lvl)
                                 {
                                     listElement[indexElement].levelElement = lvl;
+                                    listElement[indexElement].name = prefab.name;
                                 }
                             }
                         }
