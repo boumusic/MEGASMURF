@@ -6,7 +6,8 @@ using UnityEngine;
 public class Maestro : Unit
 {
 
-    private int maxShapes;
+    [HideInInspector]
+    public int maxShapes;
 
     [HideInInspector]
     public int rangeLvl;

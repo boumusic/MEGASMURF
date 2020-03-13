@@ -33,7 +33,7 @@ public class SaveManager: MonoBehaviour
         Save save = new Save();
 
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/GameSave.save");
+        FileStream file = File.Create(Application.dataPath + "/GameSave.save");
         bf.Serialize(file, save);
         file.Close();
 
@@ -48,7 +48,7 @@ public class SaveManager: MonoBehaviour
         {
 
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/GameSave.save", FileMode.Open);
+            FileStream file = File.Open(Application.dataPath + "/GameSave.save", FileMode.Open);
             Save save = (Save)bf.Deserialize(file);
             file.Close();
 
