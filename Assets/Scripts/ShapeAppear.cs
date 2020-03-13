@@ -14,6 +14,7 @@ public class ShapeAppear : MonoBehaviour
 
     public void OnEnable()
     {
+        GetComponent<Unit>().hp.gameObject.SetActive(false);
         if(playOnEnable)
         {
             Appear();
@@ -37,6 +38,7 @@ public class ShapeAppear : MonoBehaviour
     {
         appearAnticipation.Play();
         yield return new WaitForSeconds(appearDelay);
+        GetComponent<Unit>().hp.gameObject.SetActive(true);
         DoAppear();
     }
 

@@ -38,6 +38,17 @@ public class AudioManager : MonoBehaviour
 
     [Range(1, 150)] public int sourceAmount = 30;
 
+    private void Start()
+    {
+        for (int i = 0; i < clips.Count; i++)
+        {
+            if(clips[i].playOnAwake)
+            {
+                PlaySound(clips[i].clip.name);
+            }
+        }
+    }
+
     private void Update()
     {
         DeactivateSourcesNotPlayingSound();

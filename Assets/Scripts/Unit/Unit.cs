@@ -14,7 +14,7 @@ public abstract class Unit : LevelElement
 {
     [Header("Components")]
     [SerializeField] private UnitAnimator unitAnimator;
-    [SerializeField] protected UnitHP hp;
+    [SerializeField] public UnitHP hp;
     [SerializeField] private GameObject[] visuals;
 
     public Vector2 debugTile;
