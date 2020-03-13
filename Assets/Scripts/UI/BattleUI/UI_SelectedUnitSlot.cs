@@ -12,17 +12,17 @@ public class UI_SelectedUnitSlot : UIElement
     public Image unitIconSolo, unitIconDuo_1, unitIconDuo_2, unitIconTrio_1, unitIconTrio_2, unitIconTrio_3;
     public Button actionButton;
     public Image actionButtonIcon;
-    public MouseOverButton mouseOverScript;
+    //public MouseOverButton mouseOverScript;
 
     
 
     private Sprite soloIcon, duoIcon, trioIcon;
     private Sprite actionIcon;
     private Sprite actionIconPressed;
-    private Sprite actionIconTouched;
+    //private Sprite actionIconTouched;
     private Sprite actionCancelIcon;
     private Sprite actionCancelIconPressed;
-    private Sprite actionCancelIconTouched;
+    //private Sprite actionCancelIconTouched;
 
     private bool isShapeUnit;
     private int unitMergeLevel;
@@ -33,11 +33,15 @@ public class UI_SelectedUnitSlot : UIElement
 
     private SpriteState actionButtonSpriteState;
 
+    private void Awake()
+    {
+        anim = gameObject.GetComponent<Animator>();
+    }
+
     private void Start()
     {
         actionButtonSpriteState = new SpriteState();
         unitMergeLevel = 0;
-        anim = gameObject.GetComponent<Animator>();
     }
 
     public void SelectUnit(Unit unit)
@@ -53,17 +57,24 @@ public class UI_SelectedUnitSlot : UIElement
         DisplayActionIcons();
 
         UpdateHealthText(unit.CurrentHitPoint);
+
+        SelectedSwitchAnim();
+    }
+
+    public void UpdateName(Unit unit)
+    {
+        unitName.text = unit.UnitName;
     }
 
     public void UpdateActionIcons(Unit unit)
     {
         actionIcon = unit.unitActionIcon;
         actionIconPressed = unit.unitActionIconPressed;
-        actionIconTouched = unit.unitActionIconTouched;
+        //actionIconTouched = unit.unitActionIconTouched;
 
         actionCancelIcon = unit.unitActionCancelIcon;
         actionCancelIconPressed = unit.unitActionCancelIconPressed;
-        actionCancelIconTouched = unit.unitActionCancelIconTouched;
+        //actionCancelIconTouched = unit.unitActionCancelIconTouched;
         DisplayActionIcons();
     }
 
@@ -107,6 +118,7 @@ public class UI_SelectedUnitSlot : UIElement
             case 1:
                 unitIconDuo_1.sprite = soloIcon;
                 unitIconDuo_2.sprite = duoIcon;
+                
                 break;
             case 2:
                 unitIconTrio_1.sprite = soloIcon;
@@ -116,6 +128,8 @@ public class UI_SelectedUnitSlot : UIElement
             default:
                 break;
         }
+
+        ActivateUnitIcons(unitMergeLevel);
     }
 
     public void DisplayActionIcons()
@@ -123,11 +137,60 @@ public class UI_SelectedUnitSlot : UIElement
         actionButtonIcon.sprite = actionIcon;
 
         actionButtonSpriteState.pressedSprite = actionIconPressed;
-        actionButtonSpriteState.highlightedSprite = actionIconTouched;
+        //actionButtonSpriteState.highlightedSprite = actionIconTouched;
         actionButton.spriteState = actionButtonSpriteState;
 
-        mouseOverScript.baseSprite = actionIcon;
-        mouseOverScript.mouseOverSprite = actionIconTouched;
+        //mouseOverScript.baseSprite = actionIcon;
+        //mouseOverScript.mouseOverSprite = actionIconTouched;
+    }
+
+    public void ActivateUnitIcons(int unitDisplayLevel)
+    {
+        switch (unitDisplayLevel)
+        {
+            case -1:
+                unitIconSolo.gameObject.SetActive(false);
+
+                unitIconDuo_1.gameObject.SetActive(false);
+                unitIconDuo_2.gameObject.SetActive(false);
+
+                unitIconTrio_1.gameObject.SetActive(false);
+                unitIconTrio_2.gameObject.SetActive(false);
+                unitIconTrio_3.gameObject.SetActive(false);
+                break;
+            case 0:
+                unitIconSolo.gameObject.SetActive(true);
+
+                unitIconDuo_1.gameObject.SetActive(false);
+                unitIconDuo_2.gameObject.SetActive(false);
+
+                unitIconTrio_1.gameObject.SetActive(false);
+                unitIconTrio_2.gameObject.SetActive(false);
+                unitIconTrio_3.gameObject.SetActive(false);
+                break;
+            case 1:
+                unitIconSolo.gameObject.SetActive(false);
+
+                unitIconDuo_1.gameObject.SetActive(true);
+                unitIconDuo_2.gameObject.SetActive(true);
+
+                unitIconTrio_1.gameObject.SetActive(false);
+                unitIconTrio_2.gameObject.SetActive(false);
+                unitIconTrio_3.gameObject.SetActive(false);
+                break;
+            case 2:
+                unitIconSolo.gameObject.SetActive(false);
+
+                unitIconDuo_1.gameObject.SetActive(false);
+                unitIconDuo_2.gameObject.SetActive(false);
+
+                unitIconTrio_1.gameObject.SetActive(true);
+                unitIconTrio_2.gameObject.SetActive(true);
+                unitIconTrio_3.gameObject.SetActive(true);
+                break;
+            default:
+                break;
+        }
     }
 
     public void SwitchToCancelButton()
@@ -135,12 +198,12 @@ public class UI_SelectedUnitSlot : UIElement
         actionButtonIcon.sprite = actionCancelIcon;
 
         actionButtonSpriteState.pressedSprite = actionCancelIconPressed;
-        actionButtonSpriteState.highlightedSprite = actionCancelIconTouched;
+        //actionButtonSpriteState.highlightedSprite = actionCancelIconTouched;
         actionButton.spriteState = actionButtonSpriteState;
 
-        mouseOverScript.baseSprite = actionCancelIcon;
-        mouseOverScript.mouseOverSprite = actionCancelIconTouched;
-        mouseOverScript.UpdateSprites();
+        //mouseOverScript.baseSprite = actionCancelIcon;
+        //mouseOverScript.mouseOverSprite = actionCancelIconTouched;
+        //mouseOverScript.UpdateSprites();
     }
 
     public void SwitchToActionButton()
@@ -148,12 +211,13 @@ public class UI_SelectedUnitSlot : UIElement
         actionButtonIcon.sprite = actionIcon;
 
         actionButtonSpriteState.pressedSprite = actionIconPressed;
-        actionButtonSpriteState.highlightedSprite = actionIconTouched;
+        //actionButtonSpriteState.highlightedSprite = actionIconTouched;
         actionButton.spriteState = actionButtonSpriteState;
 
-        mouseOverScript.baseSprite = actionIcon;
-        mouseOverScript.mouseOverSprite = actionIconTouched;
-        mouseOverScript.UpdateSprites();
+        
+        //mouseOverScript.baseSprite = actionIcon;
+        //mouseOverScript.mouseOverSprite = actionIconTouched;
+        //mouseOverScript.UpdateSprites();
     }
 
     public void UnselectUnit()
@@ -163,6 +227,9 @@ public class UI_SelectedUnitSlot : UIElement
 
     public void UpdateHealthText(int newHealthValue)
     {
+        if(newHealthValue < healthValue)
+            SelectedDamageAnim();
+
         healthValue = newHealthValue;
 
         unitHealthText.text = healthValue.ToString();
@@ -180,10 +247,19 @@ public class UI_SelectedUnitSlot : UIElement
         unitIconTrio_3.sprite = null;
     }
 
+
+
     //ANIMATIONS
     private void Update()
     {
-       
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            SelectedDamageAnim();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SelectedSoloToDuo();
+        }
     }
     public void SelectedDamageAnim()
     {
@@ -197,15 +273,13 @@ public class UI_SelectedUnitSlot : UIElement
         anim.Play("SelectedSwitch");
     }
 
-    public void SelectedBattleModeOnAnim()
+    public void SelectedOutAnim()
     {
         //Mode attaque activé
+        anim.Play("SelectedOut");
     }
 
-    public void SelectedBattleModeOffAnim()
-    {
-        //Mode attaque desactivé
-    }
+   
 
     public void SelectedSoloToDuo()
     {
@@ -225,11 +299,27 @@ public class UI_SelectedUnitSlot : UIElement
     public void SelectedInvokeShapesOff()
     {
         anim.Play("SelectedInvokeShapesOff");
+        //A JOUER UNE FOIS QUE LE JOUEUR A POSÉ SA MERDE
     }
 
-
-    public void UpdateName(Unit unit)
+    public void DuoMode()
     {
-        unitName.text = unit.name;
+        unitIconSolo.enabled = false;
+        unitIconDuo_1.enabled = true;
+        unitIconDuo_2.enabled = true;
+        unitIconTrio_1.enabled = false;
+        unitIconTrio_2.enabled = false;
+        unitIconTrio_3.enabled = false;
+
+    }
+
+    public void TrioMode()
+    {
+        unitIconSolo.enabled = false;
+        unitIconDuo_1.enabled = false;
+        unitIconDuo_2.enabled = false;
+        unitIconTrio_1.enabled = true;
+        unitIconTrio_2.enabled = true;
+        unitIconTrio_3.enabled = true;
     }
 }
