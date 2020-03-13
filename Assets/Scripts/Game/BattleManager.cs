@@ -108,6 +108,7 @@ public class BattleManager : MonoBehaviour
     public void LightStart()
     {
         CurrentPlayerID = StartingPlayer;
+        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.LevelStart);
     }
 
     #region State Actions

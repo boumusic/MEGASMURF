@@ -32,6 +32,9 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     [Header("Feedbacks")]
     public QuikFeedback attackedByShape;
     public QuikFeedback attackedByEnemy;
+
+    public ParticleSystem mudFXPop;
+
     private bool isAppeared = false;
 
     [Header("UI")]
@@ -88,6 +91,15 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
         hovered.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (MudAmount <= 0)
+        {
+            mudFXPop.Clear();
+            mudFXPop.Stop();
+        }
+    }
+
     public override void Appear()
     {
         if (!isAppeared)
@@ -95,6 +107,11 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
             animator.SetTrigger("In");
             isAppeared = true;
         }
+    }
+
+    public void ResetAppeared() 
+    {
+        isAppeared = false;
     }
 
     public List<Tile> GetNeighbors()
@@ -185,6 +202,13 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     {
         //Animation Si on est dans le bon State de BattleManager
         InputManager.instance.UpdateCurrentTile(this);
+        if(type == TileType.Enemy)
+        {
+            if (unit != null)
+            {
+
+            }
+        }
         hovered.SetActive(true);
     }
 

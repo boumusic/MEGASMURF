@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.07
   forwardSmooth: 0.07
+  endWalkDelay: 0.4
   shapeDeath:
     delayToggleVisuals: 0.2
     delayToggleGameObject: 0.5
@@ -21,5 +22,5 @@ MonoBehaviour:
     delayToggleVisuals: 0.2
     delayToggleGameObject: 0.5
   playerDeath:
-    delayToggleVisuals: 1
+    delayToggleVisuals: 2
     delayToggleGameObject: 1

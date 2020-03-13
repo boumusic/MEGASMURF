@@ -81,6 +81,10 @@ public class SaveManager: MonoBehaviour
         {
             Debug.Log("No game saved!");
         }
+        if(GameManager.ShapeMud == 0)
+        {
+            GameManager.ShapeMud = 10;
+        }
         BattleManager.Instance.StartLevel();
     }
 

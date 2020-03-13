@@ -217,6 +217,7 @@ public class Board : MonoBehaviour
                 {
                     tiles[i, j].unit.UnspawnUnit();
                 }
+                tiles[i, j].ResetAppeared();
                 tiles[i, j].gameObject.SetActive(false);
             }
         }
@@ -228,6 +229,7 @@ public class Board : MonoBehaviour
         spawnTiles = new List<Tile>();
         exitTiles = new List<Tile>();
         spawners = new List<Spawner>();
+        tileList = new List<Tile>();
         immediateSpawners = new List<ImmediateSpawner>();
         for (int i = 0; i < columns; i++)
         {
@@ -273,13 +275,14 @@ public class Board : MonoBehaviour
                                 Enemy enemy = PoolManager.Instance.GetEntityOfType(levelElement.GetType()) as Enemy;
                                 if (enemy != null)
                                 {
-                                    enemies.Add(enemy);
+                                    enemy.Regen();
                                     if (tiles[i, j] is ImmediateSpawner)
                                     {
                                         ((ImmediateSpawner)tiles[i, j]).spawnedType = enemy.UnitType;
                                         enemy.gameObject.SetActive(true);
                                         enemy.SpawnUnit(tiles[i, j]);
                                         immediateSpawners.Add((ImmediateSpawner)tiles[i, j]);
+                                        enemies.Add(enemy);
                                     }
                                     else if (tiles[i, j] is Spawner)
                                     {
@@ -290,6 +293,7 @@ public class Board : MonoBehaviour
                                     {
                                         enemy.gameObject.SetActive(true);
                                         enemy.SpawnUnit(tiles[i, j]);
+                                        enemies.Add(enemy);
                                     }
                                 }
                             }
@@ -347,6 +351,7 @@ public class Board : MonoBehaviour
 
     private void FinishedTiles()
     {
+        appearProgress = 0f;
         StartCoroutine(AppearLevelElements());
     }
 
@@ -406,6 +411,8 @@ public class Board : MonoBehaviour
                 }
             }
         }
+
+        spawnTiles.Clear();
     }
 
     public Tile GetTile(int x, int y)

@@ -297,8 +297,8 @@ public class Enemy : Unit
         if (BattleManager.Instance.IsCurrentPlayerUnit(this))
             AIManager.instance.AIDeathCallBack();
         Tile tile = currentTile;
-        base.Die();
         DropShapeMud(tile);
+        base.Die();
         if (unitBase.unitType == BaseUnitType.Bombi)
         {
             GameObject bombito = UnitFactory.Instance.CreateUnit(BaseUnitType.Bombito);
@@ -324,6 +324,9 @@ public class Enemy : Unit
     {
         //Animation
         //Spawn mud
-        tile.MudAmount = mudAmountDrop;
+        if(tile != null) {
+            tile.MudAmount = mudAmountDrop + GameManager.SkillTree.CheckEffect(SkillType.MoreLoot);
+            tile.mudFXPop.Play();
+        }
     }
 }
