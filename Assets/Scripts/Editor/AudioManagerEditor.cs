@@ -94,6 +94,7 @@ public class AudioManagerEditor : Editor
     {
         if(i < clips.arraySize)
         {
+
             SerializedProperty clipSettings = clips.GetArrayElementAtIndex(i);
             SerializedProperty clipAsset = clipSettings.FindPropertyRelative("clip");
             SerializedProperty volume = clipSettings.FindPropertyRelative("volume");
@@ -106,23 +107,25 @@ public class AudioManagerEditor : Editor
             if(i < a.clips.Count)
             {
                 string labelString = a.clips[i].clip == null ? "New Clip" : a.clips[i].clip.name;
-                EditorGUILayout.LabelField(labelString, EditorStyles.boldLabel);
+                clipSettings.isExpanded = EditorGUILayout.Foldout(clipSettings.isExpanded, labelString, EditorStyles.foldoutHeader);
             }
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PropertyField(clipAsset);
-
-            if(GUILayout.Button("Remove", GUILayout.MaxWidth(80)))
+            if(clipSettings.isExpanded)
             {
-                Undo.RecordObject(a, "Remove");
-                a.clips.RemoveAt(i);
-            }
+                EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.PropertyField(clipAsset);
 
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.PropertyField(volume);
-            EditorGUILayout.PropertyField(pan);
-            EditorGUILayout.PropertyField(loop);
-            EditorGUILayout.PropertyField(awk);
+                if (GUILayout.Button("Remove", GUILayout.MaxWidth(80)))
+                {
+                    Undo.RecordObject(a, "Remove");
+                    a.clips.RemoveAt(i);
+                }
+
+                EditorGUILayout.EndHorizontal();
+                EditorGUILayout.PropertyField(volume);
+                EditorGUILayout.PropertyField(pan);
+                EditorGUILayout.PropertyField(loop);
+                EditorGUILayout.PropertyField(awk);
+            }            
 
             EditorGUILayout.EndVertical();
         }
