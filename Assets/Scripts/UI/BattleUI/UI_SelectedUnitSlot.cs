@@ -26,7 +26,8 @@ public class UI_SelectedUnitSlot : UIElement
 
     private bool isShapeUnit;
     private int unitMergeLevel;
-    
+
+    private Animator anim;
 
     public Unit SelectedUnit { get; private set; }
 
@@ -36,6 +37,7 @@ public class UI_SelectedUnitSlot : UIElement
     {
         actionButtonSpriteState = new SpriteState();
         unitMergeLevel = 0;
+        anim = gameObject.GetComponent<Animator>();
     }
 
     public void SelectUnit(Unit unit)
@@ -179,15 +181,20 @@ public class UI_SelectedUnitSlot : UIElement
     }
 
     //ANIMATIONS
-
+    private void Update()
+    {
+       
+    }
     public void SelectedDamageAnim()
     {
         //Quand le joueur prend des dégâts
+        anim.Play("SelectedDamage");
     }
 
     public void SelectedSwitchAnim()
     {
         //Quand le joueur change d'unités
+        anim.Play("SelectedSwitch");
     }
 
     public void SelectedBattleModeOnAnim()
@@ -199,6 +206,27 @@ public class UI_SelectedUnitSlot : UIElement
     {
         //Mode attaque desactivé
     }
+
+    public void SelectedSoloToDuo()
+    {
+        anim.Play("SelectedSoloToDuo");
+
+    }
+    public void SelectedDuoToTrio()
+    {
+        anim.Play("SelectedDuoToTrio");
+    }
+
+    public void SelectedInvokeShapesOn()
+    {
+        anim.Play("SelectedInvokeShapesOn");
+    }
+
+    public void SelectedInvokeShapesOff()
+    {
+        anim.Play("SelectedInvokeShapesOff");
+    }
+
 
     public void UpdateName(Unit unit)
     {
