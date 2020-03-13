@@ -18834,6 +18834,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1783289692}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &434145357 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3251745703843111378, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1172010313}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &434617436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: a849f987b4d9ab14db02db9ef655e1ac,
@@ -67785,7 +67791,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ShapeSelectionUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 434145357}
     - target: {fileID: 4310743327333894551, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: uIShapemud
@@ -67800,7 +67806,7 @@ PrefabInstance:
         type: 3}
       propertyPath: SelectedUnitSlot
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1906342848}
     - target: {fileID: 4310743327333894551, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: EndTurnButton
@@ -68109,6 +68115,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
+      propertyPath: environments.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: tileMaterials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
       propertyPath: totalHeight
       value: 30
       objectReference: {fileID: 0}
@@ -68162,6 +68178,36 @@ PrefabInstance:
       propertyPath: gameOverScreen
       value: 
       objectReference: {fileID: 1493861528}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: environments.Array.data[0]
+      value: 
+      objectReference: {fileID: 28076929}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: environments.Array.data[1]
+      value: 
+      objectReference: {fileID: 28076929}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: environments.Array.data[2]
+      value: 
+      objectReference: {fileID: 28076929}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: tileMaterials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: da85f5b9b8719c24991255676ba0092a, type: 2}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: tileMaterials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: ce3d23ef6a79824498ddfba35235a340, type: 2}
+    - target: {fileID: 8234869487257678794, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: tileMaterials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: da85f5b9b8719c24991255676ba0092a, type: 2}
     - target: {fileID: 8239756008729391557, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -95318,6 +95364,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1809334116}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1906342848 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2462655826259853262, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1172010313}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57558ccffbe61094ea3c2ccfccf35aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1910828502 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: bec255f77646f1445837328eec7d6701,
