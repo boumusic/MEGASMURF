@@ -16,11 +16,11 @@ MonoBehaviour:
   forwardSmooth: 0.07
   endWalkDelay: 0.4
   shapeDeath:
-    delayToggleVisuals: 0.2
-    delayToggleGameObject: 0.5
+    delayToggleVisuals: 1.67
+    delayToggleGameObject: 1.5
   enemyDeath:
     delayToggleVisuals: 0.2
     delayToggleGameObject: 0.5
   playerDeath:
-    delayToggleVisuals: 2
-    delayToggleGameObject: 1
+    delayToggleVisuals: 1.67
+    delayToggleGameObject: 1.5

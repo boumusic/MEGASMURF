@@ -20,4 +20,8 @@ public static class GameManager
     public static SkillTree SkillTree;
     public static List<Unit> units;
 
+    public static void PayShapeMudCost(int cost)
+    {
+        GameManager.ShapeMud -= cost;
+    }
 }

@@ -38,6 +38,11 @@ public class AudioManager : MonoBehaviour
 
     [Range(1, 150)] public int sourceAmount = 30;
 
+    private void Update()
+    {
+        DeactivateSourcesNotPlayingSound();
+    }
+
     private void DeactivateSourcesNotPlayingSound()
     {
         for (int i = 0; i < sourcePool.Count; i++)
@@ -51,9 +56,15 @@ public class AudioManager : MonoBehaviour
 
     #region Public Methods
 
+    public void PlaySFX(string name)
+    {
+        name = "SFX_" + name;
+        PlaySound(name);
+    }
+
     public void PlaySound(string name)
     {
-        if(on)
+        if (on)
         {
             AudioSource newSource = GetSource();
             newSource.gameObject.SetActive(true);
@@ -67,11 +78,11 @@ public class AudioManager : MonoBehaviour
     {
         for (int i = 0; i < sourcePool.Count; i++)
         {
-            if(sourcePool[i].gameObject.activeInHierarchy)
+            if (sourcePool[i].gameObject.activeInHierarchy)
             {
-                if(sourcePool[i].clip != null)
+                if (sourcePool[i].clip != null)
                 {
-                    if(sourcePool[i].clip.name == name)
+                    if (sourcePool[i].clip.name == name)
                     {
                         sourcePool[i].Stop();
                     }
@@ -107,7 +118,7 @@ public class AudioManager : MonoBehaviour
 
     public void DestroySources()
     {
-        if(sourcePool.Count > 0)
+        if (sourcePool.Count > 0)
         {
             for (int i = 0; i < sourcePool.Count; i++)
             {
@@ -122,12 +133,15 @@ public class AudioManager : MonoBehaviour
 
     private void SetSourceSettings(AudioSource source, AudioClipSettings clipSettings)
     {
-        source.clip = clipSettings.clip;
-        source.volume = clipSettings.volume;
-        source.panStereo = clipSettings.pan;
-        source.loop = clipSettings.loop;
-        source.playOnAwake = clipSettings.playOnAwake;
-    }        
+        if (source && clipSettings != null)
+        {
+            source.clip = clipSettings.clip;
+            source.volume = clipSettings.volume;
+            source.panStereo = clipSettings.pan;
+            source.loop = clipSettings.loop;
+            source.playOnAwake = clipSettings.playOnAwake;
+        }
+    }
 
     #region Returns
 
@@ -135,7 +149,7 @@ public class AudioManager : MonoBehaviour
     {
         for (int i = 0; i < sourcePool.Count; i++)
         {
-            if(!sourcePool[i].gameObject.activeInHierarchy)
+            if (!sourcePool[i].gameObject.activeInHierarchy)
             {
                 return sourcePool[i];
             }
@@ -149,7 +163,7 @@ public class AudioManager : MonoBehaviour
         for (int i = 0; i < clips.Count; i++)
         {
 
-            if(clips[i].clip.name == name)
+            if (clips[i].clip.name == name)
             {
                 return clips[i];
             }

@@ -18,8 +18,17 @@ public class PoolManager : MonoBehaviour
 {
     private static PoolManager instance;
     public static PoolManager Instance { get { if (!instance) instance = FindObjectOfType<PoolManager>(); return instance; } }
-    
+
+    public bool instantiateOnAwake = false;
     public List<Pool> pools = new List<Pool>();
+
+    private void Awake()
+    {
+        if(instantiateOnAwake)
+        {
+            InstantiatePools();
+        }
+    }
 
     private void Start()
     {
@@ -204,5 +213,62 @@ public class PoolManager : MonoBehaviour
         }
 
         return 0;
+    }
+
+    private void InstantiatePools()
+    {
+        DestroyPools();
+        if (pools.Count > 0)
+        {
+            for (int i = 0; i < pools.Count; i++)
+            {
+                Pool p = pools[i];
+                if (p.prefab)
+                {
+                    if (!p.parent)
+                    {
+                        GameObject newParentGo = new GameObject(p.prefab.name + "_Pool");
+                        newParentGo.transform.parent = transform;
+                        p.parent = newParentGo.transform;
+                    }
+
+                    for (int amnt = 0; amnt < p.amount; amnt++)
+                    {
+                        GameObject newGo = Instantiate(p.prefab, p.parent);
+                        //GameObject newGo = PrefabUtility.InstantiatePrefab(p.prefab, p.parent) as GameObject;
+                        newGo.name = p.prefab.name + "_" + amnt;
+                        newGo.SetActive(false);
+                        Entity e = newGo.GetComponentInChildren<Entity>();
+                        p.entities.Add(e);
+                    }
+                }
+            }
+        }
+    }
+
+    private void DestroyPools()
+    {
+        if (pools.Count > 0)
+        {
+            for (int i = 0; i < pools.Count; i++)
+            {
+                if (pools[i].entities.Count > 0)
+                {
+                    for (int g = 0; g < pools[i].entities.Count; g++)
+                    {
+                        if (pools[i].entities[g])
+                        {
+                            GameObject go = pools[i].entities[g].gameObject;
+                            if (go)
+                            {
+                                DestroyImmediate(go);
+                            }
+                        }
+                    }
+
+                    pools[i].entities.Clear();
+                }
+            }
+        }
     }
 }
