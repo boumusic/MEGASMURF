@@ -100,6 +100,11 @@ public abstract class Unit : LevelElement
     private void Update()
     {
         UpdateForward();
+
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            Die();
+        }
     }
 
     public virtual void OnEnable()
@@ -368,12 +373,12 @@ public abstract class Unit : LevelElement
         {
             visuals[i].SetActive(true);
         }
+        gameObject.SetActive(false);
         if (unitBase.unitType == BaseUnitType.Maestro)
         {
             Board.Instance.gameOverScreen.SetActive(true);
             SequenceManager.Instance.Clear();
         }
-        gameObject.SetActive(false);
     }
 
     public virtual void BecomeMoved()

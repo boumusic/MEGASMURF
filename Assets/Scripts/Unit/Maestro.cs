@@ -11,7 +11,7 @@ public class Maestro : Unit
     [HideInInspector]
     public int rangeLvl;
     public override MovementPattern UnitMovementPattern => HasInfiniteMoveRange ? unitBase.movementPatterns[unitBase.movementPatterns.Length-1] : unitBase.movementPatterns[rangeLvl];
-
+    public ParticleClearer death;
     public int summonCost;
 
     public override Tile CurrentTile
@@ -106,5 +106,11 @@ public class Maestro : Unit
             //Animation
             //Remove Mud asset
         }
+    }
+
+    protected override void Die()
+    {
+        death?.Play();
+        base.Die();
     }
 }
