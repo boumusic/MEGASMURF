@@ -269,15 +269,13 @@ public class UI_SelectedUnitSlot : UIElement
         anim.Play("SelectedSwitch");
     }
 
-    public void SelectedBattleModeOnAnim()
+    public void SelectedOutAnim()
     {
         //Mode attaque activé
+        anim.Play("SelectedOut");
     }
 
-    public void SelectedBattleModeOffAnim()
-    {
-        //Mode attaque desactivé
-    }
+   
 
     public void SelectedSoloToDuo()
     {

@@ -200,6 +200,7 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
         unitIconTrio_2.enabled = true;
         unitIconTrio_3.enabled = true;
     }
+
     //SELECTION
 
     public void OnSelectSlotButtonPress()
