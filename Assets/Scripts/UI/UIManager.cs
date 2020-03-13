@@ -14,11 +14,9 @@ public class UIManager : MonoBehaviour
 
     public GameObject EndTurnButton;
     public GameObject NextLevelButton;
-    public GameObject ShapeSelectionUI;
 
     private void Awake()
     {
-        SelectedUnitSlot.UnselectUnit();
         DesableEndTurnButton();
         DesableNextLevelButton();
         DesableShapeSelectionUI();
@@ -32,6 +30,7 @@ public class UIManager : MonoBehaviour
     public void UpdateUnitHealth(Unit unit, int newHealth)
     {
         uIUnitSlotContainer.UpdateUnitHealth(unit, newHealth);
+        SelectedUnitSlot.UpdateUnitHealth(unit, newHealth);
     }
 
     public void SelectUnit(Unit unit)
@@ -68,12 +67,12 @@ public class UIManager : MonoBehaviour
 
     public void EnableShapeSelectionUI()
     {
-        ShapeSelectionUI.SetActive(true);
+        SelectedUnitSlot.SelectedInvokeShapesOn();
     }
 
     public void DesableShapeSelectionUI()
     {
-        ShapeSelectionUI.SetActive(false);
+        SelectedUnitSlot.SelectedInvokeShapesOff();
     }
 
     public void AddNewUnitUISlot(Unit unit)
