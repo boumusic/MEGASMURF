@@ -341,6 +341,7 @@ public abstract class Unit : LevelElement
     /// <summary>
     /// Execute all the action needed upon unit death
     /// </summary>
+    [ContextMenu("Death")]
     protected virtual void Die()
     {
         if(currentTile != null)

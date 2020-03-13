@@ -13,6 +13,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 274583244935773123}
+--- !u!114 &2539563707070322037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5613015649589116678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aaa9c52b842512488562b01c5e12cbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appearDelay: 1.5
+  appearAnticipation: {fileID: 7610034221547819099}
+  appearClimax: {fileID: 2944696703863378313}
+  compassFx: {fileID: 0}
 --- !u!114 &5175111722463130817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,6 +51,10 @@ MonoBehaviour:
   selectedUnitIcon: {fileID: 0}
   unitActionIcon: {fileID: 0}
   unitActionIconPressed: {fileID: 0}
+  unitActionIconTouched: {fileID: 0}
+  unitActionCancelIcon: {fileID: 0}
+  unitActionCancelIconPressed: {fileID: 0}
+  unitActionCancelIconTouched: {fileID: 0}
   unitMergeAnimator: {fileID: 7068817320334795538}
   mergeParent: {fileID: 669235394645220367}
   shapeLegIcon: {fileID: 0}
@@ -203,22 +223,6 @@ MonoBehaviour:
   speed: 1.8
   initialDelay: 0.5
   releaseZoomDelay: 0.5
---- !u!114 &2539563707070322037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5613015649589116678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aaa9c52b842512488562b01c5e12cbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  appearDelay: 1.5
-  appearAnticipation: {fileID: 7610034221547819099}
-  appearClimax: {fileID: 2944696703863378313}
-  compassFx: {fileID: 0}
 --- !u!1 &6174062218813620409
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +608,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShapeVisuals
       objectReference: {fileID: 0}
+    - target: {fileID: 5702839670627198989, guid: 519b71af6d82fdb45be96b78ee86f81d,
+        type: 3}
+      propertyPath: rends.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702839670627198989, guid: 519b71af6d82fdb45be96b78ee86f81d,
+        type: 3}
+      propertyPath: rends.Array.data[0]
+      value: 
+      objectReference: {fileID: 5003159206653497609}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 519b71af6d82fdb45be96b78ee86f81d, type: 3}
 --- !u!1 &6626746461617610146 stripped
@@ -669,6 +683,12 @@ MonoBehaviour:
 --- !u!4 &669235394645220367 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8055023042291396526, guid: 519b71af6d82fdb45be96b78ee86f81d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7386091182669902753}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5003159206653497609 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2589112415859876520, guid: 519b71af6d82fdb45be96b78ee86f81d,
     type: 3}
   m_PrefabInstance: {fileID: 7386091182669902753}
   m_PrefabAsset: {fileID: 0}
