@@ -1037,7 +1037,8 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 2, y: 10, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 0}
+  - levelElement: {fileID: 7792620425358419959, guid: d0fbc22970f082349b827ec9a54b74d5,
+      type: 3}
     pos: {x: 2, y: 11, z: 0}
     orderInTurn: 0
   - levelElement: {fileID: 0}
@@ -1172,8 +1173,7 @@ MonoBehaviour:
   - levelElement: {fileID: 0}
     pos: {x: 5, y: 10, z: 0}
     orderInTurn: 0
-  - levelElement: {fileID: 6830711563521810775, guid: 8777a6d007f454348bc6372630e56319,
-      type: 3}
+  - levelElement: {fileID: 0}
     pos: {x: 5, y: 11, z: 0}
     orderInTurn: 0
   - levelElement: {fileID: 0}

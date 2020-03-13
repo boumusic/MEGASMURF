@@ -390,6 +390,11 @@ PrefabInstance:
       propertyPath: materialProperties.Array.data[1].color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4890306011997678270, guid: 2bbe777a5f518c043b1efbfe08967beb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6937681877181892735, guid: 2bbe777a5f518c043b1efbfe08967beb,
         type: 3}
       propertyPath: m_LocalScale.x
