@@ -33,6 +33,7 @@ public class UI_UnitSlotContainer : UIElement
             UnitSlotBehaviourDictionary.Add(unitSlotBehaviour.SlotUnit, unitSlotBehaviour);
 
             unitSlot.transform.parent = scrollViewContent.transform;
+            unitSlot.transform.localScale = Vector3.one;
             unitSlot.SetActive(true);
             //Animation
         }

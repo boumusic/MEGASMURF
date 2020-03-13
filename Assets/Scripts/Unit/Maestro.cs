@@ -94,6 +94,9 @@ public class Maestro : Unit
             (UnitAnimator as MaestroUnitAnimator).SpellAnim();
             action?.Invoke();
         }
+
+        GameManager.PayShapeMudCost(UnitFactory.Instance.UnitDictionary[BaseUnitType.Square].unitCost);
+
         BecomeExhausted();
     }
 
