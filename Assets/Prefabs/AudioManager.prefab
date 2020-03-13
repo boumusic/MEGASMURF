@@ -5990,6 +5990,11 @@ MonoBehaviour:
     pan: 0
     loop: 0
     playOnAwake: 0
+  - clip: {fileID: 8300000, guid: 9adda74da1c22204490fb22a3499653b, type: 3}
+    volume: 0.45
+    pan: 0
+    loop: 1
+    playOnAwake: 1
   sourcePool:
   - {fileID: 7210807320702988528}
   - {fileID: 8449985533727436430}
