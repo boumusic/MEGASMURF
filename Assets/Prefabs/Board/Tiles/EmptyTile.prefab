@@ -17,6 +17,8 @@ MonoBehaviour:
   animator: {fileID: 3145315210585426805}
   attackedByShape: {fileID: 0}
   attackedByEnemy: {fileID: 0}
+  mudFXPop: {fileID: 6750984674824098429}
+  mudFXLoop: {fileID: 664146064623621969}
   hovered: {fileID: 5509178695764661555}
 --- !u!1001 &5438676595904661583
 PrefabInstance:
@@ -132,6 +134,18 @@ GameObject:
 --- !u!95 &3145315210585426805 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6979567908413440826, guid: 41519bd1cb215f346a08d865540ae9cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 5438676595904661583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6750984674824098429 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1642229774050908722, guid: 41519bd1cb215f346a08d865540ae9cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 5438676595904661583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &664146064623621969 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4777627473447591710, guid: 41519bd1cb215f346a08d865540ae9cf,
     type: 3}
   m_PrefabInstance: {fileID: 5438676595904661583}
   m_PrefabAsset: {fileID: 0}
