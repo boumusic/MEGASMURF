@@ -110,6 +110,7 @@ public class Maestro : Unit
             GameManager.ShapeMud += currentTile.MudAmount;
             currentTile.MudAmount = 0;
             SaveManager.Instance.SaveGame();
+            AudioManager.Instance.PlaySFX("ShapeMudLooted_01");
             //Animation
             //Remove Mud asset
         }

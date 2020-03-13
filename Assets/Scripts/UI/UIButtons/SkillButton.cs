@@ -113,6 +113,8 @@ public class SkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             GameManager.SkillTree.Unlock(type, lvl);
             GameManager.ShapeMud -= GameManager.SkillTree.CheckCost(type, lvl);
             SaveManager.Instance.SaveGame();
+            AudioManager.Instance.PlaySFX("Button_01");
+            AudioManager.Instance.PlaySFX("ItemBought_01");
         }
     }
 
