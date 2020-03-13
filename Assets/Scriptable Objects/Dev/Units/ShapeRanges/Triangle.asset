@@ -15,7 +15,7 @@ MonoBehaviour:
   unitType: 2
   attackPatterns:
   - {fileID: 11400000, guid: dac9466cfd3083d419d964dc2be78ba5, type: 2}
-  - {fileID: 11400000, guid: dac9466cfd3083d419d964dc2be78ba5, type: 2}
+  - {fileID: 11400000, guid: ff373f1c83cfe4743aea0fb005f57f1d, type: 2}
   movementPatterns:
   - {fileID: 11400000, guid: 54701afd74b55374e826a7dec829f3c7, type: 2}
   - {fileID: 11400000, guid: e78c2631d5812724cb4014b31e3b618c, type: 2}
