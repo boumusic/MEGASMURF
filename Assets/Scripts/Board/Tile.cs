@@ -34,6 +34,8 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     public QuikFeedback attackedByShape;
     public QuikFeedback attackedByEnemy;
 
+    public Renderer rend;
+
     public ParticleSystem mudFXPop;
 
     private bool isAppeared = false;
@@ -56,6 +58,14 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
         {
             _coords = value;
             CheckNeighbors();
+        }
+    }
+
+    public void SetMaterial(Material mat)
+    {
+        if(rend != null)
+        {
+            rend.material = mat;
         }
     }
 

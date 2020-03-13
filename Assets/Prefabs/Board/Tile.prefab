@@ -1097,6 +1097,7 @@ MonoBehaviour:
   animator: {fileID: 6979567908413440826}
   attackedByShape: {fileID: 7041893905554164800}
   attackedByEnemy: {fileID: 4814057644249562944}
+  rend: {fileID: 6539359060699037352}
   mudFXPop: {fileID: 1642229774050908722}
   hovered: {fileID: 508492627718643068}
 --- !u!65 &3771807709214903550
