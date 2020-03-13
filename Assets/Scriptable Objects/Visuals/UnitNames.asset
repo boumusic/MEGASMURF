@@ -13,20 +13,57 @@ MonoBehaviour:
   m_Name: UnitNames
   m_EditorClassIdentifier: 
   names:
-  - Louis Houyez
-  - mancini
-  - luigi
-  - samuel sans armure
-  - mamenos
-  - 'Y E E T '
-  - 'uwu :3 :^) '
-  - genji
-  - djuloh
-  - cafouuuu
+  - Jean
+  - Jean
+  - Jean
+  - Jean
+  - Jean
+  - Nico
+  - Geogeo
+  - Nassim
+  - Tim
+  - Djuloh
+  - Guu
+  - Gudum
+  - Dukroh
+  - Miguel
+  - Pedro
+  - Chien
+  - Chauve
+  - Crabe
+  - Plot
+  - Goodboi
+  - Genji
+  - Vince
+  - Julia
+  - Pou
+  - Uwu
+  - Oui
+  - "Carr\xE9"
+  - Rond
+  - Triangle
+  - Snif
+  - Rocko
+  - Toumtoum
+  - Gonzague
+  - Simon
+  - Cartier
   prefixes:
-  - MEGA
-  - SUPER
-  - ULTRA
+  - Mega
+  - Super
+  - Ultra
+  - Giga
+  - Supra
+  - Omega
+  - Top
+  - Turbo
+  - Triple
+  - Coach
+  - Big
+  - Based
+  - Final
+  - Magic
+  - Ultimate
   search: 
   nameForPrefix: 0
   nameComingFirst: 0
