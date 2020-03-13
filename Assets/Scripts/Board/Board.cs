@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public enum Direction
@@ -68,12 +69,14 @@ public class Board : MonoBehaviour
     public Maestro maestro;
 
     public List<GameObject> environments;
+    public List<Material> tileMaterials;
 
     private Room currentRoom;
 
     private int roomId;
 
     private GameObject currentEnvironment;
+    private Material currentMaterial;
 
     private List<Tile> exitTiles;
     private List<Tile> spawnTiles;
@@ -111,6 +114,10 @@ public class Board : MonoBehaviour
     public void InitializeBoard(Room room)
     {
         currentRoom = room;
+        if (environments.Count > 0)
+        {
+            currentEnvironment = environments[0];
+        }
         currentRoom.OrderElements();
         GenerateTiles();
         isAppearing = true;
@@ -127,7 +134,25 @@ public class Board : MonoBehaviour
                 currentEnvironment = environment;
                 currentEnvironment.SetActive(true);
             }
+            else
+            {
+                currentEnvironment = environment;
+                currentEnvironment.SetActive(true);
+            }
         }
+    }
+
+    public void InitializeMaterial(Material mat)
+    {
+        if (mat != null)
+        {
+            currentMaterial = mat;
+        }
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public bool SpawnersActive()
@@ -162,6 +187,10 @@ public class Board : MonoBehaviour
             if (roomId < environments.Count)
             {
                 InitializeEnvironment(environments[roomId]);
+            }
+            if(roomId < tileMaterials.Count)
+            {
+                InitializeMaterial(tileMaterials[roomId]);
             }
             InitializeBoard(dungeon[roomId]);
             BattleManager.Instance.ResetState();
@@ -263,9 +292,13 @@ public class Board : MonoBehaviour
                             exitTiles.Add(tiles[i, j]);
 
                         }
+                        if (currentMaterial != null)
+                        {
+                            tiles[i, j].SetMaterial(currentMaterial);
+                        }
                         string name = "Tile (" + i + "," + j + ")";
                         newTile.gameObject.name = name;
-                        newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), 1f, totalHeight / (rows - 1));
+                        newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), totalWidth / (columns - 1), totalHeight / (rows - 1));
 
                         LevelElement levelElement = currentRoom.GetEntity(i, j);
                         if (levelElement)

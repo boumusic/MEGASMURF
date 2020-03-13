@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitAnimator: {fileID: 7487550012469225370}
-  hp: {fileID: 7384073478356473238}
+  hp: {fileID: 2459182358286303662}
   visuals:
   - {fileID: 6626746461617610146}
   debugTile: {x: 0, y: 0}
@@ -310,12 +310,27 @@ PrefabInstance:
     - target: {fileID: 1776543282803582477, guid: b5de573a3d505c647b81c6561a17a605,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1776543282803582477, guid: b5de573a3d505c647b81c6561a17a605,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597433740043860668, guid: b5de573a3d505c647b81c6561a17a605,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765430545509764614, guid: b5de573a3d505c647b81c6561a17a605,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7765430545509764614, guid: b5de573a3d505c647b81c6561a17a605,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.43
       objectReference: {fileID: 0}
     - target: {fileID: 7783943185939048085, guid: b5de573a3d505c647b81c6561a17a605,
         type: 3}
@@ -366,16 +381,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17e2d2473ed158469d1f9f86ecfbf53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7384073478356473238 stripped
+--- !u!114 &2459182358286303662 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3277590211081849855, guid: b5de573a3d505c647b81c6561a17a605,
+  m_CorrespondingSourceObject: {fileID: 7576721475505676231, guid: b5de573a3d505c647b81c6561a17a605,
     type: 3}
   m_PrefabInstance: {fileID: 5405772397372956265}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e27744f724ae5e46b0c4f334ea5a653, type: 3}
+  m_Script: {fileID: 11500000, guid: 05990900d88cb5f4dbd78691d5b07663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7386091182669902753

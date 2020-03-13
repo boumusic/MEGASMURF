@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_HandpaintedMesh
+  m_Name: M_MembersEnemy
   m_Shader: {fileID: 4800000, guid: 1f43146c19badb94faad5915d81092ca, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
@@ -34,4 +34,4 @@ Material:
     - _Speed: 4
     - __dirty: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 0}
