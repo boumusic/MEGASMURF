@@ -626,7 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.82745105, g: 0.4039216, b: 0.69803923, a: 1}
+  m_Color: {r: 0.5050285, g: 0.8500922, b: 0.9150943, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -636,7 +636,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -704,7 +704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.72156864, b: 0.91372555, a: 1}
+  m_Color: {r: 0.4236383, g: 0.663052, b: 0.754717, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -892,13 +892,13 @@ MonoBehaviour:
   m_margin: {x: 24.697914, y: -25.647888, z: 44.646286, w: -20.898193}
   m_textInfo:
     textComponent: {fileID: 4925135325228823867}
-    characterCount: 0
+    characterCount: 3
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 2
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 2
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -1274,7 +1274,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00016570721, y: -0.000026636517}
+  m_AnchoredPosition: {x: -0.00016570721, y: 0.000008396447}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1498323356916616447
@@ -1420,7 +1420,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2877266911572573986}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99993044
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2010,22 +2010,22 @@ PrefabInstance:
     - target: {fileID: 1730066116740458769, guid: 65bf0a73819e94242b888bf0d7be7b13,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1730066116740458769, guid: 65bf0a73819e94242b888bf0d7be7b13,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1730066116740458769, guid: 65bf0a73819e94242b888bf0d7be7b13,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1730066116740458769, guid: 65bf0a73819e94242b888bf0d7be7b13,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4745968208587255557, guid: 65bf0a73819e94242b888bf0d7be7b13,
         type: 3}
@@ -2140,32 +2140,32 @@ PrefabInstance:
     - target: {fileID: 8958873295345163429, guid: 65bf0a73819e94242b888bf0d7be7b13,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8958873295345163429, guid: 65bf0a73819e94242b888bf0d7be7b13,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8958873295345163429, guid: 65bf0a73819e94242b888bf0d7be7b13,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8958873295345163429, guid: 65bf0a73819e94242b888bf0d7be7b13,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8958873295345163429, guid: 65bf0a73819e94242b888bf0d7be7b13,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8958873295345163429, guid: 65bf0a73819e94242b888bf0d7be7b13,
         type: 3}
       propertyPath: m_textInfo.materialCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65bf0a73819e94242b888bf0d7be7b13, type: 3}
@@ -2182,7 +2182,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 5539135723665561906}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -2194,7 +2194,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 5539135723665561906}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -2206,7 +2206,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 5539135723665561906}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -2218,7 +2218,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 5539135723665561906}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
