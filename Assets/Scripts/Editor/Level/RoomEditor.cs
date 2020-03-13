@@ -62,11 +62,11 @@ public class RoomEditor : Editor
         EditorGUI.BeginChangeCheck();
 
         CheckRequiredStuff();
-        if(GUILayout.Button("Fix Links"))
-        {
-            Undo.RecordObject(t, "Fix");
             t.FixLinks();
-        }
+        //if(GUILayout.Button("Fix Links"))
+        //{
+        //    Undo.RecordObject(t, "Fix");
+        //}
             serializedObject.ApplyModifiedProperties();
 
         if (EditorGUI.EndChangeCheck())

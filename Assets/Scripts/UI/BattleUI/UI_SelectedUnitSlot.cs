@@ -319,8 +319,8 @@ public class UI_SelectedUnitSlot : UIElement
         unitIconTrio_3.enabled = true;
     }
 
-    public void UpdateName(Unit unit)
-    {
-        unitName.text = unit.name;
-    }
+    //public void UpdateName(Unit unit)
+    //{
+    //    unitName.text = unit.name;
+    //}
 }
