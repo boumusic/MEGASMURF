@@ -10,6 +10,15 @@ public class ShapeAppear : MonoBehaviour
     public QuikFeedback appearAnticipation;
     public QuikFeedback appearClimax;
     public CompassFX compassFx;
+    public bool playOnEnable = false;
+
+    public void OnEnable()
+    {
+        if(playOnEnable)
+        {
+            Appear();
+        }
+    }
 
     public void Appear()
     {

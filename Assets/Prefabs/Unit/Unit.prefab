@@ -174,12 +174,12 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    duration: 1
-    intensity: 2
-    interpolation: 0
-  useZoom: 0
+    duration: 1.67
+    intensity: 0.5
+    interpolation: 0.008
+  useZoom: 1
   zoomFeedback:
-    delay: 0
+    delay: 1.7
     curve:
       serializedVersion: 2
       m_Curve:
@@ -223,7 +223,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     duration: 0.15
-    multiplier: 0.5
+    multiplier: 0.8
   usePostProcess: 0
   postProcessFeedback:
     delay: 0
@@ -445,11 +445,12 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     priority: 0
-  useGameobject: 0
+  useGameobject: 1
   gameObjectFeedback:
     delay: 0
-    gameObjects: []
-    setActive: 1
+    gameObjects:
+    - {fileID: 82082244922552880}
+    setActive: 0
   enableDebug: 0
   debugKey: 110
 --- !u!1 &495473630045626735

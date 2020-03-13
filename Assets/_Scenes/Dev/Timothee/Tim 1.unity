@@ -18987,12 +18987,12 @@ PrefabInstance:
     - target: {fileID: 4210672932226395139, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00006146193
+      value: 0.00008414127
       objectReference: {fileID: 0}
     - target: {fileID: 4210672932226395139, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00001569243
+      value: -0.0029583527
       objectReference: {fileID: 0}
     - target: {fileID: 4442104383943566776, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
@@ -19523,6 +19523,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_EventMask.m_Bits
       value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 7610549333330305110, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7610549333330305110, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7861870885699673860, guid: 668c33abcc0f02e4983e4fdfeb8cbf3f,
         type: 3}
