@@ -110,6 +110,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 7447bb3128c29c34daba0b7ba089d47f,
         type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: unitActionIconTouched
+      value: 
+      objectReference: {fileID: 21300000, guid: 5626d18611345f3488a592ef9166e84c,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: unitActionCancelIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 2597931d1f46b0e4483c92942e741731,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: unitActionCancelIconPressed
+      value: 
+      objectReference: {fileID: 21300000, guid: 2597931d1f46b0e4483c92942e741731,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: unitActionCancelIconTouched
+      value: 
+      objectReference: {fileID: 21300000, guid: 2597931d1f46b0e4483c92942e741731,
+        type: 3}
     - target: {fileID: 5613015649589116677, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
         type: 3}
       propertyPath: m_LocalPosition.x
