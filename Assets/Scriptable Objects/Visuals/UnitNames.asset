@@ -44,6 +44,10 @@ MonoBehaviour:
   - Triangle
   - Snif
   - Rocko
+  - Toumtoum
+  - Gonzague
+  - Simon
+  - Cartier
   prefixes:
   - Mega
   - Super
@@ -58,6 +62,8 @@ MonoBehaviour:
   - Big
   - Based
   - Final
+  - Magic
+  - Ultimate
   search: 
   nameForPrefix: 0
   nameComingFirst: 0
