@@ -136,6 +136,10 @@ public class Board : MonoBehaviour
             }
             else
             {
+                if (environments.Count > 0)
+                {
+                    environments[0].SetActive(false);
+                }
                 currentEnvironment = environment;
                 currentEnvironment.SetActive(true);
             }
