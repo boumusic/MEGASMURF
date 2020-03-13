@@ -13,7 +13,7 @@ public class RangeManager : MonoBehaviour
     private List<Tile> attackRange;
     private Stack<Tile> currentPath;
     private Tile target;
-    private Tile unitTile;
+    public Tile unitTile { get; set; }
     private int maxPathfindingDepth;
 
     // Start is called before the first frame update
@@ -42,18 +42,21 @@ public class RangeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (unitTile == null)
+        {
+            //ClearTiles();
+        }
     }
 
     public List<Tile> GetTilesInAttackRange(Tile startTile)
     {
+        ClearTiles();
         List<Tile> range = new List<Tile>();
         if (startTile == null)
         {
             return range;
         }
         unitTile = startTile;
-        attackRange.Clear();
         ProcessAttackRange(startTile.unit.UnitAttackPattern);
         foreach (Tile tile in attackPaths.Keys)
         {
@@ -65,9 +68,13 @@ public class RangeManager : MonoBehaviour
 
     public List<Tile> GetTilesInMovementRange(Tile startTile)
     {
+        ClearTiles();
+        List<Tile> range = new List<Tile>();
+        if (startTile == null)
+        {
+            return range;
+        }
         unitTile = startTile;
-        rangePaths.Clear();
-        currentPath.Clear();
         switch (startTile.unit.UnitMovementPattern.type)
         {
             case MovementPatternType.Teleport:
@@ -84,7 +91,6 @@ public class RangeManager : MonoBehaviour
                 ProcessMovementRange(startTile, null, startTile.unit.UnitMovementPattern.range, maxPathfindingDepth);
                 break;
         }
-        List<Tile> range = new List<Tile>();
         foreach (Tile tile in rangePaths.Keys)
         {
             range.Add(tile);
@@ -459,14 +465,29 @@ public class RangeManager : MonoBehaviour
 
     public void DisplayMovementTiles()
     {
+        if(unitTile == null)
+        {
+            return;
+        }
         foreach (Tile tile in rangePaths.Keys)
         {
-            tile.TriggerAnimation(TileAnim.Movement);
+            if (unitTile.type == TileType.Enemy)
+            {
+                tile.TriggerAnimation(TileAnim.EnemyMovement);
+            }
+            else
+            {
+                tile.TriggerAnimation(TileAnim.Movement);
+            }
         }
     }
 
     public void DisplayAttackTiles()
     {
+        if(unitTile == null)
+        {
+            return;
+        }
         foreach (Tile tile in attackRange)
         {
             if (attackPaths.ContainsKey(tile))
@@ -542,13 +563,12 @@ public class RangeManager : MonoBehaviour
 
     public void ClearTiles()
     {
-        foreach (Tile tile in rangePaths.Keys)
+        for (int i = 0; i < Board.Instance.Columns; i++)
         {
-            tile.TriggerAnimation(TileAnim.None);
-        }
-        foreach (Tile tile in attackRange)
-        {
-            tile.TriggerAnimation(TileAnim.None);
+            for (int j = 0; j < Board.Instance.Rows; j++)
+            {
+                Board.Instance.tiles[i, j].TriggerAnimation(TileAnim.None);
+            }
         }
         attackRange.Clear();
         attackPaths.Clear();
@@ -579,6 +599,11 @@ public class RangeManager : MonoBehaviour
             while (currentPath.Count > 0);
         }
         return orderedPath;
+    }
+
+    public bool HasUnit()
+    {
+        return unitTile == null || unitTile.unit == null;
     }
 
     public List<Tile> GetTargets()
