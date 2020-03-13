@@ -33,11 +33,15 @@ public class UI_SelectedUnitSlot : UIElement
 
     private SpriteState actionButtonSpriteState;
 
+    private void Awake()
+    {
+        anim = gameObject.GetComponent<Animator>();
+    }
+
     private void Start()
     {
         actionButtonSpriteState = new SpriteState();
         unitMergeLevel = 0;
-        anim = gameObject.GetComponent<Animator>();
     }
 
     public void SelectUnit(Unit unit)
