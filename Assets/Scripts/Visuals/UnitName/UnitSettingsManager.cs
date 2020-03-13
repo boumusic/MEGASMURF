@@ -22,13 +22,18 @@ public class UnitSettingsManager : MonoBehaviour
 
     public string GetName()
     {
-        int index = Random.Range(0, names.Count);
-        string name = names[index];
-        if(!allowDuplicates)
-        {
-            names.RemoveAt(index);
-        }
+        int index = Random.Range(0, names.Count-1);
 
+        string name = "";
+        if (index >= 0)
+        {
+            name = names[index];
+            if (!allowDuplicates)
+            {
+                names.RemoveAt(index);
+            }
+        }
+            
         return name;
     }
 }
