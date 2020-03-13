@@ -43,7 +43,7 @@ public class SaveManager: MonoBehaviour
 
     public void LoadGame()
     {
-
+        GameManager.SkillTree = new SkillTree();
         if (File.Exists(Application.dataPath + "/Gamesave.save"))
         {
 
@@ -62,7 +62,6 @@ public class SaveManager: MonoBehaviour
             }
             if (resetSave || save.skilltree == null || save.skilltree.Count == 0)
             {
-                GameManager.SkillTree = new SkillTree();
                 for (int i = 0; i < 24; i++)
                 {
                     GameManager.SkillTree.tree.Add(i,false);

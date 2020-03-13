@@ -60,7 +60,8 @@ public class Board : MonoBehaviour
 
     public GameObject gameOverScreen;
 
-    private Tile[,] tiles;
+    [HideInInspector]
+    public Tile[,] tiles;
     private List<Tile> tileList = new List<Tile>();
 
     [HideInInspector]
@@ -264,7 +265,7 @@ public class Board : MonoBehaviour
                         }
                         string name = "Tile (" + i + "," + j + ")";
                         newTile.gameObject.name = name;
-                        newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), 1f, totalHeight / (rows - 1));
+                        newTile.transform.localScale = new Vector3(totalWidth / (columns - 1), totalWidth / (columns - 1), totalHeight / (rows - 1));
 
                         LevelElement levelElement = currentRoom.GetEntity(i, j);
                         if (levelElement)

@@ -19,8 +19,8 @@ MonoBehaviour:
     delayToggleVisuals: 1.67
     delayToggleGameObject: 1.5
   enemyDeath:
-    delayToggleVisuals: 0.2
-    delayToggleGameObject: 0.5
+    delayToggleVisuals: 1.9
+    delayToggleGameObject: 1.5
   playerDeath:
     delayToggleVisuals: 1.67
     delayToggleGameObject: 1.5

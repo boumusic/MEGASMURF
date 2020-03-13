@@ -16,11 +16,11 @@ public class PoolManagerEditor : Editor
         EditorGUILayout.Space();
 
         CustomEditorUtility.DrawTitle("Pool Manager");
-
+        CustomEditorUtility.QuickSerializeObject("instantiateOnAwake", serializedObject);
         DrawPools();
         RefreshPoolsButton();
         AddPoolButton();
-        //DestroyPoolsButton();
+        DestroyPoolsButton();
         serializedObject.ApplyModifiedProperties();
     }
 

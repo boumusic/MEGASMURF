@@ -14,7 +14,7 @@ public abstract class Unit : LevelElement
 {
     [Header("Components")]
     [SerializeField] private UnitAnimator unitAnimator;
-    [SerializeField] private Jauge hp;
+    [SerializeField] private UnitHP hp;
     [SerializeField] private GameObject[] visuals;
 
     public Vector2 debugTile;
@@ -44,6 +44,8 @@ public abstract class Unit : LevelElement
     public virtual int UnitMergeLevel => 0;
 
     public int SpawnID { get; set; }
+
+    public string UnitName { get; set; } = "";
 
     //A Initialiser
     private int currentHealth;
@@ -88,7 +90,7 @@ public abstract class Unit : LevelElement
     {
         FaceCamera();
         if (hp)
-            hp.UpdateJauge(CurrentHitPoint, MaxHealth);
+            hp.UpdateHealth(CurrentHitPoint);
     }
 
     public override void Appear()
@@ -257,6 +259,8 @@ public abstract class Unit : LevelElement
         if(tiles.Count > 0 && tiles[0] != null)
             FaceTile(tiles[0]);
 
+        StartCoroutine(ResetFaceCamera());
+
         switch (UnitAttackPattern.type)
         {
             case AttackPatternType.All:
@@ -305,6 +309,12 @@ public abstract class Unit : LevelElement
                 break;
         }
     }
+
+    private IEnumerator ResetFaceCamera()
+    {
+        yield return new WaitForSeconds(1f);
+        FaceCamera();
+    }
     
     private void OnAttackAnimationEnd()
     {
@@ -326,8 +336,9 @@ public abstract class Unit : LevelElement
         //Debug.Log(gameObject.name + " took " + unit.Damage + " damage from " + unit.gameObject.name);
         CurrentHitPoint -= unit.Damage;
         //Debug.Log("He now has " + CurrentHitPoint);
-        if(hp)hp.UpdateJauge(CurrentHitPoint, MaxHealth);
+        if(hp)hp.UpdateHealth(CurrentHitPoint);
         AudioManager.Instance.PlaySFX("Hit_01");
+        UnitAnimator.PlaySpecial("SimpleHit");
 
         if (CurrentHitPoint <= 0)
         {
@@ -357,24 +368,28 @@ public abstract class Unit : LevelElement
         }
         BattleManager.Instance.RemoveUnitFromPlay(this);
         //animation
-
+        UnitAnimator.PlaySpecial("MegaHit");
         StartCoroutine(Dying());
     }
 
     private IEnumerator Dying()
     {
         UnitAnimator.PlayFeedback("Death");
+        GameCamera.Instance.RequestZoomOn(transform, GameCamera.mediumZoom);
         yield return new WaitForSeconds(DeathSettings.delayToggleVisuals);
         for (int i = 0; i < visuals.Length; i++)
         {
             visuals[i].SetActive(false);
         }
 
+        GameCamera.Instance.ReleaseZoom();
+
         yield return new WaitForSeconds(DeathSettings.delayToggleGameObject);
         for (int i = 0; i < visuals.Length; i++)
         {
             visuals[i].SetActive(true);
         }
+
         gameObject.SetActive(false);
         if (unitBase.unitType == BaseUnitType.Maestro)
         {
