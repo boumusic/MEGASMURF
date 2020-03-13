@@ -9,7 +9,7 @@ public class UI_SelectedUnitSlot : UIElement
     private int healthValue;
     public TextMeshProUGUI unitName;
     public TextMeshProUGUI unitHealthText;
-    public Image unitIconSolo, unitIconDuo, unitIconTrio;
+    public Image unitIconSolo, unitIconDuo_1, unitIconDuo_2, unitIconTrio_1, unitIconTrio_2, unitIconTrio_3;
     public Button actionButton;
     public Image actionButtonIcon;
     public MouseOverButton mouseOverScript;
@@ -23,6 +23,8 @@ public class UI_SelectedUnitSlot : UIElement
     private Sprite actionCancelIcon;
     private Sprite actionCancelIconPressed;
     private Sprite actionCancelIconTouched;
+
+    private int unitMergeLevel;
     
 
     public Unit SelectedUnit { get; private set; }
@@ -32,6 +34,7 @@ public class UI_SelectedUnitSlot : UIElement
     private void Start()
     {
         actionButtonSpriteState = new SpriteState();
+        unitMergeLevel = 0;
     }
 
     public void SelectUnit(Unit unit)
@@ -66,6 +69,7 @@ public class UI_SelectedUnitSlot : UIElement
         soloIcon = unit.selectedUnitIcon;
         duoIcon = null;
         trioIcon = null;
+        unitMergeLevel = 0;
 
         if (isShapeUnit = unit is ShapeUnit)
         {
@@ -75,9 +79,13 @@ public class UI_SelectedUnitSlot : UIElement
             {
                 soloIcon = shapeUnit.shapeLegIcon;
                 duoIcon = shapeUnit.ArmUnit.selectedUnitIcon;
+                unitMergeLevel = 1;
             }
             if (shapeUnit.HeadUnit != null)
+            {
                 trioIcon = shapeUnit.HeadUnit.selectedUnitIcon;
+                unitMergeLevel = 2;
+            }
         }
 
         DisplayUnitIcons();
@@ -86,16 +94,25 @@ public class UI_SelectedUnitSlot : UIElement
     public void DisplayUnitIcons()
     {
         //Animation
-        unitIconSolo.sprite = soloIcon;
+        ResetSprite();
 
         if (isShapeUnit)
         {
-            if (unitIconDuo != null)
+            if (unitMergeLevel == 0)
             {
-                unitIconDuo.sprite = duoIcon;
+                unitIconSolo.sprite = soloIcon;
             }
-            if (unitIconTrio != null)
-                unitIconTrio.sprite = trioIcon;
+            else if(unitMergeLevel == 1)
+            {
+                unitIconDuo_1.sprite = soloIcon;
+                unitIconDuo_2.sprite = duoIcon;
+            }
+            else if (unitMergeLevel == 2)
+            {
+                unitIconTrio_1.sprite = soloIcon;
+                unitIconTrio_2.sprite = duoIcon;
+                unitIconTrio_3.sprite = trioIcon;
+            }
         }
     }
 
@@ -147,6 +164,18 @@ public class UI_SelectedUnitSlot : UIElement
         healthValue = newHealthValue;
 
         unitHealthText.text = healthValue.ToString();
+    }
+
+    private void ResetSprite()
+    {
+        unitIconSolo.sprite = null;
+        
+        unitIconDuo_1.sprite = null;
+        unitIconDuo_2.sprite = null;
+        
+        unitIconTrio_1.sprite = null;
+        unitIconTrio_2.sprite = null;
+        unitIconTrio_3.sprite = null;
     }
 
     //ANIMATIONS
