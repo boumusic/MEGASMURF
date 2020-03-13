@@ -7,9 +7,9 @@ public class GameCamera : MonoBehaviour
     private static GameCamera instance;
     public static GameCamera Instance { get { if (!instance) instance = FindObjectOfType<GameCamera>(); return instance; } }
 
-    public static float microZoom = 5;
-    public static float closeZoom = 10;
-    public static float mediumZoom = 15;
+    public static float microZoom = -100;
+    public static float closeZoom = -200;
+    public static float mediumZoom = -300;
 
     [SerializeField] private Camera cam;
 
@@ -28,7 +28,7 @@ public class GameCamera : MonoBehaviour
     
     private void Start()
     {
-        initialZoom = cam.orthographicSize;
+        initialZoom = cam.transform.localPosition.z;
         initialPos = transform.position;
         zoom = initialZoom;
     }
@@ -50,7 +50,7 @@ public class GameCamera : MonoBehaviour
 
     private void Update()
     {
-        float desiredZoom = Mathf.SmoothDamp(cam.orthographicSize, zoom, ref currentVelZoom, smoothZoom);
+        float desiredZoom = Mathf.SmoothDamp(cam.transform.localPosition.z, zoom, ref currentVelZoom, smoothZoom);
         Vector3 targetPos = new Vector3();
 
         if (target)
@@ -59,7 +59,8 @@ public class GameCamera : MonoBehaviour
             targetPos = initialPos;
 
         Vector3 desiredPos = Vector3.SmoothDamp(transform.position, targetPos, ref currentVelPos, smoothZoom);
-        cam.orthographicSize = desiredZoom;
+        //cam.orthographicSize = desiredZoom;
+        cam.transform.localPosition = new Vector3(0, 0, desiredZoom);
         transform.position = desiredPos;
     }
 }

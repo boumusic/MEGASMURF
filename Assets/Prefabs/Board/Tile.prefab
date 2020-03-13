@@ -574,7 +574,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: da85f5b9b8719c24991255676ba0092a, type: 2}
+  - {fileID: 2100000, guid: 35ede94fd052e69418b5ef3fb39ecec3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1473,6 +1473,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_Attack_Magic
       objectReference: {fileID: 0}
+    - target: {fileID: 541231524411829136, guid: 7f8a5a460e98c91449b9c0caf5edc09a,
+        type: 3}
+      propertyPath: InitialModule.startRotation.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 541231524411829136, guid: 7f8a5a460e98c91449b9c0caf5edc09a,
+        type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 541231524411829136, guid: 7f8a5a460e98c91449b9c0caf5edc09a,
+        type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 541231524411829136, guid: 7f8a5a460e98c91449b9c0caf5edc09a,
+        type: 3}
+      propertyPath: InitialModule.startRotationX.scalar
+      value: -1.5707963
+      objectReference: {fileID: 0}
+    - target: {fileID: 541231524411829136, guid: 7f8a5a460e98c91449b9c0caf5edc09a,
+        type: 3}
+      propertyPath: InitialModule.startRotationY.scalar
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 541231524411829139, guid: 7f8a5a460e98c91449b9c0caf5edc09a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1491,7 +1516,7 @@ PrefabInstance:
     - target: {fileID: 541231524411829139, guid: 7f8a5a460e98c91449b9c0caf5edc09a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: 541231524411829139, guid: 7f8a5a460e98c91449b9c0caf5edc09a,
         type: 3}
@@ -1506,7 +1531,7 @@ PrefabInstance:
     - target: {fileID: 541231524411829139, guid: 7f8a5a460e98c91449b9c0caf5edc09a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: 541231524411829139, guid: 7f8a5a460e98c91449b9c0caf5edc09a,
         type: 3}
@@ -1557,6 +1582,26 @@ PrefabInstance:
     - target: {fileID: 2237448898138843716, guid: df229ea1d7f72d446921cef59c3496c5,
         type: 3}
       propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237448898138843716, guid: df229ea1d7f72d446921cef59c3496c5,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237448898138843716, guid: df229ea1d7f72d446921cef59c3496c5,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.minScalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237448898138843716, guid: df229ea1d7f72d446921cef59c3496c5,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2237448898138843716, guid: df229ea1d7f72d446921cef59c3496c5,
+        type: 3}
+      propertyPath: ShapeModule.angle
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2237448898138843718, guid: df229ea1d7f72d446921cef59c3496c5,
@@ -1713,21 +1758,26 @@ PrefabInstance:
     - target: {fileID: 7486012027804636837, guid: 4bedf01d6f5b50c4d8e1a3959f01a37d,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7486012027804636837, guid: 4bedf01d6f5b50c4d8e1a3959f01a37d,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7486012027804636837, guid: 4bedf01d6f5b50c4d8e1a3959f01a37d,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7486012027804636839, guid: 4bedf01d6f5b50c4d8e1a3959f01a37d,
         type: 3}
       propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486012027804636839, guid: 4bedf01d6f5b50c4d8e1a3959f01a37d,
+        type: 3}
+      propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
