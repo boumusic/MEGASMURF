@@ -290,8 +290,8 @@ public class UI_SelectedUnitSlot : UIElement
         anim.Play("SelectedInvokeShapesOff");
     }
 
-    public void UpdateName(Unit unit)
-    {
-        unitName.text = unit.name;
-    }
+    //public void UpdateName(Unit unit)
+    //{
+    //    unitName.text = unit.name;
+    //}
 }

@@ -49,19 +49,29 @@ public class Room : ScriptableObject
 
     public void FixLinks()
     {
-        for (int i = 0; i < tileElements.Count; i++)
-        {
-            if(tileElements[i].name != "" && tileElements[i].levelElement == null)
-            {
-                tileElements[i].levelElement = PoolManager.Instance.GetLevelElementOfName(tileElements[i].name);
-            }
-        }
+        FixArray(tileElements);
+        FixArray(entityElements);
+    }
 
-        for (int i = 0; i < entityElements.Count; i++)
+    private void FixArray(List<LevelElementRoomSettings> elems)
+    {
+        for (int i = 0; i < elems.Count; i++)
         {
-            if (entityElements[i].name != "" && entityElements[i].levelElement == null)
+            if (elems[i].name != "" && elems[i].levelElement == null)
             {
-                entityElements[i].levelElement = PoolManager.Instance.GetLevelElementOfName(entityElements[i].name);
+                LevelElement elem = PoolManager.Instance.GetLevelElementOfName(elems[i].name);
+                if (elem)
+                    elems[i].levelElement = elem;
+                else
+                {
+                    elems[i].levelElement = null;
+                    elems[i].name = "";
+                }
+            }
+
+            if(elems[i].levelElement != null && elems[i].name == "")
+            {
+                elems[i].name = elems[i].levelElement.name;
             }
         }
     }
