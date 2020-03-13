@@ -44,7 +44,11 @@ public class SaveManager: MonoBehaviour
     public void LoadGame()
     {
         GameManager.SkillTree = new SkillTree();
-        if (File.Exists(Application.dataPath + "/Gamesave.save"))
+        for (int i = 0; i < 24; i++)
+        {
+            GameManager.SkillTree.tree.Add(i, false);
+        }
+        if (File.Exists(Application.persistentDataPath + "/Gamesave.save"))
         {
 
             BinaryFormatter bf = new BinaryFormatter();
@@ -64,7 +68,7 @@ public class SaveManager: MonoBehaviour
             {
                 for (int i = 0; i < 24; i++)
                 {
-                    GameManager.SkillTree.tree.Add(i,false);
+                    GameManager.SkillTree.tree[i] = false;
                 }
             }
             else
