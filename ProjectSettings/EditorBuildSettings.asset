@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/_Scenes/Dev/Nassim/LD1-2.unity
     guid: 76df25a6e89994844b332c31a0f42fd8
   - enabled: 1
+    path: Assets/_Scenes/Menu.unity
+    guid: f97f00602cdcc804aba076385a271be5
+  - enabled: 1
     path: Assets/_Scenes/Dev/Geoffrey/Gameplay.unity
     guid: c6cf34f717b6d574aaf6f17da269bdd9
   m_configObjects:
