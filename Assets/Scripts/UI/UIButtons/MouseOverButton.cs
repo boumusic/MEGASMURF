@@ -6,24 +6,35 @@ using UnityEngine.EventSystems;
 
 public class MouseOverButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public Sprite baseSprite;
     public Sprite mouseOverSprite;
 
-    private Sprite previousSprite;
     private Image buttonImage;
+    private bool isOverMoused;
 
     private void Awake()
     {
         buttonImage = GetComponent<Image>();
+        isOverMoused = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        previousSprite = buttonImage.sprite;
         buttonImage.sprite = mouseOverSprite;
+        isOverMoused = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        buttonImage.sprite = previousSprite;
+        buttonImage.sprite = baseSprite;
+        isOverMoused = false;
+    }
+
+    public void UpdateSprites()
+    {
+        if(isOverMoused)
+            buttonImage.sprite = mouseOverSprite;
+        else
+            buttonImage.sprite = baseSprite;
     }
 }
