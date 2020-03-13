@@ -332,7 +332,8 @@ public class Enemy : Unit
         //Animation
         //Spawn mud
         if(tile != null) {
-            tile.MudAmount = mudAmountDrop;
+            tile.MudAmount = mudAmountDrop + GameManager.SkillTree.CheckEffect(SkillType.MoreLoot);
+            tile.mudFXPop.Play();
         }
     }
 }
