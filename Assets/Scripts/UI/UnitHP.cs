@@ -9,7 +9,7 @@ public class UnitHP : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI nameText;
 
-    private void OnEnable()
+    private void Start()
     {
         string name = UnitSettingsManager.Instance.GetName();
         UpdateName(name);
