@@ -14,7 +14,7 @@ public class UI_SelectedUnitSlot : UIElement
     public Image actionButtonIcon;
     public MouseOverButton mouseOverScript;
 
-    private bool isShapeUnit;
+    
 
     private Sprite soloIcon, duoIcon, trioIcon;
     private Sprite actionIcon;
@@ -24,6 +24,7 @@ public class UI_SelectedUnitSlot : UIElement
     private Sprite actionCancelIconPressed;
     private Sprite actionCancelIconTouched;
 
+    private bool isShapeUnit;
     private int unitMergeLevel;
     
 
@@ -96,23 +97,22 @@ public class UI_SelectedUnitSlot : UIElement
         //Animation
         ResetSprite();
 
-        if (isShapeUnit)
+        switch (unitMergeLevel)
         {
-            if (unitMergeLevel == 0)
-            {
+            case 0:
                 unitIconSolo.sprite = soloIcon;
-            }
-            else if(unitMergeLevel == 1)
-            {
+                break;
+            case 1:
                 unitIconDuo_1.sprite = soloIcon;
                 unitIconDuo_2.sprite = duoIcon;
-            }
-            else if (unitMergeLevel == 2)
-            {
+                break;
+            case 2:
                 unitIconTrio_1.sprite = soloIcon;
                 unitIconTrio_2.sprite = duoIcon;
                 unitIconTrio_3.sprite = trioIcon;
-            }
+                break;
+            default:
+                break;
         }
     }
 

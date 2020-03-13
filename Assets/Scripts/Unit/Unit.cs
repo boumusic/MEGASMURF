@@ -45,6 +45,8 @@ public abstract class Unit : LevelElement
 
     public int SpawnID { get; set; }
 
+    public string UnitName { get; set; } = "";
+
     //A Initialiser
     private int currentHealth;
     public int CurrentHitPoint

@@ -12,11 +12,17 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
 
     public TextMeshProUGUI unitNameTMP;
     public TextMeshProUGUI healthText;
-    public Image itemIcon, shapeIcon, shapeIconMiddle, shapeIconTop, hoveredSlotSprite, selectedSlotSprite;
+    public Image itemIcon, hoveredSlotSprite, selectedSlotSprite;
+    public Image unitIconSolo, unitIconDuo_1, unitIconDuo_2, unitIconTrio_1, unitIconTrio_2, unitIconTrio_3;
+
+    private Sprite soloIcon, duoIcon, trioIcon;
 
     public Unit SlotUnit { get; private set; }
     private Animator ShapeSlot_anim;
     private string unitName;
+
+    private bool isShapeUnit;
+    private int unitMergeLevel;
 
     private void Awake()
     {
@@ -28,7 +34,7 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
         if(unitNameTMP.text != unitName)
         {
             unitName = unitNameTMP.text;
-            SlotUnit.name = unitName;
+            SlotUnit.UnitName = unitName;
             UIManager.Instance.UpdateSelectedUnitName(SlotUnit);
         }
     }
@@ -36,37 +42,96 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
     public void Initialize(Unit unit)
     {
         SlotUnit = unit;
-        unitName = unit.name;
-        unitNameTMP.text = unit.name;
+        unitName = unit.UnitName;
+        unitNameTMP.text = unitName;
+        UpdateUnitIcons(unit);
         UpdateDamageText(unit.CurrentHitPoint);
-        ChangeshapeIcon(unit.unitIcon);
         
+        UIManager.Instance.UpdateSelectedUnitName(SlotUnit);
+
         //ChangeItemIcon(unit.CurrentEquipement.equipementIcon);
     }
 
-    public void UpdateHealth(int newHealth)
-    {
-        if(newHealth < healthValue)
-        {
-            shapeSlotDamageAnim();
-        }
-        else if(newHealth > healthValue)
-        {
-            shapeSlotHealAnim();
-        }
-
-        UpdateDamageText(newHealth);
-    }
 
     //ICONES ET TEXTE
+    public void UpdateUnitIcons(Unit unit)
+    {
+        soloIcon = unit.selectedUnitIcon;
+        unitMergeLevel = 0;
+
+        if (isShapeUnit = unit is ShapeUnit)
+        {
+            ShapeUnit shapeUnit = (ShapeUnit)unit;
+
+            if (shapeUnit.ArmUnit != null)
+            {
+                soloIcon = shapeUnit.shapeLegIcon;
+                duoIcon = shapeUnit.ArmUnit.selectedUnitIcon;
+                unitMergeLevel = 1;
+            }
+            if (shapeUnit.HeadUnit != null)
+            {
+                trioIcon = shapeUnit.HeadUnit.selectedUnitIcon;
+                unitMergeLevel = 2;
+            }
+        }
+
+        ResetDisplay();
+        DisplayUnitIcons();
+    }
+
+    public void DisplayUnitIcons()
+    {
+        //Animation
+
+        switch (unitMergeLevel)
+        {
+            case 0:
+                unitIconSolo.sprite = soloIcon;
+                break;
+            case 1:
+                unitIconDuo_1.sprite = soloIcon;
+                unitIconDuo_2.sprite = duoIcon;
+                fusionDoubleAnim();
+                break;
+            case 2:
+                unitIconTrio_1.sprite = soloIcon;
+                unitIconTrio_2.sprite = duoIcon;
+                unitIconTrio_3.sprite = trioIcon;
+                fusionTripleAnim();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ResetDisplay()
+    {
+        unitIconSolo.gameObject.SetActive(true);
+        unitIconDuo_1.gameObject.SetActive(false); 
+        unitIconDuo_2.gameObject.SetActive(false); 
+        unitIconTrio_1.gameObject.SetActive(false);
+        unitIconTrio_2.gameObject.SetActive(false);
+        unitIconTrio_3.gameObject.SetActive(false);
+    }
+    
     public void ChangeItemIcon(Sprite newItemIcon) 
     {
         itemIcon.sprite = newItemIcon;
     }
 
-    public void ChangeshapeIcon(Sprite newShapeIcon)
+    public void UpdateHealth(int newHealth)
     {
-        shapeIcon.sprite = newShapeIcon;
+        if (newHealth < healthValue)
+        {
+            shapeSlotDamageAnim();
+        }
+        else if (newHealth > healthValue)
+        {
+            shapeSlotHealAnim();
+        }
+
+        UpdateDamageText(newHealth);
     }
 
     public void UpdateDamageText(int newHealthValue)
@@ -75,8 +140,6 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
         
         healthText.text = healthValue.ToString();
     }
-
-
     //ANIMATIONS
 
     public void shapeSlotDamageAnim()
