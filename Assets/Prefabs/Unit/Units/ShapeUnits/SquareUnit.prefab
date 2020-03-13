@@ -74,6 +74,66 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 87c23dbfa9ee6ee499d62dfa8c8d8cb8,
         type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: selectedUnitIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 87c23dbfa9ee6ee499d62dfa8c8d8cb8,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: shapeLegIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: f084a0159506f444f99d63a45f24fca2,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: shapeArmIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 6d5f5b2e1ffe3f94baeb0b8014bea893,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: shapeHeadIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 6d5f5b2e1ffe3f94baeb0b8014bea893,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: unitActionIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 5626d18611345f3488a592ef9166e84c,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: unitActionIconPressed
+      value: 
+      objectReference: {fileID: 21300000, guid: 81a04989a727e3d49b865000ea525783,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: unitActionIconTouched
+      value: 
+      objectReference: {fileID: 21300000, guid: 2597931d1f46b0e4483c92942e741731,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: unitActionCancelIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 26a9db8fd3490ea4bb81337757e9e59d,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: unitActionCancelIconPressed
+      value: 
+      objectReference: {fileID: 21300000, guid: 26a9db8fd3490ea4bb81337757e9e59d,
+        type: 3}
+    - target: {fileID: 5175111722463130817, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
+        type: 3}
+      propertyPath: unitActionCancelIconTouched
+      value: 
+      objectReference: {fileID: 21300000, guid: 2597931d1f46b0e4483c92942e741731,
+        type: 3}
     - target: {fileID: 5613015649589116677, guid: 3c43f919ab6d8aa4ba083b7d705c2585,
         type: 3}
       propertyPath: m_LocalPosition.x

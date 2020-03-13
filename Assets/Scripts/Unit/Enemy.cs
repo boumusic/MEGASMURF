@@ -10,6 +10,8 @@ public class Enemy : Unit
     public int mudAmountDrop = 10;
     private Tile priorityDestination;
 
+    public override UnitDeathSettings DeathSettings => UnitSettingsManager.Instance.generalSettings.enemyDeath;
+
     protected override void Awake()
     {
         base.Awake();
@@ -295,8 +297,8 @@ public class Enemy : Unit
         if (BattleManager.Instance.IsCurrentPlayerUnit(this))
             AIManager.instance.AIDeathCallBack();
         Tile tile = currentTile;
-        base.Die();
         DropShapeMud(tile);
+        base.Die();
         if (unitBase.unitType == BaseUnitType.Bombi)
         {
             GameObject bombito = UnitFactory.Instance.CreateUnit(BaseUnitType.Bombito);
@@ -322,6 +324,8 @@ public class Enemy : Unit
     {
         //Animation
         //Spawn mud
-        tile.MudAmount = mudAmountDrop;
+        if(tile != null) {
+            tile.MudAmount = mudAmountDrop;
+        }
     }
 }

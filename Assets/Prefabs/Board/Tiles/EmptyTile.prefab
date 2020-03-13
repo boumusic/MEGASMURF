@@ -15,6 +15,9 @@ MonoBehaviour:
   type: 0
   unit: {fileID: 0}
   animator: {fileID: 3145315210585426805}
+  attackedByShape: {fileID: 0}
+  attackedByEnemy: {fileID: 0}
+  hovered: {fileID: 5509178695764661555}
 --- !u!1001 &5438676595904661583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,6 +132,12 @@ GameObject:
 --- !u!95 &3145315210585426805 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6979567908413440826, guid: 41519bd1cb215f346a08d865540ae9cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 5438676595904661583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5509178695764661555 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 508492627718643068, guid: 41519bd1cb215f346a08d865540ae9cf,
     type: 3}
   m_PrefabInstance: {fileID: 5438676595904661583}
   m_PrefabAsset: {fileID: 0}

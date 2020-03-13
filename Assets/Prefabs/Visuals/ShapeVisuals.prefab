@@ -936,11 +936,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4428802084059770370}
   - component: {fileID: 6085409390055014944}
-  - component: {fileID: 8146293463804965955}
   - component: {fileID: 101812427093185595}
   - component: {fileID: 2333068994756385537}
   - component: {fileID: 5702839670627198989}
-  - component: {fileID: 4207132879532193540}
   m_Layer: 0
   m_Name: ShapeVisuals
   m_TagString: Untagged
@@ -979,19 +977,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go: {fileID: 5369994606937002886}
---- !u!65 &8146293463804965955
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4428802084059770371}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.64, y: 0.7, z: 0.4}
-  m_Center: {x: 0, y: 0.51, z: 0}
 --- !u!114 &101812427093185595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,22 +1052,6 @@ MonoBehaviour:
     color: {r: 0.36405307, g: 0.48174068, b: 0.764151, a: 0}
   - name: _ColorB
     color: {r: 0.23718406, g: 0.5240272, b: 0.7735849, a: 0}
---- !u!114 &4207132879532193540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4428802084059770371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aaa9c52b842512488562b01c5e12cbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  appearDelay: 1.5
-  appearAnticipation: {fileID: 1089008002360648698}
-  appearClimax: {fileID: 5646670335792472616}
-  animator: {fileID: 0}
 --- !u!1 &5369994606937002886
 GameObject:
   m_ObjectHideFlags: 0
@@ -3025,15 +2994,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9591c437d50850a4b87fea650d128507, type: 3}
---- !u!198 &358301677838624510 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7576722463716030145, guid: 9591c437d50850a4b87fea650d128507,
-    type: 3}
-  m_PrefabInstance: {fileID: 7916516199712378943}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &358301677838624509 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7576722463716030146, guid: 9591c437d50850a4b87fea650d128507,
+    type: 3}
+  m_PrefabInstance: {fileID: 7916516199712378943}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &358301677838624510 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7576722463716030145, guid: 9591c437d50850a4b87fea650d128507,
     type: 3}
   m_PrefabInstance: {fileID: 7916516199712378943}
   m_PrefabAsset: {fileID: 0}

@@ -10,6 +10,10 @@ public class ShapeUnit : Unit
     [SerializeField] public Transform mergeParent;
     private Action OnMergedFinished;
 
+    public Sprite shapeLegIcon;
+    public Sprite shapeArmIcon;
+    public Sprite shapeHeadIcon;
+
     public override Tile CurrentTile
     {
         get => currentTile;
@@ -48,6 +52,7 @@ public class ShapeUnit : Unit
     public ShapeUnit HeadUnit => (mergedUnits.Count > 1) ? mergedUnits[1] : null;
     public ShapeUnit ArmUnit => (mergedUnits.Count > 0) ? mergedUnits[0] : null;
     public ShapeUnit LegUnit => this;
+    public override UnitDeathSettings DeathSettings => UnitSettingsManager.Instance.generalSettings.shapeDeath;
 
     public ShapeUnitAnimator ShapeUnitAnimator => UnitAnimator as ShapeUnitAnimator;
 
@@ -264,6 +269,8 @@ public class ShapeUnit : Unit
         {
             shapeBeingMerged = null;
         }
+
+        UIManager.Instance.UpdateUnitIcon(this);
         // Autre check 
         // Vanish d'equipement + Refund
     }

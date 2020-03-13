@@ -142,66 +142,66 @@ public class SkillTree
                 switch (lvl)
                 {
                     case 1:
-                        return 2;
+                        return 30;
                     case 2:
-                        return 4;
+                        return 65;
                     case 3:
-                        return 6;
+                        return 110;
                 }
                 break;
             case SkillType.MoreLoot:
                 switch (lvl)
                 {
                     case 1:
-                        return 2;
+                        return 40;
                     case 2:
-                        return 5;
+                        return 70;
                     case 3:
-                        return 8;
+                        return 100;
                 }
                 break;
             case SkillType.MaestroMobility:
                 switch (lvl)
                 {
                     case 1:
-                        return 8;
+                        return 70;
                     case 2:
-                        return 14;
+                        return 100;
                     case 3:
-                        return 20;
+                        return 150;
                 }
                 break;
             case SkillType.MaestroLife:
                 switch (lvl)
                 {
                     case 1:
-                        return 4;
+                        return 50;
                     case 2:
-                        return 6;
+                        return 75;
                     case 3:
-                        return 8;
+                        return 100;
                 }
                 break;
             case SkillType.ReduceCosts:
                 switch (lvl)
                 {
                     case 1:
-                        return 2;
+                        return 30;
                     case 2:
-                        return 5;
+                        return 60;
                     case 3:
-                        return 7;
+                        return 120;
                 }
                 break;
             case SkillType.SaferZone:
                 switch (lvl)
                 {
                     case 1:
-                        return 3;
+                        return 50;
                     case 2:
-                        return 8;
+                        return 75;
                     case 3:
-                        return 10;
+                        return 100;
                 }
                 break;
         }

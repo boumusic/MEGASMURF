@@ -32,6 +32,10 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     [Header("Feedbacks")]
     public QuikFeedback attackedByShape;
     public QuikFeedback attackedByEnemy;
+    private bool isAppeared = false;
+
+    [Header("UI")]
+    public GameObject hovered;
 
     public int MudAmount { get; set; }
 
@@ -79,9 +83,23 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
         _currentAnim = TileAnim.None;
     }
 
-    public void Appear()
+    private void OnEnable()
     {
-        animator.SetTrigger("In");
+        hovered.SetActive(false);
+    }
+
+    public override void Appear()
+    {
+        if (!isAppeared)
+        {
+            animator.SetTrigger("In");
+            isAppeared = true;
+        }
+    }
+
+    public void ResetAppeared() 
+    {
+        isAppeared = false;
     }
 
     public List<Tile> GetNeighbors()
@@ -136,6 +154,7 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     {
         if (animator != null && _currentAnim != anim)
         {
+            /*
             switch (anim)
             {
                 case TileAnim.Movement:
@@ -160,7 +179,10 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
                     animator.SetTrigger("None");
                     break;
             }
+            */
+
             _currentAnim = anim;
+            animator.SetTrigger(anim.ToString());
         }
     }
 
@@ -168,11 +190,13 @@ public class Tile : LevelElement, IPointerEnterHandler, IPointerExitHandler, IPo
     {
         //Animation Si on est dans le bon State de BattleManager
         InputManager.instance.UpdateCurrentTile(this);
+        hovered.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         //throw new System.NotImplementedException();
+        hovered.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)

@@ -19,6 +19,7 @@ public class BattleManager : MonoBehaviour
     [Header("Players Settings")]
     public Player[] players;
     public List<List<Unit>> playerUnits;
+    public Maestro MaestroUnit { get; private set; }
 
     private int StartingPlayer { get; set; }
     public Player CurrentPlayer => (CurrentPlayerID < players.Length) ? players[CurrentPlayerID] : null;
@@ -100,12 +101,20 @@ public class BattleManager : MonoBehaviour
 
         Initialize();
         CurrentPlayerID = StartingPlayer;
+
+        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.LevelStart);
+    }
+
+    public void LightStart()
+    {
+        CurrentPlayerID = StartingPlayer;
+        PhaseManager.Instance.gameplayState.ChangeState(GameplayState.LevelStart);
     }
 
     #region State Actions
     private void LevelStartEnter()
     {
-
+        SequenceManager.Instance.EnQueueAction(EnterPlayerTurnStartState, ActionType.AutomaticResume);
     }
 
     private void LevelStartExit()
@@ -127,6 +136,8 @@ public class BattleManager : MonoBehaviour
     {
         //Anim de debut de tour
         SequenceManager.Instance.EnQueueAction(OnPlayerTurnStart, ActionType.AutomaticResume);
+
+        SequenceManager.Instance.EnQueueAction(CheckForInfiniteRange, ActionType.AutomaticResume);
 
         SequenceManager.Instance.EnQueueAction(FreshenUpCurrentPlayerUnits, ActionType.AutomaticResume);
 
@@ -226,6 +237,8 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress += EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress += EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
+
+        UIManager.Instance.SwitchToActionButton();
     }
 
     private void MovementSelectionDeactivateInputs()
@@ -283,6 +296,8 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress += EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress += EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
+
+        UIManager.Instance.SwitchToActionButton();
     }
 
     private void ActionSelectionDeactivateInput()
@@ -311,6 +326,7 @@ public class BattleManager : MonoBehaviour
         OnBattleModeButtonPress += EnterAppropriateActionState;
         CurrentPlayer.OnCancel += EnterAppropriateActionState;
         UIManager.Instance.EnableShapeSelectionUI();
+        UIManager.Instance.SwitchToCancelButton();
     }
 
     private void MaestroActionInterSelectionDeactivateInput()
@@ -363,6 +379,8 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnTileSelection += OrderAction;
         OnBattleModeButtonPress += CancelToRightActionSelectionState;
         CurrentPlayer.OnCancel += CancelToRightActionSelectionState;
+
+        UIManager.Instance.SwitchToCancelButton();
     }
 
     private void ActionTargetSelectionDeactivateInput()
@@ -403,6 +421,12 @@ public class BattleManager : MonoBehaviour
     #endregion
 
     #region Phase Call and Menu
+
+    public void ResetState()
+    {
+        PhaseManager.Instance.ResetState();
+    }
+
     public void OpenGameplayMenu()
     {
         //OpenUi
@@ -598,7 +622,11 @@ public class BattleManager : MonoBehaviour
         {
             playerUnits[playerID].Add(unit);
             if (playerID == 0)
+            {
                 UIManager.Instance.AddNewUnitUISlot(unit);
+                if (unit is Maestro)
+                    MaestroUnit = (Maestro)unit;
+            }
         }
     }
 

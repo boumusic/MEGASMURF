@@ -40,6 +40,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 8031679cb224dd346ab13f403adac6dd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Distort:
+        m_Texture: {fileID: 2800000, guid: 8031679cb224dd346ab13f403adac6dd, type: 3}
+        m_Scale: {x: 1.5, y: 0.7}
+        m_Offset: {x: 0, y: 0.02}
     - _DistortionTex:
         m_Texture: {fileID: 2800000, guid: 8031679cb224dd346ab13f403adac6dd, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -61,12 +65,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseA:
-        m_Texture: {fileID: 2800000, guid: e6fd03e3048f75b4e902f1dcc5e59bff, type: 3}
-        m_Scale: {x: 3, y: 1.5}
-        m_Offset: {x: -0.01, y: -0.2}
+        m_Texture: {fileID: 2800000, guid: 12cf4dc71171f8e4f94c0e74b4d5f341, type: 3}
+        m_Scale: {x: 0.7, y: 0.1}
+        m_Offset: {x: -0.01, y: -0.02}
     - _NoiseB:
-        m_Texture: {fileID: 2800000, guid: e6fd03e3048f75b4e902f1dcc5e59bff, type: 3}
-        m_Scale: {x: -3.21, y: 0.53}
+        m_Texture: {fileID: 2800000, guid: 12cf4dc71171f8e4f94c0e74b4d5f341, type: 3}
+        m_Scale: {x: 0.5, y: 0.1}
         m_Offset: {x: 0.02, y: -0.1}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
@@ -88,8 +92,8 @@ Material:
     - _AlphaSource: 0
     - _BlendFactor: 0.5
     - _BumpScale: 1
-    - _ColorMax: 0.29
-    - _ColorMin: -0.32
+    - _ColorMax: 0.44
+    - _ColorMin: -0.45
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DispMax: 1
@@ -98,6 +102,7 @@ Material:
     - _DisplacementStrength: 0.3
     - _DistortionStrengthX: 0.115
     - _DistortionStrengthY: 0.132
+    - _Distrtortion: 0.04
     - _DstBlend: 0
     - _EdgeBurnEmissive: 2
     - _EdgeBurnSharpness: 0.9
@@ -140,12 +145,12 @@ Material:
     - __dirty: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorA: {r: 0.7924528, g: 0.20558919, b: 0.64790064, a: 0}
-    - _ColorB: {r: 0.33962262, g: 0.0016019973, b: 0.33962262, a: 0}
+    - _ColorA: {r: 0.6117647, g: 0.17647058, b: 0.47731465, a: 0}
+    - _ColorB: {r: 0.3018868, g: 0.13243146, b: 0.29372638, a: 0}
     - _EdgeBurnColor: {r: 1, g: 1, b: 1, a: 1}
     - _EdgeFadeU: {r: 0, g: 1, b: 1, a: 1}
     - _EdgeFadeV: {r: 0, g: 1, b: 1, a: 1}
-    - _Emission: {r: 0.03251034, g: 0.022235844, b: 0.03251034, a: 0}
+    - _Emission: {r: 0.01886791, g: 0.009344955, b: 0.01886791, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Emissive: {r: 1, g: 1, b: 0, a: 1}
     - _EmissiveColor: {r: 1, g: 1, b: 1, a: 1}

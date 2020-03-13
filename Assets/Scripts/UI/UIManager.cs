@@ -89,4 +89,37 @@ public class UIManager : MonoBehaviour
     {
         uIUnitSlotContainer.Remove(unit);
     }
+
+    public void UpdateSelectedUnitName(Unit unit)
+    {
+        SelectedUnitSlot.UpdateName(unit);
+    }
+
+    public void CheckSelectedUnitRemoved(Unit unit)
+    {
+        if (unit == SelectedUnitSlot.SelectedUnit)
+        {
+            if (BattleManager.Instance.MaestroUnit != null)
+                SelectUnit(BattleManager.Instance.MaestroUnit);
+            else
+                SelectUnit(uIUnitSlotContainer.GetNextUnit(uIUnitSlotContainer.unitList.IndexOf(unit)));
+        }
+    }
+
+    public void SwitchToActionButton()
+    {
+        SelectedUnitSlot.SwitchToActionButton();
+    }
+
+    public void SwitchToCancelButton()
+    {
+        SelectedUnitSlot.SwitchToCancelButton();
+    }
+
+    public void UpdateUnitIcon(Unit unit)
+    {
+        SelectedUnitSlot.UpdateUnitIcons(unit);
+    }
+
+    //DeactivationUI?
 }

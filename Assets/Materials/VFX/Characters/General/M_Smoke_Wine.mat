@@ -9,8 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Smoke_Wine
   m_Shader: {fileID: 4800000, guid: 9cc45e8f7db43e54f8cea791ac9420db, type: 3}
-  m_ShaderKeywords: USE_DISTORTION USE_GRADIENT_MAP USE_SECONDARY_TEX _USEALPHA_ON
-    _USECUSTOMDATA_ON _USEEMISSIVE_ON
+  m_ShaderKeywords: USE_DISTORTION USE_GRADIENT_MAP USE_SECONDARY_TEX _FLIPGRADIENTMAP_ON
+    _USEALPHA_ON _USECUSTOMDATA_ON _USEEMISSIVE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -87,7 +87,7 @@ Material:
     - _EdgeBurnThreshold: 0
     - _Erosion: 0
     - _FlipEdgeBurn: 0
-    - _FlipGradientMap: 0
+    - _FlipGradientMap: 1
     - _FresnelAlphaPower: 0
     - _FresnelColorPower: 0
     - _GlossMapScale: 1
@@ -123,7 +123,7 @@ Material:
     - _EdgeFadeU: {r: 0, g: 1, b: 1, a: 1}
     - _EdgeFadeV: {r: 0.02, g: 0.7, b: 0.2, a: 0.2}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Emissive: {r: 3, g: 5, b: 0.14527029, a: 0.48986486}
+    - _Emissive: {r: 1, g: 3, b: 0.14527029, a: 0.48986486}
     - _EmissiveColor: {r: 1, g: 1, b: 1, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
     - _GradientRemap: {r: 0.02364862, g: 0.93176866, b: 0, a: 0}
