@@ -244,7 +244,7 @@ public abstract class Unit : LevelElement
     private void UpdateForward()
     {
         float smooth = UnitSettingsManager.Instance.generalSettings.forwardSmooth;
-        Vector3 newForward = Vector3.SmoothDamp(transform.forward, desiredForward, ref currentVelForward,smooth);
+        Vector3 newForward = Vector3.SmoothDamp(transform.forward, desiredForward.normalized, ref currentVelForward,smooth);
         transform.forward = newForward;
     }
 

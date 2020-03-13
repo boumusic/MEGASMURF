@@ -57,6 +57,11 @@ public class UI_SelectedUnitSlot : UIElement
         SelectedSwitchAnim();
     }
 
+    public void UpdateName(Unit unit)
+    {
+        unitName.text = unit.UnitName;
+    }
+
     public void UpdateActionIcons(Unit unit)
     {
         actionIcon = unit.unitActionIcon;
@@ -238,10 +243,7 @@ public class UI_SelectedUnitSlot : UIElement
         unitIconTrio_3.sprite = null;
     }
 
-    public void UpdateName(Unit unit)
-    {
-        unitName.text = unit.name;
-    }
+
 
     //ANIMATIONS
     private void Update()
@@ -318,9 +320,4 @@ public class UI_SelectedUnitSlot : UIElement
         unitIconTrio_2.enabled = true;
         unitIconTrio_3.enabled = true;
     }
-
-    //public void UpdateName(Unit unit)
-    //{
-    //    unitName.text = unit.name;
-    //}
 }
