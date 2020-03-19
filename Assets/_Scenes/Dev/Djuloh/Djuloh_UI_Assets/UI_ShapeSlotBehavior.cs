@@ -207,8 +207,7 @@ public class UI_ShapeSlotBehavior : UIElement, IPointerEnterHandler, IPointerExi
 
     public void OnSelectSlotButtonPress()
     {
-        Debug.Log("Personnage selectionné -- Penser à changer le sprite et faire apparaitre le perso en bas à droite");
-        InputManager.instance.SendUnitSelection(SlotUnit);
+        InputManager.instance.SendUIUnitSelection(SlotUnit);
     }
 
     public void SelectUnit()
