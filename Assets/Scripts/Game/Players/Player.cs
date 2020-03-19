@@ -15,7 +15,9 @@ public abstract class Player : MonoBehaviour
     public Action OnSquareButtonPress;
     public Action<Tile> OnTileMouseOver;
     public Action<Unit> OnUnitSelection;
+    public Action<Unit> OnUIUnitSelection;
     public Action<Tile> OnTileSelection;
+    public Action OnOutOfBoardClick;
 
 
     public abstract void EnableInput();
@@ -57,9 +59,19 @@ public abstract class Player : MonoBehaviour
         OnUnitSelection?.Invoke(unit);
     }
 
+    public virtual void CallOnUIUnitSelection(Unit unit)
+    {
+        OnUIUnitSelection?.Invoke(unit);
+    }
+
     public virtual void CallOnTileSelection(Tile tile)
     {
         OnTileSelection?.Invoke(tile);
+    }
+
+    public virtual void CallOnOutOfBoardClick()
+    {
+        OnOutOfBoardClick?.Invoke();
     }
 
     public virtual void CallOnEndTurnInput()

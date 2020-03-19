@@ -47,7 +47,6 @@ public class UI_SelectedUnitSlot : UIElement
 
     public void SelectUnit(Unit unit)
     {
-        //  gameObject.SetActive(true);
         unitName = UIManager.Instance.uIUnitSlotContainer.UnitSlotBehaviourDictionary[unit].unitNameTMP;
 
         UpdateActionIcons(unit);
@@ -62,9 +61,23 @@ public class UI_SelectedUnitSlot : UIElement
         SelectedSwitchAnim();
     }
 
+    public void UnselectUnit()
+    {
+        ActivateUnitIcons(-1);
+        SetActiveActionButton(false);
+        unitName.enabled = false;
+        unitHealthText.enabled = false;
+    }
+
+    public void SetActiveActionButton(bool value)
+    {
+        actionButton.gameObject.SetActive(value);
+    }
+
     public void UpdateName(Unit unit)
     {
         unitName.text = unit.UnitName;
+        unitName.enabled = true;
     }
 
     public void UpdateActionIcons(Unit unit)
@@ -150,6 +163,7 @@ public class UI_SelectedUnitSlot : UIElement
 
     public void DisplayActionIcons()
     {
+        SetActiveActionButton(true);
         actionButtonIcon.sprite = actionIcon;
 
         actionButtonSpriteState.pressedSprite = actionIconPressed;
@@ -236,11 +250,6 @@ public class UI_SelectedUnitSlot : UIElement
         //mouseOverScript.UpdateSprites();
     }
 
-    public void UnselectUnit()
-    {
-        gameObject.SetActive(false);
-    }
-
     public void UpdateHealthText(int newHealthValue)
     {
         if (newHealthValue < healthValue)
@@ -249,6 +258,7 @@ public class UI_SelectedUnitSlot : UIElement
         healthValue = newHealthValue;
 
         unitHealthText.text = healthValue.ToString();
+        unitHealthText.enabled = true;
     }
 
     private void ResetSprite()

@@ -19,7 +19,9 @@ public class InputManager : MonoBehaviour
     public Action OnEndTurnInput;
     public Action<Tile> OnTileMouseOver;
     public Action<Unit> OnUnitSelection;
+    public Action<Unit> OnUIUnitSelection;
     public Action<Tile> OnTileSelection;
+    public Action OnOutOfBoardClick;
 
     private PlayerInput playerInput;
 
@@ -60,6 +62,11 @@ public class InputManager : MonoBehaviour
         if (tile.unit != null)
             OnUnitSelection?.Invoke(tile.unit);
         OnTileSelection?.Invoke(tile);
+    }
+
+    public void SendOutOfBoardClickEvent()
+    {
+        OnOutOfBoardClick?.Invoke();
     }
 
     public void SendCancelEvent(InputAction.CallbackContext context)
@@ -131,6 +138,11 @@ public class InputManager : MonoBehaviour
     public void SendUnitSelection(Unit unit)
     {
         OnUnitSelection?.Invoke(unit);
+    }
+
+    public void SendUIUnitSelection(Unit unit)
+    {
+        OnUIUnitSelection?.Invoke(unit);
     }
 
     public void SendTileSelection(Tile tile)

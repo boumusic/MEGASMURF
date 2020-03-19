@@ -20,7 +20,9 @@ public class HumanPlayer : Player
             InputManager.instance.OnSquareButtonPress += CallOnSquareButtonPress;
             InputManager.instance.OnTileMouseOver += CallOnTileMouseOver;
             InputManager.instance.OnUnitSelection += CallOnUnitSelection;
+            InputManager.instance.OnUIUnitSelection += CallOnUIUnitSelection;
             InputManager.instance.OnTileSelection += CallOnTileSelection;
+            InputManager.instance.OnOutOfBoardClick += CallOnOutOfBoardClick;
 
             //Afficher l'UI Player
         }
@@ -39,7 +41,9 @@ public class HumanPlayer : Player
             InputManager.instance.OnSquareButtonPress -= CallOnSquareButtonPress;
             InputManager.instance.OnTileMouseOver -= CallOnTileMouseOver;
             InputManager.instance.OnUnitSelection -= CallOnUnitSelection;
+            InputManager.instance.OnUIUnitSelection -= CallOnUIUnitSelection;
             InputManager.instance.OnTileSelection -= CallOnTileSelection;
+            InputManager.instance.OnOutOfBoardClick -= CallOnOutOfBoardClick;
 
             //Desafficher UI Player
         }

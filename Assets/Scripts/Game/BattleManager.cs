@@ -30,6 +30,7 @@ public class BattleManager : MonoBehaviour
 
 
     public Unit CurrentSelectedUnit { get; private set; }
+    public Unit UnitBeingSelected { get; private set; }
     public BaseUnitType SelectedUnitTypeToBeSummon { get; private set; }
     private List<Tile> tilesInMovementRange;
     private Stack<Tile> movementPath;
@@ -41,6 +42,7 @@ public class BattleManager : MonoBehaviour
     {
         playerUnits = new List<List<Unit>>();
         GameManager.units = new List<Unit>();
+        UnitBeingSelected = null;
     }
 
     private void Start()
@@ -186,6 +188,7 @@ public class BattleManager : MonoBehaviour
     {
         CurrentPlayer.OnCancel += PlayerEndTurn;                                                    //Debug (Normalement OpenGameplayMenu)
         CurrentPlayer.OnUnitSelection += SelectUnit;
+        CurrentPlayer.OnUIUnitSelection += UISelectUnit;
         UIManager.Instance.EnableEndTurnButton();
         UIManager.Instance.EnableNextLevelButton();
     }
@@ -194,6 +197,7 @@ public class BattleManager : MonoBehaviour
     {
         CurrentPlayer.OnCancel -= PlayerEndTurn;                    //Debug (Normalement OpenGameplayMenu)
         CurrentPlayer.OnUnitSelection -= SelectUnit;
+        CurrentPlayer.OnUIUnitSelection -= UISelectUnit;
         UIManager.Instance.DesableEndTurnButton();
         UIManager.Instance.DesableNextLevelButton();
     }
@@ -237,8 +241,12 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress += EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress += EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
+        CurrentPlayer.OnOutOfBoardClick += EnterUnitSelectionState;
+        CurrentPlayer.OnUIUnitSelection += UISelectUnit;
 
         UIManager.Instance.SwitchToActionButton();
+        UIManager.Instance.EnableEndTurnButton();
+        UIManager.Instance.EnableNextLevelButton();
     }
 
     private void MovementSelectionDeactivateInputs()
@@ -248,6 +256,11 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress -= EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress -= EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel -= EnterUnitSelectionState;
+        CurrentPlayer.OnOutOfBoardClick -= EnterUnitSelectionState;
+        CurrentPlayer.OnUIUnitSelection -= UISelectUnit;
+
+        UIManager.Instance.DesableEndTurnButton();
+        UIManager.Instance.DesableNextLevelButton();
     }
 
     private void MovementPseudoStateEnter()
@@ -296,8 +309,13 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress += EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress += EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel += EnterUnitSelectionState;
+        CurrentPlayer.OnTileSelection += TileClickAction;
+        CurrentPlayer.OnUIUnitSelection += UISelectUnit;
+        CurrentPlayer.OnOutOfBoardClick += EnterUnitSelectionState;
 
         UIManager.Instance.SwitchToActionButton();
+        UIManager.Instance.EnableEndTurnButton();
+        UIManager.Instance.EnableNextLevelButton();
     }
 
     private void ActionSelectionDeactivateInput()
@@ -305,6 +323,12 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnActionButtonPress -= EnterRightActionTargetSelectionState;
         OnBattleModeButtonPress -= EnterRightActionTargetSelectionState;
         CurrentPlayer.OnCancel -= EnterUnitSelectionState;
+        CurrentPlayer.OnTileSelection -= TileClickAction;
+        CurrentPlayer.OnUIUnitSelection -= UISelectUnit;
+        CurrentPlayer.OnOutOfBoardClick -= EnterUnitSelectionState;
+
+        UIManager.Instance.DesableEndTurnButton();
+        UIManager.Instance.DesableNextLevelButton();
     }
 
     private void MaestroActionInterSelectionEnter()
@@ -324,9 +348,13 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnTriangleButtonPress += SelectTriangleShape;
         CurrentPlayer.OnSquareButtonPress += SelectSquareShape;
         OnBattleModeButtonPress += EnterAppropriateActionState;
-        CurrentPlayer.OnCancel += EnterAppropriateActionState;
+        CurrentPlayer.OnCancel += ExitToAppropriateActionState;
+        CurrentPlayer.OnUIUnitSelection += UISelectUnit;
+
         UIManager.Instance.EnableShapeSelectionUI();
         UIManager.Instance.SwitchToCancelButton();
+        UIManager.Instance.EnableEndTurnButton();
+        UIManager.Instance.EnableNextLevelButton();
     }
 
     private void MaestroActionInterSelectionDeactivateInput()
@@ -336,8 +364,13 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnTriangleButtonPress -= SelectTriangleShape;
         CurrentPlayer.OnSquareButtonPress -= SelectSquareShape;
         OnBattleModeButtonPress -= EnterAppropriateActionState;
-        CurrentPlayer.OnCancel -= EnterAppropriateActionState;
+        CurrentPlayer.OnCancel -= ExitToAppropriateActionState;
+        CurrentPlayer.OnUIUnitSelection -= UISelectUnit;
+
         UIManager.Instance.DesableShapeSelectionUI();
+        UIManager.Instance.SwitchToActionButton();
+        UIManager.Instance.DesableEndTurnButton();
+        UIManager.Instance.DesableNextLevelButton();
     }
 
     private void ActionTargetSelectionEnter()                                                                                       // BIG CHANGES
@@ -379,8 +412,11 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnTileSelection += OrderAction;
         OnBattleModeButtonPress += CancelToRightActionSelectionState;
         CurrentPlayer.OnCancel += CancelToRightActionSelectionState;
+        CurrentPlayer.OnUIUnitSelection += UISelectUnit;
 
         UIManager.Instance.SwitchToCancelButton();
+        UIManager.Instance.EnableEndTurnButton();
+        UIManager.Instance.EnableNextLevelButton();
     }
 
     private void ActionTargetSelectionDeactivateInput()
@@ -389,6 +425,11 @@ public class BattleManager : MonoBehaviour
         CurrentPlayer.OnTileSelection -= OrderAction;
         OnBattleModeButtonPress -= CancelToRightActionSelectionState;
         CurrentPlayer.OnCancel -= CancelToRightActionSelectionState;
+        CurrentPlayer.OnUIUnitSelection -= UISelectUnit;
+
+        UIManager.Instance.SwitchToActionButton();
+        UIManager.Instance.DesableEndTurnButton();
+        UIManager.Instance.DesableNextLevelButton();
     }
 
     private void ActionPseudoStateEnter()
@@ -478,7 +519,6 @@ public class BattleManager : MonoBehaviour
 
     public void EnterActionTargetSelectionState()
     {
-        //Maestro
         PhaseManager.Instance.gameplayState.ChangeState(GameplayState.ActionTargetSelection);
     }
 
@@ -492,7 +532,27 @@ public class BattleManager : MonoBehaviour
             }
             else if (CurrentSelectedUnit.CurrentUnitState == UnitState.Moved)
             {
-                PhaseManager.Instance.gameplayState.ChangeState(GameplayState.ActionSelection);
+                //PhaseManager.Instance.gameplayState.ChangeState(GameplayState.ActionSelection);
+                EnterRightActionTargetSelectionState();
+            }
+            else if(CurrentSelectedUnit.CurrentUnitState == UnitState.Used)
+            {
+                PhaseManager.Instance.gameplayState.ChangeState(GameplayState.UnitSelection);
+            }
+        }
+    }
+    
+    public void ExitToAppropriateActionState()
+    {
+        if (CurrentSelectedUnit != null)
+        {
+            if (CurrentSelectedUnit.CurrentUnitState == UnitState.Fresh)
+            {
+                PhaseManager.Instance.gameplayState.ChangeState(GameplayState.MovementSelection);
+            }
+            else if (CurrentSelectedUnit.CurrentUnitState == UnitState.Moved)
+            {
+                EnterActionSelectionState();
             }
             else if(CurrentSelectedUnit.CurrentUnitState == UnitState.Used)
             {
@@ -516,7 +576,8 @@ public class BattleManager : MonoBehaviour
         if (CurrentSelectedUnit is Maestro)
             EnterMaestroActionInterSelectionState();
         else
-            EnterAppropriateActionState();
+            EnterUnitSelectionState();
+            //EnterAppropriateActionState();
     }
     #endregion
 
@@ -534,6 +595,43 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    public void SelectUnit()
+    {
+        if (UnitBeingSelected != null && IsCurrentPlayerUnit(UnitBeingSelected))                                                                                                  
+        {
+            if (UnitBeingSelected.CurrentUnitState == UnitState.Fresh || UnitBeingSelected.CurrentUnitState == UnitState.Moved)
+            {
+                CurrentSelectedUnit = UnitBeingSelected;
+                UIManager.Instance.SelectUnit(UnitBeingSelected);
+                UnitBeingSelected = null;
+                EnterAppropriateActionState();
+            }
+        }
+    }
+
+    public void UISelectUnit(Unit unit)
+    {
+        SequenceManager.Instance.EnQueueAction(EnterUnitSelectionState, ActionType.AutomaticResume);
+
+        if (unit != null && IsCurrentPlayerUnit(unit))
+        {
+            UnitBeingSelected = unit;
+            SequenceManager.Instance.EnQueueAction(SelectUnit, ActionType.AutomaticResume);
+        }
+    }
+
+    public void TileClickAction(Tile tile)
+    {
+        if(tile.unit != null)
+        {
+            SelectUnit(tile.unit);
+        }
+        else
+        {
+            SequenceManager.Instance.EnQueueAction(EnterUnitSelectionState, ActionType.AutomaticResume);
+        }
+    }
+
     public void OrderMovement(Tile tile)
     {
         if (tile != null && tilesInMovementRange.Contains(tile))
@@ -544,6 +642,16 @@ public class BattleManager : MonoBehaviour
             movementPath = RangeManager.Instance.GetCurrentPath();
 
             PhaseManager.Instance.gameplayState.ChangeState(GameplayState.MovementPseudoState);
+        }
+        else
+        {
+            SequenceManager.Instance.EnQueueAction(EnterUnitSelectionState, ActionType.AutomaticResume);
+
+            if (tile.unit != null && IsCurrentPlayerUnit(tile.unit))
+            {
+                UnitBeingSelected = tile.unit;
+                SequenceManager.Instance.EnQueueAction(SelectUnit, ActionType.AutomaticResume);
+            }
         }
     }
 

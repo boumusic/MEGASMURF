@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
     public void UnselectUnit(Unit unit)
     {
         uIUnitSlotContainer.UnselectUnit(unit);
-        //SelectedUnitSlot.UnselectUnit();
+        SelectedUnitSlot.UnselectUnit();
     }
 
     public void EnableEndTurnButton()
@@ -102,10 +102,11 @@ public class UIManager : MonoBehaviour
     {
         if (unit == SelectedUnitSlot.SelectedUnit)
         {
-            if (BattleManager.Instance.MaestroUnit != null)
-                SelectUnit(BattleManager.Instance.MaestroUnit);
-            else
-                SelectUnit(uIUnitSlotContainer.GetNextUnit(uIUnitSlotContainer.unitList.IndexOf(unit)));
+            //if (BattleManager.Instance.MaestroUnit != null)
+            //    SelectUnit(BattleManager.Instance.MaestroUnit);
+            //else
+            //    SelectUnit(uIUnitSlotContainer.GetNextUnit(uIUnitSlotContainer.unitList.IndexOf(unit)));
+            SelectedUnitSlot.UnselectUnit();
         }
     }
 
