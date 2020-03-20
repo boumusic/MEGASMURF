@@ -1985,6 +1985,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8566034398823584351}
     m_Modifications:
+    - target: {fileID: 399065416563866274, guid: 65bf0a73819e94242b888bf0d7be7b13,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 757830632017863870, guid: 65bf0a73819e94242b888bf0d7be7b13,
         type: 3}
       propertyPath: unitIconDuo_2
@@ -2144,6 +2149,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShapeSlot_Selected
+      objectReference: {fileID: 0}
+    - target: {fileID: 7076834148775961402, guid: 65bf0a73819e94242b888bf0d7be7b13,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8958873295345163429, guid: 65bf0a73819e94242b888bf0d7be7b13,
         type: 3}
